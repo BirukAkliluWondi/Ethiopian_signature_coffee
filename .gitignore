@@ -1,0 +1,6 @@
+# Backup and temporary files
+*.bak
+*.original_bak
+preview_cozy.html
+.DS_Store
+Thumbs.db
