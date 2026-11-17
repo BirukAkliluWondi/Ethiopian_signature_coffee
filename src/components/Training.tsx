@@ -6,11 +6,6 @@ export default function Training() {
     >
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 sm:gap-4">
         <div className="flex flex-col gap-1.5 sm:gap-2">
-          <div className="flex items-center gap-2">
-            <span className="font-serif text-[10px] sm:text-[11px] uppercase tracking-[0.22em] text-brand-yellow font-bold">
-              CHAPTER IV · THE BARISTA ACADEMY
-            </span>
-          </div>
           <span className="text-xs uppercase tracking-widest text-brand-yellow font-bold">
             Barista &amp; Staff Training
           </span>
@@ -73,19 +68,30 @@ export default function Training() {
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
           {/* Secondary Outline on Left */}
           <a
-            className="w-full sm:w-auto h-12 px-6 sm:px-8 rounded-xl border border-white/30 text-white hover:bg-white/10 font-semibold text-xs uppercase tracking-wider text-center whitespace-nowrap active:scale-95 transition-all shadow-cozy-sm flex items-center justify-center gap-2"
+            className="group w-full sm:w-auto h-12 px-6 sm:px-8 rounded-xl border border-white/30 text-white hover:bg-white/10 font-semibold text-xs uppercase tracking-wider text-center whitespace-nowrap active:scale-95 transition-all shadow-cozy-sm flex items-center justify-center gap-2.5"
             href="#contact"
           >
             <span>View Syllabus</span>
-            <span className="material-symbols-outlined text-base">description</span>
+            <svg
+              className="w-4 h-4 stroke-current stroke-[1.75] fill-none shrink-0"
+              viewBox="0 0 16 16"
+            >
+              <path d="M3 2.5h7l3 3v8H3v-11z" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M10 2.5v3h3" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
           </a>
           {/* Primary Solid Confirmation on Right */}
           <a
-            className="w-full sm:w-auto h-12 px-6 sm:px-8 rounded-xl bg-brand-yellow hover:bg-brand-yellow-light text-black font-bold text-xs uppercase tracking-wider text-center whitespace-nowrap active:scale-95 transition-all shadow-cozy hover:shadow-cozy-float flex items-center justify-center gap-2"
+            className="group w-full sm:w-auto h-12 px-6 sm:px-8 rounded-xl bg-brand-yellow hover:bg-brand-yellow-light text-black font-bold text-xs uppercase tracking-wider text-center whitespace-nowrap active:scale-95 transition-all shadow-cozy hover:shadow-cozy-float flex items-center justify-center gap-2.5"
             href="#contact"
           >
             <span>Enroll in Academy</span>
-            <span className="material-symbols-outlined text-base">arrow_forward</span>
+            <svg
+              className="w-4 h-4 stroke-current stroke-[2] fill-none transition-transform duration-300 group-hover:translate-x-1 shrink-0"
+              viewBox="0 0 16 16"
+            >
+              <path d="M2.5 8h10.5M9 4.5l3.5 3.5-3.5 3.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
           </a>
         </div>
       </div>

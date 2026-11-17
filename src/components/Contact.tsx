@@ -33,12 +33,7 @@ export default function Contact() {
         {/* Left Column: Contact Channels & Credentials */}
         <div className="lg:col-span-5 flex flex-col gap-5 sm:gap-6">
           <div className="flex flex-col gap-2">
-            <div className="flex items-center gap-2">
-              <span className="font-serif text-[10px] sm:text-[11px] uppercase tracking-[0.22em] text-brand-yellow font-bold">
-                CHAPTER VI · DIALOGUE &amp; ADVISORY
-              </span>
-            </div>
-            <span className="text-xs uppercase tracking-widest text-brand-green font-bold">
+            <span className="text-xs uppercase tracking-widest text-brand-yellow font-bold">
               Get In Touch
             </span>
             <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-brand-green leading-snug">
@@ -70,9 +65,12 @@ export default function Contact() {
                   +251 91 123 4567 (Direct Advisory)
                 </p>
               </div>
-              <span className="material-symbols-outlined text-gray-400 ml-auto group-hover:text-brand-green text-sm">
-                arrow_forward
-              </span>
+              <svg
+                className="w-4 h-4 stroke-current stroke-[1.75] fill-none text-text-muted/60 group-hover:text-brand-green transition-all group-hover:translate-x-1 ml-auto shrink-0"
+                viewBox="0 0 16 16"
+              >
+                <path d="M2.5 8h10.5M9 4.5l3.5 3.5-3.5 3.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
             </a>
 
             {/* Direct Telegram Button */}
@@ -93,9 +91,12 @@ export default function Contact() {
                 </h5>
                 <p className="text-[11px] sm:text-xs text-text-muted">@ethiopiansignature</p>
               </div>
-              <span className="material-symbols-outlined text-gray-400 ml-auto group-hover:text-brand-green text-sm">
-                arrow_forward
-              </span>
+              <svg
+                className="w-4 h-4 stroke-current stroke-[1.75] fill-none text-text-muted/60 group-hover:text-brand-green transition-all group-hover:translate-x-1 ml-auto shrink-0"
+                viewBox="0 0 16 16"
+              >
+                <path d="M2.5 8h10.5M9 4.5l3.5 3.5-3.5 3.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
             </a>
 
             {/* Direct Telephone */}
@@ -226,11 +227,16 @@ export default function Contact() {
 
             {/* Main Solid Action Button on Submit */}
             <button
-              className="mt-1 sm:mt-2 w-full h-12 px-6 sm:px-8 rounded-xl bg-brand-green hover:bg-brand-green-dark text-white font-semibold text-sm active:scale-95 transition-all shadow-cozy hover:shadow-cozy-float flex items-center justify-center gap-2 whitespace-nowrap"
+              className="group mt-1 sm:mt-2 w-full h-12 px-6 sm:px-8 rounded-xl bg-brand-green hover:bg-brand-green-dark text-white font-semibold text-sm active:scale-95 transition-all shadow-cozy hover:shadow-cozy-float flex items-center justify-center gap-2.5 whitespace-nowrap"
               type="submit"
             >
               <span>Submit Inquiry</span>
-              <span className="material-symbols-outlined text-lg">send</span>
+              <svg
+                className="w-4 h-4 stroke-current stroke-[1.75] fill-none transition-transform duration-300 group-hover:translate-x-1 shrink-0"
+                viewBox="0 0 16 16"
+              >
+                <path d="M2.5 8h10.5M9 4.5l3.5 3.5-3.5 3.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
             </button>
 
             {isSubmitted && (

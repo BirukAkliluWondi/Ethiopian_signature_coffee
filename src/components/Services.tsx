@@ -2,19 +2,9 @@ export default function Services() {
   return (
     <section className="flex flex-col gap-8 sm:gap-10 scroll-mt-28 relative section-transition-glow" id="services">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 sm:gap-4">
-        <div className="flex flex-col gap-1.5">
-          <div className="flex items-center gap-2">
-            <span className="font-serif text-[10px] sm:text-[11px] uppercase tracking-[0.22em] text-brand-yellow font-bold">
-              CHAPTER III · CAPABILITIES &amp; SOLUTIONS
-            </span>
-          </div>
-          <span className="text-xs uppercase tracking-widest text-brand-green font-bold">
-            Our Core Capabilities
-          </span>
-          <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-brand-green font-bold">
-            Our Services
-          </h2>
-        </div>
+        <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-brand-green font-bold">
+          Our Services
+        </h2>
         <p className="text-xs sm:text-sm md:text-base text-text-muted max-w-md">
           Professional advisory, training, and operational support designed for sustainable café profitability and growth.
         </p>
@@ -68,11 +58,16 @@ export default function Services() {
 
           <div className="pt-1 sm:pt-2">
             <a
-              className="inline-flex items-center justify-center gap-2 h-12 w-full sm:w-auto px-6 sm:px-8 rounded-xl bg-brand-green hover:bg-brand-green-dark text-white font-semibold text-sm whitespace-nowrap shadow-cozy hover:shadow-cozy-float active:scale-95 transition-all text-center"
+              className="group inline-flex items-center justify-center gap-2.5 h-12 w-full sm:w-auto px-6 sm:px-8 rounded-xl bg-brand-green hover:bg-brand-green-dark text-white font-semibold text-sm whitespace-nowrap shadow-cozy hover:shadow-cozy-float active:scale-95 transition-all text-center"
               href="#contact"
             >
               <span>Book Setup Consultation</span>
-              <span className="material-symbols-outlined text-lg">arrow_forward</span>
+              <svg
+                className="w-4 h-4 stroke-current stroke-[1.75] fill-none transition-transform duration-300 group-hover:translate-x-1 shrink-0"
+                viewBox="0 0 16 16"
+              >
+                <path d="M2.5 8h10.5M9 4.5l3.5 3.5-3.5 3.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
             </a>
           </div>
         </div>
@@ -102,11 +97,16 @@ export default function Services() {
           </div>
         </div>
         <a
-          className="whitespace-nowrap h-11 w-full md:w-auto px-6 rounded-xl bg-brand-yellow hover:bg-brand-yellow-light text-black font-bold text-xs uppercase tracking-wider shadow-cozy active:scale-95 transition-all flex items-center justify-center gap-2 text-center"
+          className="group whitespace-nowrap h-11 w-full md:w-auto px-6 rounded-xl bg-brand-yellow hover:bg-brand-yellow-light text-black font-bold text-xs uppercase tracking-wider shadow-cozy active:scale-95 transition-all flex items-center justify-center gap-2 text-center"
           href="#contact"
         >
           <span>Inquire Beans</span>
-          <span className="material-symbols-outlined text-base">arrow_forward</span>
+          <svg
+            className="w-3.5 h-3.5 stroke-current stroke-[2] fill-none transition-transform duration-300 group-hover:translate-x-1 shrink-0"
+            viewBox="0 0 16 16"
+          >
+            <path d="M2.5 8h10.5M9 4.5l3.5 3.5-3.5 3.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
         </a>
       </div>
 
@@ -136,11 +136,16 @@ export default function Services() {
               </p>
             </div>
             <a
-              className="w-full h-11 px-5 rounded-xl border border-brand-green text-brand-green font-bold text-xs uppercase tracking-wider hover:bg-brand-green hover:text-white transition-all shadow-cozy-sm flex items-center justify-between whitespace-nowrap"
+              className="group w-full h-11 px-5 rounded-xl border border-brand-green text-brand-green font-bold text-xs uppercase tracking-wider hover:bg-brand-green hover:text-white transition-all shadow-cozy-sm flex items-center justify-between whitespace-nowrap"
               href="#training"
             >
               <span>View Curriculum</span>
-              <span className="material-symbols-outlined text-base">arrow_forward</span>
+              <svg
+                className="w-3.5 h-3.5 stroke-current stroke-[1.75] fill-none transition-transform duration-300 group-hover:translate-x-1 shrink-0"
+                viewBox="0 0 16 16"
+              >
+                <path d="M2.5 8h10.5M9 4.5l3.5 3.5-3.5 3.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
             </a>
           </div>
         </article>
@@ -169,11 +174,16 @@ export default function Services() {
               </p>
             </div>
             <a
-              className="w-full h-11 px-5 rounded-xl border border-brand-green text-brand-green font-bold text-xs uppercase tracking-wider hover:bg-brand-green hover:text-white transition-all shadow-cozy-sm flex items-center justify-between whitespace-nowrap"
+              className="group w-full h-11 px-5 rounded-xl border border-brand-green text-brand-green font-bold text-xs uppercase tracking-wider hover:bg-brand-green hover:text-white transition-all shadow-cozy-sm flex items-center justify-between whitespace-nowrap"
               href="#contact"
             >
               <span>Inquire Menus</span>
-              <span className="material-symbols-outlined text-base">arrow_forward</span>
+              <svg
+                className="w-3.5 h-3.5 stroke-current stroke-[1.75] fill-none transition-transform duration-300 group-hover:translate-x-1 shrink-0"
+                viewBox="0 0 16 16"
+              >
+                <path d="M2.5 8h10.5M9 4.5l3.5 3.5-3.5 3.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
             </a>
           </div>
         </article>
@@ -202,11 +212,16 @@ export default function Services() {
               </p>
             </div>
             <a
-              className="w-full h-11 px-5 rounded-xl border border-brand-green text-brand-green font-bold text-xs uppercase tracking-wider hover:bg-brand-green hover:text-white transition-all shadow-cozy-sm flex items-center justify-between whitespace-nowrap"
+              className="group w-full h-11 px-5 rounded-xl border border-brand-green text-brand-green font-bold text-xs uppercase tracking-wider hover:bg-brand-green hover:text-white transition-all shadow-cozy-sm flex items-center justify-between whitespace-nowrap"
               href="#contact"
             >
               <span>Book Advisory</span>
-              <span className="material-symbols-outlined text-base">arrow_forward</span>
+              <svg
+                className="w-3.5 h-3.5 stroke-current stroke-[1.75] fill-none transition-transform duration-300 group-hover:translate-x-1 shrink-0"
+                viewBox="0 0 16 16"
+              >
+                <path d="M2.5 8h10.5M9 4.5l3.5 3.5-3.5 3.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
             </a>
           </div>
         </article>
@@ -235,11 +250,16 @@ export default function Services() {
               </p>
             </div>
             <a
-              className="w-full h-11 px-5 rounded-xl border border-brand-green text-brand-green font-bold text-xs uppercase tracking-wider hover:bg-brand-green hover:text-white transition-all shadow-cozy-sm flex items-center justify-between whitespace-nowrap"
+              className="group w-full h-11 px-5 rounded-xl border border-brand-green text-brand-green font-bold text-xs uppercase tracking-wider hover:bg-brand-green hover:text-white transition-all shadow-cozy-sm flex items-center justify-between whitespace-nowrap"
               href="#contact"
             >
               <span>View Operations</span>
-              <span className="material-symbols-outlined text-base">arrow_forward</span>
+              <svg
+                className="w-3.5 h-3.5 stroke-current stroke-[1.75] fill-none transition-transform duration-300 group-hover:translate-x-1 shrink-0"
+                viewBox="0 0 16 16"
+              >
+                <path d="M2.5 8h10.5M9 4.5l3.5 3.5-3.5 3.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
             </a>
           </div>
         </article>
@@ -268,11 +288,16 @@ export default function Services() {
               </p>
             </div>
             <a
-              className="w-full h-11 px-5 rounded-xl border border-brand-green text-brand-green font-bold text-xs uppercase tracking-wider hover:bg-brand-green hover:text-white transition-all shadow-cozy-sm flex items-center justify-between whitespace-nowrap"
+              className="group w-full h-11 px-5 rounded-xl border border-brand-green text-brand-green font-bold text-xs uppercase tracking-wider hover:bg-brand-green hover:text-white transition-all shadow-cozy-sm flex items-center justify-between whitespace-nowrap"
               href="#contact"
             >
               <span>Improve Margins</span>
-              <span className="material-symbols-outlined text-base">arrow_forward</span>
+              <svg
+                className="w-3.5 h-3.5 stroke-current stroke-[1.75] fill-none transition-transform duration-300 group-hover:translate-x-1 shrink-0"
+                viewBox="0 0 16 16"
+              >
+                <path d="M2.5 8h10.5M9 4.5l3.5 3.5-3.5 3.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
             </a>
           </div>
         </article>

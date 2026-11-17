@@ -2,12 +2,7 @@ export default function Projects() {
   return (
     <section className="flex flex-col gap-6 sm:gap-8 scroll-mt-28 relative section-transition-glow" id="projects">
       <div className="flex flex-col gap-1.5">
-        <div className="flex items-center gap-2">
-          <span className="font-serif text-[10px] sm:text-[11px] uppercase tracking-[0.22em] text-brand-yellow font-bold">
-            CHAPTER V · EXECUTED WORKS ARCHIVE
-          </span>
-        </div>
-        <span className="text-xs uppercase tracking-widest text-brand-green font-bold">
+        <span className="text-xs uppercase tracking-widest text-brand-yellow font-bold">
           Demonstrated Experience
         </span>
         <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-brand-green font-bold">
