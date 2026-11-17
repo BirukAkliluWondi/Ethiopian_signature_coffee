@@ -47,7 +47,7 @@ export default function Hero() {
 
       {/* Right Column: Visual Showcase (On mobile: order-1, displays first; Desktop: lg:order-2) */}
       <div className="lg:col-span-5 order-1 lg:order-2">
-        <div className="relative w-full rounded-2xl sm:rounded-3xl overflow-hidden shadow-cozy-lg border border-border-subtle bg-stone-900 group ring-1 ring-border-subtle">
+        <div className="relative w-full rounded-2xl sm:rounded-3xl overflow-hidden shadow-roast-bloom border border-border-subtle bg-stone-900 group ring-1 ring-border-subtle">
           <div className="relative w-full aspect-[4/3] sm:aspect-[4/3] lg:aspect-[4/5] max-h-[460px]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img

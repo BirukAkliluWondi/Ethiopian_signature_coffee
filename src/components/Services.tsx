@@ -21,7 +21,7 @@ export default function Services() {
       </div>
 
       {/* Prominent Flagship Service (Given Extra Visual Space) */}
-      <article className="p-5 sm:p-8 lg:p-10 rounded-2xl sm:rounded-3xl bg-surface-white border border-border-warm shadow-cozy-lg flex flex-col lg:grid lg:grid-cols-12 gap-6 sm:gap-8 items-center ring-1 ring-border-subtle">
+      <article className="p-5 sm:p-8 lg:p-10 rounded-2xl sm:rounded-3xl bg-surface-white border border-border-warm shadow-roast-bloom flex flex-col lg:grid lg:grid-cols-12 gap-6 sm:gap-8 items-center ring-1 ring-border-subtle">
         {/* Flagship Image (5 cols) */}
         <div className="w-full lg:col-span-5 relative rounded-xl sm:rounded-2xl overflow-hidden bg-stone-900 aspect-video lg:aspect-[4/3] shadow-cozy group">
           {/* eslint-disable-next-line @next/next/no-img-element */}

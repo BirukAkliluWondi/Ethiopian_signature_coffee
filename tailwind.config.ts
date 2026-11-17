@@ -32,10 +32,11 @@ const config: Config = {
         sans: ["var(--font-plus-jakarta)", "Plus Jakarta Sans", "system-ui", "-apple-system", "sans-serif"]
       },
       boxShadow: {
-        "cozy-sm": "0 2px 8px -1px rgba(36, 20, 10, 0.04), 0 1px 3px 0 rgba(36, 20, 10, 0.02)",
-        "cozy": "0 10px 30px -4px rgba(36, 20, 10, 0.06), 0 4px 12px -2px rgba(36, 20, 10, 0.03), inset 0 1px 0 rgba(255, 255, 255, 0.85)",
-        "cozy-lg": "0 20px 48px -8px rgba(36, 20, 10, 0.08), 0 8px 20px -4px rgba(36, 20, 10, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.9)",
-        "cozy-float": "0 24px 60px -12px rgba(36, 20, 10, 0.12), 0 10px 24px -4px rgba(36, 20, 10, 0.04)",
+        "cozy-sm": "0 2px 10px -1px rgba(24, 11, 4, 0.05), 0 1px 4px 0 rgba(212, 136, 0, 0.03)",
+        "cozy": "0 12px 34px -4px rgba(22, 10, 4, 0.08), 0 4px 14px -2px rgba(212, 136, 0, 0.05), 0 0 24px -6px rgba(212, 136, 0, 0.03), inset 0 1px 0 rgba(255, 252, 245, 0.9)",
+        "cozy-lg": "0 24px 54px -10px rgba(20, 9, 3, 0.11), 0 8px 26px -4px rgba(212, 136, 0, 0.09), 0 0 60px -15px rgba(212, 136, 0, 0.06), inset 0 1px 0 rgba(255, 252, 245, 0.95)",
+        "cozy-float": "0 28px 65px -12px rgba(20, 9, 3, 0.15), 0 12px 30px -4px rgba(212, 136, 0, 0.11), 0 0 50px -10px rgba(212, 136, 0, 0.08)",
+        "roast-bloom": "0 20px 50px -10px rgba(20, 9, 3, 0.14), 0 8px 25px -4px rgba(212, 136, 0, 0.12), 0 0 70px -15px rgba(212, 136, 0, 0.10)",
       }
     },
   },
