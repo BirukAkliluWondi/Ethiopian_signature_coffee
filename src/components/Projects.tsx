@@ -1,8 +1,13 @@
 export default function Projects() {
   return (
-    <section className="flex flex-col gap-6 sm:gap-8" id="projects">
+    <section className="flex flex-col gap-6 sm:gap-8 scroll-mt-28 relative section-transition-glow" id="projects">
       <div className="flex flex-col gap-1.5">
-        <span className="text-xs uppercase tracking-widest text-brand-yellow font-bold">
+        <div className="flex items-center gap-2">
+          <span className="font-serif text-[10px] sm:text-[11px] uppercase tracking-[0.22em] text-brand-yellow font-bold">
+            CHAPTER V · EXECUTED WORKS ARCHIVE
+          </span>
+        </div>
+        <span className="text-xs uppercase tracking-widest text-brand-green font-bold">
           Demonstrated Experience
         </span>
         <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-brand-green font-bold">
@@ -16,9 +21,9 @@ export default function Projects() {
       {/* 3 Projects */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6">
         {/* Project 1 */}
-        <div className="p-5 sm:p-6 rounded-2xl bg-white border border-border-subtle flex flex-col justify-between gap-4 shadow-sm hover:shadow transition-shadow">
+        <div className="p-5 sm:p-6 rounded-2xl bg-surface-white border border-border-subtle flex flex-col justify-between gap-4 shadow-cozy hover:shadow-cozy-lg transition-all">
           <div className="flex flex-col gap-3">
-            <div className="w-10 h-10 rounded-xl bg-brand-green/10 text-brand-green flex items-center justify-center">
+            <div className="w-10 h-10 rounded-xl bg-brand-green/10 text-brand-green flex items-center justify-center shadow-cozy-sm">
               <span className="material-symbols-outlined text-xl">storefront</span>
             </div>
             <div className="flex flex-col gap-1">
@@ -33,15 +38,15 @@ export default function Projects() {
               </p>
             </div>
           </div>
-          <div className="pt-3 border-t border-gray-100 text-[11px] sm:text-xs text-text-muted font-medium">
+          <div className="pt-3 border-t border-border-subtle text-[11px] sm:text-xs text-text-muted font-medium">
             Category: Turnkey Venue Setup
           </div>
         </div>
 
         {/* Project 2 */}
-        <div className="p-5 sm:p-6 rounded-2xl bg-white border border-border-subtle flex flex-col justify-between gap-4 shadow-sm hover:shadow transition-shadow">
+        <div className="p-5 sm:p-6 rounded-2xl bg-surface-white border border-border-subtle flex flex-col justify-between gap-4 shadow-cozy hover:shadow-cozy-lg transition-all">
           <div className="flex flex-col gap-3">
-            <div className="w-10 h-10 rounded-xl bg-brand-yellow/15 text-brand-yellow flex items-center justify-center">
+            <div className="w-10 h-10 rounded-xl bg-brand-yellow/15 text-brand-yellow flex items-center justify-center shadow-cozy-sm">
               <span className="material-symbols-outlined text-xl">hotel</span>
             </div>
             <div className="flex flex-col gap-1">
@@ -56,15 +61,15 @@ export default function Projects() {
               </p>
             </div>
           </div>
-          <div className="pt-3 border-t border-gray-100 text-[11px] sm:text-xs text-text-muted font-medium">
+          <div className="pt-3 border-t border-border-subtle text-[11px] sm:text-xs text-text-muted font-medium">
             Category: Hospitality Training
           </div>
         </div>
 
         {/* Project 3 */}
-        <div className="p-5 sm:p-6 rounded-2xl bg-white border border-border-subtle flex flex-col justify-between gap-4 shadow-sm hover:shadow transition-shadow">
+        <div className="p-5 sm:p-6 rounded-2xl bg-surface-white border border-border-subtle flex flex-col justify-between gap-4 shadow-cozy hover:shadow-cozy-lg transition-all">
           <div className="flex flex-col gap-3">
-            <div className="w-10 h-10 rounded-xl bg-brand-red/10 text-brand-red flex items-center justify-center">
+            <div className="w-10 h-10 rounded-xl bg-brand-red/10 text-brand-red flex items-center justify-center shadow-cozy-sm">
               <span className="material-symbols-outlined text-xl">local_shipping</span>
             </div>
             <div className="flex flex-col gap-1">
@@ -79,7 +84,7 @@ export default function Projects() {
               </p>
             </div>
           </div>
-          <div className="pt-3 border-t border-gray-100 text-[11px] sm:text-xs text-text-muted font-medium">
+          <div className="pt-3 border-t border-border-subtle text-[11px] sm:text-xs text-text-muted font-medium">
             Category: Quality Calibration
           </div>
         </div>

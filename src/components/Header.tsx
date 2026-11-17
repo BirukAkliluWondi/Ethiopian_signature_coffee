@@ -1,10 +1,29 @@
 "use client";
 
-import { useState } from "react";
-import Image from "next/image";
+import { useState, useEffect } from "react";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const sectionIds = ["home", "about", "services", "training", "projects", "contact"];
+      const scrollPos = window.scrollY + 220;
+
+      for (let i = sectionIds.length - 1; i >= 0; i--) {
+        const el = document.getElementById(sectionIds[i]);
+        if (el && el.offsetTop <= scrollPos) {
+          setActiveSection(sectionIds[i]);
+          break;
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const toggleMenu = () => {
     setIsMenuOpen((prev) => !prev);
@@ -14,13 +33,22 @@ export default function Header() {
     setIsMenuOpen(false);
   };
 
+  const navLinks = [
+    { id: "home", label: "Home", href: "#home" },
+    { id: "about", label: "About Us", href: "#about" },
+    { id: "services", label: "Our Services", href: "#services" },
+    { id: "training", label: "Training", href: "#training" },
+    { id: "projects", label: "Our Projects", href: "#projects" },
+    { id: "contact", label: "Contact Us", href: "#contact" },
+  ];
+
   return (
-    <header className="fixed top-1 w-full z-50 pt-safe bg-white/95 backdrop-blur-md border-b border-border-subtle shadow-[0_2px_10px_rgba(0,0,0,0.03)]">
+    <header className="fixed top-1 w-full z-50 pt-safe bg-surface-cream/92 backdrop-blur-md border-b border-border-subtle shadow-[0_4px_24px_-4px_rgba(36,20,10,0.04)] transition-all">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Header Row */}
         <div className="flex items-center justify-between h-16 sm:h-20">
           {/* Logo & Branding */}
-          <a href="#" className="flex items-center gap-2.5 sm:gap-3.5 group shrink-0">
+          <a href="#home" className="flex items-center gap-2.5 sm:gap-3.5 group shrink-0">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               alt="Ethiopian Signature Coffee Logo"
@@ -37,50 +65,33 @@ export default function Header() {
             </div>
           </a>
 
-          {/* Desktop Navigation Links (lg and up: 1024px+) */}
+          {/* Desktop Navigation Links (lg and up: 1024px+) with Smooth Active Chapter Indicator */}
           <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
-            <a
-              className="px-3.5 py-2 rounded-lg text-sm font-semibold text-brand-green bg-brand-green/5 hover:bg-brand-green/10 transition-colors"
-              href="#"
-            >
-              Home
-            </a>
-            <a
-              className="px-3.5 py-2 rounded-lg text-sm font-medium text-text-muted hover:text-brand-green hover:bg-gray-50 transition-colors"
-              href="#about"
-            >
-              About Us
-            </a>
-            <a
-              className="px-3.5 py-2 rounded-lg text-sm font-medium text-text-muted hover:text-brand-green hover:bg-gray-50 transition-colors"
-              href="#services"
-            >
-              Our Services
-            </a>
-            <a
-              className="px-3.5 py-2 rounded-lg text-sm font-medium text-text-muted hover:text-brand-green hover:bg-gray-50 transition-colors"
-              href="#training"
-            >
-              Training
-            </a>
-            <a
-              className="px-3.5 py-2 rounded-lg text-sm font-medium text-text-muted hover:text-brand-green hover:bg-gray-50 transition-colors"
-              href="#projects"
-            >
-              Our Projects
-            </a>
-            <a
-              className="px-3.5 py-2 rounded-lg text-sm font-medium text-text-muted hover:text-brand-green hover:bg-gray-50 transition-colors"
-              href="#contact"
-            >
-              Contact Us
-            </a>
+            {navLinks.map((link) => {
+              const isActive = activeSection === link.id;
+              return (
+                <a
+                  key={link.id}
+                  className={`px-3.5 py-2 rounded-lg text-sm font-semibold transition-all relative ${
+                    isActive
+                      ? "text-brand-green bg-brand-green/8 shadow-sm border border-brand-green/15"
+                      : "text-text-muted hover:text-brand-green hover:bg-surface-subtle"
+                  }`}
+                  href={link.href}
+                >
+                  <span>{link.label}</span>
+                  {isActive && (
+                    <span className="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-4 h-0.5 bg-brand-yellow rounded-full" />
+                  )}
+                </a>
+              );
+            })}
           </nav>
 
           {/* Right Header Actions (WhatsApp Button + Mobile/Tablet Hamburger) */}
           <div className="flex items-center gap-2 sm:gap-3">
             <a
-              className="h-9 sm:h-10 px-3.5 sm:px-5 lg:px-6 rounded-full bg-brand-green hover:bg-brand-green-dark text-white flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-semibold shadow-sm hover:shadow whitespace-nowrap active:scale-95 transition-all"
+              className="h-9 sm:h-10 px-3.5 sm:px-5 lg:px-6 rounded-full bg-brand-green hover:bg-brand-green-dark text-white flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-semibold shadow-cozy-sm hover:shadow-cozy whitespace-nowrap active:scale-95 transition-all"
               href="https://wa.me/251911234567"
               rel="noopener noreferrer"
               target="_blank"
@@ -95,7 +106,7 @@ export default function Header() {
             {/* Mobile & Tablet Hamburger Menu Button (lg:hidden) */}
             <button
               aria-label="Toggle Navigation Menu"
-              className="lg:hidden w-9 h-9 rounded-xl border border-border-subtle bg-gray-50 flex items-center justify-center text-text-main hover:bg-gray-100 transition-colors focus:outline-none"
+              className="lg:hidden w-9 h-9 rounded-xl border border-border-subtle bg-surface-subtle flex items-center justify-center text-text-main hover:bg-surface-muted transition-colors focus:outline-none"
               id="mobile-menu-btn"
               onClick={toggleMenu}
             >
@@ -110,52 +121,27 @@ export default function Header() {
         <div
           className={`${
             isMenuOpen ? "flex" : "hidden"
-          } lg:hidden border-t border-border-subtle py-3 transition-all flex-col gap-1`}
+          } lg:hidden border-t border-border-subtle py-3 transition-all flex-col gap-1 bg-surface-cream/95`}
           id="mobile-menu-drawer"
         >
-          <a
-            className="px-4 py-2.5 rounded-xl text-sm font-semibold text-brand-green bg-brand-green/5"
-            href="#"
-            onClick={closeMenu}
-          >
-            Home
-          </a>
-          <a
-            className="px-4 py-2.5 rounded-xl text-sm font-medium text-text-muted hover:bg-gray-50 hover:text-brand-green"
-            href="#about"
-            onClick={closeMenu}
-          >
-            About Us
-          </a>
-          <a
-            className="px-4 py-2.5 rounded-xl text-sm font-medium text-text-muted hover:bg-gray-50 hover:text-brand-green"
-            href="#services"
-            onClick={closeMenu}
-          >
-            Our Services
-          </a>
-          <a
-            className="px-4 py-2.5 rounded-xl text-sm font-medium text-text-muted hover:bg-gray-50 hover:text-brand-green"
-            href="#training"
-            onClick={closeMenu}
-          >
-            Barista Training
-          </a>
-          <a
-            className="px-4 py-2.5 rounded-xl text-sm font-medium text-text-muted hover:bg-gray-50 hover:text-brand-green"
-            href="#projects"
-            onClick={closeMenu}
-          >
-            Our Projects
-          </a>
-          <a
-            className="px-4 py-2.5 rounded-xl text-sm font-medium text-text-muted hover:bg-gray-50 hover:text-brand-green"
-            href="#contact"
-            onClick={closeMenu}
-          >
-            Contact Us
-          </a>
-          <div className="pt-2 border-t border-gray-100 flex items-center justify-between px-2 text-xs text-text-muted">
+          {navLinks.map((link) => {
+            const isActive = activeSection === link.id;
+            return (
+              <a
+                key={link.id}
+                className={`px-4 py-2.5 rounded-xl text-sm font-semibold transition-all ${
+                  isActive
+                    ? "text-brand-green bg-brand-green/10 font-bold border-l-4 border-brand-green"
+                    : "text-text-muted hover:bg-surface-subtle hover:text-brand-green font-medium"
+                }`}
+                href={link.href}
+                onClick={closeMenu}
+              >
+                {link.label}
+              </a>
+            );
+          })}
+          <div className="pt-2 border-t border-border-subtle flex items-center justify-between px-2 text-xs text-text-muted">
             <span>Addis Ababa, Ethiopia</span>
             <span className="text-brand-green font-semibold">+251 91 123 4567</span>
           </div>

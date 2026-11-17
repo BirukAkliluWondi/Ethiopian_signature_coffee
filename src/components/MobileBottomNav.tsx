@@ -1,57 +1,66 @@
+"use client";
+
+import { useState, useEffect } from "react";
+
 export default function MobileBottomNav() {
+  const [activeSection, setActiveSection] = useState("home");
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const sectionIds = ["home", "about", "services", "training", "projects", "contact"];
+      const scrollPos = window.scrollY + 220;
+
+      for (let i = sectionIds.length - 1; i >= 0; i--) {
+        const el = document.getElementById(sectionIds[i]);
+        if (el && el.offsetTop <= scrollPos) {
+          setActiveSection(sectionIds[i]);
+          break;
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const items = [
+    { id: "home", label: "Home", href: "#home", icon: "local_cafe" },
+    { id: "about", label: "About", href: "#about", icon: "info" },
+    { id: "services", label: "Services", href: "#services", icon: "corporate_fare" },
+    { id: "training", label: "Training", href: "#training", icon: "school" },
+    { id: "projects", label: "Projects", href: "#projects", icon: "foundation" },
+    { id: "contact", label: "Contact", href: "#contact", icon: "alternate_email" },
+  ];
+
   return (
     <nav
       aria-label="Mobile Navigation"
-      className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-xl border-t border-border-subtle shadow-[0_-2px_12px_rgba(0,0,0,0.06)] pb-safe"
+      className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-surface-cream/95 backdrop-blur-xl border-t border-border-subtle shadow-[0_-4px_16px_rgba(36,20,10,0.06)] pb-safe transition-all"
     >
       <div className="flex items-center justify-around h-14 max-w-md mx-auto px-2">
-        <a
-          className="flex flex-col items-center justify-center flex-1 py-1 text-brand-green font-semibold transition-colors active:scale-95"
-          href="#"
-        >
-          <span className="material-symbols-outlined text-[20px]">local_cafe</span>
-          <span className="text-[9.5px] mt-0.5 tracking-tight font-medium">Home</span>
-        </a>
-
-        <a
-          className="flex flex-col items-center justify-center flex-1 py-1 text-text-muted hover:text-brand-green font-medium transition-colors active:scale-95"
-          href="#about"
-        >
-          <span className="material-symbols-outlined text-[20px]">info</span>
-          <span className="text-[9.5px] mt-0.5 tracking-tight">About</span>
-        </a>
-
-        <a
-          className="flex flex-col items-center justify-center flex-1 py-1 text-text-muted hover:text-brand-green font-medium transition-colors active:scale-95"
-          href="#services"
-        >
-          <span className="material-symbols-outlined text-[20px]">corporate_fare</span>
-          <span className="text-[9.5px] mt-0.5 tracking-tight">Services</span>
-        </a>
-
-        <a
-          className="flex flex-col items-center justify-center flex-1 py-1 text-text-muted hover:text-brand-green font-medium transition-colors active:scale-95"
-          href="#training"
-        >
-          <span className="material-symbols-outlined text-[20px]">school</span>
-          <span className="text-[9.5px] mt-0.5 tracking-tight">Training</span>
-        </a>
-
-        <a
-          className="flex flex-col items-center justify-center flex-1 py-1 text-text-muted hover:text-brand-green font-medium transition-colors active:scale-95"
-          href="#projects"
-        >
-          <span className="material-symbols-outlined text-[20px]">foundation</span>
-          <span className="text-[9.5px] mt-0.5 tracking-tight">Projects</span>
-        </a>
-
-        <a
-          className="flex flex-col items-center justify-center flex-1 py-1 text-text-muted hover:text-brand-green font-medium transition-colors active:scale-95"
-          href="#contact"
-        >
-          <span className="material-symbols-outlined text-[20px]">alternate_email</span>
-          <span className="text-[9.5px] mt-0.5 tracking-tight">Contact</span>
-        </a>
+        {items.map((item) => {
+          const isActive = activeSection === item.id;
+          return (
+            <a
+              key={item.id}
+              className={`flex flex-col items-center justify-center flex-1 py-1 transition-all active:scale-95 relative ${
+                isActive ? "text-brand-green font-bold" : "text-text-muted hover:text-brand-green font-medium"
+              }`}
+              href={item.href}
+            >
+              <span className={`material-symbols-outlined text-[20px] ${isActive ? "text-brand-green" : ""}`}>
+                {item.icon}
+              </span>
+              <span className="text-[9.5px] mt-0.5 tracking-tight font-medium">
+                {item.label}
+              </span>
+              {isActive && (
+                <span className="absolute bottom-0 w-3 h-0.5 bg-brand-yellow rounded-full" />
+              )}
+            </a>
+          );
+        })}
       </div>
     </nav>
   );

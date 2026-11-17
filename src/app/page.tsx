@@ -15,12 +15,12 @@ export default function Home() {
       {/* Top Brand Accent Line */}
       <TopAccentLine />
 
-      {/* Responsive Header */}
+      {/* Responsive Header with Active Chapter Navigation */}
       <Header />
 
-      {/* Main Content Container */}
-      <main className="flex-1 w-full pt-20 sm:pt-24 md:pt-28 pb-28 md:pb-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-12 sm:gap-16 md:gap-24">
+      {/* Main Content Container with Warm Porcelain Base */}
+      <main className="flex-1 w-full pt-20 sm:pt-24 md:pt-28 pb-28 md:pb-20 bg-surface-cream">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-14 sm:gap-20 md:gap-28">
           <Hero />
           <About />
           <Services />

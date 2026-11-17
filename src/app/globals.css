@@ -7,8 +7,8 @@
     width: 100%;
     margin: 0;
     padding: 0;
-    background-color: #ffffff;
-    color: #18181b;
+    background-color: #fdfbf7;
+    color: #1c1815;
     overflow-x: hidden;
   }
   .pb-safe {
@@ -17,6 +17,37 @@
   .pt-safe {
     padding-top: env(safe-area-inset-top, 0px);
   }
+}
+
+/* Subtle Vintage Warmth & Shadow Utilities */
+.paper-card {
+  background-color: #ffffff;
+  border: 1px solid #ebe3d7;
+  box-shadow: 0 10px 30px -4px rgba(36, 20, 10, 0.05), 0 4px 12px -2px rgba(36, 20, 10, 0.02), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.paper-card-warm {
+  background-color: #faf7f2;
+  border: 1px solid #e4dacb;
+  box-shadow: 0 12px 36px -6px rgba(36, 20, 10, 0.06), 0 4px 14px -2px rgba(36, 20, 10, 0.03), inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+/* Atmospheric Section Transitions Without Break Lines */
+.section-transition-glow {
+  position: relative;
+}
+.section-transition-glow::before {
+  content: "";
+  position: absolute;
+  top: -3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70%;
+  max-width: 900px;
+  height: 6rem;
+  background: radial-gradient(ellipse at center, rgba(212, 136, 0, 0.045) 0%, rgba(253, 251, 247, 0) 70%);
+  pointer-events: none;
+  z-index: 0;
 }
 
 .no-scrollbar::-webkit-scrollbar {
