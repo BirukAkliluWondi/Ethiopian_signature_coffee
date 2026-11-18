@@ -68,23 +68,17 @@ export default function Training() {
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
           {/* Secondary Outline on Left */}
           <a
-            className="group w-full sm:w-auto h-12 px-6 sm:px-8 rounded-xl border border-white/30 text-white hover:bg-white/10 font-semibold text-xs uppercase tracking-wider text-center whitespace-nowrap active:scale-95 transition-all shadow-cozy-sm flex items-center justify-center gap-2"
+            className="group w-full sm:w-auto h-12 px-6 sm:px-8 rounded-xl border border-white/30 text-white hover:bg-white/10 font-semibold text-xs uppercase tracking-wider text-center whitespace-nowrap active:scale-95 transition-all shadow-cozy-sm flex items-center justify-center"
             href="#contact"
           >
             <span>View Syllabus</span>
-            <span className="material-symbols-outlined text-base transition-transform duration-300 group-hover:translate-x-0.5">
-              arrow_forward
-            </span>
           </a>
           {/* Primary Solid Confirmation on Right */}
           <a
-            className="group w-full sm:w-auto h-12 px-6 sm:px-8 rounded-xl bg-brand-yellow hover:bg-brand-yellow-light text-black font-bold text-xs uppercase tracking-wider text-center whitespace-nowrap active:scale-95 transition-all shadow-cozy hover:shadow-cozy-float flex items-center justify-center gap-2"
+            className="group w-full sm:w-auto h-12 px-6 sm:px-8 rounded-xl bg-brand-yellow hover:bg-brand-yellow-light text-black font-bold text-xs uppercase tracking-wider text-center whitespace-nowrap active:scale-95 transition-all shadow-cozy hover:shadow-cozy-float flex items-center justify-center"
             href="#contact"
           >
             <span>Enroll in Academy</span>
-            <span className="material-symbols-outlined text-base transition-transform duration-300 group-hover:translate-x-0.5">
-              arrow_forward
-            </span>
           </a>
         </div>
       </div>

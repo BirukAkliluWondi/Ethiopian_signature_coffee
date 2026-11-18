@@ -91,9 +91,6 @@ export default function Contact() {
                   +251 91 123 4567 (Direct Advisory)
                 </p>
               </div>
-              <span className="material-symbols-outlined text-gray-400 ml-auto group-hover:text-brand-green text-sm transition-transform duration-300 group-hover:translate-x-0.5 shrink-0">
-                arrow_forward
-              </span>
             </a>
 
             {/* Direct Telegram Button */}
@@ -114,9 +111,6 @@ export default function Contact() {
                 </h5>
                 <p className="text-[11px] sm:text-xs text-text-muted">@ethiopiansignature</p>
               </div>
-              <span className="material-symbols-outlined text-gray-400 ml-auto group-hover:text-brand-green text-sm transition-transform duration-300 group-hover:translate-x-0.5 shrink-0">
-                arrow_forward
-              </span>
             </a>
 
             {/* Direct Telephone */}
@@ -252,9 +246,11 @@ export default function Contact() {
               disabled={isSubmitting}
             >
               <span>{isSubmitting ? "Submitting Inquiry..." : "Submit Inquiry"}</span>
-              <span className={`material-symbols-outlined text-lg transition-transform duration-300 ${isSubmitting ? "animate-spin" : "group-hover:translate-x-0.5"}`}>
-                {isSubmitting ? "progress_activity" : "arrow_forward"}
-              </span>
+              {isSubmitting && (
+                <span className="material-symbols-outlined text-lg animate-spin">
+                  progress_activity
+                </span>
+              )}
             </button>
 
             {feedback.type === "success" && (

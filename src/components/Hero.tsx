@@ -23,23 +23,17 @@ export default function Hero() {
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1 sm:pt-2 w-full sm:w-auto">
           {/* Secondary Outline Action (Left) */}
           <a
-            className="group h-12 w-full sm:w-auto px-6 sm:px-8 rounded-xl border-2 border-brand-green text-brand-green bg-white hover:bg-brand-green/5 text-center font-semibold text-sm whitespace-nowrap active:scale-95 transition-all shadow-cozy-sm hover:shadow-cozy flex items-center justify-center gap-2"
+            className="group h-12 w-full sm:w-auto px-6 sm:px-8 rounded-xl border-2 border-brand-green text-brand-green bg-white hover:bg-brand-green/5 text-center font-semibold text-sm whitespace-nowrap active:scale-95 transition-all shadow-cozy-sm hover:shadow-cozy flex items-center justify-center"
             href="#services"
           >
             <span>Explore Services</span>
-            <span className="material-symbols-outlined text-lg transition-transform duration-300 group-hover:translate-y-0.5">
-              arrow_downward
-            </span>
           </a>
           {/* Primary Solid Confirmation Action (Right) */}
           <a
-            className="group h-12 w-full sm:w-auto px-6 sm:px-8 rounded-xl bg-brand-green hover:bg-brand-green-dark text-white text-center font-semibold text-sm shadow-cozy hover:shadow-cozy-float whitespace-nowrap active:scale-95 transition-all flex items-center justify-center gap-2"
+            className="group h-12 w-full sm:w-auto px-6 sm:px-8 rounded-xl bg-brand-green hover:bg-brand-green-dark text-white text-center font-semibold text-sm shadow-cozy hover:shadow-cozy-float whitespace-nowrap active:scale-95 transition-all flex items-center justify-center"
             href="#contact"
           >
             <span>Start Advisory</span>
-            <span className="material-symbols-outlined text-lg transition-transform duration-300 group-hover:translate-x-0.5">
-              arrow_forward
-            </span>
           </a>
         </div>
       </div>
@@ -54,11 +48,6 @@ export default function Hero() {
               className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDDk-iFEvRORMomf5aJppkPdG4X1Afc0D1RwBOm5ZtWA5r-y2Fyk-Srlgmy6w0-XU6hgHyrtZHntI6m50dGyZiGAT5Z4lVML8lFr_PhoYRLtlSA0cAmeC_YyVt7YCSt2qR49OxsjXxr-zwduJ6SQPKxbroL9vdg2pZU8E_F-s3VpJPowK1lkr1Gms7ycTU43SRwoS98u0CrzuJ3y8S2Ym8a7J-x4IWdPiRIOE_vxRrmiLghhNGr-x5"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent" />
-            <div className="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl bg-surface-cream/95 backdrop-blur-md border border-border-subtle shadow-cozy-sm flex items-center justify-between text-xs font-semibold text-brand-green">
-              <span>Traditional Ceremony &amp; Modern Craft</span>
-              <span className="text-brand-yellow font-bold">Addis Ababa</span>
-            </div>
           </div>
         </div>
       </div>

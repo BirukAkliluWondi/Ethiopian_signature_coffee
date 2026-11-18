@@ -35,11 +35,11 @@ export default function Header() {
 
   const navLinks = [
     { id: "home", label: "Home", href: "#home" },
-    { id: "about", label: "About Us", href: "#about" },
-    { id: "services", label: "Our Services", href: "#services" },
+    { id: "about", label: "About", href: "#about" },
+    { id: "services", label: "Services", href: "#services" },
     { id: "training", label: "Training", href: "#training" },
-    { id: "projects", label: "Our Projects", href: "#projects" },
-    { id: "contact", label: "Contact Us", href: "#contact" },
+    { id: "projects", label: "Projects", href: "#projects" },
+    { id: "contact", label: "Contact", href: "#contact" },
   ];
 
   return (
@@ -65,24 +65,21 @@ export default function Header() {
             </div>
           </a>
 
-          {/* Desktop Navigation Links (lg and up: 1024px+) with Smooth Active Chapter Indicator */}
-          <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
+          {/* Desktop Navigation Links (lg and up: 1024px+) - Clean Luxury Editorial */}
+          <nav className="hidden lg:flex items-center gap-7 xl:gap-9">
             {navLinks.map((link) => {
               const isActive = activeSection === link.id;
               return (
                 <a
                   key={link.id}
-                  className={`px-3.5 py-2 rounded-lg text-sm font-semibold transition-all relative ${
+                  className={`text-[13px] tracking-wide py-1 transition-all relative ${
                     isActive
-                      ? "text-brand-green bg-brand-green/8 shadow-sm border border-brand-green/15"
-                      : "text-text-muted hover:text-brand-green hover:bg-surface-subtle"
+                      ? "text-brand-green font-semibold after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-4 after:h-[2px] after:bg-brand-yellow after:rounded-full"
+                      : "text-text-muted font-medium hover:text-brand-green"
                   }`}
                   href={link.href}
                 >
                   <span>{link.label}</span>
-                  {isActive && (
-                    <span className="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-4 h-0.5 bg-brand-yellow rounded-full" />
-                  )}
                 </a>
               );
             })}

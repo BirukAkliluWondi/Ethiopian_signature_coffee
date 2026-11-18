@@ -58,13 +58,10 @@ export default function Services() {
 
           <div className="pt-1 sm:pt-2">
             <a
-              className="group inline-flex items-center justify-center gap-2 h-12 w-full sm:w-auto px-6 sm:px-8 rounded-xl bg-brand-green hover:bg-brand-green-dark text-white font-semibold text-sm whitespace-nowrap shadow-cozy hover:shadow-cozy-float active:scale-95 transition-all text-center"
+              className="group inline-flex items-center justify-center h-12 w-full sm:w-auto px-6 sm:px-8 rounded-xl bg-brand-green hover:bg-brand-green-dark text-white font-semibold text-sm whitespace-nowrap shadow-cozy hover:shadow-cozy-float active:scale-95 transition-all text-center"
               href="#contact"
             >
               <span>Book Setup Consultation</span>
-              <span className="material-symbols-outlined text-lg transition-transform duration-300 group-hover:translate-x-0.5">
-                arrow_forward
-              </span>
             </a>
           </div>
         </div>
@@ -94,13 +91,10 @@ export default function Services() {
           </div>
         </div>
         <a
-          className="group whitespace-nowrap h-11 w-full md:w-auto px-6 rounded-xl bg-brand-yellow hover:bg-brand-yellow-light text-black font-bold text-xs uppercase tracking-wider shadow-cozy active:scale-95 transition-all flex items-center justify-center gap-2 text-center"
+          className="group whitespace-nowrap h-11 w-full md:w-auto px-6 rounded-xl bg-brand-yellow hover:bg-brand-yellow-light text-black font-bold text-xs uppercase tracking-wider shadow-cozy active:scale-95 transition-all flex items-center justify-center text-center"
           href="#contact"
         >
           <span>Inquire Beans</span>
-          <span className="material-symbols-outlined text-base transition-transform duration-300 group-hover:translate-x-0.5">
-            arrow_forward
-          </span>
         </a>
       </div>
 
@@ -130,13 +124,10 @@ export default function Services() {
               </p>
             </div>
             <a
-              className="group w-full h-11 px-5 rounded-xl border border-brand-green text-brand-green font-bold text-xs uppercase tracking-wider hover:bg-brand-green hover:text-white transition-all shadow-cozy-sm flex items-center justify-center gap-2 whitespace-nowrap"
+              className="group w-full h-11 px-5 rounded-xl border border-brand-green text-brand-green font-bold text-xs uppercase tracking-wider hover:bg-brand-green hover:text-white transition-all shadow-cozy-sm flex items-center justify-center whitespace-nowrap"
               href="#training"
             >
               <span>View Curriculum</span>
-              <span className="material-symbols-outlined text-base transition-transform duration-300 group-hover:translate-x-0.5">
-                arrow_forward
-              </span>
             </a>
           </div>
         </article>
@@ -165,13 +156,10 @@ export default function Services() {
               </p>
             </div>
             <a
-              className="group w-full h-11 px-5 rounded-xl border border-brand-green text-brand-green font-bold text-xs uppercase tracking-wider hover:bg-brand-green hover:text-white transition-all shadow-cozy-sm flex items-center justify-center gap-2 whitespace-nowrap"
+              className="group w-full h-11 px-5 rounded-xl border border-brand-green text-brand-green font-bold text-xs uppercase tracking-wider hover:bg-brand-green hover:text-white transition-all shadow-cozy-sm flex items-center justify-center whitespace-nowrap"
               href="#contact"
             >
               <span>Inquire Menus</span>
-              <span className="material-symbols-outlined text-base transition-transform duration-300 group-hover:translate-x-0.5">
-                arrow_forward
-              </span>
             </a>
           </div>
         </article>
@@ -200,13 +188,10 @@ export default function Services() {
               </p>
             </div>
             <a
-              className="group w-full h-11 px-5 rounded-xl border border-brand-green text-brand-green font-bold text-xs uppercase tracking-wider hover:bg-brand-green hover:text-white transition-all shadow-cozy-sm flex items-center justify-center gap-2 whitespace-nowrap"
+              className="group w-full h-11 px-5 rounded-xl border border-brand-green text-brand-green font-bold text-xs uppercase tracking-wider hover:bg-brand-green hover:text-white transition-all shadow-cozy-sm flex items-center justify-center whitespace-nowrap"
               href="#contact"
             >
               <span>Book Advisory</span>
-              <span className="material-symbols-outlined text-base transition-transform duration-300 group-hover:translate-x-0.5">
-                arrow_forward
-              </span>
             </a>
           </div>
         </article>
@@ -235,13 +220,10 @@ export default function Services() {
               </p>
             </div>
             <a
-              className="group w-full h-11 px-5 rounded-xl border border-brand-green text-brand-green font-bold text-xs uppercase tracking-wider hover:bg-brand-green hover:text-white transition-all shadow-cozy-sm flex items-center justify-center gap-2 whitespace-nowrap"
+              className="group w-full h-11 px-5 rounded-xl border border-brand-green text-brand-green font-bold text-xs uppercase tracking-wider hover:bg-brand-green hover:text-white transition-all shadow-cozy-sm flex items-center justify-center whitespace-nowrap"
               href="#contact"
             >
               <span>View Operations</span>
-              <span className="material-symbols-outlined text-base transition-transform duration-300 group-hover:translate-x-0.5">
-                arrow_forward
-              </span>
             </a>
           </div>
         </article>
@@ -270,13 +252,10 @@ export default function Services() {
               </p>
             </div>
             <a
-              className="group w-full h-11 px-5 rounded-xl border border-brand-green text-brand-green font-bold text-xs uppercase tracking-wider hover:bg-brand-green hover:text-white transition-all shadow-cozy-sm flex items-center justify-center gap-2 whitespace-nowrap"
+              className="group w-full h-11 px-5 rounded-xl border border-brand-green text-brand-green font-bold text-xs uppercase tracking-wider hover:bg-brand-green hover:text-white transition-all shadow-cozy-sm flex items-center justify-center whitespace-nowrap"
               href="#contact"
             >
               <span>Improve Margins</span>
-              <span className="material-symbols-outlined text-base transition-transform duration-300 group-hover:translate-x-0.5">
-                arrow_forward
-              </span>
             </a>
           </div>
         </article>
