@@ -40,7 +40,7 @@ export default function Hero() {
 
       {/* Right Column: Isolated Visual Showcase directly on #FAF8F3 (Transparent, no card, no borders, no shadow) */}
       <div className="lg:col-span-5 order-1 lg:order-2 flex items-center justify-center lg:justify-end">
-        <div className="relative w-full max-w-[380px] sm:max-w-[420px] lg:max-w-[460px] aspect-[410/512] flex items-center justify-center">
+        <div className="relative w-full max-w-[340px] sm:max-w-[370px] lg:max-w-[385px] max-h-[460px] aspect-[410/512] flex items-center justify-center">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             alt="Traditional Ethiopian Coffee Ceremony"
