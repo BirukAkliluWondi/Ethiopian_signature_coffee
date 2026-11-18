@@ -1,9 +1,15 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { submitInquiryAction } from "@/app/actions/inquiry";
 
 export default function Contact() {
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [feedback, setFeedback] = useState<{
+    type: "success" | "error" | null;
+    message: string;
+  }>({ type: null, message: "" });
+
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -12,16 +18,36 @@ export default function Contact() {
     notes: "",
   });
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    setIsSubmitted(true);
-    setFormData({
-      name: "",
-      phone: "",
-      email: "",
-      service: "Coffee Shop Setup & Organization",
-      notes: "",
+    setIsSubmitting(true);
+    setFeedback({ type: null, message: "" });
+
+    const result = await submitInquiryAction({
+      fullName: formData.name,
+      phone: formData.phone,
+      email: formData.email,
+      service: formData.service,
+      notes: formData.notes,
     });
+
+    setIsSubmitting(false);
+
+    if (result.success) {
+      setFeedback({ type: "success", message: result.message });
+      setFormData({
+        name: "",
+        phone: "",
+        email: "",
+        service: "Coffee Shop Setup & Organization",
+        notes: "",
+      });
+    } else {
+      setFeedback({
+        type: "error",
+        message: result.message || "Failed to submit inquiry. Please try again.",
+      });
+    }
   };
 
   return (
@@ -221,21 +247,31 @@ export default function Contact() {
 
             {/* Main Solid Action Button on Submit */}
             <button
-              className="group mt-1 sm:mt-2 w-full h-12 px-6 sm:px-8 rounded-xl bg-brand-green hover:bg-brand-green-dark text-white font-semibold text-sm active:scale-95 transition-all shadow-cozy hover:shadow-cozy-float flex items-center justify-center gap-2 whitespace-nowrap"
+              className="group mt-1 sm:mt-2 w-full h-12 px-6 sm:px-8 rounded-xl bg-brand-green hover:bg-brand-green-dark text-white font-semibold text-sm active:scale-95 transition-all shadow-cozy hover:shadow-cozy-float flex items-center justify-center gap-2 whitespace-nowrap disabled:opacity-75 disabled:cursor-not-allowed"
               type="submit"
+              disabled={isSubmitting}
             >
-              <span>Submit Inquiry</span>
-              <span className="material-symbols-outlined text-lg transition-transform duration-300 group-hover:translate-x-0.5">
-                arrow_forward
+              <span>{isSubmitting ? "Submitting Inquiry..." : "Submit Inquiry"}</span>
+              <span className={`material-symbols-outlined text-lg transition-transform duration-300 ${isSubmitting ? "animate-spin" : "group-hover:translate-x-0.5"}`}>
+                {isSubmitting ? "progress_activity" : "arrow_forward"}
               </span>
             </button>
 
-            {isSubmitted && (
+            {feedback.type === "success" && (
               <div
                 id="form-feedback"
-                className="p-3.5 sm:p-4 rounded-xl bg-green-50/80 border border-brand-green/30 text-brand-green text-xs sm:text-sm font-semibold text-center shadow-cozy-sm"
+                className="p-3.5 sm:p-4 rounded-xl bg-green-50/90 border border-brand-green/30 text-brand-green text-xs sm:text-sm font-semibold text-center shadow-cozy-sm"
               >
-                ✓ Thank you! Your request has been received. Our advisory team will reach out via WhatsApp/Phone within 24 hours.
+                ✓ {feedback.message}
+              </div>
+            )}
+
+            {feedback.type === "error" && (
+              <div
+                id="form-error"
+                className="p-3.5 sm:p-4 rounded-xl bg-red-50/90 border border-red-200 text-brand-red text-xs sm:text-sm font-semibold text-center shadow-cozy-sm"
+              >
+                ⚠ {feedback.message}
               </div>
             )}
           </form>
