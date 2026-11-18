@@ -38,17 +38,15 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Right Column: Visual Showcase (On mobile: order-1, displays first; Desktop: lg:order-2) */}
-      <div className="lg:col-span-5 order-1 lg:order-2">
-        <div className="relative w-full rounded-2xl sm:rounded-3xl overflow-hidden shadow-roast-bloom border border-border-subtle bg-stone-900 group ring-1 ring-border-subtle">
-          <div className="relative w-full aspect-[4/3] sm:aspect-[4/3] lg:aspect-[4/5] max-h-[460px]">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              alt="Traditional Ethiopian Coffee Ceremony"
-              className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDDk-iFEvRORMomf5aJppkPdG4X1Afc0D1RwBOm5ZtWA5r-y2Fyk-Srlgmy6w0-XU6hgHyrtZHntI6m50dGyZiGAT5Z4lVML8lFr_PhoYRLtlSA0cAmeC_YyVt7YCSt2qR49OxsjXxr-zwduJ6SQPKxbroL9vdg2pZU8E_F-s3VpJPowK1lkr1Gms7ycTU43SRwoS98u0CrzuJ3y8S2Ym8a7J-x4IWdPiRIOE_vxRrmiLghhNGr-x5"
-            />
-          </div>
+      {/* Right Column: Isolated Visual Showcase directly on #FAF8F3 (Transparent, no card, no borders, no shadow) */}
+      <div className="lg:col-span-5 order-1 lg:order-2 flex items-center justify-center lg:justify-end">
+        <div className="relative w-full max-w-[380px] sm:max-w-[420px] lg:max-w-[460px] aspect-[410/512] flex items-center justify-center">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            alt="Traditional Ethiopian Coffee Ceremony"
+            className="w-full h-full object-contain object-center transition-transform duration-700 hover:scale-[1.02]"
+            src="/ceremony-isolated.png"
+          />
         </div>
       </div>
     </section>
