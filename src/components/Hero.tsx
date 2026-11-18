@@ -23,29 +23,23 @@ export default function Hero() {
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1 sm:pt-2 w-full sm:w-auto">
           {/* Secondary Outline Action (Left) */}
           <a
-            className="group h-12 w-full sm:w-auto px-6 sm:px-8 rounded-xl border-2 border-brand-green text-brand-green bg-surface-cream hover:bg-brand-green/5 text-center font-semibold text-sm whitespace-nowrap active:scale-95 transition-all shadow-cozy-sm hover:shadow-cozy flex items-center justify-center gap-2.5"
+            className="group h-12 w-full sm:w-auto px-6 sm:px-8 rounded-xl border-2 border-brand-green text-brand-green bg-white hover:bg-brand-green/5 text-center font-semibold text-sm whitespace-nowrap active:scale-95 transition-all shadow-cozy-sm hover:shadow-cozy flex items-center justify-center gap-2"
             href="#services"
           >
             <span>Explore Services</span>
-            <svg
-              className="w-4 h-4 stroke-current stroke-[1.75] fill-none transition-transform duration-300 group-hover:translate-y-1 shrink-0"
-              viewBox="0 0 16 16"
-            >
-              <path d="M8 2.5v10.5M4.5 9.5L8 13l3.5-3.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
+            <span className="material-symbols-outlined text-lg transition-transform duration-300 group-hover:translate-y-0.5">
+              arrow_downward
+            </span>
           </a>
           {/* Primary Solid Confirmation Action (Right) */}
           <a
-            className="group h-12 w-full sm:w-auto px-6 sm:px-8 rounded-xl bg-brand-green hover:bg-brand-green-dark text-white text-center font-semibold text-sm shadow-cozy hover:shadow-cozy-float whitespace-nowrap active:scale-95 transition-all flex items-center justify-center gap-2.5"
+            className="group h-12 w-full sm:w-auto px-6 sm:px-8 rounded-xl bg-brand-green hover:bg-brand-green-dark text-white text-center font-semibold text-sm shadow-cozy hover:shadow-cozy-float whitespace-nowrap active:scale-95 transition-all flex items-center justify-center gap-2"
             href="#contact"
           >
             <span>Start Advisory</span>
-            <svg
-              className="w-4 h-4 stroke-current stroke-[1.75] fill-none transition-transform duration-300 group-hover:translate-x-1 shrink-0"
-              viewBox="0 0 16 16"
-            >
-              <path d="M2.5 8h10.5M9 4.5l3.5 3.5-3.5 3.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
+            <span className="material-symbols-outlined text-lg transition-transform duration-300 group-hover:translate-x-0.5">
+              arrow_forward
+            </span>
           </a>
         </div>
       </div>

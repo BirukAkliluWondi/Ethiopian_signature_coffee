@@ -68,30 +68,23 @@ export default function Training() {
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
           {/* Secondary Outline on Left */}
           <a
-            className="group w-full sm:w-auto h-12 px-6 sm:px-8 rounded-xl border border-white/30 text-white hover:bg-white/10 font-semibold text-xs uppercase tracking-wider text-center whitespace-nowrap active:scale-95 transition-all shadow-cozy-sm flex items-center justify-center gap-2.5"
+            className="group w-full sm:w-auto h-12 px-6 sm:px-8 rounded-xl border border-white/30 text-white hover:bg-white/10 font-semibold text-xs uppercase tracking-wider text-center whitespace-nowrap active:scale-95 transition-all shadow-cozy-sm flex items-center justify-center gap-2"
             href="#contact"
           >
             <span>View Syllabus</span>
-            <svg
-              className="w-4 h-4 stroke-current stroke-[1.75] fill-none shrink-0"
-              viewBox="0 0 16 16"
-            >
-              <path d="M3 2.5h7l3 3v8H3v-11z" strokeLinecap="round" strokeLinejoin="round" />
-              <path d="M10 2.5v3h3" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
+            <span className="material-symbols-outlined text-base transition-transform duration-300 group-hover:translate-x-0.5">
+              arrow_forward
+            </span>
           </a>
           {/* Primary Solid Confirmation on Right */}
           <a
-            className="group w-full sm:w-auto h-12 px-6 sm:px-8 rounded-xl bg-brand-yellow hover:bg-brand-yellow-light text-black font-bold text-xs uppercase tracking-wider text-center whitespace-nowrap active:scale-95 transition-all shadow-cozy hover:shadow-cozy-float flex items-center justify-center gap-2.5"
+            className="group w-full sm:w-auto h-12 px-6 sm:px-8 rounded-xl bg-brand-yellow hover:bg-brand-yellow-light text-black font-bold text-xs uppercase tracking-wider text-center whitespace-nowrap active:scale-95 transition-all shadow-cozy hover:shadow-cozy-float flex items-center justify-center gap-2"
             href="#contact"
           >
             <span>Enroll in Academy</span>
-            <svg
-              className="w-4 h-4 stroke-current stroke-[2] fill-none transition-transform duration-300 group-hover:translate-x-1 shrink-0"
-              viewBox="0 0 16 16"
-            >
-              <path d="M2.5 8h10.5M9 4.5l3.5 3.5-3.5 3.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
+            <span className="material-symbols-outlined text-base transition-transform duration-300 group-hover:translate-x-0.5">
+              arrow_forward
+            </span>
           </a>
         </div>
       </div>

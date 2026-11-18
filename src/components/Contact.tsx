@@ -65,12 +65,9 @@ export default function Contact() {
                   +251 91 123 4567 (Direct Advisory)
                 </p>
               </div>
-              <svg
-                className="w-4 h-4 stroke-current stroke-[1.75] fill-none text-text-muted/60 group-hover:text-brand-green transition-all group-hover:translate-x-1 ml-auto shrink-0"
-                viewBox="0 0 16 16"
-              >
-                <path d="M2.5 8h10.5M9 4.5l3.5 3.5-3.5 3.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
+              <span className="material-symbols-outlined text-gray-400 ml-auto group-hover:text-brand-green text-sm transition-transform duration-300 group-hover:translate-x-0.5 shrink-0">
+                arrow_forward
+              </span>
             </a>
 
             {/* Direct Telegram Button */}
@@ -91,12 +88,9 @@ export default function Contact() {
                 </h5>
                 <p className="text-[11px] sm:text-xs text-text-muted">@ethiopiansignature</p>
               </div>
-              <svg
-                className="w-4 h-4 stroke-current stroke-[1.75] fill-none text-text-muted/60 group-hover:text-brand-green transition-all group-hover:translate-x-1 ml-auto shrink-0"
-                viewBox="0 0 16 16"
-              >
-                <path d="M2.5 8h10.5M9 4.5l3.5 3.5-3.5 3.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
+              <span className="material-symbols-outlined text-gray-400 ml-auto group-hover:text-brand-green text-sm transition-transform duration-300 group-hover:translate-x-0.5 shrink-0">
+                arrow_forward
+              </span>
             </a>
 
             {/* Direct Telephone */}
@@ -227,16 +221,13 @@ export default function Contact() {
 
             {/* Main Solid Action Button on Submit */}
             <button
-              className="group mt-1 sm:mt-2 w-full h-12 px-6 sm:px-8 rounded-xl bg-brand-green hover:bg-brand-green-dark text-white font-semibold text-sm active:scale-95 transition-all shadow-cozy hover:shadow-cozy-float flex items-center justify-center gap-2.5 whitespace-nowrap"
+              className="group mt-1 sm:mt-2 w-full h-12 px-6 sm:px-8 rounded-xl bg-brand-green hover:bg-brand-green-dark text-white font-semibold text-sm active:scale-95 transition-all shadow-cozy hover:shadow-cozy-float flex items-center justify-center gap-2 whitespace-nowrap"
               type="submit"
             >
               <span>Submit Inquiry</span>
-              <svg
-                className="w-4 h-4 stroke-current stroke-[1.75] fill-none transition-transform duration-300 group-hover:translate-x-1 shrink-0"
-                viewBox="0 0 16 16"
-              >
-                <path d="M2.5 8h10.5M9 4.5l3.5 3.5-3.5 3.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
+              <span className="material-symbols-outlined text-lg transition-transform duration-300 group-hover:translate-x-0.5">
+                arrow_forward
+              </span>
             </button>
 
             {isSubmitted && (
