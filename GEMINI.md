@@ -6,12 +6,15 @@
    - Never reduce top padding below `pt-20`; the floating header navbar requires ~50-60px clearance so the eyebrow and H1 heading have comfortable, luxurious breathing room without being crammed against the navigation bar.
 
 2. **Ceremony Image Footprint (Desktop)**:
-   - The hero ceremony image must expand horizontally to the center dividing line (`lg:col-span-6`, container `w-full max-w-[600px] xl:max-w-[640px]` with `lg:justify-start`).
-   - The left edge of the ceremony image must softly dissolve into the `#FAF8F3` cream background using progressive cosine feathering and CSS mask (`lg:[mask-image:linear-gradient(to_right,transparent_0%,rgba(0,0,0,0.35)_12%,black_32%)]`), preventing any empty void between the text column and the image.
+   - The hero ceremony image must be anchored to the right edge (`lg:col-span-6`, container `w-full max-w-[560px] xl:max-w-[620px]` with `lg:justify-end` and `lg:object-right`).
+   - The image starts flush from the right and expands towards the left (towards the text column).
+   - Never set `lg:justify-start` or move the image container away from the right edge, which leaves an empty white void on the right.
+   - The left edge of the ceremony image softly dissolves into the `#FAF8F3` cream background using progressive cosine feathering and CSS mask (`lg:[mask-image:linear-gradient(to_right,transparent_0%,rgba(0,0,0,0.3)_15%,black_38%)]`).
 
-3. **Woman's Head Framing & Headroom**:
-   - The ceremony asset (`public/ceremony-blended.png` and `public/ceremony-isolated.png`) must always preserve the convex sculpted Ethiopian curl dome (+28px headroom above the raw photo edge).
-   - Never crop or hard-cut the top of her hair; the crown must curve naturally into alpha 0.
+3. **Woman's Head Framing & Authenticity**:
+   - The ceremony asset (`public/ceremony-blended.png` and `public/ceremony-isolated.png`) is derived directly from the authentic original high-resolution photo.
+   - Never paint or generate artificial synthetic dark domes/hair lumps onto her head.
+   - The natural hair and upper background wall softly feather into `#FAF8F3` cream with subtle cosine falloff, preserving her authentic appearance without hard cut lines.
 
 4. **Mobile Presentation (Strictly Frameless)**:
    - On mobile screens, the ceremony visual must sit directly on the `#FAF8F3` page background without any rectangular card borders, backgrounds, drop shadows, or container frames (`rounded-none`, `shadow-none`, `border-none`).
