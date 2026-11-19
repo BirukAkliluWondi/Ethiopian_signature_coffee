@@ -9,7 +9,7 @@ export default function StickyChatButton() {
       <a
         aria-label="Chat with Ethiopian Signature Coffee on WhatsApp"
         className="relative flex items-center gap-2.5 h-12 sm:h-13 px-4 sm:px-5 rounded-full bg-brand-green hover:bg-brand-green-dark text-white font-semibold text-xs sm:text-sm shadow-roast-bloom hover:shadow-cozy-lg active:scale-95 transition-all duration-300 ring-2 ring-white/30 backdrop-blur-sm"
-        href="https://wa.me/251911234567"
+        href="https://wa.me/251925451711"
         rel="noopener noreferrer"
         target="_blank"
       >

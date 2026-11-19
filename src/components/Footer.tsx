@@ -47,7 +47,7 @@ export default function Footer() {
         <div className="flex items-center gap-3 pt-1">
           <a
             className="h-9 px-4 rounded-full bg-white/10 hover:bg-brand-green text-xs font-semibold text-white flex items-center gap-2 transition-all border border-white/15 shadow-sm active:scale-95"
-            href="https://wa.me/251911234567"
+            href="https://wa.me/251925451711"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -58,7 +58,7 @@ export default function Footer() {
           </a>
           <a
             className="h-9 px-4 rounded-full bg-white/10 hover:bg-sky-600 text-xs font-semibold text-white flex items-center gap-2 transition-all border border-white/15 shadow-sm active:scale-95"
-            href="https://t.me/ethiopiansignature"
+            href="https://t.me/+251925451711"
             target="_blank"
             rel="noopener noreferrer"
           >

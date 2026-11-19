@@ -74,7 +74,7 @@ export default function Contact() {
             {/* Direct WhatsApp Button */}
             <a
               className="p-3.5 sm:p-4 rounded-xl bg-surface-white border border-border-subtle hover:border-brand-green flex items-center gap-3 sm:gap-3.5 shadow-cozy-sm hover:shadow-cozy transition-all group"
-              href="https://wa.me/251911234567"
+              href="https://wa.me/251925451711"
               rel="noopener noreferrer"
               target="_blank"
             >
@@ -88,7 +88,7 @@ export default function Contact() {
                   Chat on WhatsApp
                 </h5>
                 <p className="text-[11px] sm:text-xs text-text-muted">
-                  +251 91 123 4567 (Direct Advisory)
+                  +251 92 545 1711 (Direct Advisory)
                 </p>
               </div>
             </a>
@@ -96,7 +96,7 @@ export default function Contact() {
             {/* Direct Telegram Button */}
             <a
               className="p-3.5 sm:p-4 rounded-xl bg-surface-white border border-border-subtle hover:border-brand-green flex items-center gap-3 sm:gap-3.5 shadow-cozy-sm hover:shadow-cozy transition-all group"
-              href="https://t.me/ethiopiansignature"
+              href="https://t.me/+251925451711"
               rel="noopener noreferrer"
               target="_blank"
             >
@@ -109,7 +109,7 @@ export default function Contact() {
                 <h5 className="text-xs sm:text-sm font-bold text-text-main group-hover:text-brand-green transition-colors">
                   Connect on Telegram
                 </h5>
-                <p className="text-[11px] sm:text-xs text-text-muted">@ethiopiansignature</p>
+                <p className="text-[11px] sm:text-xs text-text-muted">+251 92 545 1711</p>
               </div>
             </a>
 
@@ -121,7 +121,7 @@ export default function Contact() {
               <div>
                 <h5 className="text-xs sm:text-sm font-bold text-text-main">Phone Inquiry</h5>
                 <p className="text-[11px] sm:text-xs text-text-muted">
-                  +251 91 123 4567 / +251 92 987 6543
+                  +251 92 545 1711
                 </p>
               </div>
             </div>

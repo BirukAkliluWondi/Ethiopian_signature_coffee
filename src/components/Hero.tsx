@@ -38,13 +38,13 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Right Column: Authentic Blended Ceremony Showcase (Expanded to left, natural head, seamless fade) */}
+      {/* Right Column: Authentic Blended Ceremony Showcase (Frameless, fits naturally, seamless background blend) */}
       <div className="lg:col-span-6 order-1 lg:order-2 flex items-center justify-center lg:justify-end">
-        <div className="relative w-full max-w-[420px] sm:max-w-[460px] lg:max-w-[560px] aspect-[410/512] flex items-center justify-center lg:justify-end rounded-2xl lg:rounded-none overflow-hidden lg:overflow-visible shadow-cozy lg:shadow-none">
+        <div className="relative w-full max-w-[360px] sm:max-w-[420px] lg:max-w-[480px] h-[340px] sm:h-[400px] lg:h-[440px] flex items-center justify-center lg:justify-end">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             alt="Traditional Ethiopian Coffee Ceremony"
-            className="w-full h-full object-contain object-center lg:object-right lg:[mask-image:linear-gradient(to_right,transparent_0%,rgba(0,0,0,0.5)_18%,black_42%)] lg:[-webkit-mask-image:linear-gradient(to_right,transparent_0%,rgba(0,0,0,0.5)_18%,black_42%)] transition-transform duration-700 hover:scale-[1.01]"
+            className="w-full h-full object-contain object-center lg:object-right lg:[mask-image:linear-gradient(to_right,transparent_0%,rgba(0,0,0,0.5)_16%,black_40%)] lg:[-webkit-mask-image:linear-gradient(to_right,transparent_0%,rgba(0,0,0,0.5)_16%,black_40%)] transition-transform duration-700 hover:scale-[1.01]"
             src="/ceremony-blended.png"
           />
         </div>
