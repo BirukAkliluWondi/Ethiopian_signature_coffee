@@ -126,7 +126,7 @@ export default function Header() {
           })}
           <div className="pt-2 border-t border-border-subtle flex items-center justify-between px-2 text-xs text-text-muted">
             <span>Addis Ababa, Ethiopia</span>
-            <span className="text-brand-green font-semibold">+251 91 123 4567</span>
+            <span className="text-brand-green font-semibold">+251 92 545 1711</span>
           </div>
         </div>
       </div>

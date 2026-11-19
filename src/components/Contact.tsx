@@ -172,7 +172,7 @@ export default function Contact() {
                 <input
                   className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl border border-border-subtle bg-surface-cream text-xs sm:text-sm focus:border-brand-green focus:bg-white focus:ring-1 focus:ring-brand-green outline-none transition-all shadow-inner"
                   id="lead-whatsapp"
-                  placeholder="+251 91 123 4567"
+                  placeholder="+251 92 545 1711"
                   required
                   type="tel"
                   value={formData.phone}
