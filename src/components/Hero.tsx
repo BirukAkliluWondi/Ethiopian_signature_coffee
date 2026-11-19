@@ -1,11 +1,11 @@
 export default function Hero() {
   return (
     <section
-      className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-center scroll-mt-28 relative section-transition-glow"
+      className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center scroll-mt-28 relative section-transition-glow"
       id="home"
     >
-      {/* Story, Headline & CTAs (Left Column: 6 cols on desktop, compact & crisp) */}
-      <div className="lg:col-span-6 flex flex-col gap-5 sm:gap-6 order-2 lg:order-1 z-10">
+      {/* Story, Headline & CTAs (On mobile: order-2, displays below visual showcase; Desktop: lg:order-1) */}
+      <div className="lg:col-span-7 flex flex-col gap-5 sm:gap-6 order-2 lg:order-1">
         <div className="flex flex-col gap-2 sm:gap-2.5">
           <span className="text-[11px] sm:text-xs md:text-sm uppercase tracking-widest text-brand-yellow font-bold">
             Beyond Coffee, Building Coffee Businesses
@@ -15,7 +15,7 @@ export default function Hero() {
           </h1>
         </div>
 
-        <p className="text-sm sm:text-base md:text-lg text-text-muted leading-relaxed max-w-xl font-normal">
+        <p className="text-sm sm:text-base md:text-lg text-text-muted leading-relaxed max-w-2xl font-normal">
           We bring together premium Ethiopian coffee, professional coffee training, business consultancy, and innovative café solutions. From centuries-old ceremonial roots to modern commercial venues, we help coffee businesses achieve excellence.
         </p>
 
@@ -38,15 +38,17 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Right Column: Authentic Blended Ceremony Showcase (Anchored to right, expands leftward, positioned gracefully below header) */}
-      <div className="lg:col-span-6 order-1 lg:order-2 flex items-center justify-center lg:justify-end">
-        <div className="relative w-full max-w-[460px] sm:max-w-[520px] lg:max-w-[640px] xl:max-w-[700px] aspect-[584/638] max-h-[500px] sm:max-h-[540px] lg:max-h-[580px] flex items-center justify-center lg:justify-end lg:translate-y-6 xl:translate-y-8">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            alt="Traditional Ethiopian Coffee Ceremony"
-            className="w-full h-full object-contain object-center lg:object-right transition-transform duration-700 hover:scale-[1.01]"
-            src="/ceremony-blended.png"
-          />
+      {/* Right Column: Visual Showcase (On mobile: order-1, displays first; Desktop: lg:order-2) */}
+      <div className="lg:col-span-5 order-1 lg:order-2">
+        <div className="relative w-full rounded-2xl sm:rounded-3xl overflow-hidden shadow-roast-bloom border border-border-subtle bg-stone-900 group ring-1 ring-border-subtle">
+          <div className="relative w-full aspect-[4/3] sm:aspect-[4/3] lg:aspect-[4/5] max-h-[460px]">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              alt="Traditional Ethiopian Coffee Ceremony"
+              className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDDk-iFEvRORMomf5aJppkPdG4X1Afc0D1RwBOm5ZtWA5r-y2Fyk-Srlgmy6w0-XU6hgHyrtZHntI6m50dGyZiGAT5Z4lVML8lFr_PhoYRLtlSA0cAmeC_YyVt7YCSt2qR49OxsjXxr-zwduJ6SQPKxbroL9vdg2pZU8E_F-s3VpJPowK1lkr1Gms7ycTU43SRwoS98u0CrzuJ3y8S2Ym8a7J-x4IWdPiRIOE_vxRrmiLghhNGr-x5"
+            />
+          </div>
         </div>
       </div>
     </section>
