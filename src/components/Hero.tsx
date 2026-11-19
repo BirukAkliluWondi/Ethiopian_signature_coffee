@@ -1,21 +1,21 @@
 export default function Hero() {
   return (
     <section
-      className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center scroll-mt-28 relative section-transition-glow"
+      className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-12 items-center scroll-mt-28 relative section-transition-glow"
       id="home"
     >
       {/* Story, Headline & CTAs (On mobile: order-2, displays below visual showcase; Desktop: lg:order-1) */}
-      <div className="lg:col-span-7 flex flex-col gap-5 sm:gap-6 order-2 lg:order-1">
+      <div className="lg:col-span-6 flex flex-col gap-5 sm:gap-6 order-2 lg:order-1">
         <div className="flex flex-col gap-2 sm:gap-2.5">
           <span className="text-[11px] sm:text-xs md:text-sm uppercase tracking-widest text-brand-yellow font-bold">
             Beyond Coffee, Building Coffee Businesses
           </span>
-          <h1 className="font-serif text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-brand-green leading-[1.18] sm:leading-[1.15] tracking-tight">
+          <h1 className="font-serif text-2xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-bold text-brand-green leading-[1.18] sm:leading-[1.15] tracking-tight">
             Discover the Excellence of Ethiopian Coffee
           </h1>
         </div>
 
-        <p className="text-sm sm:text-base md:text-lg text-text-muted leading-relaxed max-w-2xl font-normal">
+        <p className="text-sm sm:text-base md:text-lg text-text-muted leading-relaxed max-w-xl lg:max-w-none font-normal">
           We bring together premium Ethiopian coffee, professional coffee training, business consultancy, and innovative café solutions. From centuries-old ceremonial roots to modern commercial venues, we help coffee businesses achieve excellence.
         </p>
 
@@ -39,9 +39,9 @@ export default function Hero() {
       </div>
 
       {/* Right Column: Visual Showcase (On mobile: order-1, displays first; Desktop: lg:order-2) */}
-      <div className="lg:col-span-5 order-1 lg:order-2">
-        <div className="relative w-full rounded-2xl sm:rounded-3xl overflow-hidden shadow-roast-bloom border border-border-subtle bg-stone-900 group ring-1 ring-border-subtle">
-          <div className="relative w-full aspect-[4/3] sm:aspect-[4/3] lg:aspect-[4/5] max-h-[460px]">
+      <div className="lg:col-span-6 order-1 lg:order-2 flex justify-center lg:justify-end">
+        <div className="relative w-full max-w-lg lg:max-w-none rounded-2xl sm:rounded-3xl overflow-hidden shadow-roast-bloom border border-border-subtle bg-stone-900 group ring-1 ring-border-subtle">
+          <div className="relative w-full aspect-[4/3] sm:aspect-[4/3] lg:aspect-[4/3.5] xl:aspect-[4/3.3] max-h-[480px]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               alt="Traditional Ethiopian Coffee Ceremony"

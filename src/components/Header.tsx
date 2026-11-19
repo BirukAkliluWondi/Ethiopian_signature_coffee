@@ -43,7 +43,7 @@ export default function Header() {
   ];
 
   return (
-    <header className="fixed top-1 w-full z-50 pt-safe bg-surface-cream/92 backdrop-blur-md border-b border-border-subtle shadow-[0_4px_24px_-4px_rgba(36,20,10,0.04)] transition-all">
+    <header className="fixed top-1 w-full z-50 pt-safe bg-[#FBF9F5]/98 backdrop-blur-lg border-b border-border-subtle shadow-[0_2px_16px_rgba(36,20,10,0.06)] transition-all">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Header Row */}
         <div className="flex items-center justify-between h-16 sm:h-20">
@@ -85,11 +85,11 @@ export default function Header() {
             })}
           </nav>
 
-          {/* Mobile & Tablet Hamburger Menu Button (lg:hidden) */}
+          {/* Mobile & Tablet Hamburger Menu Button (lg:hidden, 44x44px accessible touch target) */}
           <div className="flex items-center lg:hidden">
             <button
               aria-label="Toggle Navigation Menu"
-              className="w-9 h-9 rounded-xl border border-border-subtle bg-surface-subtle flex items-center justify-center text-text-main hover:bg-surface-muted transition-colors focus:outline-none"
+              className="w-11 h-11 min-w-[44px] min-h-[44px] rounded-xl border border-border-subtle bg-surface-subtle flex items-center justify-center text-text-main hover:bg-surface-muted transition-colors focus:outline-none"
               id="mobile-menu-btn"
               onClick={toggleMenu}
             >

@@ -94,10 +94,10 @@ export default function Services() {
         </a>
       </div>
 
-      {/* 5 Additional Core Services */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+      {/* 5 Additional Core Services (Balanced 3-top, 2-bottom symmetrical grid) */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6 lg:gap-8">
         {/* Service 2: Barista Training */}
-        <article className="flex flex-col rounded-2xl bg-surface-white border border-border-subtle overflow-hidden shadow-cozy hover:shadow-cozy-lg transition-all">
+        <article className="flex flex-col rounded-2xl bg-surface-white border border-border-subtle overflow-hidden shadow-cozy hover:shadow-cozy-lg transition-all lg:col-span-2">
           <div className="relative w-full aspect-video overflow-hidden bg-stone-900">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -125,7 +125,7 @@ export default function Services() {
         </article>
 
         {/* Service 3: Menu & Recipe Development */}
-        <article className="flex flex-col rounded-2xl bg-surface-white border border-border-subtle overflow-hidden shadow-cozy hover:shadow-cozy-lg transition-all">
+        <article className="flex flex-col rounded-2xl bg-surface-white border border-border-subtle overflow-hidden shadow-cozy hover:shadow-cozy-lg transition-all lg:col-span-2">
           <div className="relative w-full aspect-video overflow-hidden bg-stone-900">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -153,7 +153,7 @@ export default function Services() {
         </article>
 
         {/* Service 4: Coffee Business Consulting */}
-        <article className="flex flex-col rounded-2xl bg-surface-white border border-border-subtle overflow-hidden shadow-cozy hover:shadow-cozy-lg transition-all">
+        <article className="flex flex-col rounded-2xl bg-surface-white border border-border-subtle overflow-hidden shadow-cozy hover:shadow-cozy-lg transition-all lg:col-span-2">
           <div className="relative w-full aspect-video overflow-hidden bg-stone-900">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -181,7 +181,7 @@ export default function Services() {
         </article>
 
         {/* Service 5: Coffee Shop Operations Management */}
-        <article className="flex flex-col rounded-2xl bg-surface-white border border-border-subtle overflow-hidden shadow-cozy hover:shadow-cozy-lg transition-all">
+        <article className="flex flex-col rounded-2xl bg-surface-white border border-border-subtle overflow-hidden shadow-cozy hover:shadow-cozy-lg transition-all lg:col-span-3">
           <div className="relative w-full aspect-video overflow-hidden bg-stone-900">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -209,7 +209,7 @@ export default function Services() {
         </article>
 
         {/* Service 6: Menu Engineering & Profitability Improvement */}
-        <article className="flex flex-col rounded-2xl bg-surface-white border border-border-subtle overflow-hidden shadow-cozy hover:shadow-cozy-lg transition-all md:col-span-2 lg:col-span-1">
+        <article className="flex flex-col rounded-2xl bg-surface-white border border-border-subtle overflow-hidden shadow-cozy hover:shadow-cozy-lg transition-all md:col-span-2 lg:col-span-3">
           <div className="relative w-full aspect-video overflow-hidden bg-stone-900">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
