@@ -1,0 +1,21 @@
+# Ethiopian Signature Coffee - Project Guidelines & Learned Preferences
+
+## Hero Section Architecture & Visual Layout
+1. **Vertical Spacing & Header Clearance**:
+   - The main content container in `src/app/page.tsx` must maintain `pt-20 sm:pt-24 md:pt-28`.
+   - Never reduce top padding below `pt-20`; the floating header navbar requires ~50-60px clearance so the eyebrow and H1 heading have comfortable, luxurious breathing room without being crammed against the navigation bar.
+
+2. **Ceremony Image Footprint (Desktop)**:
+   - The hero ceremony image must expand horizontally to the center dividing line (`lg:col-span-6`, container `w-full max-w-[600px] xl:max-w-[640px]` with `lg:justify-start`).
+   - The left edge of the ceremony image must softly dissolve into the `#FAF8F3` cream background using progressive cosine feathering and CSS mask (`lg:[mask-image:linear-gradient(to_right,transparent_0%,rgba(0,0,0,0.35)_12%,black_32%)]`), preventing any empty void between the text column and the image.
+
+3. **Woman's Head Framing & Headroom**:
+   - The ceremony asset (`public/ceremony-blended.png` and `public/ceremony-isolated.png`) must always preserve the convex sculpted Ethiopian curl dome (+28px headroom above the raw photo edge).
+   - Never crop or hard-cut the top of her hair; the crown must curve naturally into alpha 0.
+
+4. **Mobile Presentation (Strictly Frameless)**:
+   - On mobile screens, the ceremony visual must sit directly on the `#FAF8F3` page background without any rectangular card borders, backgrounds, drop shadows, or container frames (`rounded-none`, `shadow-none`, `border-none`).
+   - Her head must float naturally above the hero headline with smooth 4-way vignette feathering.
+
+5. **Contact Channels & Numbers**:
+   - Official contact phone, WhatsApp, and Telegram number across all components and pages is: **`+251925451711`**.
