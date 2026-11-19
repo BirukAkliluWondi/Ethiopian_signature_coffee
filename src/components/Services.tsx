@@ -20,10 +20,6 @@ export default function Services() {
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuBupxs9yDUXKNBndzW61BwaixUDoqz_FHq_DZORO1tvFV6TiAu1ihaQrr7RvkPMcZV_2lHl8Zpnjb-IITPCjuET2UL7AdHY_jGfNuE3b9emmCyx2fF9hvo82XPbgrRYBrzhvcqNYZWsEuO1_uzJT6iDdIKpbaWEEssY-Gbu9T6Ho3St9i25qi2EwjsuuUtxlLIXBjuGxy1l4e5qRQi0Xsddj8vXp1woaUMj96B4XfzwHI206gmPLA_u"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-          <span className="absolute top-3.5 left-3.5 sm:top-4 sm:left-4 px-3 py-1 rounded-full bg-brand-red text-white text-[10px] sm:text-[11px] font-bold tracking-wider uppercase shadow-cozy-sm">
-            FLAGSHIP SERVICE
-          </span>
         </div>
 
         {/* Flagship Details (7 cols) */}
@@ -109,10 +105,6 @@ export default function Services() {
               className="w-full h-full object-cover"
               src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=800&auto=format&fit=crop"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-            <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-brand-green text-white text-[10px] font-bold uppercase tracking-wider shadow-cozy-sm">
-              TRAINING
-            </span>
           </div>
           <div className="p-5 sm:p-6 flex flex-col justify-between flex-1 gap-4 sm:gap-5">
             <div className="flex flex-col gap-1.5 sm:gap-2">
@@ -141,10 +133,6 @@ export default function Services() {
               className="w-full h-full object-cover"
               src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=800&auto=format&fit=crop"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-            <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-brand-yellow text-black text-[10px] font-bold uppercase tracking-wider shadow-cozy-sm">
-              BEVERAGE DESIGN
-            </span>
           </div>
           <div className="p-5 sm:p-6 flex flex-col justify-between flex-1 gap-4 sm:gap-5">
             <div className="flex flex-col gap-1.5 sm:gap-2">
@@ -173,10 +161,6 @@ export default function Services() {
               className="w-full h-full object-cover"
               src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?q=80&w=800&auto=format&fit=crop"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-            <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-brand-green text-white text-[10px] font-bold uppercase tracking-wider shadow-cozy-sm">
-              CONSULTING
-            </span>
           </div>
           <div className="p-5 sm:p-6 flex flex-col justify-between flex-1 gap-4 sm:gap-5">
             <div className="flex flex-col gap-1.5 sm:gap-2">
@@ -205,10 +189,6 @@ export default function Services() {
               className="w-full h-full object-cover"
               src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?q=80&w=800&auto=format&fit=crop"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-            <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-brand-yellow text-black text-[10px] font-bold uppercase tracking-wider shadow-cozy-sm">
-              OPERATIONS
-            </span>
           </div>
           <div className="p-5 sm:p-6 flex flex-col justify-between flex-1 gap-4 sm:gap-5">
             <div className="flex flex-col gap-1.5 sm:gap-2">
@@ -237,10 +217,6 @@ export default function Services() {
               className="w-full h-full object-cover"
               src="https://images.unsplash.com/photo-1559496417-e7f25cb247f3?q=80&w=800&auto=format&fit=crop"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-            <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-brand-red text-white text-[10px] font-bold uppercase tracking-wider shadow-cozy-sm">
-              PROFITABILITY
-            </span>
           </div>
           <div className="p-5 sm:p-6 flex flex-col justify-between flex-1 gap-4 sm:gap-5">
             <div className="flex flex-col gap-1.5 sm:gap-2">

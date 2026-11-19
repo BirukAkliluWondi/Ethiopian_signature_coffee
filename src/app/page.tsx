@@ -8,6 +8,7 @@ import Projects from "@/components/Projects";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import MobileBottomNav from "@/components/MobileBottomNav";
+import StickyChatButton from "@/components/StickyChatButton";
 
 export default function Home() {
   return (
@@ -32,6 +33,9 @@ export default function Home() {
 
       {/* Footer */}
       <Footer />
+
+      {/* Sticky Bottom-Right WhatsApp Chat Action */}
+      <StickyChatButton />
 
       {/* Mobile Bottom App Navigation */}
       <MobileBottomNav />
