@@ -40,11 +40,11 @@ export default function Hero() {
 
       {/* Right Column: Authentic Blended Ceremony Showcase (Anchored to right, expands leftward, positioned gracefully below header) */}
       <div className="lg:col-span-6 order-1 lg:order-2 flex items-center justify-center lg:justify-end">
-        <div className="relative w-full max-w-[420px] sm:max-w-[480px] lg:max-w-[620px] xl:max-w-[680px] aspect-[494/638] max-h-[480px] sm:max-h-[520px] lg:max-h-[560px] flex items-center justify-center lg:justify-end lg:translate-y-7 xl:translate-y-9">
+        <div className="relative w-full max-w-[460px] sm:max-w-[520px] lg:max-w-[640px] xl:max-w-[700px] aspect-[584/638] max-h-[500px] sm:max-h-[540px] lg:max-h-[580px] flex items-center justify-center lg:justify-end lg:translate-y-6 xl:translate-y-8">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             alt="Traditional Ethiopian Coffee Ceremony"
-            className="w-full h-full object-contain object-center lg:object-right lg:[mask-image:linear-gradient(to_right,transparent_0%,black_10%)] lg:[-webkit-mask-image:linear-gradient(to_right,transparent_0%,black_10%)] transition-transform duration-700 hover:scale-[1.01]"
+            className="w-full h-full object-contain object-center lg:object-right transition-transform duration-700 hover:scale-[1.01]"
             src="/ceremony-blended.png"
           />
         </div>
