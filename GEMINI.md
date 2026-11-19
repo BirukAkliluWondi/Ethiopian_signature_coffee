@@ -2,14 +2,13 @@
 
 ## Hero Section Architecture & Visual Layout
 1. **Vertical Spacing & Header Clearance**:
-   - The main content container in `src/app/page.tsx` must maintain `pt-20 sm:pt-24 md:pt-28`.
-   - Never reduce top padding below `pt-20`; the floating header navbar requires ~50-60px clearance so the eyebrow and H1 heading have comfortable, luxurious breathing room without being crammed against the navigation bar.
+   - The main content container in `src/app/page.tsx` must maintain `pt-12 sm:pt-16 md:pt-18`.
+   - This provides a balanced ~45-50px clearance below the floating navbar so the eyebrow and H1 heading have comfortable breathing room without excessive empty upper margin.
 
 2. **Ceremony Image Footprint (Desktop)**:
-   - The hero ceremony image must be anchored to the right edge (`lg:col-span-6`, container `w-full max-w-[560px] xl:max-w-[620px]` with `lg:justify-end` and `lg:object-right`).
-   - The image starts flush from the right and expands towards the left (towards the text column).
-   - Never set `lg:justify-start` or move the image container away from the right edge, which leaves an empty white void on the right.
-   - The left edge of the ceremony image softly dissolves into the `#FAF8F3` cream background using progressive cosine feathering and CSS mask (`lg:[mask-image:linear-gradient(to_right,transparent_0%,rgba(0,0,0,0.3)_15%,black_38%)]`).
+   - The hero ceremony image must be anchored to the right edge (`lg:col-span-6`, container `w-full max-w-[620px] xl:max-w-[680px]` with `lg:justify-end` and `lg:object-right`).
+   - The image starts flush from the right and expands wide towards the left (towards the text column), preserving the full authentic ceremony scene including the charcoal brazier, glowing embers, and fragrant smoke.
+   - The left edge dissolves smoothly into the `#FAF8F3` cream background using progressive cosine feathering (~45px) and subtle CSS edge mask (`lg:[mask-image:linear-gradient(to_right,transparent_0%,black_10%)]`), completely eliminating any empty dead space between text and image.
 
 3. **Woman's Head Framing & Authenticity**:
    - The ceremony asset (`public/ceremony-blended.png` and `public/ceremony-isolated.png`) is derived directly from the authentic original high-resolution photo.

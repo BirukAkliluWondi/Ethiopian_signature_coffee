@@ -38,13 +38,13 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Right Column: Authentic Blended Ceremony Showcase (Anchored to right, expands leftward, seamless fade) */}
+      {/* Right Column: Authentic Blended Ceremony Showcase (Anchored to right, expands leftward, positioned gracefully below header) */}
       <div className="lg:col-span-6 order-1 lg:order-2 flex items-center justify-center lg:justify-end">
-        <div className="relative w-full max-w-[380px] sm:max-w-[440px] lg:max-w-[560px] xl:max-w-[620px] aspect-[494/638] max-h-[460px] sm:max-h-[500px] lg:max-h-[540px] flex items-center justify-center lg:justify-end">
+        <div className="relative w-full max-w-[420px] sm:max-w-[480px] lg:max-w-[620px] xl:max-w-[680px] aspect-[494/638] max-h-[480px] sm:max-h-[520px] lg:max-h-[560px] flex items-center justify-center lg:justify-end lg:translate-y-7 xl:translate-y-9">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             alt="Traditional Ethiopian Coffee Ceremony"
-            className="w-full h-full object-contain object-center lg:object-right lg:[mask-image:linear-gradient(to_right,transparent_0%,rgba(0,0,0,0.3)_15%,black_38%)] lg:[-webkit-mask-image:linear-gradient(to_right,transparent_0%,rgba(0,0,0,0.3)_15%,black_38%)] transition-transform duration-700 hover:scale-[1.01]"
+            className="w-full h-full object-contain object-center lg:object-right lg:[mask-image:linear-gradient(to_right,transparent_0%,black_10%)] lg:[-webkit-mask-image:linear-gradient(to_right,transparent_0%,black_10%)] transition-transform duration-700 hover:scale-[1.01]"
             src="/ceremony-blended.png"
           />
         </div>
