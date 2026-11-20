@@ -68,3 +68,13 @@
    - **Backup Branch**: `backup-stable-baseline` (Pushed to GitHub `origin`)
    - **Remote Synchronization**: Fully backed up on remote GitHub repository.
    - **One-Prompt Revert Protocol**: If the user asks to revert or roll back at any time, run `git reset --hard baseline-stable && git clean -fd` to instantly restore this exact pristine state.
+
+## Motion & Web Dynamics Architecture (Anti-PDF Standards)
+8. **Dynamic Web Physics & Cleanliness Rules**:
+   - **Strictly ZERO Pill Badges**: Never add `rounded-full` text tags, chips, or pill badges (e.g. `INTERACTIVE EXPLORER`, `CLIENT PORTFOLIO`).
+   - **Strictly ZERO Text Bloat**: Maintain concise copy; never add accordion drawers, long competency matrices, or heavy FAQ blocks.
+   - **Hero Live Proof Counters**: In `Hero.tsx`, the 3 quantity metrics animate from 0 to target (`14+`, `250+`, `100%`) on page mount with smooth decelerating curve (`easeOutQuart` over ~1.2s).
+   - **Header Reading Progress Bar**: Thin 2.5px golden gradient line at bottom edge of fixed header tracks overall scroll percentage (0% to 100%).
+   - **Staggered Scroll Reveal**: Elements smoothly reveal upon scrolling using lightweight, zero-dependency `IntersectionObserver` with staggered delays (`delay-100` to `delay-400`).
+   - **Kinetic Card Physics**: Cards feature subtle elevation (`-translate-y-1.5`) and warm amber glow on hover (`hover:shadow-roast-bloom hover:ring-1 hover:ring-brand-yellow/40`).
+   - **Button Shimmer**: Primary CTA buttons feature hardware-accelerated subtle sheen sweep on mouse hover (`.btn-shimmer`).
