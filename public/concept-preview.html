@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ethiopian Signature Coffee — Reimagined Luxury Concept</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Playfair Display & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              green: '#1B3B2B',
+              'green-dark': '#12261C',
+              yellow: '#C68D27',
+              'yellow-light': '#DFA842',
+              cream: '#FBF9F5',
+              surface: '#F6F3EB',
+            }
+          },
+          fontFamily: {
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Subtle luxury parchment texture overlay */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image: radial-gradient(rgba(27, 59, 43, 0.03) 1px, transparent 1px);
+      background-size: 24px 24px;
+      pointer-events: none;
+      z-index: 99;
+    }
+    .amber-glow {
+      box-shadow: 0 0 60px -15px rgba(198, 141, 39, 0.22);
+    }
+  </style>
+</head>
+<body class="bg-brand-cream text-stone-800 font-sans antialiased selection:bg-brand-yellow/20 selection:text-brand-green">
+
+  <!-- Concept Banner -->
+  <div class="bg-stone-900 text-white/90 text-xs py-2 px-4 text-center border-b border-stone-800 flex items-center justify-center gap-2">
+    <span class="px-2 py-0.5 rounded-full bg-brand-yellow text-stone-950 font-bold uppercase tracking-wider text-[10px]">CONCEPT DESIGN PREVIEW</span>
+    <span>Separate standalone design exploration — 100% isolated from production code.</span>
+  </div>
+
+  <!-- Top Accent Line -->
+  <div class="h-1 w-full bg-gradient-to-r from-brand-green via-brand-yellow to-brand-green"></div>
+
+  <!-- Header -->
+  <header class="sticky top-0 z-50 bg-[#FBF9F5]/95 backdrop-blur-md border-b border-stone-200/80 shadow-sm transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full bg-brand-green flex items-center justify-center text-brand-yellow shadow-inner font-serif font-bold text-lg">ES</div>
+        <div class="flex flex-col">
+          <span class="font-serif text-xl font-bold tracking-tight text-brand-green leading-none">ETHIOPIAN SIGNATURE</span>
+          <span class="text-[9px] uppercase tracking-widest text-brand-yellow font-bold mt-1">Building Coffee Businesses</span>
+        </div>
+      </div>
+      <nav class="hidden lg:flex items-center gap-8 text-xs font-semibold tracking-wider uppercase text-stone-600">
+        <a href="#hero" class="text-brand-green border-b-2 border-brand-yellow pb-1">Home</a>
+        <a href="#about" class="hover:text-brand-green transition-colors">About</a>
+        <a href="#services" class="hover:text-brand-green transition-colors">Services</a>
+        <a href="#terroir" class="hover:text-brand-green transition-colors">Origins</a>
+        <a href="#training" class="hover:text-brand-green transition-colors">Training</a>
+        <a href="#contact" class="hover:text-brand-green transition-colors">Contact</a>
+      </nav>
+      <a href="#contact" class="hidden sm:inline-flex items-center justify-center h-10 px-5 rounded-full bg-brand-green hover:bg-brand-green-dark text-white text-xs font-bold uppercase tracking-wider transition-all shadow-md active:scale-95">
+        Book Advisory
+      </a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="hero" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 md:pt-16 pb-20">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+      
+      <!-- Left Column: Editorial Headline, Story, Proof Points -->
+      <div class="lg:col-span-6 flex flex-col gap-6">
+        <div class="inline-flex items-center gap-2 self-start px-3.5 py-1.5 rounded-full bg-brand-yellow/15 border border-brand-yellow/30 text-stone-800 text-xs font-bold tracking-wider uppercase">
+          <span class="w-2 h-2 rounded-full bg-brand-yellow animate-pulse"></span>
+          Bespoke Café Consultancy & Mastery
+        </div>
+
+        <h1 class="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-[3.4rem] font-bold text-brand-green leading-[1.14] tracking-tight">
+          Discover the Excellence of <span class="italic text-stone-900 underline decoration-brand-yellow/60 underline-offset-8">Ethiopian Coffee</span>
+        </h1>
+
+        <p class="text-stone-600 text-base md:text-lg leading-relaxed max-w-xl font-normal">
+          We bring together ancestral ceremony and cutting-edge hospitality science. From turnkey café launches and commercial bar ergonomics to world-class barista certification, we guide institutions to enduring excellence.
+        </p>
+
+        <!-- Proof Metrics Chips -->
+        <div class="grid grid-cols-3 gap-3 pt-2">
+          <div class="p-3.5 rounded-xl bg-white border border-stone-200/90 shadow-sm flex flex-col">
+            <span class="font-serif text-2xl font-bold text-brand-green">14+</span>
+            <span class="text-[11px] text-stone-500 font-medium">Turnkey Venues</span>
+          </div>
+          <div class="p-3.5 rounded-xl bg-white border border-stone-200/90 shadow-sm flex flex-col">
+            <span class="font-serif text-2xl font-bold text-brand-green">250+</span>
+            <span class="text-[11px] text-stone-500 font-medium">Certified Baristas</span>
+          </div>
+          <div class="p-3.5 rounded-xl bg-white border border-stone-200/90 shadow-sm flex flex-col">
+            <span class="font-serif text-2xl font-bold text-brand-green">100%</span>
+            <span class="text-[11px] text-stone-500 font-medium">Direct-Trade Origins</span>
+          </div>
+        </div>
+
+        <!-- Action CTAs -->
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-2">
+          <a href="#contact" class="h-12 px-8 rounded-xl bg-brand-green hover:bg-brand-green-dark text-white font-semibold text-sm shadow-md flex items-center justify-center transition-all hover:shadow-lg active:scale-95">
+            Start Café Advisory
+          </a>
+          <a href="#services" class="h-12 px-7 rounded-xl border border-stone-300 bg-white hover:bg-stone-50 text-stone-800 font-semibold text-sm shadow-sm flex items-center justify-center transition-all active:scale-95">
+            Explore 6 Services
+          </a>
+        </div>
+      </div>
+
+      <!-- Right Column: Luxury Framed Visual Card -->
+      <div class="lg:col-span-6 flex justify-center lg:justify-end">
+        <div class="relative w-full max-w-lg lg:max-w-none rounded-3xl overflow-hidden shadow-2xl amber-glow border-2 border-stone-200/90 bg-stone-900 group">
+          <div class="relative aspect-[4/3.4]">
+            <img 
+              alt="Traditional Ethiopian Coffee Ceremony" 
+              class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105" 
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDDk-iFEvRORMomf5aJppkPdG4X1Afc0D1RwBOm5ZtWA5r-y2Fyk-Srlgmy6w0-XU6hgHyrtZHntI6m50dGyZiGAT5Z4lVML8lFr_PhoYRLtlSA0cAmeC_YyVt7YCSt2qR49OxsjXxr-zwduJ6SQPKxbroL9vdg2pZU8E_F-s3VpJPowK1lkr1Gms7ycTU43SRwoS98u0CrzuJ3y8S2Ym8a7J-x4IWdPiRIOE_vxRrmiLghhNGr-x5"
+            />
+            <div class="absolute bottom-4 left-4 right-4 p-3.5 rounded-2xl bg-stone-900/80 backdrop-blur-md text-white border border-white/10 flex items-center justify-between">
+              <div>
+                <div class="text-[10px] uppercase tracking-widest text-brand-yellow font-bold">Heritage Ritual</div>
+                <div class="font-serif text-sm font-semibold">Buna Tetu Ceremonial Roots</div>
+              </div>
+              <span class="px-2.5 py-1 rounded-full bg-white/10 text-[10px] font-bold">Addis Ababa</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Terroir & Origin Micro-Explorer -->
+  <section id="terroir" class="bg-brand-surface py-12 border-y border-stone-200/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+        <div>
+          <span class="text-xs uppercase tracking-widest text-brand-yellow font-bold">The Birthplace of Arabica</span>
+          <h2 class="font-serif text-2xl sm:text-3xl font-bold text-brand-green mt-1">Direct-Trade Single Origins</h2>
+        </div>
+        <p class="text-stone-600 text-xs sm:text-sm max-w-md">Our client cafés receive direct allocations from certified highland cooperatives.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="p-5 rounded-2xl bg-white border border-stone-200/90 shadow-sm hover:shadow-md transition-all">
+          <span class="text-[10px] font-bold text-brand-yellow uppercase tracking-widest">Floral & Delicate</span>
+          <h3 class="font-serif text-xl font-bold text-brand-green mt-1">Yirgacheffe</h3>
+          <p class="text-xs text-stone-500 mt-2 leading-relaxed">Jasmine blossoms, sweet bergamot, lemongrass, crisp citrus finish.</p>
+        </div>
+        <div class="p-5 rounded-2xl bg-white border border-stone-200/90 shadow-sm hover:shadow-md transition-all">
+          <span class="text-[10px] font-bold text-brand-yellow uppercase tracking-widest">Complex & Balanced</span>
+          <h3 class="font-serif text-xl font-bold text-brand-green mt-1">Sidama</h3>
+          <p class="text-xs text-stone-500 mt-2 leading-relaxed">Bright Meyer lemon, ripe apricot, cane sugar, silky caramel body.</p>
+        </div>
+        <div class="p-5 rounded-2xl bg-white border border-stone-200/90 shadow-sm hover:shadow-md transition-all">
+          <span class="text-[10px] font-bold text-brand-yellow uppercase tracking-widest">Lush & Exotic</span>
+          <h3 class="font-serif text-xl font-bold text-brand-green mt-1">Guji</h3>
+          <p class="text-xs text-stone-500 mt-2 leading-relaxed">White peach, honeyed lavender, dark plum, sparkling acidity.</p>
+        </div>
+        <div class="p-5 rounded-2xl bg-white border border-stone-200/90 shadow-sm hover:shadow-md transition-all">
+          <span class="text-[10px] font-bold text-brand-yellow uppercase tracking-widest">Wild & Sun-Dried</span>
+          <h3 class="font-serif text-xl font-bold text-brand-green mt-1">Harrar</h3>
+          <p class="text-xs text-stone-500 mt-2 leading-relaxed">Wild blueberry compote, baker's chocolate, spicy cinnamon undertones.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
+      <div>
+        <span class="text-xs uppercase tracking-widest text-brand-yellow font-bold">Turnkey Solutions</span>
+        <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-brand-green mt-1">Our Core Services</h2>
+      </div>
+      <p class="text-stone-600 text-sm max-w-md">Systematic execution from commercial layout to team readiness.</p>
+    </div>
+
+    <!-- Flagship Service 1 -->
+    <div class="p-6 sm:p-10 rounded-3xl bg-white border border-stone-200/90 shadow-lg mb-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+      <div class="lg:col-span-5 rounded-2xl overflow-hidden aspect-[4/3] bg-stone-900 shadow-md">
+        <img alt="Modern Cafe Setup" class="w-full h-full object-cover object-center" src="coffee-shop-setup.jpg" />
+      </div>
+      <div class="lg:col-span-7 flex flex-col gap-4">
+        <span class="text-xs font-bold uppercase tracking-wider text-brand-green">Flagship Turnkey Advisory</span>
+        <h3 class="font-serif text-2xl sm:text-3xl font-bold text-stone-900">1. Coffee Shop Setup &amp; Organization</h3>
+        <p class="text-stone-600 text-sm leading-relaxed">
+          Comprehensive blueprinting for new specialty coffee venues. We calibrate bar speed ergonomics, machine procurement, reverse-osmosis water systems, and staff operational SOPs.
+        </p>
+        <div class="grid grid-cols-3 gap-2.5 pt-2">
+          <div class="p-3 rounded-xl bg-stone-50 border border-stone-200 text-xs">
+            <span class="font-bold text-stone-900 block">Bar Ergonomics</span>
+            <span class="text-[11px] text-stone-500">Peak hour workflow</span>
+          </div>
+          <div class="p-3 rounded-xl bg-stone-50 border border-stone-200 text-xs">
+            <span class="font-bold text-stone-900 block">Equipment Spec</span>
+            <span class="text-[11px] text-stone-500">Machines &amp; grinders</span>
+          </div>
+          <div class="p-3 rounded-xl bg-stone-50 border border-stone-200 text-xs">
+            <span class="font-bold text-stone-900 block">Launch Readiness</span>
+            <span class="text-[11px] text-stone-500">On-site coaching</span>
+          </div>
+        </div>
+        <div class="pt-2">
+          <a href="#contact" class="inline-flex items-center h-11 px-7 rounded-xl bg-brand-green hover:bg-brand-green-dark text-white text-xs font-bold uppercase tracking-wider shadow-md">
+            Consult on Setup
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Symmetrical 5 Services Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="p-6 rounded-2xl bg-white border border-stone-200/90 shadow-sm flex flex-col justify-between gap-4">
+        <div>
+          <span class="text-[11px] font-bold text-brand-yellow uppercase">Skill Mastery</span>
+          <h4 class="font-serif text-xl font-bold text-stone-900 mt-1">2. Barista Training</h4>
+          <p class="text-xs text-stone-600 mt-2 leading-relaxed">Extraction theory, sensory profiling, milk micro-texture, and hospitality grace.</p>
+        </div>
+        <a href="#training" class="text-xs font-bold text-brand-green hover:underline">View Curriculum →</a>
+      </div>
+      <div class="p-6 rounded-2xl bg-white border border-stone-200/90 shadow-sm flex flex-col justify-between gap-4">
+        <div>
+          <span class="text-[11px] font-bold text-brand-yellow uppercase">Artisanal Menus</span>
+          <h4 class="font-serif text-xl font-bold text-stone-900 mt-1">3. Menu &amp; Recipe Development</h4>
+          <p class="text-xs text-stone-600 mt-2 leading-relaxed">Signature drinks, botanical infusions, recipe standardization, and seasonal syrups.</p>
+        </div>
+        <a href="#contact" class="text-xs font-bold text-brand-green hover:underline">Inquire Menus →</a>
+      </div>
+      <div class="p-6 rounded-2xl bg-white border border-stone-200/90 shadow-sm flex flex-col justify-between gap-4">
+        <div>
+          <span class="text-[11px] font-bold text-brand-yellow uppercase">Strategic Growth</span>
+          <h4 class="font-serif text-xl font-bold text-stone-900 mt-1">4. Coffee Business Consulting</h4>
+          <p class="text-xs text-stone-600 mt-2 leading-relaxed">Financial modeling, venue location assessment, customer demographic analysis.</p>
+        </div>
+        <a href="#contact" class="text-xs font-bold text-brand-green hover:underline">Book Advisory →</a>
+      </div>
+      <div class="p-6 rounded-2xl bg-white border border-stone-200/90 shadow-sm flex flex-col justify-between gap-4">
+        <div>
+          <span class="text-[11px] font-bold text-brand-yellow uppercase">Operational Rigor</span>
+          <h4 class="font-serif text-xl font-bold text-stone-900 mt-1">5. Operations Management</h4>
+          <p class="text-xs text-stone-600 mt-2 leading-relaxed">Inventory tracking, spoilage minimization, shift checklists, and preventive maintenance.</p>
+        </div>
+        <a href="#contact" class="text-xs font-bold text-brand-green hover:underline">View Systems →</a>
+      </div>
+      <div class="p-6 rounded-2xl bg-white border border-stone-200/90 shadow-sm flex flex-col justify-between gap-4">
+        <div>
+          <span class="text-[11px] font-bold text-brand-yellow uppercase">Margin Maximization</span>
+          <h4 class="font-serif text-xl font-bold text-stone-900 mt-1">6. Menu Engineering</h4>
+          <p class="text-xs text-stone-600 mt-2 leading-relaxed">Cost-of-goods breakdown per beverage, pricing optimization, and high-margin driver items.</p>
+        </div>
+        <a href="#contact" class="text-xs font-bold text-brand-green hover:underline">Improve Margins →</a>
+      </div>
+      <div class="p-6 rounded-2xl bg-brand-green text-white shadow-sm flex flex-col justify-between gap-4">
+        <div>
+          <span class="text-[11px] font-bold text-brand-yellow uppercase">Direct Supply</span>
+          <h4 class="font-serif text-xl font-bold text-white mt-1">Specialty Bean Supply</h4>
+          <p class="text-xs text-white/80 mt-2 leading-relaxed">Micro-lots and roasted profiles sourced directly from certified farmer cooperatives.</p>
+        </div>
+        <a href="#contact" class="text-xs font-bold text-brand-yellow hover:underline">Source Beans →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Training Academy Dark Section -->
+  <section id="training" class="bg-brand-green-dark text-white py-20 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="max-w-2xl">
+        <span class="text-xs font-bold uppercase tracking-widest text-brand-yellow">Professional Academy</span>
+        <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold mt-1">SCA-Aligned Masterclasses</h2>
+        <p class="text-white/80 text-sm mt-3 leading-relaxed">
+          Elevate your team with comprehensive training in sensory cup grading, roasting science, and high-speed bar ergonomics.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-10">
+        <div class="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-brand-yellow/50 transition-all">
+          <span class="material-symbols-outlined text-brand-yellow text-3xl">school</span>
+          <h4 class="font-serif text-xl font-bold mt-3">Barista Certification</h4>
+          <p class="text-xs text-white/70 mt-2">Dosing, tamping, channeling prevention, and milk aeration.</p>
+        </div>
+        <div class="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-brand-yellow/50 transition-all">
+          <span class="material-symbols-outlined text-brand-yellow text-3xl">local_fire_department</span>
+          <h4 class="font-serif text-xl font-bold mt-3">Roasting Mastery</h4>
+          <p class="text-xs text-white/70 mt-2">Thermal curve profiles, first crack control, and cupping scores.</p>
+        </div>
+        <div class="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-brand-yellow/50 transition-all">
+          <span class="material-symbols-outlined text-brand-yellow text-3xl">psychology</span>
+          <h4 class="font-serif text-xl font-bold mt-3">Sensory &amp; Cupping</h4>
+          <p class="text-xs text-white/70 mt-2">Flavor wheel calibration, defect identification, and acid balance.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Advisory Form -->
+  <section id="contact" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <div class="p-8 sm:p-12 rounded-3xl bg-white border border-stone-200/90 shadow-xl grid grid-cols-1 lg:grid-cols-12 gap-10">
+      <div class="lg:col-span-5 flex flex-col gap-6">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-widest text-brand-yellow">Initiate Partnership</span>
+          <h2 class="font-serif text-3xl sm:text-4xl font-bold text-brand-green mt-1">Let's Build Your Coffee Business</h2>
+        </div>
+        <p class="text-stone-600 text-sm leading-relaxed">
+          Whether you are launching an flagship specialty café or upgrading an existing hospitality brand, our master advisors are ready.
+        </p>
+        <div class="space-y-3 text-xs text-stone-700">
+          <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-brand-green">call</span>
+            <span class="font-bold">+251 92 545 1711</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-brand-green">location_on</span>
+            <span>Bole Sub-City, Atlas District, Addis Ababa, Ethiopia</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-brand-green">mail</span>
+            <span>advisory@ethiopiansignature.com</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="lg:col-span-7">
+        <form class="space-y-4" onsubmit="event.preventDefault(); alert('Demo concept inquiry submitted!');">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <input type="text" placeholder="Full Name" class="w-full px-4 py-3 rounded-xl border border-stone-300 text-sm focus:border-brand-green focus:outline-none bg-stone-50" required />
+            <input type="tel" placeholder="Phone Number" class="w-full px-4 py-3 rounded-xl border border-stone-300 text-sm focus:border-brand-green focus:outline-none bg-stone-50" required />
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <input type="email" placeholder="Email Address" class="w-full px-4 py-3 rounded-xl border border-stone-300 text-sm focus:border-brand-green focus:outline-none bg-stone-50" required />
+            <select class="w-full px-4 py-3 rounded-xl border border-stone-300 text-sm focus:border-brand-green focus:outline-none bg-stone-50">
+              <option>Coffee Shop Setup &amp; Organization</option>
+              <option>Barista Training</option>
+              <option>Menu &amp; Recipe Development</option>
+              <option>Coffee Business Consulting</option>
+              <option>Premium Bean Sourcing</option>
+            </select>
+          </div>
+          <textarea placeholder="Tell us about your café concept, location, or launch timeline..." rows="3" class="w-full px-4 py-3 rounded-xl border border-stone-300 text-sm focus:border-brand-green focus:outline-none bg-stone-50"></textarea>
+          <button type="submit" class="w-full h-12 rounded-xl bg-brand-green hover:bg-brand-green-dark text-white font-bold text-sm tracking-wider uppercase shadow-md transition-all">
+            Send Advisory Request
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-brand-green-dark text-white py-14 border-t border-white/10 text-center">
+    <div class="max-w-4xl mx-auto px-4 flex flex-col items-center gap-6">
+      <div class="font-serif text-2xl font-bold tracking-wide">ETHIOPIAN SIGNATURE COFFEE</div>
+      <p class="text-xs text-white/70 max-w-lg leading-relaxed">
+        Rooted in the ancestral highlands of Ethiopia. Building enduring coffee businesses through turnkey execution and mastery.
+      </p>
+      <div class="text-[11px] text-white/50 pt-4 border-t border-white/10 w-full flex flex-col sm:flex-row items-center justify-between">
+        <span>© 2026 ETHIOPIAN SIGNATURE COFFEE. All rights reserved.</span>
+        <span>Crafted in the Cradle of Coffee · Addis Ababa, Ethiopia</span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
