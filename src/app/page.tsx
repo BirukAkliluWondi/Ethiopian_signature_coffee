@@ -6,6 +6,7 @@ import SingleOrigins from "@/components/SingleOrigins";
 import Services from "@/components/Services";
 import Training from "@/components/Training";
 import Projects from "@/components/Projects";
+import FAQ from "@/components/FAQ";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import MobileBottomNav from "@/components/MobileBottomNav";
@@ -29,6 +30,7 @@ export default function Home() {
           <Services />
           <Training />
           <Projects />
+          <FAQ />
           <Contact />
         </div>
       </main>

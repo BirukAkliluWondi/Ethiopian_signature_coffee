@@ -4,10 +4,11 @@ import { useState, useEffect } from "react";
 
 export default function Header() {
   const [activeSection, setActiveSection] = useState("home");
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      const sectionIds = ["home", "about", "services", "training", "projects", "contact"];
+      const sectionIds = ["home", "about", "origins", "services", "training", "projects", "contact"];
       const scrollPos = window.scrollY + 220;
 
       for (let i = sectionIds.length - 1; i >= 0; i--) {
@@ -16,6 +17,11 @@ export default function Header() {
           setActiveSection(sectionIds[i]);
           break;
         }
+      }
+
+      const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
+      if (totalScroll > 0) {
+        setScrollProgress((window.scrollY / totalScroll) * 100);
       }
     };
 
@@ -77,6 +83,13 @@ export default function Header() {
           </nav>
         </div>
       </div>
+
+      {/* Subtle Dynamic Reading Progress Indicator */}
+      <div
+        aria-hidden="true"
+        className="h-[2px] bg-gradient-to-r from-brand-yellow via-brand-yellow-light to-brand-green transition-all duration-150 ease-out absolute bottom-0 left-0"
+        style={{ width: `${scrollProgress}%` }}
+      />
     </header>
   );
 }

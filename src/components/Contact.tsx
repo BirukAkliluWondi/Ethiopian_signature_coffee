@@ -149,6 +149,39 @@ export default function Contact() {
         {/* Right Column: Consultation Form */}
         <div className="lg:col-span-7 bg-surface-white p-5 sm:p-8 rounded-2xl border border-border-subtle shadow-cozy w-full">
           <form className="flex flex-col gap-3.5 sm:gap-4" id="advisory-form" onSubmit={handleSubmit}>
+            {/* Interactive Quick-Goal Selector Chips */}
+            <div className="flex flex-col gap-2 pb-1">
+              <span className="text-[11px] uppercase tracking-wider font-bold text-brand-yellow">
+                Select Your Advisory Focus:
+              </span>
+              <div className="flex flex-wrap gap-1.5 sm:gap-2">
+                {[
+                  "Coffee Shop Setup & Organization",
+                  "Barista & Sensory Training",
+                  "Coffee Business Consulting",
+                  "Coffee Shop Operations Management",
+                  "Menu Engineering & Profitability",
+                  "Premium Ethiopian Coffee Sourcing",
+                ].map((s) => {
+                  const isChosen = formData.service === s;
+                  return (
+                    <button
+                      key={s}
+                      type="button"
+                      onClick={() => setFormData((prev) => ({ ...prev, service: s }))}
+                      className={`text-[11px] px-2.5 sm:px-3 py-1.5 rounded-lg font-medium transition-all cursor-pointer ${
+                        isChosen
+                          ? "bg-brand-green text-white shadow-cozy-sm font-semibold"
+                          : "bg-surface-subtle text-text-muted border border-border-subtle hover:border-brand-green/30 hover:text-text-main"
+                      }`}
+                    >
+                      {s}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4">
               <div className="flex flex-col gap-1.5">
                 <label className="text-xs font-bold text-text-main" htmlFor="lead-name">
@@ -209,13 +242,13 @@ export default function Contact() {
                   <option value="Coffee Shop Setup & Organization">
                     Coffee Shop Setup &amp; Organization
                   </option>
-                  <option value="Barista Training">Barista Training</option>
+                  <option value="Barista & Sensory Training">Barista &amp; Sensory Training</option>
                   <option value="Menu & Recipe Development">Menu &amp; Recipe Development</option>
                   <option value="Coffee Business Consulting">Coffee Business Consulting</option>
                   <option value="Coffee Shop Operations Management">
                     Coffee Shop Operations Management
                   </option>
-                  <option value="Menu Engineering & Profitability Improvement">
+                  <option value="Menu Engineering & Profitability">
                     Menu Engineering &amp; Profitability
                   </option>
                   <option value="Premium Ethiopian Coffee Sourcing">
