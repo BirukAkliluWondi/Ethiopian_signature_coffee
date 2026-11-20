@@ -63,37 +63,6 @@ export default function Services() {
         </div>
       </article>
 
-      {/* Sourcing Highlight Banner */}
-      <div className="p-5 sm:p-8 rounded-2xl bg-brand-green-dark text-white flex flex-col md:flex-row items-stretch md:items-center justify-between gap-5 sm:gap-6 shadow-cozy-lg border border-brand-green">
-        <div className="flex items-start sm:items-center gap-3.5 sm:gap-4">
-          <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-white/10 flex items-center justify-center shrink-0 border border-white/20 shadow-cozy-sm">
-            <span className="material-symbols-outlined text-brand-yellow text-xl sm:text-2xl">
-              local_cafe
-            </span>
-          </div>
-          <div className="flex flex-col gap-1">
-            <div className="flex items-center gap-2">
-              <span className="px-2 py-0.5 rounded-full bg-brand-yellow text-black text-[9px] sm:text-[10px] font-bold uppercase tracking-wider">
-                SPECIALTY SUPPLY
-              </span>
-              <span className="text-xs text-white/80 font-semibold">Direct Trade</span>
-            </div>
-            <h3 className="font-serif text-lg sm:text-xl md:text-2xl font-bold">
-              Premium Ethiopian Coffee Sourcing
-            </h3>
-            <p className="text-xs sm:text-sm text-white/80 max-w-2xl leading-relaxed">
-              Specialty micro-lots and roasted coffee products sourced directly from Yirgacheffe, Sidama, Guji, and Harrar farm cooperatives.
-            </p>
-          </div>
-        </div>
-        <a
-          className="group whitespace-nowrap h-11 w-full md:w-auto px-6 rounded-xl bg-brand-yellow hover:bg-brand-yellow-light text-black font-bold text-xs uppercase tracking-wider shadow-cozy active:scale-95 transition-all flex items-center justify-center text-center"
-          href="#contact"
-        >
-          <span>Inquire Beans</span>
-        </a>
-      </div>
-
       {/* 5 Additional Core Services (Balanced 3-top, 2-bottom symmetrical grid) */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6 lg:gap-8">
         {/* Service 2: Barista Training */}

@@ -11,11 +11,12 @@
 ## Services Section Structure
 2. **Symmetrical Grid Layout**:
    - Card 1 ("Coffee Shop Setup & Organization") is featured as the flagship article.
-   - Sourcing Banner ("Premium Ethiopian Coffee Sourcing") highlights direct trade supply.
+   - Flow directly transitions to Cards 2–6 with zero disruptive middle banners or interruptions.
    - Cards 2–6 follow a symmetrical 6-column container:
      - Row 1: Cards 2, 3, 4 each spanning `lg:col-span-2`.
      - Row 2: Cards 5, 6 each spanning `lg:col-span-3`.
      - Zero empty or missing columns on desktop.
+   - Coffee sourcing remains cleanly accessible through the Contact form dropdown and Hero narrative.
 
 ## Header & Navigation Standards
 3. **Contrast & Tap Targets**:
