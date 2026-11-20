@@ -23,7 +23,7 @@ export default function StickyChatButton() {
   return (
     <aside
       aria-label="Direct advisory chat"
-      className={`fixed bottom-20 sm:bottom-6 right-3 sm:right-6 z-40 flex items-center group transition-all duration-300 ${
+      className={`fixed bottom-20 lg:bottom-6 right-3 sm:right-6 z-40 flex items-center group transition-all duration-300 ${
         isFooterVisible
           ? "opacity-0 pointer-events-none translate-y-3"
           : "opacity-100 pointer-events-auto translate-y-0"

@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 
 export default function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
 
   useEffect(() => {
@@ -24,14 +23,6 @@ export default function Header() {
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const toggleMenu = () => {
-    setIsMenuOpen((prev) => !prev);
-  };
-
-  const closeMenu = () => {
-    setIsMenuOpen(false);
-  };
 
   const navLinks = [
     { id: "home", label: "Home", href: "#home" },
@@ -65,7 +56,7 @@ export default function Header() {
             </div>
           </a>
 
-          {/* Desktop Navigation Links (lg and up: 1024px+) - Clean Luxury Editorial */}
+          {/* Desktop Navigation Links (Full Desktop Only: lg and up, 1024px+) */}
           <nav className="hidden lg:flex items-center gap-7 xl:gap-9">
             {navLinks.map((link) => {
               const isActive = activeSection === link.id;
@@ -84,50 +75,6 @@ export default function Header() {
               );
             })}
           </nav>
-
-          {/* Mobile & Tablet Hamburger Menu Button (lg:hidden, 44x44px accessible touch target) */}
-          <div className="flex items-center lg:hidden">
-            <button
-              aria-label="Toggle Navigation Menu"
-              className="w-11 h-11 min-w-[44px] min-h-[44px] rounded-xl border border-border-subtle bg-surface-subtle flex items-center justify-center text-text-main hover:bg-surface-muted transition-colors focus:outline-none"
-              id="mobile-menu-btn"
-              onClick={toggleMenu}
-            >
-              <span className="material-symbols-outlined text-2xl" id="menu-icon">
-                {isMenuOpen ? "close" : "menu"}
-              </span>
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile & Tablet Dropdown Menu Drawer (lg:hidden) */}
-        <div
-          className={`${
-            isMenuOpen ? "flex" : "hidden"
-          } lg:hidden border-t border-border-subtle py-3 transition-all flex-col gap-1 bg-surface-cream/95`}
-          id="mobile-menu-drawer"
-        >
-          {navLinks.map((link) => {
-            const isActive = activeSection === link.id;
-            return (
-              <a
-                key={link.id}
-                className={`px-4 py-2.5 rounded-xl text-sm font-semibold transition-all ${
-                  isActive
-                    ? "text-brand-green bg-brand-green/10 font-bold border-l-4 border-brand-green"
-                    : "text-text-muted hover:bg-surface-subtle hover:text-brand-green font-medium"
-                }`}
-                href={link.href}
-                onClick={closeMenu}
-              >
-                {link.label}
-              </a>
-            );
-          })}
-          <div className="pt-2 border-t border-border-subtle flex items-center justify-between px-2 text-xs text-text-muted">
-            <span>Addis Ababa, Ethiopia</span>
-            <span className="text-brand-green font-semibold">+251 92 545 1711</span>
-          </div>
         </div>
       </div>
     </header>

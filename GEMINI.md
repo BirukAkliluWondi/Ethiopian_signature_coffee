@@ -19,9 +19,10 @@
    - Coffee sourcing remains cleanly accessible through the Contact form dropdown and Hero narrative.
 
 ## Header & Navigation Standards
-3. **Contrast & Tap Targets**:
+3. **Responsive Navigation Architecture by Viewport**:
    - Fixed header uses an opaque cream backdrop (`bg-[#FBF9F5]/98 backdrop-blur-lg border-b border-border-subtle shadow-[0_2px_16px_rgba(36,20,10,0.06)]`) so dark sections (`#training`, footer) never bleed through and compromise navigation legibility.
-   - Mobile hamburger menu toggle button meets the standard minimum 44×44px tap target (`w-11 h-11 min-w-[44px] min-h-[44px]`).
+   - **Full Desktop View (`lg:`, 1024px+)**: Navigation is located ONLY in the top header as clean horizontal links (`Home`, `About`, `Services`, `Training`, `Projects`, `Contact`). Bottom navigation is completely hidden (`lg:hidden`).
+   - **Half-Screen Desktop & Mobile View (`< lg`, < 1024px)**: Navigation is located ONLY at the bottom (`MobileBottomNav` fixed at bottom, `lg:hidden`). The top header displays ONLY the pristine logo & brand typography with zero hamburger button, eliminating duplicate or confusing navbars.
 
 ## Mobile Usability & Ergonomics
 4. **Sticky WhatsApp Button (Minimalist & Occlusion-Free)**:
