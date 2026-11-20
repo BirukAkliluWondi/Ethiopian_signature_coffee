@@ -10,10 +10,14 @@ import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import MobileBottomNav from "@/components/MobileBottomNav";
 import StickyChatButton from "@/components/StickyChatButton";
+import ScrollRevealInit from "@/components/ScrollRevealInit";
 
 export default function Home() {
   return (
     <>
+      {/* Scroll Reveal Observer Engine */}
+      <ScrollRevealInit />
+
       {/* Top Brand Accent Line */}
       <TopAccentLine />
 

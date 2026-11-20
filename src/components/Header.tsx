@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 
 export default function Header() {
   const [activeSection, setActiveSection] = useState("home");
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,6 +17,12 @@ export default function Header() {
           setActiveSection(sectionIds[i]);
           break;
         }
+      }
+
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (totalHeight > 0) {
+        const progress = (window.scrollY / totalHeight) * 100;
+        setScrollProgress(Math.min(Math.max(progress, 0), 100));
       }
     };
 
@@ -77,6 +84,12 @@ export default function Header() {
           </nav>
         </div>
       </div>
+
+      {/* Reading Progress Indicator Bar */}
+      <div
+        className="absolute bottom-0 left-0 h-[2.5px] bg-gradient-to-r from-brand-yellow via-amber-400 to-brand-green transition-all duration-150 ease-out pointer-events-none"
+        style={{ width: `${scrollProgress}%` }}
+      />
     </header>
   );
 }

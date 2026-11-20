@@ -1,6 +1,6 @@
 export default function Services() {
   return (
-    <section className="flex flex-col gap-8 sm:gap-10 scroll-mt-28 relative section-transition-glow" id="services">
+    <section className="reveal-on-scroll flex flex-col gap-8 sm:gap-10 scroll-mt-28 relative section-transition-glow" id="services">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 sm:gap-4">
         <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-brand-green font-bold">
           Our Services
@@ -11,7 +11,7 @@ export default function Services() {
       </div>
 
       {/* Prominent Flagship Service (Given Extra Visual Space) */}
-      <article className="p-5 sm:p-8 lg:p-10 rounded-2xl sm:rounded-3xl bg-surface-white border border-border-warm shadow-roast-bloom flex flex-col lg:grid lg:grid-cols-12 gap-6 sm:gap-8 items-center ring-1 ring-border-subtle">
+      <article className="p-5 sm:p-8 lg:p-10 rounded-2xl sm:rounded-3xl bg-surface-white border border-border-warm shadow-roast-bloom flex flex-col lg:grid lg:grid-cols-12 gap-6 sm:gap-8 items-center ring-1 ring-border-subtle hover:-translate-y-1 hover:shadow-cozy-lg transition-all duration-300">
         {/* Flagship Image (5 cols) */}
         <div className="w-full lg:col-span-5 relative rounded-xl sm:rounded-2xl overflow-hidden bg-stone-900 aspect-video lg:aspect-[4/3] shadow-cozy group">
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -38,15 +38,15 @@ export default function Services() {
 
           {/* Key Scope Elements */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3 pt-1">
-            <div className="p-3 sm:p-3.5 rounded-xl bg-surface-subtle border border-border-subtle shadow-cozy-sm flex flex-col gap-0.5 sm:gap-1">
+            <div className="p-3 sm:p-3.5 rounded-xl bg-surface-subtle border border-border-subtle shadow-cozy-sm flex flex-col gap-0.5 sm:gap-1 hover:-translate-y-0.5 transition-all">
               <span className="text-xs text-text-main font-bold">Bar Ergonomics</span>
               <span className="text-[11px] text-text-muted">High-volume drink flow layout</span>
             </div>
-            <div className="p-3 sm:p-3.5 rounded-xl bg-surface-subtle border border-border-subtle shadow-cozy-sm flex flex-col gap-0.5 sm:gap-1">
+            <div className="p-3 sm:p-3.5 rounded-xl bg-surface-subtle border border-border-subtle shadow-cozy-sm flex flex-col gap-0.5 sm:gap-1 hover:-translate-y-0.5 transition-all">
               <span className="text-xs text-text-main font-bold">Equipment Selection</span>
               <span className="text-[11px] text-text-muted">Commercial machines &amp; grinders</span>
             </div>
-            <div className="p-3 sm:p-3.5 rounded-xl bg-surface-subtle border border-border-subtle shadow-cozy-sm flex flex-col gap-0.5 sm:gap-1">
+            <div className="p-3 sm:p-3.5 rounded-xl bg-surface-subtle border border-border-subtle shadow-cozy-sm flex flex-col gap-0.5 sm:gap-1 hover:-translate-y-0.5 transition-all">
               <span className="text-xs text-text-main font-bold">Opening Launch</span>
               <span className="text-[11px] text-text-muted">On-site team operational readiness</span>
             </div>
@@ -54,7 +54,7 @@ export default function Services() {
 
           <div className="pt-1 sm:pt-2">
             <a
-              className="group inline-flex items-center justify-center h-12 w-full sm:w-auto px-6 sm:px-8 rounded-xl bg-brand-green hover:bg-brand-green-dark text-white font-semibold text-sm whitespace-nowrap shadow-cozy hover:shadow-cozy-float active:scale-95 transition-all text-center"
+              className="group btn-shimmer inline-flex items-center justify-center h-12 w-full sm:w-auto px-6 sm:px-8 rounded-xl bg-brand-green hover:bg-brand-green-dark text-white font-semibold text-sm whitespace-nowrap shadow-cozy hover:shadow-cozy-float active:scale-95 transition-all text-center hover:-translate-y-0.5 duration-200"
               href="#contact"
             >
               <span>Book Setup Consultation</span>
@@ -66,18 +66,18 @@ export default function Services() {
       {/* 5 Additional Core Services (Balanced 3-top, 2-bottom symmetrical grid) */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6 lg:gap-8">
         {/* Service 2: Barista Training */}
-        <article className="flex flex-col rounded-2xl bg-surface-white border border-border-subtle overflow-hidden shadow-cozy hover:shadow-cozy-lg transition-all lg:col-span-2">
+        <article className="reveal-on-scroll delay-100 group flex flex-col rounded-2xl bg-surface-white border border-border-subtle overflow-hidden shadow-cozy hover:shadow-roast-bloom hover:-translate-y-1.5 hover:border-brand-yellow/50 transition-all duration-300 lg:col-span-2">
           <div className="relative w-full aspect-video overflow-hidden bg-stone-900">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               alt="Barista Training"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=800&auto=format&fit=crop"
             />
           </div>
           <div className="p-5 sm:p-6 flex flex-col justify-between flex-1 gap-4 sm:gap-5">
             <div className="flex flex-col gap-1.5 sm:gap-2">
-              <h3 className="font-serif text-lg sm:text-xl md:text-2xl font-bold text-text-main">
+              <h3 className="font-serif text-lg sm:text-xl md:text-2xl font-bold text-text-main group-hover:text-brand-green transition-colors">
                 2. Barista Training
               </h3>
               <p className="text-xs sm:text-sm text-text-muted leading-relaxed">
@@ -85,7 +85,7 @@ export default function Services() {
               </p>
             </div>
             <a
-              className="group w-full h-11 px-5 rounded-xl border border-brand-green text-brand-green font-bold text-xs uppercase tracking-wider hover:bg-brand-green hover:text-white transition-all shadow-cozy-sm flex items-center justify-center whitespace-nowrap"
+              className="group w-full h-11 px-5 rounded-xl border border-brand-green text-brand-green font-bold text-xs uppercase tracking-wider hover:bg-brand-green hover:text-white transition-all shadow-cozy-sm flex items-center justify-center whitespace-nowrap active:scale-95"
               href="#training"
             >
               <span>View Curriculum</span>
@@ -94,18 +94,18 @@ export default function Services() {
         </article>
 
         {/* Service 3: Menu & Recipe Development */}
-        <article className="flex flex-col rounded-2xl bg-surface-white border border-border-subtle overflow-hidden shadow-cozy hover:shadow-cozy-lg transition-all lg:col-span-2">
+        <article className="reveal-on-scroll delay-200 group flex flex-col rounded-2xl bg-surface-white border border-border-subtle overflow-hidden shadow-cozy hover:shadow-roast-bloom hover:-translate-y-1.5 hover:border-brand-yellow/50 transition-all duration-300 lg:col-span-2">
           <div className="relative w-full aspect-video overflow-hidden bg-stone-900">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               alt="Menu & Recipe Development"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=800&auto=format&fit=crop"
             />
           </div>
           <div className="p-5 sm:p-6 flex flex-col justify-between flex-1 gap-4 sm:gap-5">
             <div className="flex flex-col gap-1.5 sm:gap-2">
-              <h3 className="font-serif text-lg sm:text-xl md:text-2xl font-bold text-text-main">
+              <h3 className="font-serif text-lg sm:text-xl md:text-2xl font-bold text-text-main group-hover:text-brand-green transition-colors">
                 3. Menu &amp; Recipe Development
               </h3>
               <p className="text-xs sm:text-sm text-text-muted leading-relaxed">
@@ -113,7 +113,7 @@ export default function Services() {
               </p>
             </div>
             <a
-              className="group w-full h-11 px-5 rounded-xl border border-brand-green text-brand-green font-bold text-xs uppercase tracking-wider hover:bg-brand-green hover:text-white transition-all shadow-cozy-sm flex items-center justify-center whitespace-nowrap"
+              className="group w-full h-11 px-5 rounded-xl border border-brand-green text-brand-green font-bold text-xs uppercase tracking-wider hover:bg-brand-green hover:text-white transition-all shadow-cozy-sm flex items-center justify-center whitespace-nowrap active:scale-95"
               href="#contact"
             >
               <span>Inquire Menus</span>
@@ -122,18 +122,18 @@ export default function Services() {
         </article>
 
         {/* Service 4: Coffee Business Consulting */}
-        <article className="flex flex-col rounded-2xl bg-surface-white border border-border-subtle overflow-hidden shadow-cozy hover:shadow-cozy-lg transition-all lg:col-span-2">
+        <article className="reveal-on-scroll delay-300 group flex flex-col rounded-2xl bg-surface-white border border-border-subtle overflow-hidden shadow-cozy hover:shadow-roast-bloom hover:-translate-y-1.5 hover:border-brand-yellow/50 transition-all duration-300 lg:col-span-2">
           <div className="relative w-full aspect-video overflow-hidden bg-stone-900">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               alt="Coffee Business Consulting"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?q=80&w=800&auto=format&fit=crop"
             />
           </div>
           <div className="p-5 sm:p-6 flex flex-col justify-between flex-1 gap-4 sm:gap-5">
             <div className="flex flex-col gap-1.5 sm:gap-2">
-              <h3 className="font-serif text-lg sm:text-xl md:text-2xl font-bold text-text-main">
+              <h3 className="font-serif text-lg sm:text-xl md:text-2xl font-bold text-text-main group-hover:text-brand-green transition-colors">
                 4. Coffee Business Consulting
               </h3>
               <p className="text-xs sm:text-sm text-text-muted leading-relaxed">
@@ -141,7 +141,7 @@ export default function Services() {
               </p>
             </div>
             <a
-              className="group w-full h-11 px-5 rounded-xl border border-brand-green text-brand-green font-bold text-xs uppercase tracking-wider hover:bg-brand-green hover:text-white transition-all shadow-cozy-sm flex items-center justify-center whitespace-nowrap"
+              className="group w-full h-11 px-5 rounded-xl border border-brand-green text-brand-green font-bold text-xs uppercase tracking-wider hover:bg-brand-green hover:text-white transition-all shadow-cozy-sm flex items-center justify-center whitespace-nowrap active:scale-95"
               href="#contact"
             >
               <span>Book Advisory</span>
@@ -150,18 +150,18 @@ export default function Services() {
         </article>
 
         {/* Service 5: Coffee Shop Operations Management */}
-        <article className="flex flex-col rounded-2xl bg-surface-white border border-border-subtle overflow-hidden shadow-cozy hover:shadow-cozy-lg transition-all lg:col-span-3">
+        <article className="reveal-on-scroll delay-100 group flex flex-col rounded-2xl bg-surface-white border border-border-subtle overflow-hidden shadow-cozy hover:shadow-roast-bloom hover:-translate-y-1.5 hover:border-brand-yellow/50 transition-all duration-300 lg:col-span-3">
           <div className="relative w-full aspect-video overflow-hidden bg-stone-900">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               alt="Coffee Shop Operations Management"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?q=80&w=800&auto=format&fit=crop"
             />
           </div>
           <div className="p-5 sm:p-6 flex flex-col justify-between flex-1 gap-4 sm:gap-5">
             <div className="flex flex-col gap-1.5 sm:gap-2">
-              <h3 className="font-serif text-lg sm:text-xl md:text-2xl font-bold text-text-main">
+              <h3 className="font-serif text-lg sm:text-xl md:text-2xl font-bold text-text-main group-hover:text-brand-green transition-colors">
                 5. Coffee Shop Operations Management
               </h3>
               <p className="text-xs sm:text-sm text-text-muted leading-relaxed">
@@ -169,7 +169,7 @@ export default function Services() {
               </p>
             </div>
             <a
-              className="group w-full h-11 px-5 rounded-xl border border-brand-green text-brand-green font-bold text-xs uppercase tracking-wider hover:bg-brand-green hover:text-white transition-all shadow-cozy-sm flex items-center justify-center whitespace-nowrap"
+              className="group w-full h-11 px-5 rounded-xl border border-brand-green text-brand-green font-bold text-xs uppercase tracking-wider hover:bg-brand-green hover:text-white transition-all shadow-cozy-sm flex items-center justify-center whitespace-nowrap active:scale-95"
               href="#contact"
             >
               <span>View Operations</span>
@@ -178,18 +178,18 @@ export default function Services() {
         </article>
 
         {/* Service 6: Menu Engineering & Profitability Improvement */}
-        <article className="flex flex-col rounded-2xl bg-surface-white border border-border-subtle overflow-hidden shadow-cozy hover:shadow-cozy-lg transition-all md:col-span-2 lg:col-span-3">
+        <article className="reveal-on-scroll delay-200 group flex flex-col rounded-2xl bg-surface-white border border-border-subtle overflow-hidden shadow-cozy hover:shadow-roast-bloom hover:-translate-y-1.5 hover:border-brand-yellow/50 transition-all duration-300 md:col-span-2 lg:col-span-3">
           <div className="relative w-full aspect-video overflow-hidden bg-stone-900">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               alt="Menu Engineering & Profitability"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               src="https://images.unsplash.com/photo-1559496417-e7f25cb247f3?q=80&w=800&auto=format&fit=crop"
             />
           </div>
           <div className="p-5 sm:p-6 flex flex-col justify-between flex-1 gap-4 sm:gap-5">
             <div className="flex flex-col gap-1.5 sm:gap-2">
-              <h3 className="font-serif text-lg sm:text-xl md:text-2xl font-bold text-text-main">
+              <h3 className="font-serif text-lg sm:text-xl md:text-2xl font-bold text-text-main group-hover:text-brand-green transition-colors">
                 6. Menu Engineering &amp; Profitability
               </h3>
               <p className="text-xs sm:text-sm text-text-muted leading-relaxed">
@@ -197,7 +197,7 @@ export default function Services() {
               </p>
             </div>
             <a
-              className="group w-full h-11 px-5 rounded-xl border border-brand-green text-brand-green font-bold text-xs uppercase tracking-wider hover:bg-brand-green hover:text-white transition-all shadow-cozy-sm flex items-center justify-center whitespace-nowrap"
+              className="group w-full h-11 px-5 rounded-xl border border-brand-green text-brand-green font-bold text-xs uppercase tracking-wider hover:bg-brand-green hover:text-white transition-all shadow-cozy-sm flex items-center justify-center whitespace-nowrap active:scale-95"
               href="#contact"
             >
               <span>Improve Margins</span>

@@ -1,7 +1,7 @@
 export default function About() {
   return (
     <section
-      className="p-5 sm:p-8 md:p-10 lg:p-12 rounded-2xl sm:rounded-3xl bg-surface-warm/80 border border-border-warm shadow-cozy-lg flex flex-col gap-6 sm:gap-8 scroll-mt-28 relative section-transition-glow"
+      className="reveal-on-scroll p-5 sm:p-8 md:p-10 lg:p-12 rounded-2xl sm:rounded-3xl bg-surface-warm/80 border border-border-warm shadow-cozy-lg flex flex-col gap-6 sm:gap-8 scroll-mt-28 relative section-transition-glow"
       id="about"
     >
       <div className="flex flex-col gap-1.5">
@@ -16,7 +16,7 @@ export default function About() {
       {/* Clean 2-Column Mission & Vision Layout */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 items-stretch">
         {/* Mission Card */}
-        <div className="p-6 sm:p-8 rounded-2xl bg-surface-white border border-border-subtle shadow-cozy flex flex-col justify-between gap-5 sm:gap-6 border-l-4 border-l-brand-green hover:shadow-cozy-lg transition-all">
+        <div className="p-6 sm:p-8 rounded-2xl bg-surface-white border border-border-subtle shadow-cozy flex flex-col justify-between gap-5 sm:gap-6 border-l-4 border-l-brand-green hover:-translate-y-1 hover:shadow-roast-bloom transition-all duration-300">
           <div className="flex flex-col gap-2.5 sm:gap-3">
             <span className="text-xs uppercase tracking-wider text-brand-yellow font-bold">
               Our Mission
@@ -31,7 +31,7 @@ export default function About() {
         </div>
 
         {/* Vision & Approach Card */}
-        <div className="p-6 sm:p-8 rounded-2xl bg-surface-white border border-border-subtle shadow-cozy flex flex-col justify-between gap-5 sm:gap-6 border-l-4 border-l-brand-yellow hover:shadow-cozy-lg transition-all">
+        <div className="p-6 sm:p-8 rounded-2xl bg-surface-white border border-border-subtle shadow-cozy flex flex-col justify-between gap-5 sm:gap-6 border-l-4 border-l-brand-yellow hover:-translate-y-1 hover:shadow-roast-bloom transition-all duration-300">
           <div className="flex flex-col gap-2.5 sm:gap-3">
             <span className="text-xs uppercase tracking-wider text-brand-yellow font-bold">
               Our Approach

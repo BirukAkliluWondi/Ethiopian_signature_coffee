@@ -52,7 +52,7 @@ export default function Contact() {
 
   return (
     <section
-      className="p-5 sm:p-8 md:p-10 lg:p-12 rounded-2xl sm:rounded-3xl bg-surface-warm/80 border border-border-warm shadow-cozy-lg scroll-mt-28 relative section-transition-glow"
+      className="reveal-on-scroll p-5 sm:p-8 md:p-10 lg:p-12 rounded-2xl sm:rounded-3xl bg-surface-warm/80 border border-border-warm shadow-cozy-lg scroll-mt-28 relative section-transition-glow"
       id="contact"
     >
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
@@ -241,7 +241,7 @@ export default function Contact() {
 
             {/* Main Solid Action Button on Submit */}
             <button
-              className="group mt-1 sm:mt-2 w-full h-12 px-6 sm:px-8 rounded-xl bg-brand-green hover:bg-brand-green-dark text-white font-semibold text-sm active:scale-95 transition-all shadow-cozy hover:shadow-cozy-float flex items-center justify-center gap-2 whitespace-nowrap disabled:opacity-75 disabled:cursor-not-allowed"
+              className="group btn-shimmer mt-1 sm:mt-2 w-full h-12 px-6 sm:px-8 rounded-xl bg-brand-green hover:bg-brand-green-dark text-white font-semibold text-sm active:scale-95 transition-all shadow-cozy hover:shadow-cozy-float flex items-center justify-center gap-2 whitespace-nowrap disabled:opacity-75 disabled:cursor-not-allowed hover:-translate-y-0.5 duration-200"
               type="submit"
               disabled={isSubmitting}
             >

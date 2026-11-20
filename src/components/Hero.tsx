@@ -1,4 +1,49 @@
+"use client";
+
+import { useEffect, useState, useRef } from "react";
+
+function useCounter(target: number, duration: number = 1200) {
+  const [count, setCount] = useState(0);
+  const started = useRef(false);
+
+  useEffect(() => {
+    if (started.current) return;
+    started.current = true;
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setCount(target);
+      return;
+    }
+
+    let startTime: number | null = null;
+    let animId: number;
+
+    const tick = (now: number) => {
+      if (!startTime) startTime = now;
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const ease = 1 - Math.pow(1 - progress, 4);
+      setCount(Math.round(ease * target));
+
+      if (progress < 1) {
+        animId = requestAnimationFrame(tick);
+      } else {
+        setCount(target);
+      }
+    };
+
+    animId = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(animId);
+  }, [target, duration]);
+
+  return count;
+}
+
 export default function Hero() {
+  const venuesCount = useCounter(14, 1100);
+  const baristasCount = useCounter(250, 1300);
+  const originsCount = useCounter(100, 1200);
+
   return (
     <section
       className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-12 items-center scroll-mt-28 relative section-transition-glow"
@@ -16,16 +61,22 @@ export default function Hero() {
 
         {/* Quantitative Proof Metrics */}
         <div className="grid grid-cols-3 gap-2.5 sm:gap-3.5 pt-1">
-          <div className="p-3 sm:p-3.5 rounded-xl bg-surface-white border border-border-subtle shadow-cozy-sm flex flex-col">
-            <span className="font-serif text-xl sm:text-2xl md:text-3xl font-bold text-brand-green leading-none">14+</span>
+          <div className="p-3 sm:p-3.5 rounded-xl bg-surface-white border border-border-subtle shadow-cozy-sm flex flex-col hover:-translate-y-1 hover:shadow-cozy hover:border-brand-yellow/50 transition-all duration-300">
+            <span className="font-serif text-xl sm:text-2xl md:text-3xl font-bold text-brand-green leading-none">
+              {venuesCount}+
+            </span>
             <span className="text-[10px] sm:text-xs text-text-muted font-medium mt-1">Turnkey Venues</span>
           </div>
-          <div className="p-3 sm:p-3.5 rounded-xl bg-surface-white border border-border-subtle shadow-cozy-sm flex flex-col">
-            <span className="font-serif text-xl sm:text-2xl md:text-3xl font-bold text-brand-green leading-none">250+</span>
+          <div className="p-3 sm:p-3.5 rounded-xl bg-surface-white border border-border-subtle shadow-cozy-sm flex flex-col hover:-translate-y-1 hover:shadow-cozy hover:border-brand-yellow/50 transition-all duration-300">
+            <span className="font-serif text-xl sm:text-2xl md:text-3xl font-bold text-brand-green leading-none">
+              {baristasCount}+
+            </span>
             <span className="text-[10px] sm:text-xs text-text-muted font-medium mt-1">Certified Baristas</span>
           </div>
-          <div className="p-3 sm:p-3.5 rounded-xl bg-surface-white border border-border-subtle shadow-cozy-sm flex flex-col">
-            <span className="font-serif text-xl sm:text-2xl md:text-3xl font-bold text-brand-green leading-none">100%</span>
+          <div className="p-3 sm:p-3.5 rounded-xl bg-surface-white border border-border-subtle shadow-cozy-sm flex flex-col hover:-translate-y-1 hover:shadow-cozy hover:border-brand-yellow/50 transition-all duration-300">
+            <span className="font-serif text-xl sm:text-2xl md:text-3xl font-bold text-brand-green leading-none">
+              {originsCount}%
+            </span>
             <span className="text-[10px] sm:text-xs text-text-muted font-medium mt-1">Direct-Trade Origins</span>
           </div>
         </div>
@@ -34,14 +85,14 @@ export default function Hero() {
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1 sm:pt-2 w-full sm:w-auto">
           {/* Secondary Outline Action (Left) */}
           <a
-            className="group h-12 w-full sm:w-auto px-6 sm:px-8 rounded-xl border-2 border-brand-green text-brand-green bg-white hover:bg-brand-green/5 text-center font-semibold text-sm whitespace-nowrap active:scale-95 transition-all shadow-cozy-sm hover:shadow-cozy flex items-center justify-center"
+            className="group h-12 w-full sm:w-auto px-6 sm:px-8 rounded-xl border-2 border-brand-green text-brand-green bg-white hover:bg-brand-green/5 text-center font-semibold text-sm whitespace-nowrap active:scale-95 transition-all shadow-cozy-sm hover:shadow-cozy flex items-center justify-center hover:-translate-y-0.5 duration-200"
             href="#services"
           >
             <span>Explore Services</span>
           </a>
           {/* Primary Solid Confirmation Action (Right) */}
           <a
-            className="group h-12 w-full sm:w-auto px-6 sm:px-8 rounded-xl bg-brand-green hover:bg-brand-green-dark text-white text-center font-semibold text-sm shadow-cozy hover:shadow-cozy-float whitespace-nowrap active:scale-95 transition-all flex items-center justify-center"
+            className="group btn-shimmer h-12 w-full sm:w-auto px-6 sm:px-8 rounded-xl bg-brand-green hover:bg-brand-green-dark text-white text-center font-semibold text-sm shadow-cozy hover:shadow-cozy-float whitespace-nowrap active:scale-95 transition-all flex items-center justify-center hover:-translate-y-0.5 duration-200"
             href="#contact"
           >
             <span>Start Advisory</span>

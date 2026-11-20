@@ -24,7 +24,7 @@ export default function SingleOrigins() {
 
   return (
     <section
-      className="flex flex-col gap-6 sm:gap-8 scroll-mt-28 relative section-transition-glow"
+      className="reveal-on-scroll flex flex-col gap-6 sm:gap-8 scroll-mt-28 relative section-transition-glow"
       id="origins"
     >
       {/* Section Header */}
@@ -44,24 +44,27 @@ export default function SingleOrigins() {
 
       {/* 4-Card Terroir Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
-        {origins.map((origin) => (
-          <div
-            key={origin.name}
-            className="p-5 sm:p-6 rounded-2xl bg-surface-white border border-border-subtle shadow-cozy-sm hover:shadow-cozy hover:-translate-y-1 transition-all flex flex-col justify-between group ring-1 ring-border-subtle/50"
-          >
-            <div>
-              <span className="text-[10px] sm:text-xs font-bold text-brand-yellow uppercase tracking-widest">
-                {origin.tag}
-              </span>
-              <h3 className="font-serif text-xl sm:text-2xl font-bold text-brand-green mt-1.5 group-hover:text-brand-green-light transition-colors">
-                {origin.name}
-              </h3>
-              <p className="text-xs sm:text-sm text-text-muted mt-2.5 leading-relaxed">
-                {origin.description}
-              </p>
+        {origins.map((origin, index) => {
+          const delays = ["delay-100", "delay-200", "delay-300", "delay-400"];
+          return (
+            <div
+              key={origin.name}
+              className={`reveal-on-scroll ${delays[index % 4]} p-5 sm:p-6 rounded-2xl bg-surface-white border border-border-subtle shadow-cozy-sm hover:shadow-roast-bloom hover:-translate-y-2 hover:ring-1 hover:ring-brand-yellow/40 transition-all duration-300 flex flex-col justify-between group ring-1 ring-border-subtle/50`}
+            >
+              <div>
+                <span className="text-[10px] sm:text-xs font-bold text-brand-yellow uppercase tracking-widest">
+                  {origin.tag}
+                </span>
+                <h3 className="font-serif text-xl sm:text-2xl font-bold text-brand-green mt-1.5 group-hover:text-brand-green-light transition-colors">
+                  {origin.name}
+                </h3>
+                <p className="text-xs sm:text-sm text-text-muted mt-2.5 leading-relaxed">
+                  {origin.description}
+                </p>
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </section>
   );
