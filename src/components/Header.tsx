@@ -5,9 +5,11 @@ import { useState, useEffect } from "react";
 export default function Header() {
   const [activeSection, setActiveSection] = useState("home");
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
       const sectionIds = ["home", "about", "services", "training", "projects", "contact"];
       const scrollPos = window.scrollY + 220;
 
@@ -41,7 +43,13 @@ export default function Header() {
   ];
 
   return (
-    <header className="fixed top-1 w-full z-50 pt-safe bg-[#FBF9F5]/98 backdrop-blur-lg border-b border-border-subtle shadow-[0_2px_16px_rgba(36,20,10,0.06)] transition-all">
+    <header
+      className={`fixed top-1 w-full z-50 pt-safe backdrop-blur-lg border-b border-border-subtle transition-all duration-300 ${
+        isScrolled
+          ? "bg-[#FBF9F5]/98 shadow-[0_4px_20px_rgba(36,20,10,0.08)]"
+          : "bg-[#FBF9F5]/92 shadow-[0_2px_12px_rgba(36,20,10,0.04)]"
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Header Row */}
         <div className="flex items-center justify-between h-16 sm:h-20">

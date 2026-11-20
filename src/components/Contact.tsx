@@ -157,7 +157,7 @@ export default function Contact() {
                   Your Full Name *
                 </label>
                 <input
-                  className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl border border-border-subtle bg-surface-cream text-xs sm:text-sm focus:border-brand-green focus:bg-white focus:ring-1 focus:ring-brand-green outline-none transition-all shadow-inner"
+                  className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl border border-border-subtle bg-surface-cream text-xs sm:text-sm focus:border-brand-green focus:bg-white focus:ring-2 focus:ring-brand-green/20 focus:shadow-cozy-sm outline-none transition-all shadow-inner"
                   id="lead-name"
                   placeholder="Abebe Bikila"
                   required
@@ -172,7 +172,7 @@ export default function Contact() {
                   WhatsApp or Phone Number *
                 </label>
                 <input
-                  className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl border border-border-subtle bg-surface-cream text-xs sm:text-sm focus:border-brand-green focus:bg-white focus:ring-1 focus:ring-brand-green outline-none transition-all shadow-inner"
+                  className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl border border-border-subtle bg-surface-cream text-xs sm:text-sm focus:border-brand-green focus:bg-white focus:ring-2 focus:ring-brand-green/20 focus:shadow-cozy-sm outline-none transition-all shadow-inner"
                   id="lead-whatsapp"
                   placeholder="+251 92 545 1711"
                   required
@@ -189,7 +189,7 @@ export default function Contact() {
                   Email Address
                 </label>
                 <input
-                  className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl border border-border-subtle bg-surface-cream text-xs sm:text-sm focus:border-brand-green focus:bg-white focus:ring-1 focus:ring-brand-green outline-none transition-all shadow-inner"
+                  className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl border border-border-subtle bg-surface-cream text-xs sm:text-sm focus:border-brand-green focus:bg-white focus:ring-2 focus:ring-brand-green/20 focus:shadow-cozy-sm outline-none transition-all shadow-inner"
                   id="lead-email"
                   placeholder="abebe@example.com"
                   type="email"
@@ -203,7 +203,7 @@ export default function Contact() {
                   Area of Interest *
                 </label>
                 <select
-                  className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl border border-border-subtle bg-surface-cream text-xs sm:text-sm focus:border-brand-green focus:bg-white focus:ring-1 focus:ring-brand-green outline-none transition-all shadow-inner"
+                  className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl border border-border-subtle bg-surface-cream text-xs sm:text-sm focus:border-brand-green focus:bg-white focus:ring-2 focus:ring-brand-green/20 focus:shadow-cozy-sm outline-none transition-all shadow-inner"
                   id="lead-service"
                   value={formData.service}
                   onChange={(e) => setFormData({ ...formData, service: e.target.value })}
@@ -232,7 +232,7 @@ export default function Contact() {
                 Project Details / Message
               </label>
               <textarea
-                className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl border border-border-subtle bg-surface-cream text-xs sm:text-sm focus:border-brand-green focus:bg-white focus:ring-1 focus:ring-brand-green outline-none transition-all resize-y shadow-inner"
+                className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl border border-border-subtle bg-surface-cream text-xs sm:text-sm focus:border-brand-green focus:bg-white focus:ring-2 focus:ring-brand-green/20 focus:shadow-cozy-sm outline-none transition-all resize-y shadow-inner"
                 id="lead-notes"
                 placeholder="Tell us about your venue location, opening timeline, or training requirements..."
                 rows={3}

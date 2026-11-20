@@ -191,7 +191,7 @@ export default function Footer() {
               </a>
 
               <a
-                className="mt-1 h-11 px-5 rounded-xl bg-brand-yellow hover:bg-brand-yellow-light text-stone-950 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-cozy hover:shadow-cozy-float active:scale-95 transition-all text-center"
+                className="btn-shimmer mt-1 h-11 px-5 rounded-xl bg-brand-yellow hover:bg-brand-yellow-light text-stone-950 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-cozy hover:shadow-cozy-float active:scale-95 transition-all text-center hover:-translate-y-0.5 duration-200"
                 href="#contact"
               >
                 <span>Book Setup Advisory</span>
