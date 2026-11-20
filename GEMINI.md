@@ -49,3 +49,15 @@
 ## Contact Channels & Standardized Phone
 5. **Contact Phone & Messaging**:
    - Official contact phone, WhatsApp, and Telegram number across all components, forms, and pages is strictly: **`+251925451711`**.
+
+## Professional Footer Architecture
+6. **4-Column Luxury Enterprise Footer**:
+   - Background uses deep luxury emerald forest green (`bg-brand-green-dark` `#062b18`) with top subtle heritage accent ribbon.
+   - Eliminates oversized, blurry background logo watermarks and centered flyer-style text.
+   - 4-column structured desktop grid (`lg:grid-cols-12`):
+     - Column 1 (`lg:col-span-4`): Brand logo mark, identity title, executive value proposition, physical headquarters in Addis Ababa, standardized phone `+251925451711`, email, and operating hours (EAT / UTC+3).
+     - Column 2 (`lg:col-span-3`): Full directory of Services & Advisory (6 core turnkey practices) with direct anchor navigation.
+     - Column 3 (`lg:col-span-2`): Direct-Trade Single Origins directory (Yirgacheffe, Sidama, Guji, Harrar) with tasting profiles and cooperative allocations.
+     - Column 4 (`lg:col-span-3`): Direct Channels desk with verified WhatsApp pill, Telegram pill, and high-contrast gold 'Book Setup Advisory' action button.
+   - Sub-footer legal bar with copyright, location accreditation, and smooth 'Back to Top ↑' anchor.
+   - Preserves semantic `<footer>` element and `#footer` anchor to ensure the sticky WhatsApp button's `IntersectionObserver` continues to automatically hide with zero occlusion.
