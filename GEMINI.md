@@ -77,4 +77,7 @@
    - **Header Reading Progress Bar**: Thin 2.5px golden gradient line at bottom edge of fixed header tracks overall scroll percentage (0% to 100%).
    - **Staggered Scroll Reveal**: Elements smoothly reveal upon scrolling using lightweight, zero-dependency `IntersectionObserver` with staggered delays (`delay-100` to `delay-400`).
    - **Kinetic Card Physics**: Cards feature subtle elevation (`-translate-y-1.5`) and warm amber glow on hover (`hover:shadow-roast-bloom hover:ring-1 hover:ring-brand-yellow/40`).
+   - **Bidirectional Scroll Reactivity**: Cards smoothly appear upon entering the viewport and gracefully fade away / scale down when exiting past the viewport edge in both directions (`.reveal-on-scroll`, `.reveal-visible`), re-revealing smoothly when scrolled back.
+   - **Masked Line-Reveal Typography**: Major section headlines (H1, H2) use `.mask-reveal-wrap` and `.mask-reveal-content` to emerge upward from behind an invisible baseline mask with silky cubic-bezier deceleration.
+   - **Interactive Cursor Spotlight Glare**: Cards across Single Origins, Services, Training, and Projects feature `.spotlight-card` projecting an organic radial amber light that dynamically tracks `--mouse-x` and `--mouse-y`.
    - **Button Shimmer**: Primary CTA buttons feature hardware-accelerated subtle sheen sweep on mouse hover (`.btn-shimmer`).
