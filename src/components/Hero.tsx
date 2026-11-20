@@ -19,6 +19,22 @@ export default function Hero() {
           We bring together premium Ethiopian coffee, professional coffee training, business consultancy, and innovative café solutions. From centuries-old ceremonial roots to modern commercial venues, we help coffee businesses achieve excellence.
         </p>
 
+        {/* Quantitative Proof Metrics */}
+        <div className="grid grid-cols-3 gap-2.5 sm:gap-3.5 pt-1">
+          <div className="p-3 sm:p-3.5 rounded-xl bg-surface-white border border-border-subtle shadow-cozy-sm flex flex-col">
+            <span className="font-serif text-xl sm:text-2xl md:text-3xl font-bold text-brand-green leading-none">14+</span>
+            <span className="text-[10px] sm:text-xs text-text-muted font-medium mt-1">Turnkey Venues</span>
+          </div>
+          <div className="p-3 sm:p-3.5 rounded-xl bg-surface-white border border-border-subtle shadow-cozy-sm flex flex-col">
+            <span className="font-serif text-xl sm:text-2xl md:text-3xl font-bold text-brand-green leading-none">250+</span>
+            <span className="text-[10px] sm:text-xs text-text-muted font-medium mt-1">Certified Baristas</span>
+          </div>
+          <div className="p-3 sm:p-3.5 rounded-xl bg-surface-white border border-border-subtle shadow-cozy-sm flex flex-col">
+            <span className="font-serif text-xl sm:text-2xl md:text-3xl font-bold text-brand-green leading-none">100%</span>
+            <span className="text-[10px] sm:text-xs text-text-muted font-medium mt-1">Direct-Trade Origins</span>
+          </div>
+        </div>
+
         {/* CTAs: Secondary Outline on Left, Primary Main Action on Right (Fully responsive) */}
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1 sm:pt-2 w-full sm:w-auto">
           {/* Secondary Outline Action (Left) */}
