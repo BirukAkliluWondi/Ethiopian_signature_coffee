@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 
 function useCounter(target: number, duration: number = 1200) {
   const [count, setCount] = useState(0);
@@ -39,10 +39,105 @@ function useCounter(target: number, duration: number = 1200) {
   return count;
 }
 
+interface MediaSlide {
+  id: string;
+  type: "image" | "video";
+  src: string;
+  alt: string;
+  duration?: number;
+  objectPosition?: string;
+}
+
+const HERO_SLIDES: MediaSlide[] = [
+  {
+    id: "ceremony-woman",
+    type: "image",
+    src: "https://lh3.googleusercontent.com/aida-public/AB6AXuCDDk-iFEvRORMomf5aJppkPdG4X1Afc0D1RwBOm5ZtWA5r-y2Fyk-Srlgmy6w0-XU6hgHyrtZHntI6m50dGyZiGAT5Z4lVML8lFr_PhoYRLtlSA0cAmeC_YyVt7YCSt2qR49OxsjXxr-zwduJ6SQPKxbroL9vdg2pZU8E_F-s3VpJPowK1lkr1Gms7ycTU43SRwoS98u0CrzuJ3y8S2Ym8a7J-x4IWdPiRIOE_vxRrmiLghhNGr-x5",
+    alt: "Traditional Ethiopian Coffee Ceremony - Woman Pouring Coffee",
+    duration: 5500,
+    objectPosition: "object-top",
+  },
+  {
+    id: "roast-and-jebena",
+    type: "image",
+    src: "/hero/roast-and-jebena.jpg",
+    alt: "Freshly Roasted Ethiopian Coffee Beans in Clay Pot with Steaming Incense and Jebena",
+    duration: 5000,
+    objectPosition: "object-center",
+  },
+  {
+    id: "coffee-community",
+    type: "image",
+    src: "/hero/coffee-community-celebration.jpg",
+    alt: "Overhead Gathering of Hands Celebrating Ethiopian Coffee Ceremony with Cini Cups",
+    duration: 5000,
+    objectPosition: "object-center",
+  },
+  {
+    id: "ceremony-video",
+    type: "video",
+    src: "/hero/ceremony-video.mp4",
+    alt: "Traditional Ethiopian Coffee Ceremony Preparation and Pouring Video",
+    objectPosition: "object-center",
+  },
+];
+
 export default function Hero() {
   const venuesCount = useCounter(14, 1100);
   const baristasCount = useCounter(250, 1300);
   const originsCount = useCounter(100, 1200);
+
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+  const [isMuted, setIsMuted] = useState(true);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
+
+  const currentSlide = HERO_SLIDES[currentSlideIndex];
+
+  const nextSlide = useCallback(() => {
+    setCurrentSlideIndex((prev) => (prev + 1) % HERO_SLIDES.length);
+  }, []);
+
+  // Handle automatic slide progression for static images
+  useEffect(() => {
+    if (currentSlide.type === "image") {
+      const duration = currentSlide.duration || 5000;
+      timerRef.current = setTimeout(() => {
+        nextSlide();
+      }, duration);
+    }
+
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
+  }, [currentSlideIndex, currentSlide, nextSlide]);
+
+  // Handle video playback when video slide is active
+  useEffect(() => {
+    if (currentSlide.type === "video" && videoRef.current) {
+      videoRef.current.currentTime = 0;
+      videoRef.current.muted = isMuted;
+      const playPromise = videoRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          // Autoplay handled safely by browser policy
+        });
+      }
+    }
+  }, [currentSlideIndex, currentSlide.type, isMuted]);
+
+  // When video completely finishes playing, advance and fade away
+  const handleVideoEnded = () => {
+    nextSlide();
+  };
+
+  const toggleSound = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (videoRef.current) {
+      videoRef.current.muted = !isMuted;
+    }
+    setIsMuted(!isMuted);
+  };
 
   return (
     <section
@@ -106,12 +201,83 @@ export default function Hero() {
       <div className="lg:col-span-6 order-1 lg:order-2 flex justify-center lg:justify-end pt-4 -mb-4 sm:pt-5 sm:-mb-5 md:pt-6 md:-mb-6 lg:pt-0 lg:mb-0">
         <div className="relative w-full max-w-lg lg:max-w-none rounded-2xl sm:rounded-3xl overflow-hidden shadow-roast-bloom border border-border-subtle bg-stone-900 group ring-1 ring-border-subtle">
           <div className="relative w-full aspect-[4/3] sm:aspect-[4/3] lg:aspect-[4/3.5] xl:aspect-[4/3.3] max-h-[480px]">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              alt="Traditional Ethiopian Coffee Ceremony"
-              className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDDk-iFEvRORMomf5aJppkPdG4X1Afc0D1RwBOm5ZtWA5r-y2Fyk-Srlgmy6w0-XU6hgHyrtZHntI6m50dGyZiGAT5Z4lVML8lFr_PhoYRLtlSA0cAmeC_YyVt7YCSt2qR49OxsjXxr-zwduJ6SQPKxbroL9vdg2pZU8E_F-s3VpJPowK1lkr1Gms7ycTU43SRwoS98u0CrzuJ3y8S2Ym8a7J-x4IWdPiRIOE_vxRrmiLghhNGr-x5"
-            />
+            {/* Sequential Crossfading Media Showcase */}
+            {HERO_SLIDES.map((slide, index) => {
+              const isActive = index === currentSlideIndex;
+              return (
+                <div
+                  key={slide.id}
+                  aria-hidden={!isActive}
+                  className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
+                    isActive ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
+                  }`}
+                >
+                  {slide.type === "image" ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      alt={slide.alt}
+                      className={`w-full h-full object-cover ${
+                        slide.objectPosition || "object-center"
+                      } transition-transform duration-[6000ms] ease-out ${
+                        isActive ? "scale-105" : "scale-100"
+                      }`}
+                      src={slide.src}
+                    />
+                  ) : (
+                    <video
+                      ref={slide.id === "ceremony-video" ? videoRef : undefined}
+                      aria-label={slide.alt}
+                      className="w-full h-full object-cover object-center"
+                      muted={isMuted}
+                      onEnded={handleVideoEnded}
+                      playsInline
+                      preload="auto"
+                      src={slide.src}
+                    />
+                  )}
+                </div>
+              );
+            })}
+
+            {/* Subtle Gradient Vignette at Bottom Edge for Story Depth */}
+            <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-stone-950/70 via-stone-950/25 to-transparent pointer-events-none z-20" />
+
+            {/* Sound Toggle (Only visible when video slide is active) */}
+            {currentSlide.type === "video" && (
+              <button
+                type="button"
+                onClick={toggleSound}
+                aria-label={isMuted ? "Unmute ceremony audio" : "Mute ceremony audio"}
+                className="absolute top-3.5 right-3.5 z-30 w-8 h-8 rounded-full bg-stone-950/60 hover:bg-stone-950/80 text-white/90 hover:text-white backdrop-blur-md transition-all flex items-center justify-center border border-white/20 shadow-md active:scale-95"
+              >
+                <span className="material-symbols-outlined text-[18px]">
+                  {isMuted ? "volume_off" : "volume_up"}
+                </span>
+              </button>
+            )}
+
+            {/* Minimalist Segment Story Progress Lines (No text pill badges) */}
+            <div
+              className="absolute bottom-3 sm:bottom-3.5 left-1/2 -translate-x-1/2 z-30 flex items-center gap-1.5"
+              aria-label="Hero visual media slides"
+            >
+              {HERO_SLIDES.map((slide, index) => {
+                const isActive = index === currentSlideIndex;
+                return (
+                  <button
+                    key={slide.id}
+                    type="button"
+                    onClick={() => setCurrentSlideIndex(index)}
+                    aria-label={`Go to slide ${index + 1}`}
+                    className={`h-[2.5px] rounded-full transition-all duration-500 ${
+                      isActive
+                        ? "w-8 sm:w-10 bg-brand-yellow shadow-[0_0_8px_rgba(212,136,0,0.8)]"
+                        : "w-3 sm:w-4 bg-white/40 hover:bg-white/75"
+                    }`}
+                  />
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>
