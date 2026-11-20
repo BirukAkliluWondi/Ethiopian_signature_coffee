@@ -2,6 +2,7 @@ import TopAccentLine from "@/components/TopAccentLine";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
+import SingleOrigins from "@/components/SingleOrigins";
 import Services from "@/components/Services";
 import Training from "@/components/Training";
 import Projects from "@/components/Projects";
@@ -24,6 +25,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-14 sm:gap-20 md:gap-28">
           <Hero />
           <About />
+          <SingleOrigins />
           <Services />
           <Training />
           <Projects />

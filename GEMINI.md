@@ -6,9 +6,19 @@
    - The coffee ceremony photo is preserved as a **FULL, standalone image element** in a luxury framed card container (`rounded-2xl sm:rounded-3xl overflow-hidden shadow-roast-bloom border border-border-subtle bg-stone-900 ring-1 ring-border-subtle`, `aspect-[4/3] sm:aspect-[4/3] lg:aspect-[4/3.5] xl:aspect-[4/3.3] max-h-[480px]`).
    - The source photo must remain the unclipped, pristine original showing the woman's complete natural hair curls, Habesha Kemis, cross, Jebena, and smoking incense. It must NEVER be artificially cropped at the hair or blended into the page background.
    - Main content top clearance is set to `pt-16 sm:pt-20 md:pt-24 lg:pt-28`, preventing excessive vertical gap under the fixed navbar while keeping the desktop side-by-side hero layout breathing and co-planar.
-   - Left hero column kicker uses a luxury amber pill badge (`inline-flex items-center gap-2 self-start px-3.5 py-1.5 rounded-full bg-brand-yellow/15 border border-brand-yellow/30 text-text-main text-xs font-bold tracking-wider uppercase` with an amber pulse dot). Its top aligns co-planar with the top of the right ceremony photo card (within $\le 3\text{px}$), positioning the H1 headline comfortably lower (~50px below the card top, aligned with the shoulder in the photo).
+   - Left hero column maintains comfortable, generous vertical rhythm without a kicker badge by applying `lg:pt-12`, keeping the H1 headline comfortably lower (~50px below the card top, aligned with the shoulder in the photo at $y \approx 160\text{px}$) and ensuring the dual CTA buttons bottom edge aligns within $\le 1\text{px}$ of the ceremony photo card bottom ($y \approx 593\text{px}$).
    - Hero proof metrics: The 3 quantity cards (`14+ Turnkey Venues`, `250+ Certified Baristas`, `100% Direct-Trade Origins`) are positioned directly above the CTA buttons, maintaining clean vertical rhythm and breathing room.
    - On mobile viewports (`< sm`), the ceremony visual container applies `pt-4 -mb-4`, ensuring an exact 12px clearance below the mobile navigation header while keeping the H1 headline and body text below completely stationary. On intermediate / half-screen desktop viewports (`sm` and `md`, 640px to 1023px), it applies `sm:pt-5 sm:-mb-5 md:pt-6 md:-mb-6` to provide comfortable clearance under the 84px header without shifting the headline below, returning to `lg:pt-0 lg:mb-0` on full desktop side-by-side view.
+
+## Direct-Trade Single Origins Section
+2. **Single Origins Architecture**:
+   - Positioned directly above `#services` ("Our Services") and below `#about`.
+   - Displays 4 regional terroir cards in a symmetrical 4-column desktop grid (`grid-cols-1 sm:grid-cols-2 lg:grid-cols-4`):
+     - **Yirgacheffe**: Floral & Delicate
+     - **Sidama**: Complex & Balanced
+     - **Guji**: Lush & Exotic
+     - **Harrar**: Wild & Sun-Dried
+   - Header features uppercase kicker `THE BIRTHPLACE OF ARABICA`, title `Direct-Trade Single Origins`, and partner allocation copy.
 
 ## Services Section Structure
 2. **Symmetrical Grid Layout**:
