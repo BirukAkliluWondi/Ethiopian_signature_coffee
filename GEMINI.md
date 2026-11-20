@@ -6,6 +6,7 @@
    - The coffee ceremony photo is preserved as a **FULL, standalone image element** in a luxury framed card container (`rounded-2xl sm:rounded-3xl overflow-hidden shadow-roast-bloom border border-border-subtle bg-stone-900 ring-1 ring-border-subtle`, `aspect-[4/3] sm:aspect-[4/3] lg:aspect-[4/3.5] xl:aspect-[4/3.3] max-h-[480px]`).
    - The source photo must remain the unclipped, pristine original showing the woman's complete natural hair curls, Habesha Kemis, cross, Jebena, and smoking incense. It must NEVER be artificially cropped at the hair or blended into the page background.
    - Main content top clearance is set to `pt-16 sm:pt-20 md:pt-24`, preventing excessive vertical gap under the fixed navbar while keeping the image card vertically centered.
+   - On mobile viewports (`< sm`), the ceremony visual container applies `pt-4 -mb-4 sm:pt-0 sm:mb-0`, ensuring an exact 12px clearance below the mobile navigation header while keeping the H1 headline and body text below completely stationary.
 
 ## Services Section Structure
 2. **Symmetrical Grid Layout**:
