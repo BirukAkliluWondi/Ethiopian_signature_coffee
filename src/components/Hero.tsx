@@ -6,14 +6,14 @@ export default function Hero() {
     >
       {/* Story, Headline & CTAs (On mobile: order-2, displays below visual showcase; Desktop: lg:order-1) */}
       <div className="lg:col-span-6 flex flex-col gap-5 sm:gap-6 order-2 lg:order-1">
-        <div className="flex flex-col gap-2 sm:gap-2.5">
-          <span className="text-[11px] sm:text-xs md:text-sm uppercase tracking-widest text-brand-yellow font-bold">
-            Beyond Coffee, Building Coffee Businesses
-          </span>
-          <h1 className="font-serif text-2xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-bold text-brand-green leading-[1.18] sm:leading-[1.15] tracking-tight">
-            Discover the Excellence of Ethiopian Coffee
-          </h1>
+        <div className="inline-flex items-center gap-2 self-start px-3.5 py-1.5 rounded-full bg-brand-yellow/15 border border-brand-yellow/30 text-text-main text-xs font-bold tracking-wider uppercase">
+          <span className="w-2 h-2 rounded-full bg-brand-yellow animate-pulse" />
+          <span>Beyond Coffee, Building Coffee Businesses</span>
         </div>
+
+        <h1 className="font-serif text-2xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-bold text-brand-green leading-[1.18] sm:leading-[1.15] tracking-tight">
+          Discover the Excellence of Ethiopian Coffee
+        </h1>
 
         <p className="text-sm sm:text-base md:text-lg text-text-muted leading-relaxed max-w-xl lg:max-w-none font-normal">
           We bring together premium Ethiopian coffee, professional coffee training, business consultancy, and innovative café solutions. From centuries-old ceremonial roots to modern commercial venues, we help coffee businesses achieve excellence.

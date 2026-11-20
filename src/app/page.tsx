@@ -20,7 +20,7 @@ export default function Home() {
       <Header />
 
       {/* Main Content Container with Warm Porcelain Base */}
-      <main className="flex-1 w-full pt-16 sm:pt-20 md:pt-24 pb-28 lg:pb-20 bg-surface-cream">
+      <main className="flex-1 w-full pt-16 sm:pt-20 md:pt-24 lg:pt-28 pb-28 lg:pb-20 bg-surface-cream">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-14 sm:gap-20 md:gap-28">
           <Hero />
           <About />
