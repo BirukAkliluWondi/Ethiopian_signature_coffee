@@ -9,9 +9,11 @@ export default function Training() {
           <span className="text-xs uppercase tracking-widest text-brand-yellow font-bold">
             Barista &amp; Staff Training
           </span>
-          <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-white font-bold">
-            Professional Barista Curriculum
-          </h2>
+          <div className="mask-reveal-wrap">
+            <h2 className="mask-reveal-content font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-white font-bold">
+              Professional Barista Curriculum
+            </h2>
+          </div>
         </div>
         <p className="text-xs sm:text-sm md:text-base text-white/80 max-w-md">
           A structured four-stage training program designed to prepare baristas and café teams for operational excellence.
@@ -21,7 +23,7 @@ export default function Training() {
       {/* 4-Stage Progression */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
         {/* Stage 01 */}
-        <div className="reveal-on-scroll delay-100 p-5 sm:p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-brand-yellow/80 hover:bg-white/[0.09] hover:-translate-y-1.5 shadow-cozy-sm transition-all duration-300 flex flex-col gap-2.5 sm:gap-3 group">
+        <div className="reveal-on-scroll delay-100 spotlight-card p-5 sm:p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-brand-yellow/80 hover:bg-white/[0.09] hover:-translate-y-1.5 shadow-cozy-sm transition-all duration-300 flex flex-col gap-2.5 sm:gap-3 group">
           <span className="text-brand-yellow text-xs font-bold tracking-widest">STAGE 01</span>
           <h4 className="font-serif text-lg sm:text-xl font-bold text-white group-hover:text-brand-yellow transition-colors">Espresso Calibration</h4>
           <p className="text-xs sm:text-sm text-white/75 leading-relaxed">
@@ -30,7 +32,7 @@ export default function Training() {
         </div>
 
         {/* Stage 02 */}
-        <div className="reveal-on-scroll delay-200 p-5 sm:p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-brand-yellow/80 hover:bg-white/[0.09] hover:-translate-y-1.5 shadow-cozy-sm transition-all duration-300 flex flex-col gap-2.5 sm:gap-3 group">
+        <div className="reveal-on-scroll delay-200 spotlight-card p-5 sm:p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-brand-yellow/80 hover:bg-white/[0.09] hover:-translate-y-1.5 shadow-cozy-sm transition-all duration-300 flex flex-col gap-2.5 sm:gap-3 group">
           <span className="text-brand-yellow text-xs font-bold tracking-widest">STAGE 02</span>
           <h4 className="font-serif text-lg sm:text-xl font-bold text-white group-hover:text-brand-yellow transition-colors">Milk Chemistry &amp; Art</h4>
           <p className="text-xs sm:text-sm text-white/75 leading-relaxed">
@@ -39,7 +41,7 @@ export default function Training() {
         </div>
 
         {/* Stage 03 */}
-        <div className="reveal-on-scroll delay-300 p-5 sm:p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-brand-yellow/80 hover:bg-white/[0.09] hover:-translate-y-1.5 shadow-cozy-sm transition-all duration-300 flex flex-col gap-2.5 sm:gap-3 group">
+        <div className="reveal-on-scroll delay-300 spotlight-card p-5 sm:p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-brand-yellow/80 hover:bg-white/[0.09] hover:-translate-y-1.5 shadow-cozy-sm transition-all duration-300 flex flex-col gap-2.5 sm:gap-3 group">
           <span className="text-brand-yellow text-xs font-bold tracking-widest">STAGE 03</span>
           <h4 className="font-serif text-lg sm:text-xl font-bold text-white group-hover:text-brand-yellow transition-colors">Sensory Cupping</h4>
           <p className="text-xs sm:text-sm text-white/75 leading-relaxed">
@@ -48,7 +50,7 @@ export default function Training() {
         </div>
 
         {/* Stage 04 */}
-        <div className="reveal-on-scroll delay-400 p-5 sm:p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-brand-yellow/80 hover:bg-white/[0.09] hover:-translate-y-1.5 shadow-cozy-sm transition-all duration-300 flex flex-col gap-2.5 sm:gap-3 group">
+        <div className="reveal-on-scroll delay-400 spotlight-card p-5 sm:p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-brand-yellow/80 hover:bg-white/[0.09] hover:-translate-y-1.5 shadow-cozy-sm transition-all duration-300 flex flex-col gap-2.5 sm:gap-3 group">
           <span className="text-brand-yellow text-xs font-bold tracking-widest">STAGE 04</span>
           <h4 className="font-serif text-lg sm:text-xl font-bold text-white group-hover:text-brand-yellow transition-colors">Hospitality &amp; Service</h4>
           <p className="text-xs sm:text-sm text-white/75 leading-relaxed">

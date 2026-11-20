@@ -2,16 +2,18 @@ export default function Services() {
   return (
     <section className="reveal-on-scroll flex flex-col gap-8 sm:gap-10 scroll-mt-28 relative section-transition-glow" id="services">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 sm:gap-4">
-        <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-brand-green font-bold">
-          Our Services
-        </h2>
+        <div className="mask-reveal-wrap">
+          <h2 className="mask-reveal-content font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-brand-green font-bold">
+            Our Services
+          </h2>
+        </div>
         <p className="text-xs sm:text-sm md:text-base text-text-muted max-w-md">
           Professional advisory, training, and operational support designed for sustainable café profitability and growth.
         </p>
       </div>
 
       {/* Prominent Flagship Service (Given Extra Visual Space) */}
-      <article className="p-5 sm:p-8 lg:p-10 rounded-2xl sm:rounded-3xl bg-surface-white border border-border-warm shadow-roast-bloom flex flex-col lg:grid lg:grid-cols-12 gap-6 sm:gap-8 items-center ring-1 ring-border-subtle hover:-translate-y-1 hover:shadow-cozy-lg transition-all duration-300">
+      <article className="spotlight-card p-5 sm:p-8 lg:p-10 rounded-2xl sm:rounded-3xl bg-surface-white border border-border-warm shadow-roast-bloom flex flex-col lg:grid lg:grid-cols-12 gap-6 sm:gap-8 items-center ring-1 ring-border-subtle hover:-translate-y-1 hover:shadow-cozy-lg transition-all duration-300">
         {/* Flagship Image (5 cols) */}
         <div className="w-full lg:col-span-5 relative rounded-xl sm:rounded-2xl overflow-hidden bg-stone-900 aspect-video lg:aspect-[4/3] shadow-cozy group">
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -66,7 +68,7 @@ export default function Services() {
       {/* 5 Additional Core Services (Balanced 3-top, 2-bottom symmetrical grid) */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6 lg:gap-8">
         {/* Service 2: Barista Training */}
-        <article className="reveal-on-scroll delay-100 group flex flex-col rounded-2xl bg-surface-white border border-border-subtle overflow-hidden shadow-cozy hover:shadow-roast-bloom hover:-translate-y-1.5 hover:border-brand-yellow/50 transition-all duration-300 lg:col-span-2">
+        <article className="reveal-on-scroll delay-100 spotlight-card group flex flex-col rounded-2xl bg-surface-white border border-border-subtle overflow-hidden shadow-cozy hover:shadow-roast-bloom hover:-translate-y-1.5 hover:border-brand-yellow/50 transition-all duration-300 lg:col-span-2">
           <div className="relative w-full aspect-video overflow-hidden bg-stone-900">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -94,7 +96,7 @@ export default function Services() {
         </article>
 
         {/* Service 3: Menu & Recipe Development */}
-        <article className="reveal-on-scroll delay-200 group flex flex-col rounded-2xl bg-surface-white border border-border-subtle overflow-hidden shadow-cozy hover:shadow-roast-bloom hover:-translate-y-1.5 hover:border-brand-yellow/50 transition-all duration-300 lg:col-span-2">
+        <article className="reveal-on-scroll delay-200 spotlight-card group flex flex-col rounded-2xl bg-surface-white border border-border-subtle overflow-hidden shadow-cozy hover:shadow-roast-bloom hover:-translate-y-1.5 hover:border-brand-yellow/50 transition-all duration-300 lg:col-span-2">
           <div className="relative w-full aspect-video overflow-hidden bg-stone-900">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -122,7 +124,7 @@ export default function Services() {
         </article>
 
         {/* Service 4: Coffee Business Consulting */}
-        <article className="reveal-on-scroll delay-300 group flex flex-col rounded-2xl bg-surface-white border border-border-subtle overflow-hidden shadow-cozy hover:shadow-roast-bloom hover:-translate-y-1.5 hover:border-brand-yellow/50 transition-all duration-300 lg:col-span-2">
+        <article className="reveal-on-scroll delay-300 spotlight-card group flex flex-col rounded-2xl bg-surface-white border border-border-subtle overflow-hidden shadow-cozy hover:shadow-roast-bloom hover:-translate-y-1.5 hover:border-brand-yellow/50 transition-all duration-300 lg:col-span-2">
           <div className="relative w-full aspect-video overflow-hidden bg-stone-900">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -150,7 +152,7 @@ export default function Services() {
         </article>
 
         {/* Service 5: Coffee Shop Operations Management */}
-        <article className="reveal-on-scroll delay-100 group flex flex-col rounded-2xl bg-surface-white border border-border-subtle overflow-hidden shadow-cozy hover:shadow-roast-bloom hover:-translate-y-1.5 hover:border-brand-yellow/50 transition-all duration-300 lg:col-span-3">
+        <article className="reveal-on-scroll delay-100 spotlight-card group flex flex-col rounded-2xl bg-surface-white border border-border-subtle overflow-hidden shadow-cozy hover:shadow-roast-bloom hover:-translate-y-1.5 hover:border-brand-yellow/50 transition-all duration-300 lg:col-span-3">
           <div className="relative w-full aspect-video overflow-hidden bg-stone-900">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -178,7 +180,7 @@ export default function Services() {
         </article>
 
         {/* Service 6: Menu Engineering & Profitability Improvement */}
-        <article className="reveal-on-scroll delay-200 group flex flex-col rounded-2xl bg-surface-white border border-border-subtle overflow-hidden shadow-cozy hover:shadow-roast-bloom hover:-translate-y-1.5 hover:border-brand-yellow/50 transition-all duration-300 md:col-span-2 lg:col-span-3">
+        <article className="reveal-on-scroll delay-200 spotlight-card group flex flex-col rounded-2xl bg-surface-white border border-border-subtle overflow-hidden shadow-cozy hover:shadow-roast-bloom hover:-translate-y-1.5 hover:border-brand-yellow/50 transition-all duration-300 md:col-span-2 lg:col-span-3">
           <div className="relative w-full aspect-video overflow-hidden bg-stone-900">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img

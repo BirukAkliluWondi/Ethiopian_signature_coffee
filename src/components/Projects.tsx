@@ -5,9 +5,11 @@ export default function Projects() {
         <span className="text-xs uppercase tracking-widest text-brand-yellow font-bold">
           Demonstrated Experience
         </span>
-        <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-brand-green font-bold">
-          Our Projects &amp; Executed Works
-        </h2>
+        <div className="mask-reveal-wrap">
+          <h2 className="mask-reveal-content font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-brand-green font-bold">
+            Our Projects &amp; Executed Works
+          </h2>
+        </div>
         <p className="text-xs sm:text-sm md:text-base text-text-muted max-w-xl">
           Selected client engagements spanning independent specialty cafés, hospitality venues, and roasting partners.
         </p>
@@ -16,7 +18,7 @@ export default function Projects() {
       {/* 3 Projects */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6">
         {/* Project 1 */}
-        <div className="reveal-on-scroll delay-100 group p-5 sm:p-6 rounded-2xl bg-surface-white border border-border-subtle flex flex-col justify-between gap-4 shadow-cozy hover:shadow-roast-bloom hover:-translate-y-1.5 hover:border-brand-yellow/50 transition-all duration-300">
+        <div className="reveal-on-scroll delay-100 spotlight-card group p-5 sm:p-6 rounded-2xl bg-surface-white border border-border-subtle flex flex-col justify-between gap-4 shadow-cozy hover:shadow-roast-bloom hover:-translate-y-1.5 hover:border-brand-yellow/50 transition-all duration-300">
           <div className="flex flex-col gap-3">
             <div className="w-10 h-10 rounded-xl bg-brand-green/10 text-brand-green flex items-center justify-center shadow-cozy-sm group-hover:scale-110 transition-transform duration-300">
               <span className="material-symbols-outlined text-xl">storefront</span>
@@ -39,7 +41,7 @@ export default function Projects() {
         </div>
 
         {/* Project 2 */}
-        <div className="reveal-on-scroll delay-200 group p-5 sm:p-6 rounded-2xl bg-surface-white border border-border-subtle flex flex-col justify-between gap-4 shadow-cozy hover:shadow-roast-bloom hover:-translate-y-1.5 hover:border-brand-yellow/50 transition-all duration-300">
+        <div className="reveal-on-scroll delay-200 spotlight-card group p-5 sm:p-6 rounded-2xl bg-surface-white border border-border-subtle flex flex-col justify-between gap-4 shadow-cozy hover:shadow-roast-bloom hover:-translate-y-1.5 hover:border-brand-yellow/50 transition-all duration-300">
           <div className="flex flex-col gap-3">
             <div className="w-10 h-10 rounded-xl bg-brand-yellow/15 text-brand-yellow flex items-center justify-center shadow-cozy-sm group-hover:scale-110 transition-transform duration-300">
               <span className="material-symbols-outlined text-xl">hotel</span>
@@ -62,7 +64,7 @@ export default function Projects() {
         </div>
 
         {/* Project 3 */}
-        <div className="reveal-on-scroll delay-300 group p-5 sm:p-6 rounded-2xl bg-surface-white border border-border-subtle flex flex-col justify-between gap-4 shadow-cozy hover:shadow-roast-bloom hover:-translate-y-1.5 hover:border-brand-yellow/50 transition-all duration-300">
+        <div className="reveal-on-scroll delay-300 spotlight-card group p-5 sm:p-6 rounded-2xl bg-surface-white border border-border-subtle flex flex-col justify-between gap-4 shadow-cozy hover:shadow-roast-bloom hover:-translate-y-1.5 hover:border-brand-yellow/50 transition-all duration-300">
           <div className="flex flex-col gap-3">
             <div className="w-10 h-10 rounded-xl bg-brand-red/10 text-brand-red flex items-center justify-center shadow-cozy-sm group-hover:scale-110 transition-transform duration-300">
               <span className="material-symbols-outlined text-xl">local_shipping</span>

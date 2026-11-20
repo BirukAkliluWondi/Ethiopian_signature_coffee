@@ -8,15 +8,17 @@ export default function About() {
         <span className="text-xs uppercase tracking-widest text-brand-yellow font-bold">
           About Our Organization
         </span>
-        <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-brand-green">
-          About Ethiopian Signature Coffee
-        </h2>
+        <div className="mask-reveal-wrap">
+          <h2 className="mask-reveal-content font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-brand-green">
+            About Ethiopian Signature Coffee
+          </h2>
+        </div>
       </div>
 
       {/* Clean 2-Column Mission & Vision Layout */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 items-stretch">
         {/* Mission Card */}
-        <div className="p-6 sm:p-8 rounded-2xl bg-surface-white border border-border-subtle shadow-cozy flex flex-col justify-between gap-5 sm:gap-6 border-l-4 border-l-brand-green hover:-translate-y-1 hover:shadow-roast-bloom transition-all duration-300">
+        <div className="spotlight-card p-6 sm:p-8 rounded-2xl bg-surface-white border border-border-subtle shadow-cozy flex flex-col justify-between gap-5 sm:gap-6 border-l-4 border-l-brand-green hover:-translate-y-1 hover:shadow-roast-bloom transition-all duration-300">
           <div className="flex flex-col gap-2.5 sm:gap-3">
             <span className="text-xs uppercase tracking-wider text-brand-yellow font-bold">
               Our Mission
@@ -31,7 +33,7 @@ export default function About() {
         </div>
 
         {/* Vision & Approach Card */}
-        <div className="p-6 sm:p-8 rounded-2xl bg-surface-white border border-border-subtle shadow-cozy flex flex-col justify-between gap-5 sm:gap-6 border-l-4 border-l-brand-yellow hover:-translate-y-1 hover:shadow-roast-bloom transition-all duration-300">
+        <div className="spotlight-card p-6 sm:p-8 rounded-2xl bg-surface-white border border-border-subtle shadow-cozy flex flex-col justify-between gap-5 sm:gap-6 border-l-4 border-l-brand-yellow hover:-translate-y-1 hover:shadow-roast-bloom transition-all duration-300">
           <div className="flex flex-col gap-2.5 sm:gap-3">
             <span className="text-xs uppercase tracking-wider text-brand-yellow font-bold">
               Our Approach

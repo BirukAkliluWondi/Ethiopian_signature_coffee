@@ -33,9 +33,11 @@ export default function SingleOrigins() {
           <span className="text-xs uppercase tracking-widest text-brand-yellow font-bold">
             The Birthplace of Arabica
           </span>
-          <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-brand-green mt-1">
-            Direct-Trade Single Origins
-          </h2>
+          <div className="mask-reveal-wrap">
+            <h2 className="mask-reveal-content font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-brand-green mt-1">
+              Direct-Trade Single Origins
+            </h2>
+          </div>
         </div>
         <p className="text-xs sm:text-sm md:text-base text-text-muted max-w-md">
           Our client cafés receive direct allocations from certified highland cooperatives.
@@ -49,7 +51,7 @@ export default function SingleOrigins() {
           return (
             <div
               key={origin.name}
-              className={`reveal-on-scroll ${delays[index % 4]} p-5 sm:p-6 rounded-2xl bg-surface-white border border-border-subtle shadow-cozy-sm hover:shadow-roast-bloom hover:-translate-y-2 hover:ring-1 hover:ring-brand-yellow/40 transition-all duration-300 flex flex-col justify-between group ring-1 ring-border-subtle/50`}
+              className={`reveal-on-scroll ${delays[index % 4]} spotlight-card p-5 sm:p-6 rounded-2xl bg-surface-white border border-border-subtle shadow-cozy-sm hover:shadow-roast-bloom hover:-translate-y-2 hover:ring-1 hover:ring-brand-yellow/40 transition-all duration-300 flex flex-col justify-between group ring-1 ring-border-subtle/50`}
             >
               <div>
                 <span className="text-[10px] sm:text-xs font-bold text-brand-yellow uppercase tracking-widest">

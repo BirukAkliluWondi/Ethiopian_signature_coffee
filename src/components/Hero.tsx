@@ -46,14 +46,16 @@ export default function Hero() {
 
   return (
     <section
-      className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-12 items-center scroll-mt-28 relative section-transition-glow"
+      className="reveal-on-scroll reveal-visible grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-12 items-center scroll-mt-28 relative section-transition-glow"
       id="home"
     >
       {/* Story, Headline & CTAs (On mobile: order-2, displays below visual showcase; Desktop: lg:order-1) */}
       <div className="lg:col-span-6 flex flex-col gap-5 sm:gap-6 order-2 lg:order-1 lg:pt-12">
-        <h1 className="font-serif text-2xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-bold text-brand-green leading-[1.18] sm:leading-[1.15] tracking-tight">
-          Discover the Excellence of Ethiopian Coffee
-        </h1>
+        <div className="mask-reveal-wrap">
+          <h1 className="mask-reveal-content font-serif text-2xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-bold text-brand-green leading-[1.18] sm:leading-[1.15] tracking-tight">
+            Discover the Excellence of Ethiopian Coffee
+          </h1>
+        </div>
 
         <p className="text-sm sm:text-base md:text-lg text-text-muted leading-relaxed max-w-xl lg:max-w-none font-normal">
           We bring together premium Ethiopian coffee, professional coffee training, business consultancy, and innovative café solutions. From centuries-old ceremonial roots to modern commercial venues, we help coffee businesses achieve excellence.
@@ -61,19 +63,19 @@ export default function Hero() {
 
         {/* Quantitative Proof Metrics */}
         <div className="grid grid-cols-3 gap-2.5 sm:gap-3.5 pt-1">
-          <div className="p-3 sm:p-3.5 rounded-xl bg-surface-white border border-border-subtle shadow-cozy-sm flex flex-col hover:-translate-y-1 hover:shadow-cozy hover:border-brand-yellow/50 transition-all duration-300">
+          <div className="spotlight-card p-3 sm:p-3.5 rounded-xl bg-surface-white border border-border-subtle shadow-cozy-sm flex flex-col hover:-translate-y-1 hover:shadow-cozy hover:border-brand-yellow/50 transition-all duration-300">
             <span className="font-serif text-xl sm:text-2xl md:text-3xl font-bold text-brand-green leading-none">
               {venuesCount}+
             </span>
             <span className="text-[10px] sm:text-xs text-text-muted font-medium mt-1">Turnkey Venues</span>
           </div>
-          <div className="p-3 sm:p-3.5 rounded-xl bg-surface-white border border-border-subtle shadow-cozy-sm flex flex-col hover:-translate-y-1 hover:shadow-cozy hover:border-brand-yellow/50 transition-all duration-300">
+          <div className="spotlight-card p-3 sm:p-3.5 rounded-xl bg-surface-white border border-border-subtle shadow-cozy-sm flex flex-col hover:-translate-y-1 hover:shadow-cozy hover:border-brand-yellow/50 transition-all duration-300">
             <span className="font-serif text-xl sm:text-2xl md:text-3xl font-bold text-brand-green leading-none">
               {baristasCount}+
             </span>
             <span className="text-[10px] sm:text-xs text-text-muted font-medium mt-1">Certified Baristas</span>
           </div>
-          <div className="p-3 sm:p-3.5 rounded-xl bg-surface-white border border-border-subtle shadow-cozy-sm flex flex-col hover:-translate-y-1 hover:shadow-cozy hover:border-brand-yellow/50 transition-all duration-300">
+          <div className="spotlight-card p-3 sm:p-3.5 rounded-xl bg-surface-white border border-border-subtle shadow-cozy-sm flex flex-col hover:-translate-y-1 hover:shadow-cozy hover:border-brand-yellow/50 transition-all duration-300">
             <span className="font-serif text-xl sm:text-2xl md:text-3xl font-bold text-brand-green leading-none">
               {originsCount}%
             </span>

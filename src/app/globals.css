@@ -94,14 +94,14 @@
 /* Scroll Reveal & Kinetic Web Transitions */
 .reveal-on-scroll {
   opacity: 0;
-  transform: translateY(18px);
+  transform: translateY(22px) scale(0.98);
   transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
 
-.reveal-visible {
+.reveal-on-scroll.reveal-visible {
   opacity: 1 !important;
-  transform: translateY(0) !important;
+  transform: translateY(0) scale(1) !important;
 }
 
 /* Stagger Delays */
@@ -109,6 +109,53 @@
 .delay-200 { transition-delay: 200ms; }
 .delay-300 { transition-delay: 300ms; }
 .delay-400 { transition-delay: 400ms; }
+
+/* Masked Line-Reveal Typography */
+.mask-reveal-wrap {
+  overflow: hidden;
+  display: block;
+  padding-bottom: 4px;
+}
+
+.mask-reveal-content {
+  display: block;
+  transform: translateY(115%);
+  transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.reveal-visible .mask-reveal-content,
+.reveal-visible.mask-reveal-content,
+.mask-reveal-content.mask-revealed {
+  transform: translateY(0%) !important;
+}
+
+/* Interactive Cursor Spotlight Glare */
+.spotlight-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.spotlight-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    450px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(212, 136, 0, 0.09),
+    rgba(212, 136, 0, 0.02) 40%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.spotlight-card:hover::before {
+  opacity: 1;
+}
 
 /* Subtle Button Shimmer Sweep */
 .btn-shimmer {
@@ -141,6 +188,13 @@
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;
+  }
+  .mask-reveal-content {
+    transform: none !important;
+    transition: none !important;
+  }
+  .spotlight-card::before {
+    display: none;
   }
   .btn-shimmer::after {
     display: none;

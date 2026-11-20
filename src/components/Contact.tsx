@@ -62,9 +62,11 @@ export default function Contact() {
             <span className="text-xs uppercase tracking-widest text-brand-yellow font-bold">
               Get In Touch
             </span>
-            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-brand-green leading-snug">
-              Let&apos;s build your coffee business together.
-            </h2>
+            <div className="mask-reveal-wrap">
+              <h2 className="mask-reveal-content font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-brand-green leading-snug">
+                Let&apos;s build your coffee business together.
+              </h2>
+            </div>
             <p className="text-xs sm:text-sm text-text-muted leading-relaxed">
               Reach out to discuss your café concept, barista training requirements, or coffee business consultancy needs.
             </p>
@@ -73,7 +75,7 @@ export default function Contact() {
           <div className="flex flex-col gap-3 sm:gap-3.5 pt-1">
             {/* Direct WhatsApp Button */}
             <a
-              className="p-3.5 sm:p-4 rounded-xl bg-surface-white border border-border-subtle hover:border-brand-green flex items-center gap-3 sm:gap-3.5 shadow-cozy-sm hover:shadow-cozy transition-all group"
+              className="spotlight-card p-3.5 sm:p-4 rounded-xl bg-surface-white border border-border-subtle hover:border-brand-green flex items-center gap-3 sm:gap-3.5 shadow-cozy-sm hover:shadow-cozy transition-all group"
               href="https://wa.me/251925451711"
               rel="noopener noreferrer"
               target="_blank"
@@ -95,7 +97,7 @@ export default function Contact() {
 
             {/* Direct Telegram Button */}
             <a
-              className="p-3.5 sm:p-4 rounded-xl bg-surface-white border border-border-subtle hover:border-brand-green flex items-center gap-3 sm:gap-3.5 shadow-cozy-sm hover:shadow-cozy transition-all group"
+              className="spotlight-card p-3.5 sm:p-4 rounded-xl bg-surface-white border border-border-subtle hover:border-brand-green flex items-center gap-3 sm:gap-3.5 shadow-cozy-sm hover:shadow-cozy transition-all group"
               href="https://t.me/+251925451711"
               rel="noopener noreferrer"
               target="_blank"
@@ -147,7 +149,7 @@ export default function Contact() {
         </div>
 
         {/* Right Column: Consultation Form */}
-        <div className="lg:col-span-7 bg-surface-white p-5 sm:p-8 rounded-2xl border border-border-subtle shadow-cozy w-full">
+        <div className="spotlight-card lg:col-span-7 bg-surface-white p-5 sm:p-8 rounded-2xl border border-border-subtle shadow-cozy w-full">
           <form className="flex flex-col gap-3.5 sm:gap-4" id="advisory-form" onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4">
               <div className="flex flex-col gap-1.5">

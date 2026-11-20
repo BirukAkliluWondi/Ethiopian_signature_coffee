@@ -9,37 +9,63 @@ export default function ScrollRevealInit() {
       document.querySelectorAll(".reveal-on-scroll").forEach((el) => {
         el.classList.add("reveal-visible");
       });
+      document.querySelectorAll(".mask-reveal-content").forEach((el) => {
+        el.classList.add("mask-revealed");
+      });
       return;
     }
 
+    // Bidirectional Intersection Observer: Elements appear when entering viewport
+    // and gently fade away when exiting viewport (up or down).
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add("reveal-visible");
-            observer.unobserve(entry.target);
+            // If the element has a masked text child, trigger reveal
+            const maskedChild = entry.target.querySelector(".mask-reveal-content");
+            if (maskedChild) {
+              maskedChild.classList.add("mask-revealed");
+            }
+          } else {
+            // Bidirectional fade away when scrolled out of view
+            entry.target.classList.remove("reveal-visible");
+            const maskedChild = entry.target.querySelector(".mask-reveal-content");
+            if (maskedChild) {
+              maskedChild.classList.remove("mask-revealed");
+            }
           }
         });
       },
       {
         threshold: 0.08,
-        rootMargin: "0px 0px -40px 0px",
+        rootMargin: "-20px 0px -20px 0px",
       }
     );
 
     const elements = document.querySelectorAll(".reveal-on-scroll");
     elements.forEach((el) => observer.observe(el));
 
-    // Fallback timer: ensure all elements are visible after 2.5s even if not scrolled
-    const timeout = setTimeout(() => {
-      document.querySelectorAll(".reveal-on-scroll").forEach((el) => {
-        el.classList.add("reveal-visible");
-      });
-    }, 2500);
+    // Interactive Cursor Spotlight Glare for .spotlight-card elements
+    const spotlightCards = document.querySelectorAll<HTMLElement>(".spotlight-card");
+    const handlePointerMove = (e: MouseEvent) => {
+      const card = e.currentTarget as HTMLElement;
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      card.style.setProperty("--mouse-x", `${x}px`);
+      card.style.setProperty("--mouse-y", `${y}px`);
+    };
+
+    spotlightCards.forEach((card) => {
+      card.addEventListener("mousemove", handlePointerMove as EventListener, { passive: true });
+    });
 
     return () => {
-      clearTimeout(timeout);
       observer.disconnect();
+      spotlightCards.forEach((card) => {
+        card.removeEventListener("mousemove", handlePointerMove as EventListener);
+      });
     };
   }, []);
 
