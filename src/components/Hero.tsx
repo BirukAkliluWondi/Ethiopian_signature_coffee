@@ -39,7 +39,7 @@ export default function Hero() {
       </div>
 
       {/* Right Column: Visual Showcase (On mobile: order-1, displays first; Desktop: lg:order-2) */}
-      <div className="lg:col-span-6 order-1 lg:order-2 flex justify-center lg:justify-end">
+      <div className="lg:col-span-6 order-1 lg:order-2 flex justify-center lg:justify-end pt-4 -mb-4 sm:pt-0 sm:mb-0">
         <div className="relative w-full max-w-lg lg:max-w-none rounded-2xl sm:rounded-3xl overflow-hidden shadow-roast-bloom border border-border-subtle bg-stone-900 group ring-1 ring-border-subtle">
           <div className="relative w-full aspect-[4/3] sm:aspect-[4/3] lg:aspect-[4/3.5] xl:aspect-[4/3.3] max-h-[480px]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
