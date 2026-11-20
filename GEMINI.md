@@ -61,3 +61,10 @@
      - Column 4 (`lg:col-span-3`): Direct Channels desk with verified WhatsApp pill, Telegram pill, and high-contrast gold 'Book Setup Advisory' action button.
    - Sub-footer legal bar with copyright, location accreditation, and smooth 'Back to Top ↑' anchor.
    - Preserves semantic `<footer>` element and `#footer` anchor to ensure the sticky WhatsApp button's `IntersectionObserver` continues to automatically hide with zero occlusion.
+
+## Rollback & Baseline Preservation
+7. **Pristine Snapshot Baseline**:
+   - **Git Tag**: `baseline-stable` (Commit: `001d894`)
+   - **Backup Branch**: `backup-stable-baseline` (Pushed to GitHub `origin`)
+   - **Remote Synchronization**: Fully backed up on remote GitHub repository.
+   - **One-Prompt Revert Protocol**: If the user asks to revert or roll back at any time, run `git reset --hard baseline-stable && git clean -fd` to instantly restore this exact pristine state.
