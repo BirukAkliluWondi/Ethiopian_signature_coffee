@@ -64,10 +64,13 @@
 
 ## Rollback & Baseline Preservation
 7. **Pristine Snapshot Baseline**:
-   - **Git Tag**: `baseline-stable` (Commit: `001d894`)
-   - **Backup Branch**: `backup-stable-baseline` (Pushed to GitHub `origin`)
+   - **Baseline Git Tag**: `baseline-stable` (Commit: `001d894`)
+   - **Pre-Media Checkpoint Tag**: `pre-hero-media-carousel` (Commit: `04eacee`)
+   - **Backup Branches**: `backup-stable-baseline`, `backup-pre-hero-media-carousel` (Pushed to GitHub `origin`)
    - **Remote Synchronization**: Fully backed up on remote GitHub repository.
-   - **One-Prompt Revert Protocol**: If the user asks to revert or roll back at any time, run `git reset --hard baseline-stable && git clean -fd` to instantly restore this exact pristine state.
+   - **One-Prompt Revert Protocol**:
+     - To revert to the state before the media carousel: `git reset --hard pre-hero-media-carousel && git clean -fd`
+     - To revert to the absolute baseline: `git reset --hard baseline-stable && git clean -fd`
 
 ## Motion & Web Dynamics Architecture (Anti-PDF Standards)
 8. **Dynamic Web Physics & Cleanliness Rules**:
@@ -81,3 +84,15 @@
    - **Masked Line-Reveal Typography**: Major section headlines (H1, H2) use `.mask-reveal-wrap` and `.mask-reveal-content` to emerge upward from behind an invisible baseline mask with silky cubic-bezier deceleration.
    - **Interactive Cursor Spotlight Glare**: Cards across Single Origins, Services, Training, and Projects feature `.spotlight-card` projecting an organic radial amber light that dynamically tracks `--mouse-x` and `--mouse-y`.
    - **Button Shimmer**: Primary CTA buttons feature hardware-accelerated subtle sheen sweep on mouse hover (`.btn-shimmer`).
+
+## Hero Sequential Media Showcase Architecture
+9. **Story Progression & Crossfading Media**:
+   - **Sequential Order**:
+     1. Slide 0: Woman Coffee Ceremony Photo (unclipped original, 5.5s display).
+     2. Slide 1: Freshly Roasted Beans in Clay Pot with Jebena and Incense (`/hero/roast-and-jebena.jpg`, 5.0s display).
+     3. Slide 2: Overhead Hands Gathering Celebrating Coffee (`/hero/coffee-community-celebration.jpg`, 5.0s display).
+     4. Slide 3: Traditional Ceremony Video (`/hero/ceremony-video.mp4`, 10.6s playback).
+   - **Crossfade Physics**: `absolute inset-0 transition-opacity duration-1000 ease-in-out` ensures zero layout jump or content reflow.
+   - **Video Completion Callback**: Video mounts with `muted`, `playsinline`, and `preload="auto"`. Upon `onEnded`, the video smoothly fades away and the carousel loops back to Slide 0.
+   - **Audio Toggle**: Discreet circular glassmorphic speaker button (`w-8 h-8`) allows visitors to unmute ceremony audio during video playback.
+   - **Segment Story Indicators**: 4 thin geometric accent lines (`h-[2.5px] rounded-full`, active `w-8 sm:w-10 bg-brand-yellow`, inactive `w-3 sm:w-4 bg-white/40`) allow slide navigation without any text pill badges.
