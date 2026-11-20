@@ -11,7 +11,7 @@ export default function Footer() {
         />
       </div>
 
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20 pb-20 sm:pb-16 relative z-10 flex flex-col items-center text-center gap-8">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20 pb-24 sm:pb-20 relative z-10 flex flex-col items-center text-center gap-8">
         {/* Grand Brand Heading Over Watermark */}
         <div className="flex flex-col items-center gap-2.5 max-w-2xl">
           <span className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-white tracking-wide uppercase">

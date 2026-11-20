@@ -23,10 +23,14 @@
    - Mobile hamburger menu toggle button meets the standard minimum 44×44px tap target (`w-11 h-11 min-w-[44px] min-h-[44px]`).
 
 ## Mobile Usability & Ergonomics
-4. **Sticky WhatsApp Button**:
-   - On mobile screens (`< sm`), it renders as a sleek **48×48px circular FAB** (`w-12 h-12 rounded-full p-0 flex items-center justify-center`) positioned safely at `bottom-20 right-3` above `MobileBottomNav`.
-   - This compact footprint guarantees zero occlusion of the Contact form fields (Email, Area of Interest, and Message).
-   - On desktop (`sm:` and above), it expands to the full pill with `"Chat on WhatsApp"` text.
+4. **Sticky WhatsApp Button (Minimalist & Occlusion-Free)**:
+   - Rendered as an ultra-minimalist, sleek circular FAB across all viewports (`w-11 h-11` on mobile, `w-12 h-12` on desktop) using authentic WhatsApp green (`bg-[#25D366] hover:bg-[#20ba5a]`) with a crisp solid white WhatsApp icon.
+   - Elimination of tacky visual clutter: No flashing/pulsing yellow radar dots, no permanent bulky 224px text capsules.
+   - Desktop hover micro-interaction: Subtle, clean tooltip (`WhatsApp`) appears only on mouse hover, keeping the resting state 100% minimal.
+   - Zero Occlusion & Dynamic Collision Avoidance:
+     - On desktop (`sm:bottom-6 sm:right-6`), the 48px circle sits in the outer gutter on standard viewports (>1350px) and maintains safe clearance from hero imagery and cards on compact viewports.
+     - On mobile (`bottom-20 right-3`), the 44px circle floats safely above `MobileBottomNav`, avoiding form fields and text.
+     - Dynamic Footer Auto-Hide: Uses an `IntersectionObserver` to automatically fade out (`opacity-0 pointer-events-none translate-y-3`) whenever the footer is in view, guaranteeing that footer text, copyright, and location coordinates are NEVER covered or occluded.
 
 ## Contact Channels & Standardized Phone
 5. **Contact Phone & Messaging**:
