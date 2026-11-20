@@ -17,8 +17,8 @@ export default function Services() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             alt="Coffee Shop Setup & Organization"
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBupxs9yDUXKNBndzW61BwaixUDoqz_FHq_DZORO1tvFV6TiAu1ihaQrr7RvkPMcZV_2lHl8Zpnjb-IITPCjuET2UL7AdHY_jGfNuE3b9emmCyx2fF9hvo82XPbgrRYBrzhvcqNYZWsEuO1_uzJT6iDdIKpbaWEEssY-Gbu9T6Ho3St9i25qi2EwjsuuUtxlLIXBjuGxy1l4e5qRQi0Xsddj8vXp1woaUMj96B4XfzwHI206gmPLA_u"
+            className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+            src="/coffee-shop-setup.jpg"
           />
         </div>
 
