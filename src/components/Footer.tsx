@@ -106,7 +106,7 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a className="hover:text-white transition-colors flex items-center gap-2 group" href="#services">
+                <a className="hover:text-white transition-colors flex items-center gap-2 group" href="#catering">
                   <span className="w-1.5 h-1.5 rounded-full bg-brand-yellow/60 group-hover:bg-brand-yellow transition-colors" />
                   <span>7. Catering Services &amp; Events</span>
                 </a>

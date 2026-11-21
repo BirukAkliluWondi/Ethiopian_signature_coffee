@@ -248,7 +248,7 @@ export default function Contact() {
               <textarea
                 className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl border border-border-subtle bg-surface-cream text-xs sm:text-sm placeholder:text-text-muted/45 font-normal focus:border-brand-green focus:bg-white focus:ring-2 focus:ring-brand-green/20 focus:shadow-cozy-sm outline-none transition-all resize-y shadow-inner"
                 id="lead-notes"
-                placeholder="Describe your venue location, concept, opening timeline, or advisory needs..."
+                placeholder="Describe your venue location, event concept, guest count, opening timeline, or advisory needs..."
                 rows={3}
                 value={formData.notes}
                 onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
