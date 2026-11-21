@@ -35,8 +35,9 @@ export default function Projects() {
               </p>
             </div>
           </div>
-          <div className="pt-3 border-t border-border-subtle text-[11px] sm:text-xs text-text-muted font-medium">
-            Category: Turnkey Venue Setup
+          <div className="pt-3 border-t border-border-subtle flex items-center justify-between text-[11px] sm:text-xs">
+            <span className="text-text-muted font-medium">Turnkey Venue Setup</span>
+            <span className="font-semibold text-brand-green">6-Week Launch</span>
           </div>
         </div>
 
@@ -58,8 +59,9 @@ export default function Projects() {
               </p>
             </div>
           </div>
-          <div className="pt-3 border-t border-border-subtle text-[11px] sm:text-xs text-text-muted font-medium">
-            Category: Hospitality Training
+          <div className="pt-3 border-t border-border-subtle flex items-center justify-between text-[11px] sm:text-xs">
+            <span className="text-text-muted font-medium">Hospitality Training</span>
+            <span className="font-semibold text-brand-green">+32% Margin Lift</span>
           </div>
         </div>
 
@@ -81,8 +83,9 @@ export default function Projects() {
               </p>
             </div>
           </div>
-          <div className="pt-3 border-t border-border-subtle text-[11px] sm:text-xs text-text-muted font-medium">
-            Category: Quality Calibration
+          <div className="pt-3 border-t border-border-subtle flex items-center justify-between text-[11px] sm:text-xs">
+            <span className="text-text-muted font-medium">Quality Calibration</span>
+            <span className="font-semibold text-brand-green">1,200kg/mo Roasting</span>
           </div>
         </div>
       </div>

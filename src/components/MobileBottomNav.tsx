@@ -7,13 +7,20 @@ export default function MobileBottomNav() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sectionIds = ["home", "about", "services", "training", "projects", "contact"];
+      const sectionIds = ["home", "services", "process", "training", "origins", "projects", "about", "contact"];
       const scrollPos = window.scrollY + 220;
 
       for (let i = sectionIds.length - 1; i >= 0; i--) {
         const el = document.getElementById(sectionIds[i]);
         if (el && el.offsetTop <= scrollPos) {
-          setActiveSection(sectionIds[i]);
+          const current = sectionIds[i];
+          if (current === "process") {
+            setActiveSection("services");
+          } else if (current === "about") {
+            setActiveSection("projects");
+          } else {
+            setActiveSection(current);
+          }
           break;
         }
       }
@@ -26,9 +33,9 @@ export default function MobileBottomNav() {
 
   const items = [
     { id: "home", label: "Home", href: "#home", icon: "local_cafe" },
-    { id: "about", label: "About", href: "#about", icon: "info" },
     { id: "services", label: "Services", href: "#services", icon: "corporate_fare" },
     { id: "training", label: "Training", href: "#training", icon: "school" },
+    { id: "origins", label: "Origins", href: "#origins", icon: "spa" },
     { id: "projects", label: "Projects", href: "#projects", icon: "foundation" },
     { id: "contact", label: "Contact", href: "#contact", icon: "alternate_email" },
   ];

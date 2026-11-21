@@ -10,7 +10,7 @@ export default function Header() {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
-      const sectionIds = ["home", "about", "services", "training", "projects", "contact"];
+      const sectionIds = ["home", "services", "process", "training", "origins", "projects", "about", "contact"];
       const scrollPos = window.scrollY + 220;
 
       for (let i = sectionIds.length - 1; i >= 0; i--) {
@@ -35,10 +35,12 @@ export default function Header() {
 
   const navLinks = [
     { id: "home", label: "Home", href: "#home" },
-    { id: "about", label: "About", href: "#about" },
     { id: "services", label: "Services", href: "#services" },
+    { id: "process", label: "Process", href: "#process" },
     { id: "training", label: "Training", href: "#training" },
+    { id: "origins", label: "Origins", href: "#origins" },
     { id: "projects", label: "Projects", href: "#projects" },
+    { id: "about", label: "About", href: "#about" },
     { id: "contact", label: "Contact", href: "#contact" },
   ];
 
@@ -72,7 +74,7 @@ export default function Header() {
           </a>
 
           {/* Desktop Navigation Links (Full Desktop Only: lg and up, 1024px+) */}
-          <nav className="hidden lg:flex items-center gap-7 xl:gap-9">
+          <nav className="hidden lg:flex items-center gap-5 xl:gap-7">
             {navLinks.map((link) => {
               const isActive = activeSection === link.id;
               return (

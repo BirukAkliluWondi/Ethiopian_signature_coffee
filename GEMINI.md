@@ -67,9 +67,11 @@
    - **Baseline Git Tag**: `baseline-stable` (Commit: `001d894`)
    - **Pre-Media Checkpoint Tag**: `pre-hero-media-carousel` (Commit: `04eacee`)
    - **Pre-Opening Motion Choreography Tag**: `pre-opening-motion-choreography` (Commit: `d822e2e`)
-   - **Backup Branches**: `backup-stable-baseline`, `backup-pre-hero-media-carousel`, `backup-pre-opening-motion-choreography` (Pushed to GitHub `origin`)
+   - **Pre-Resequencing Checkpoint Tag**: `pre-chronological-resequence` (Commit: `a2d6404`)
+   - **Backup Branches**: `backup-stable-baseline`, `backup-pre-hero-media-carousel`, `backup-pre-opening-motion-choreography`, `backup-pre-chronological-resequence` (Pushed to GitHub `origin`)
    - **Remote Synchronization**: Fully backed up on remote GitHub repository.
    - **One-Prompt Revert Protocol**:
+     - To revert to the state before chronological re-sequencing: `git reset --hard pre-chronological-resequence && git clean -fd`
      - To revert to the state before the opening motion choreography: `git reset --hard pre-opening-motion-choreography && git clean -fd`
      - To revert to the state before the media carousel: `git reset --hard pre-hero-media-carousel && git clean -fd`
      - To revert to the absolute baseline: `git reset --hard baseline-stable && git clean -fd`
@@ -110,3 +112,19 @@
    - **Dual CTA Buttons**: Float up into position (`.mount-cta`, `800ms - 1550ms`) with subtle sheen sweep on hover.
    - **Accessibility Guarantees**: Under `@media (prefers-reduced-motion: reduce)`, all mount keyframes are disabled and elements render instantaneously with zero delay or motion.
    - **Strict Preservation**: Zero layout shift (CLS), zero text bloat, and strictly zero text pill badges (`rounded-full` tags).
+
+## Chronological Information Architecture (IA) Standards
+11. **10-Stage High-Converting Narrative Sequence**:
+   - **Order**:
+     1. `Hero` (`#home`): Value proposition, live metric counters, sequential media showcase, dual CTAs.
+     2. `TrustRibbon`: 5 industry alignments (SCA Standards, Direct Cooperatives, Hotels, Cafés, ECTA export).
+     3. `Services` (`#services`): Flagship Turnkey Setup & Organization + 5 specialized practices.
+     4. `Process` (`#process`): 4-Stage turnkey methodology (Concept, Layout, Sourcing/Academy, Launch & SOPs).
+     5. `Training` (`#training`): 4-Stage barista curriculum in deep luxury forest green container.
+     6. `SingleOrigins` (`#origins`): 4 direct-trade highland terroirs (Yirgacheffe, Sidama, Guji, Harrar).
+     7. `Projects` (`#projects`): Demonstrated executed works with quantifiable metrics (`6-Week Launch`, `+32% Margin Lift`, `1,200kg/mo Roasting`).
+     8. `About` (`#about`): Mission statement, brand philosophy, and Addis Ababa headquarters.
+     9. `Contact` (`#contact`): Direct booking desk, consultation form, phone, WhatsApp, Telegram.
+     10. `Footer` (`#footer`): 4-Column luxury enterprise footer, deep directory, location coordinates.
+   - **Navigation Consistency**: Desktop fixed header contains 8 primary links matching the exact chronological sequence. Mobile bottom bar features 6 core thumb destinations with automated scroll mapping.
+   - **Strict Rule Preservation**: ZERO text pill badges, ZERO text bloat, unclipped original ceremony photo, phone `+251925451711`.
