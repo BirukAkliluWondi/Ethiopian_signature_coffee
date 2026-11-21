@@ -65,7 +65,7 @@ export default function Services() {
         </div>
       </article>
 
-      {/* 5 Additional Core Services (Balanced 3-top, 2-bottom symmetrical grid) */}
+      {/* 6 Additional Core Services (Balanced 3-top, 3-bottom symmetrical grid) */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6 lg:gap-8">
         {/* Service 2: Barista Training */}
         <article className="reveal-on-scroll delay-100 spotlight-card group flex flex-col rounded-2xl bg-surface-white border border-border-subtle overflow-hidden shadow-cozy hover:shadow-roast-bloom hover:-translate-y-1.5 hover:border-brand-yellow/50 transition-all duration-300 lg:col-span-2">
@@ -152,7 +152,7 @@ export default function Services() {
         </article>
 
         {/* Service 5: Coffee Shop Operations Management */}
-        <article className="reveal-on-scroll delay-100 spotlight-card group flex flex-col rounded-2xl bg-surface-white border border-border-subtle overflow-hidden shadow-cozy hover:shadow-roast-bloom hover:-translate-y-1.5 hover:border-brand-yellow/50 transition-all duration-300 lg:col-span-3">
+        <article className="reveal-on-scroll delay-100 spotlight-card group flex flex-col rounded-2xl bg-surface-white border border-border-subtle overflow-hidden shadow-cozy hover:shadow-roast-bloom hover:-translate-y-1.5 hover:border-brand-yellow/50 transition-all duration-300 lg:col-span-2">
           <div className="relative w-full aspect-video overflow-hidden bg-stone-900">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -180,7 +180,7 @@ export default function Services() {
         </article>
 
         {/* Service 6: Menu Engineering & Profitability Improvement */}
-        <article className="reveal-on-scroll delay-200 spotlight-card group flex flex-col rounded-2xl bg-surface-white border border-border-subtle overflow-hidden shadow-cozy hover:shadow-roast-bloom hover:-translate-y-1.5 hover:border-brand-yellow/50 transition-all duration-300 md:col-span-2 lg:col-span-3">
+        <article className="reveal-on-scroll delay-200 spotlight-card group flex flex-col rounded-2xl bg-surface-white border border-border-subtle overflow-hidden shadow-cozy hover:shadow-roast-bloom hover:-translate-y-1.5 hover:border-brand-yellow/50 transition-all duration-300 lg:col-span-2">
           <div className="relative w-full aspect-video overflow-hidden bg-stone-900">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -203,6 +203,60 @@ export default function Services() {
               href="#contact"
             >
               <span>Improve Margins</span>
+            </a>
+          </div>
+        </article>
+
+        {/* Service 7: Catering Services */}
+        <article className="reveal-on-scroll delay-300 spotlight-card group flex flex-col rounded-2xl bg-surface-white border border-border-subtle overflow-hidden shadow-cozy hover:shadow-roast-bloom hover:-translate-y-1.5 hover:border-brand-yellow/50 transition-all duration-300 lg:col-span-2">
+          <div className="relative w-full aspect-video overflow-hidden bg-stone-900">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              alt="Catering Services"
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              src="/catering-services.jpg"
+            />
+          </div>
+          <div className="p-5 sm:p-6 flex flex-col justify-between flex-1 gap-4 sm:gap-5">
+            <div className="flex flex-col gap-2">
+              <h3 className="font-serif text-lg sm:text-xl md:text-2xl font-bold text-text-main group-hover:text-brand-green transition-colors">
+                7. Catering Services
+              </h3>
+              <p className="text-xs sm:text-sm text-text-muted leading-relaxed">
+                Specialty coffee bars, food &amp; beverage catering, craft mocktails, and full hospitality service tailored for private and corporate functions.
+              </p>
+              <div className="flex flex-col gap-1.5 pt-2 border-t border-border-subtle/70 text-[11px] text-text-muted">
+                <div className="flex items-start gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-brand-green mt-1 shrink-0" />
+                  <span>
+                    <strong className="text-text-main font-semibold">Coffee Catering:</strong> Specialty coffee service for meetings, conferences &amp; special events.
+                  </span>
+                </div>
+                <div className="flex items-start gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-brand-green mt-1 shrink-0" />
+                  <span>
+                    <strong className="text-text-main font-semibold">Event Catering:</strong> Food and beverage catering for private and corporate functions.
+                  </span>
+                </div>
+                <div className="flex items-start gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-brand-green mt-1 shrink-0" />
+                  <span>
+                    <strong className="text-text-main font-semibold">Mocktail &amp; Beverage:</strong> Custom mocktails, cold refreshments &amp; hot beverage service.
+                  </span>
+                </div>
+                <div className="flex items-start gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-brand-green mt-1 shrink-0" />
+                  <span>
+                    <strong className="text-text-main font-semibold">Corporate &amp; Private:</strong> Full hospitality for company functions, weddings &amp; celebrations.
+                  </span>
+                </div>
+              </div>
+            </div>
+            <a
+              className="group w-full h-11 px-5 rounded-xl border border-brand-green text-brand-green font-bold text-xs uppercase tracking-wider hover:bg-brand-green hover:text-white transition-all shadow-cozy-sm flex items-center justify-center whitespace-nowrap active:scale-95"
+              href="#contact"
+            >
+              <span>Book Catering</span>
             </a>
           </div>
         </article>

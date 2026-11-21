@@ -23,12 +23,13 @@
 ## Services Section Structure
 2. **Symmetrical Grid Layout**:
    - Card 1 ("Coffee Shop Setup & Organization") is featured as the flagship article.
-   - Flow directly transitions to Cards 2–6 with zero disruptive middle banners or interruptions.
-   - Cards 2–6 follow a symmetrical 6-column container:
+   - Flow directly transitions to Cards 2–7 with zero disruptive middle banners or interruptions.
+   - Cards 2–7 follow a perfectly balanced 6-column container:
      - Row 1: Cards 2, 3, 4 each spanning `lg:col-span-2`.
-     - Row 2: Cards 5, 6 each spanning `lg:col-span-3`.
-     - Zero empty or missing columns on desktop.
-   - Coffee sourcing remains cleanly accessible through the Contact form dropdown and Hero narrative.
+     - Row 2: Cards 5, 6, 7 each spanning `lg:col-span-2`.
+     - Zero empty or missing columns on desktop ($3 \times 2$ grid).
+     - Card 7 ("Catering Services") incorporates 4 core sub-practices (Coffee Catering, Event Catering, Mocktail & Beverage Catering, Corporate & Private Event Service) with dedicated high-end banquet imagery.
+   - Coffee sourcing remains cleanly accessible through the Contact form selection tiles, Single Origins ledger, and Hero narrative.
 
 ## Header & Navigation Standards
 3. **Responsive Navigation Architecture by Viewport**:
@@ -70,9 +71,11 @@
    - **Pre-Resequencing Checkpoint Tag**: `pre-chronological-resequence` (Commit: `a2d6404`)
    - **Pre-De-Box Checkpoint Tag**: `pre-debox-transformation` (Commit: `3e6d9ec`)
    - **Pre-UI/UX Refinements Checkpoint Tag**: `pre-ui-ux-refinements` (Commit: `7321bef`)
-   - **Backup Branches**: `backup-stable-baseline`, `backup-pre-hero-media-carousel`, `backup-pre-opening-motion-choreography`, `backup-pre-chronological-resequence`, `backup-pre-debox-transformation`, `backup-pre-ui-ux-refinements` (Pushed to GitHub `origin`)
+   - **Pre-Catering Service Checkpoint Tag**: `pre-catering-service` (Commit: `81b9eb6`)
+   - **Backup Branches**: `backup-stable-baseline`, `backup-pre-hero-media-carousel`, `backup-pre-opening-motion-choreography`, `backup-pre-chronological-resequence`, `backup-pre-debox-transformation`, `backup-pre-ui-ux-refinements`, `backup-pre-catering-service` (Pushed to GitHub `origin`)
    - **Remote Synchronization**: Fully backed up on remote GitHub repository.
    - **One-Prompt Revert Protocol**:
+     - To revert to the state before Catering Services was added: `git reset --hard pre-catering-service && git clean -fd`
      - To revert to the state before UI/UX refinements: `git reset --hard pre-ui-ux-refinements && git clean -fd`
      - To revert to the state before the de-box transformation: `git reset --hard pre-debox-transformation && git clean -fd`
      - To revert to the state before chronological re-sequencing: `git reset --hard pre-chronological-resequence && git clean -fd`
@@ -155,4 +158,23 @@
      - Replaced sample placeholder text (`Abebe Bikila`, `+251 92 545 1711`, `abebe@example.com`) with clear, subtle instructional prompt text (`Enter your full name`, `e.g. +251 91 234 5678`, `e.g. name@company.com (optional)`, `Describe your venue location, concept, opening timeline, or advisory needs...`) using `placeholder:text-text-muted/45 font-normal`.
      - Replaced single-string select dropdown with a responsive 2-column interactive grid of `rounded-xl` selection tiles (`SERVICE_OPTIONS`) featuring active checkmark toggles (`check_circle`), tactile active scale feedback, and strictly zero text pill badges.
    - **Strict Rule Preservation**: ZERO text pill badges, ZERO text bloat, unclipped original ceremony photo, phone strictly `+251925451711`.
+
+## Catering Services & Hospitality Architecture
+14. **Service 7 Integration & Balanced $3 \times 2$ Grid**:
+   - **Card 7 Structure & Visual Media**:
+     - Positioned directly in `#services` as Service 7 ("7. Catering Services").
+     - Features high-end banquet ceremony photography (`/catering-services.jpg`, Jebena coffee station, mesob, and chafing banquet setup) in `aspect-video` container with smooth hover zoom.
+     - Preserves all 4 core client offerings with custom brand-green bullet points:
+       - **Coffee Catering**: Specialty coffee service for meetings, conferences & special events.
+       - **Event Catering**: Food and beverage catering for private and corporate functions.
+       - **Mocktail & Beverage**: Custom mocktails, cold refreshments & hot beverage service.
+       - **Corporate & Private**: Full hospitality for company functions, weddings & celebrations.
+     - Outlined CTA button `Book Catering` anchoring directly to `#contact`.
+   - **Flawlessly Symmetrical $3 \times 2$ Grid Geometry**:
+     - Eliminates uneven column spans (`lg:col-span-3`). Both Row 1 (Cards 2, 3, 4) and Row 2 (Cards 5, 6, 7) span `lg:col-span-2` each in a balanced 6-column container.
+     - Symmetrical 2-column stacking on tablet (`md:grid-cols-2`) and natural single-column flow on mobile.
+   - **Ecosystem Consistency**:
+     - Contact Form: Added `Catering Services & Hospitality` to `SERVICE_OPTIONS` interactive tiles in `Contact.tsx`.
+     - Footer: Added `7. Catering Services & Events` to Column 2 ("Services & Advisory") in `Footer.tsx`.
+   - **Strict Rule Preservation**: ZERO text pill badges, ZERO text bloat, unclipped original ceremony photo on Slide 0, phone strictly `+251925451711`.
 

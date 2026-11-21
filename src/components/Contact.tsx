@@ -9,7 +9,9 @@ const SERVICE_OPTIONS = [
   "Business Consultancy & Feasibility",
   "Operations & Workflow Systems",
   "Menu Engineering & Profitability",
+  "Catering Services & Hospitality",
   "Premium Ethiopian Coffee Sourcing",
+  "Comprehensive Turnkey Package",
 ];
 
 export default function Contact() {
