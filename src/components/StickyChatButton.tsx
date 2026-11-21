@@ -3,28 +3,32 @@
 import { useState, useEffect } from "react";
 
 export default function StickyChatButton() {
-  const [isFooterVisible, setIsFooterVisible] = useState(false);
+  const [shouldHide, setShouldHide] = useState(false);
 
   useEffect(() => {
     const footer = document.querySelector("footer");
-    if (!footer) return;
+    const contact = document.querySelector("#contact");
+
+    const targets = [footer, contact].filter(Boolean) as Element[];
+    if (targets.length === 0) return;
 
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsFooterVisible(entry.isIntersecting);
+      (entries) => {
+        const isOccluded = entries.some((entry) => entry.isIntersecting);
+        setShouldHide(isOccluded);
       },
-      { threshold: 0.05 }
+      { threshold: 0.08 }
     );
 
-    observer.observe(footer);
+    targets.forEach((target) => observer.observe(target));
     return () => observer.disconnect();
   }, []);
 
   return (
     <aside
       aria-label="Direct advisory chat"
-      className={`fixed bottom-20 lg:bottom-6 right-3 sm:right-6 z-40 flex items-center group transition-all duration-300 ${
-        isFooterVisible
+      className={`fixed bottom-24 lg:bottom-6 right-4 sm:right-6 lg:right-6 z-40 flex items-center group transition-all duration-300 ${
+        shouldHide
           ? "opacity-0 pointer-events-none translate-y-3"
           : "opacity-100 pointer-events-auto translate-y-0"
       }`}

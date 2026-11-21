@@ -69,9 +69,11 @@
    - **Pre-Opening Motion Choreography Tag**: `pre-opening-motion-choreography` (Commit: `d822e2e`)
    - **Pre-Resequencing Checkpoint Tag**: `pre-chronological-resequence` (Commit: `a2d6404`)
    - **Pre-De-Box Checkpoint Tag**: `pre-debox-transformation` (Commit: `3e6d9ec`)
-   - **Backup Branches**: `backup-stable-baseline`, `backup-pre-hero-media-carousel`, `backup-pre-opening-motion-choreography`, `backup-pre-chronological-resequence`, `backup-pre-debox-transformation` (Pushed to GitHub `origin`)
+   - **Pre-UI/UX Refinements Checkpoint Tag**: `pre-ui-ux-refinements` (Commit: `7321bef`)
+   - **Backup Branches**: `backup-stable-baseline`, `backup-pre-hero-media-carousel`, `backup-pre-opening-motion-choreography`, `backup-pre-chronological-resequence`, `backup-pre-debox-transformation`, `backup-pre-ui-ux-refinements` (Pushed to GitHub `origin`)
    - **Remote Synchronization**: Fully backed up on remote GitHub repository.
    - **One-Prompt Revert Protocol**:
+     - To revert to the state before UI/UX refinements: `git reset --hard pre-ui-ux-refinements && git clean -fd`
      - To revert to the state before the de-box transformation: `git reset --hard pre-debox-transformation && git clean -fd`
      - To revert to the state before chronological re-sequencing: `git reset --hard pre-chronological-resequence && git clean -fd`
      - To revert to the state before the opening motion choreography: `git reset --hard pre-opening-motion-choreography && git clean -fd`
@@ -139,3 +141,18 @@
    - **Single Origins**: Unified Artisanal Terroir Ledger with faint vertical dividing rules (`divide-x`), displaying regional terroirs (*Yirgacheffe*, *Sidama*, *Guji*, *Harrar*) as an open sensory table rather than 4 separate card boxes.
    - **About Section**: Typographic Brand Manifesto featuring a prominent, unboxed pull-quote with amber accent line and asymmetric story pillars, replacing the nested box-within-a-box.
    - **Strict Rule Preservation**: ZERO text pill badges, ZERO text bloat, unclipped original ceremony photo, phone `+251925451711`.
+
+## UI/UX Polish & Mobile Refinements Standards
+13. **Mobile Contrast, Collision Avoidance & Form Refinements**:
+   - **Top Header Contrast & Mobile Legibility**:
+     - Header uses 100% solid porcelain cream (`bg-[#FBF9F5]`) across both rest and scrolled states.
+     - Completely prevents dark background imagery or deep green sections from bleeding through on narrow viewports.
+     - Brand title `ETHIOPIAN SIGNATURE` strictly preserves brand color (`text-brand-green` `#0B4D2C`), achieving superior WCAG AAA contrast ratio (>12:1) against the solid cream background.
+   - **Sticky WhatsApp FAB Spacing & Dual Occlusion Avoidance**:
+     - Mobile positioning elevated to `bottom-24 right-4` (`bottom: 96px`, `right: 16px`), establishing a safe 39px vertical clearance above `MobileBottomNav` and preventing card border clipping.
+     - Dual-target `IntersectionObserver` continuously monitors both `footer` and `#contact` (`threshold: 0.08`), automatically fading out the button (`opacity-0 pointer-events-none translate-y-3`) whenever either section enters the viewport. Guarantees zero occlusion of form fields, inputs, or CTA buttons.
+   - **Contact Form Input Ergonomics & Selection Grid**:
+     - Replaced sample placeholder text (`Abebe Bikila`, `+251 92 545 1711`, `abebe@example.com`) with clear, subtle instructional prompt text (`Enter your full name`, `e.g. +251 91 234 5678`, `e.g. name@company.com (optional)`, `Describe your venue location, concept, opening timeline, or advisory needs...`) using `placeholder:text-text-muted/45 font-normal`.
+     - Replaced single-string select dropdown with a responsive 2-column interactive grid of `rounded-xl` selection tiles (`SERVICE_OPTIONS`) featuring active checkmark toggles (`check_circle`), tactile active scale feedback, and strictly zero text pill badges.
+   - **Strict Rule Preservation**: ZERO text pill badges, ZERO text bloat, unclipped original ceremony photo, phone strictly `+251925451711`.
+

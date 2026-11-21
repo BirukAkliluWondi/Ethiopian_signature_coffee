@@ -3,6 +3,15 @@
 import { useState, type FormEvent } from "react";
 import { submitInquiryAction } from "@/app/actions/inquiry";
 
+const SERVICE_OPTIONS = [
+  "Coffee Shop Setup & Organization",
+  "Barista & Staff Training",
+  "Business Consultancy & Feasibility",
+  "Operations & Workflow Systems",
+  "Menu Engineering & Profitability",
+  "Premium Ethiopian Coffee Sourcing",
+];
+
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [feedback, setFeedback] = useState<{
@@ -157,9 +166,9 @@ export default function Contact() {
                   Your Full Name *
                 </label>
                 <input
-                  className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl border border-border-subtle bg-surface-cream text-xs sm:text-sm focus:border-brand-green focus:bg-white focus:ring-2 focus:ring-brand-green/20 focus:shadow-cozy-sm outline-none transition-all shadow-inner"
+                  className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl border border-border-subtle bg-surface-cream text-xs sm:text-sm placeholder:text-text-muted/45 font-normal focus:border-brand-green focus:bg-white focus:ring-2 focus:ring-brand-green/20 focus:shadow-cozy-sm outline-none transition-all shadow-inner"
                   id="lead-name"
-                  placeholder="Abebe Bikila"
+                  placeholder="Enter your full name"
                   required
                   type="text"
                   value={formData.name}
@@ -172,9 +181,9 @@ export default function Contact() {
                   WhatsApp or Phone Number *
                 </label>
                 <input
-                  className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl border border-border-subtle bg-surface-cream text-xs sm:text-sm focus:border-brand-green focus:bg-white focus:ring-2 focus:ring-brand-green/20 focus:shadow-cozy-sm outline-none transition-all shadow-inner"
+                  className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl border border-border-subtle bg-surface-cream text-xs sm:text-sm placeholder:text-text-muted/45 font-normal focus:border-brand-green focus:bg-white focus:ring-2 focus:ring-brand-green/20 focus:shadow-cozy-sm outline-none transition-all shadow-inner"
                   id="lead-whatsapp"
-                  placeholder="+251 92 545 1711"
+                  placeholder="e.g. +251 91 234 5678"
                   required
                   type="tel"
                   value={formData.phone}
@@ -183,47 +192,50 @@ export default function Contact() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4">
-              <div className="flex flex-col gap-1.5">
-                <label className="text-xs font-bold text-text-main" htmlFor="lead-email">
-                  Email Address
-                </label>
-                <input
-                  className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl border border-border-subtle bg-surface-cream text-xs sm:text-sm focus:border-brand-green focus:bg-white focus:ring-2 focus:ring-brand-green/20 focus:shadow-cozy-sm outline-none transition-all shadow-inner"
-                  id="lead-email"
-                  placeholder="abebe@example.com"
-                  type="email"
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                />
-              </div>
+            <div className="flex flex-col gap-1.5">
+              <label className="text-xs font-bold text-text-main" htmlFor="lead-email">
+                Email Address
+              </label>
+              <input
+                className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl border border-border-subtle bg-surface-cream text-xs sm:text-sm placeholder:text-text-muted/45 font-normal focus:border-brand-green focus:bg-white focus:ring-2 focus:ring-brand-green/20 focus:shadow-cozy-sm outline-none transition-all shadow-inner"
+                id="lead-email"
+                placeholder="e.g. name@company.com (optional)"
+                type="email"
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              />
+            </div>
 
-              <div className="flex flex-col gap-1.5">
-                <label className="text-xs font-bold text-text-main" htmlFor="lead-service">
-                  Area of Interest *
-                </label>
-                <select
-                  className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl border border-border-subtle bg-surface-cream text-xs sm:text-sm focus:border-brand-green focus:bg-white focus:ring-2 focus:ring-brand-green/20 focus:shadow-cozy-sm outline-none transition-all shadow-inner"
-                  id="lead-service"
-                  value={formData.service}
-                  onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                >
-                  <option value="Coffee Shop Setup & Organization">
-                    Coffee Shop Setup &amp; Organization
-                  </option>
-                  <option value="Barista Training">Barista Training</option>
-                  <option value="Menu & Recipe Development">Menu &amp; Recipe Development</option>
-                  <option value="Coffee Business Consulting">Coffee Business Consulting</option>
-                  <option value="Coffee Shop Operations Management">
-                    Coffee Shop Operations Management
-                  </option>
-                  <option value="Menu Engineering & Profitability Improvement">
-                    Menu Engineering &amp; Profitability
-                  </option>
-                  <option value="Premium Ethiopian Coffee Sourcing">
-                    Premium Ethiopian Coffee Sourcing
-                  </option>
-                </select>
+            {/* Area of Interest: Clean Interactive Selection Tiles */}
+            <div className="flex flex-col gap-2 pt-1">
+              <label className="text-xs font-bold text-text-main">
+                Area of Interest *
+              </label>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-2.5">
+                {SERVICE_OPTIONS.map((serviceName) => {
+                  const isSelected = formData.service === serviceName;
+                  return (
+                    <button
+                      key={serviceName}
+                      type="button"
+                      onClick={() => setFormData({ ...formData, service: serviceName })}
+                      className={`p-2.5 sm:p-3 rounded-xl border text-left text-xs transition-all flex items-center justify-between group active:scale-[0.98] ${
+                        isSelected
+                          ? "border-brand-green bg-brand-green/5 text-brand-green font-semibold shadow-cozy-sm ring-1 ring-brand-green/30"
+                          : "border-border-subtle bg-surface-cream text-text-muted hover:border-brand-yellow/60 hover:text-text-main"
+                      }`}
+                    >
+                      <span className="leading-snug pr-2">{serviceName}</span>
+                      <span
+                        className={`material-symbols-outlined text-base shrink-0 transition-transform ${
+                          isSelected ? "text-brand-green scale-110" : "text-border-subtle/80 group-hover:text-brand-yellow"
+                        }`}
+                      >
+                        {isSelected ? "check_circle" : "radio_button_unchecked"}
+                      </span>
+                    </button>
+                  );
+                })}
               </div>
             </div>
 
@@ -232,9 +244,9 @@ export default function Contact() {
                 Project Details / Message
               </label>
               <textarea
-                className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl border border-border-subtle bg-surface-cream text-xs sm:text-sm focus:border-brand-green focus:bg-white focus:ring-2 focus:ring-brand-green/20 focus:shadow-cozy-sm outline-none transition-all resize-y shadow-inner"
+                className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl border border-border-subtle bg-surface-cream text-xs sm:text-sm placeholder:text-text-muted/45 font-normal focus:border-brand-green focus:bg-white focus:ring-2 focus:ring-brand-green/20 focus:shadow-cozy-sm outline-none transition-all resize-y shadow-inner"
                 id="lead-notes"
-                placeholder="Tell us about your venue location, opening timeline, or training requirements..."
+                placeholder="Describe your venue location, concept, opening timeline, or advisory needs..."
                 rows={3}
                 value={formData.notes}
                 onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
