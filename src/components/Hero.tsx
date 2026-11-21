@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useRef, useCallback } from "react";
 
-function useCounter(target: number, duration: number = 1200) {
+function useCounter(target: number, duration: number = 1200, delay: number = 0) {
   const [count, setCount] = useState(0);
   const started = useRef(false);
 
@@ -15,26 +15,33 @@ function useCounter(target: number, duration: number = 1200) {
       return;
     }
 
-    let startTime: number | null = null;
     let animId: number;
+    let timerId: NodeJS.Timeout;
 
-    const tick = (now: number) => {
-      if (!startTime) startTime = now;
-      const elapsed = now - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      const ease = 1 - Math.pow(1 - progress, 4);
-      setCount(Math.round(ease * target));
+    timerId = setTimeout(() => {
+      let startTime: number | null = null;
+      const tick = (now: number) => {
+        if (!startTime) startTime = now;
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const ease = 1 - Math.pow(1 - progress, 4);
+        setCount(Math.round(ease * target));
 
-      if (progress < 1) {
-        animId = requestAnimationFrame(tick);
-      } else {
-        setCount(target);
-      }
+        if (progress < 1) {
+          animId = requestAnimationFrame(tick);
+        } else {
+          setCount(target);
+        }
+      };
+
+      animId = requestAnimationFrame(tick);
+    }, delay);
+
+    return () => {
+      clearTimeout(timerId);
+      cancelAnimationFrame(animId);
     };
-
-    animId = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(animId);
-  }, [target, duration]);
+  }, [target, duration, delay]);
 
   return count;
 }
@@ -83,9 +90,9 @@ const HERO_SLIDES: MediaSlide[] = [
 ];
 
 export default function Hero() {
-  const venuesCount = useCounter(14, 1100);
-  const baristasCount = useCounter(250, 1300);
-  const originsCount = useCounter(100, 1200);
+  const venuesCount = useCounter(14, 1000, 500);
+  const baristasCount = useCounter(250, 1200, 600);
+  const originsCount = useCounter(100, 1100, 700);
 
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [isMuted, setIsMuted] = useState(true);
@@ -147,30 +154,30 @@ export default function Hero() {
       {/* Story, Headline & CTAs (On mobile: order-2, displays below visual showcase; Desktop: lg:order-1) */}
       <div className="lg:col-span-6 flex flex-col gap-5 sm:gap-6 order-2 lg:order-1 lg:pt-12">
         <div className="mask-reveal-wrap">
-          <h1 className="mask-reveal-content font-serif text-2xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-bold text-brand-green leading-[1.18] sm:leading-[1.15] tracking-tight">
+          <h1 className="mask-reveal-content mount-headline font-serif text-2xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-bold text-brand-green leading-[1.18] sm:leading-[1.15] tracking-tight">
             Discover the Excellence of Ethiopian Coffee
           </h1>
         </div>
 
-        <p className="text-sm sm:text-base md:text-lg text-text-muted leading-relaxed max-w-xl lg:max-w-none font-normal">
+        <p className="mount-paragraph text-sm sm:text-base md:text-lg text-text-muted leading-relaxed max-w-xl lg:max-w-none font-normal">
           We bring together premium Ethiopian coffee, professional coffee training, business consultancy, and innovative café solutions. From centuries-old ceremonial roots to modern commercial venues, we help coffee businesses achieve excellence.
         </p>
 
         {/* Quantitative Proof Metrics */}
         <div className="grid grid-cols-3 gap-2.5 sm:gap-3.5 pt-1">
-          <div className="spotlight-card p-3 sm:p-3.5 rounded-xl bg-surface-white border border-border-subtle shadow-cozy-sm flex flex-col hover:-translate-y-1 hover:shadow-cozy hover:border-brand-yellow/50 transition-all duration-300">
+          <div className="mount-metric-1 spotlight-card p-3 sm:p-3.5 rounded-xl bg-surface-white border border-border-subtle shadow-cozy-sm flex flex-col hover:-translate-y-1 hover:shadow-cozy hover:border-brand-yellow/50 transition-all duration-300">
             <span className="font-serif text-xl sm:text-2xl md:text-3xl font-bold text-brand-green leading-none">
               {venuesCount}+
             </span>
             <span className="text-[10px] sm:text-xs text-text-muted font-medium mt-1">Turnkey Venues</span>
           </div>
-          <div className="spotlight-card p-3 sm:p-3.5 rounded-xl bg-surface-white border border-border-subtle shadow-cozy-sm flex flex-col hover:-translate-y-1 hover:shadow-cozy hover:border-brand-yellow/50 transition-all duration-300">
+          <div className="mount-metric-2 spotlight-card p-3 sm:p-3.5 rounded-xl bg-surface-white border border-border-subtle shadow-cozy-sm flex flex-col hover:-translate-y-1 hover:shadow-cozy hover:border-brand-yellow/50 transition-all duration-300">
             <span className="font-serif text-xl sm:text-2xl md:text-3xl font-bold text-brand-green leading-none">
               {baristasCount}+
             </span>
             <span className="text-[10px] sm:text-xs text-text-muted font-medium mt-1">Certified Baristas</span>
           </div>
-          <div className="spotlight-card p-3 sm:p-3.5 rounded-xl bg-surface-white border border-border-subtle shadow-cozy-sm flex flex-col hover:-translate-y-1 hover:shadow-cozy hover:border-brand-yellow/50 transition-all duration-300">
+          <div className="mount-metric-3 spotlight-card p-3 sm:p-3.5 rounded-xl bg-surface-white border border-border-subtle shadow-cozy-sm flex flex-col hover:-translate-y-1 hover:shadow-cozy hover:border-brand-yellow/50 transition-all duration-300">
             <span className="font-serif text-xl sm:text-2xl md:text-3xl font-bold text-brand-green leading-none">
               {originsCount}%
             </span>
@@ -179,7 +186,7 @@ export default function Hero() {
         </div>
 
         {/* CTAs: Secondary Outline on Left, Primary Main Action on Right (Fully responsive) */}
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1 sm:pt-2 w-full sm:w-auto">
+        <div className="mount-cta flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1 sm:pt-2 w-full sm:w-auto">
           {/* Secondary Outline Action (Left) */}
           <a
             className="group h-12 w-full sm:w-auto px-6 sm:px-8 rounded-xl border-2 border-brand-green text-brand-green bg-white hover:bg-brand-green/5 text-center font-semibold text-sm whitespace-nowrap active:scale-95 transition-all shadow-cozy-sm hover:shadow-cozy flex items-center justify-center hover:-translate-y-0.5 duration-200"
@@ -199,7 +206,7 @@ export default function Hero() {
 
       {/* Right Column: Visual Showcase (On mobile/tablet: order-1; Full Desktop: lg:order-2) */}
       <div className="lg:col-span-6 order-1 lg:order-2 flex justify-center lg:justify-end pt-4 -mb-4 sm:pt-5 sm:-mb-5 md:pt-6 md:-mb-6 lg:pt-0 lg:mb-0">
-        <div className="relative w-full max-w-lg lg:max-w-none rounded-2xl sm:rounded-3xl overflow-hidden shadow-roast-bloom border border-border-subtle bg-stone-900 group ring-1 ring-border-subtle">
+        <div className="mount-hero-card relative w-full max-w-lg lg:max-w-none rounded-2xl sm:rounded-3xl overflow-hidden shadow-roast-bloom border border-border-subtle bg-stone-900 group ring-1 ring-border-subtle">
           <div className="relative w-full aspect-[4/3] sm:aspect-[4/3] lg:aspect-[4/3.5] xl:aspect-[4/3.3] max-h-[480px]">
             {/* Sequential Crossfading Media Showcase */}
             {HERO_SLIDES.map((slide, index) => {

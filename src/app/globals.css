@@ -127,7 +127,97 @@
 .reveal-visible .mask-reveal-content,
 .reveal-visible.mask-reveal-content,
 .mask-reveal-content.mask-revealed {
-  transform: translateY(0%) !important;
+  transform: translateY(0%);
+}
+
+/* Initial Page Load Entrance Motion Choreography */
+@keyframes mountSlideDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes mountSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes mountFloatUp {
+  0% {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes mountHeroCard {
+  0% {
+    opacity: 0;
+    transform: translateY(28px) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes mountMaskReveal {
+  0% {
+    transform: translateY(115%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+.mount-header {
+  animation: mountSlideDown 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.mount-mobile-nav {
+  animation: mountSlideUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.mount-hero-card {
+  animation: mountHeroCard 0.85s cubic-bezier(0.16, 1, 0.3, 1) 150ms both;
+}
+
+.mount-headline {
+  animation: mountMaskReveal 0.85s cubic-bezier(0.16, 1, 0.3, 1) 250ms both;
+}
+
+.mount-paragraph {
+  animation: mountFloatUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) 400ms both;
+}
+
+.mount-metric-1 {
+  animation: mountFloatUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 500ms both;
+}
+
+.mount-metric-2 {
+  animation: mountFloatUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 600ms both;
+}
+
+.mount-metric-3 {
+  animation: mountFloatUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 700ms both;
+}
+
+.mount-cta {
+  animation: mountFloatUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) 800ms both;
 }
 
 /* Interactive Cursor Spotlight Glare */
@@ -184,6 +274,19 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .mount-header,
+  .mount-mobile-nav,
+  .mount-hero-card,
+  .mount-headline,
+  .mount-paragraph,
+  .mount-metric-1,
+  .mount-metric-2,
+  .mount-metric-3,
+  .mount-cta {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
   .reveal-on-scroll {
     opacity: 1 !important;
     transform: none !important;

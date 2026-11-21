@@ -66,9 +66,11 @@
 7. **Pristine Snapshot Baseline**:
    - **Baseline Git Tag**: `baseline-stable` (Commit: `001d894`)
    - **Pre-Media Checkpoint Tag**: `pre-hero-media-carousel` (Commit: `04eacee`)
-   - **Backup Branches**: `backup-stable-baseline`, `backup-pre-hero-media-carousel` (Pushed to GitHub `origin`)
+   - **Pre-Opening Motion Choreography Tag**: `pre-opening-motion-choreography` (Commit: `d822e2e`)
+   - **Backup Branches**: `backup-stable-baseline`, `backup-pre-hero-media-carousel`, `backup-pre-opening-motion-choreography` (Pushed to GitHub `origin`)
    - **Remote Synchronization**: Fully backed up on remote GitHub repository.
    - **One-Prompt Revert Protocol**:
+     - To revert to the state before the opening motion choreography: `git reset --hard pre-opening-motion-choreography && git clean -fd`
      - To revert to the state before the media carousel: `git reset --hard pre-hero-media-carousel && git clean -fd`
      - To revert to the absolute baseline: `git reset --hard baseline-stable && git clean -fd`
 
@@ -96,3 +98,15 @@
    - **Video Completion Callback**: Video mounts with `muted`, `playsinline`, and `preload="auto"`. Upon `onEnded`, the video smoothly fades away and the carousel loops back to Slide 0.
    - **Audio Toggle**: Discreet circular glassmorphic speaker button (`w-8 h-8`) allows visitors to unmute ceremony audio during video playback.
    - **Segment Story Indicators**: 4 thin geometric accent lines (`h-[2.5px] rounded-full`, active `w-8 sm:w-10 bg-brand-yellow`, inactive `w-3 sm:w-4 bg-white/40`) allow slide navigation without any text pill badges.
+
+## Initial Page Load Motion Choreography
+10. **Staggered Orchestrated Cascade Architecture ($0\text{ms} \rightarrow 1000\text{ms}$)**:
+   - **Header & Top Accent Line**: Glide down from top screen edge (`.mount-header`, `0ms - 700ms`, `cubic-bezier(0.16, 1, 0.3, 1)`).
+   - **Mobile Bottom Navigation**: Glides up from bottom edge (`.mount-mobile-nav`, `0ms - 700ms`, `cubic-bezier(0.16, 1, 0.3, 1)`).
+   - **Visual Media Showcase Card**: Blooms and rises into place (`.mount-hero-card`, `150ms - 1000ms`, `translateY(28px) scale(0.96)` to `translateY(0) scale(1)`).
+   - **Masked H1 Headline**: Emerges upward from behind invisible baseline clip mask (`.mount-headline`, `250ms - 1100ms`).
+   - **Hero Narrative Paragraph**: Floats up smoothly into position (`.mount-paragraph`, `400ms - 1150ms`).
+   - **Quantitative Proof Metrics**: 3 metric cards stagger in sequentially (`.mount-metric-1` at 500ms, `.mount-metric-2` at 600ms, `.mount-metric-3` at 700ms) with synchronized live counters rolling up as each card lands (`14+`, `250+`, `100%`).
+   - **Dual CTA Buttons**: Float up into position (`.mount-cta`, `800ms - 1550ms`) with subtle sheen sweep on hover.
+   - **Accessibility Guarantees**: Under `@media (prefers-reduced-motion: reduce)`, all mount keyframes are disabled and elements render instantaneously with zero delay or motion.
+   - **Strict Preservation**: Zero layout shift (CLS), zero text bloat, and strictly zero text pill badges (`rounded-full` tags).

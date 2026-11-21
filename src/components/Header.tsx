@@ -44,7 +44,7 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed top-1 w-full z-50 pt-safe backdrop-blur-lg border-b border-border-subtle transition-all duration-300 ${
+      className={`mount-header fixed top-1 w-full z-50 pt-safe backdrop-blur-lg border-b border-border-subtle transition-all duration-300 ${
         isScrolled
           ? "bg-[#FBF9F5]/98 shadow-[0_4px_20px_rgba(36,20,10,0.08)]"
           : "bg-[#FBF9F5]/92 shadow-[0_2px_12px_rgba(36,20,10,0.04)]"
