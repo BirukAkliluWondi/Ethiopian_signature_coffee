@@ -163,25 +163,31 @@ export default function Hero() {
           We bring together premium Ethiopian coffee, professional coffee training, business consultancy, and innovative café solutions. From centuries-old ceremonial roots to modern commercial venues, we help coffee businesses achieve excellence.
         </p>
 
-        {/* Quantitative Proof Metrics */}
-        <div className="grid grid-cols-3 gap-2.5 sm:gap-3.5 pt-1">
-          <div className="mount-metric-1 spotlight-card p-3 sm:p-3.5 rounded-xl bg-surface-white border border-border-subtle shadow-cozy-sm flex flex-col hover:-translate-y-1 hover:shadow-cozy hover:border-brand-yellow/50 transition-all duration-300">
-            <span className="font-serif text-xl sm:text-2xl md:text-3xl font-bold text-brand-green leading-none">
+        {/* Quantitative Proof Metrics: Open-Air Editorial Typography (Borderless, High-Luxury) */}
+        <div className="grid grid-cols-3 divide-x divide-border-subtle/80 py-2 sm:py-2.5 border-y border-border-subtle/70 my-0.5">
+          <div className="mount-metric-1 flex flex-col pr-3 sm:pr-4 group">
+            <span className="font-serif text-2xl sm:text-3xl lg:text-[2.1rem] font-bold text-brand-green leading-none tracking-tight group-hover:text-brand-green-light transition-colors">
               {venuesCount}+
             </span>
-            <span className="text-[10px] sm:text-xs text-text-muted font-medium mt-1">Turnkey Venues</span>
+            <span className="text-[10px] sm:text-xs text-text-muted font-medium mt-1 sm:mt-1.5 leading-tight">
+              Turnkey Venues
+            </span>
           </div>
-          <div className="mount-metric-2 spotlight-card p-3 sm:p-3.5 rounded-xl bg-surface-white border border-border-subtle shadow-cozy-sm flex flex-col hover:-translate-y-1 hover:shadow-cozy hover:border-brand-yellow/50 transition-all duration-300">
-            <span className="font-serif text-xl sm:text-2xl md:text-3xl font-bold text-brand-green leading-none">
+          <div className="mount-metric-2 flex flex-col px-3 sm:px-4 group">
+            <span className="font-serif text-2xl sm:text-3xl lg:text-[2.1rem] font-bold text-brand-green leading-none tracking-tight group-hover:text-brand-green-light transition-colors">
               {baristasCount}+
             </span>
-            <span className="text-[10px] sm:text-xs text-text-muted font-medium mt-1">Certified Baristas</span>
+            <span className="text-[10px] sm:text-xs text-text-muted font-medium mt-1 sm:mt-1.5 leading-tight">
+              Certified Baristas
+            </span>
           </div>
-          <div className="mount-metric-3 spotlight-card p-3 sm:p-3.5 rounded-xl bg-surface-white border border-border-subtle shadow-cozy-sm flex flex-col hover:-translate-y-1 hover:shadow-cozy hover:border-brand-yellow/50 transition-all duration-300">
-            <span className="font-serif text-xl sm:text-2xl md:text-3xl font-bold text-brand-green leading-none">
+          <div className="mount-metric-3 flex flex-col pl-3 sm:pl-4 group">
+            <span className="font-serif text-2xl sm:text-3xl lg:text-[2.1rem] font-bold text-brand-green leading-none tracking-tight group-hover:text-brand-green-light transition-colors">
               {originsCount}%
             </span>
-            <span className="text-[10px] sm:text-xs text-text-muted font-medium mt-1">Direct-Trade Origins</span>
+            <span className="text-[10px] sm:text-xs text-text-muted font-medium mt-1 sm:mt-1.5 leading-tight">
+              Direct-Trade Origins
+            </span>
           </div>
         </div>
 

@@ -30,9 +30,9 @@ export default function TrustRibbon() {
   return (
     <section
       aria-label="Industry Partnerships and Standards"
-      className="reveal-on-scroll py-6 sm:py-8 border-y border-border-subtle bg-surface-white/70 backdrop-blur-sm rounded-2xl shadow-cozy-sm"
+      className="reveal-on-scroll py-5 sm:py-6 border-y border-border-subtle/80"
     >
-      <div className="flex flex-col gap-4 sm:gap-6">
+      <div className="flex flex-col gap-4 sm:gap-5">
         <div className="text-center">
           <span className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-brand-yellow font-bold">
             Trusted Standards &amp; Industry Collaborations
@@ -45,7 +45,7 @@ export default function TrustRibbon() {
             return (
               <div
                 key={partner.title}
-                className={`reveal-on-scroll ${delays[index % 5]} flex flex-col items-center text-center gap-1.5 p-3 rounded-xl hover:bg-surface-cream/60 transition-all group`}
+                className={`reveal-on-scroll ${delays[index % 5]} flex flex-col items-center text-center gap-1.5 py-1 transition-all group hover:-translate-y-0.5`}
               >
                 <span className="material-symbols-outlined text-2xl text-brand-green/80 group-hover:text-brand-green group-hover:scale-110 transition-transform">
                   {partner.icon}

@@ -44,25 +44,37 @@ export default function SingleOrigins() {
         </p>
       </div>
 
-      {/* 4-Card Terroir Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+      {/* Artisanal Terroir Ledger (De-Boxed Sensory Palette) */}
+      <div className="border-y border-border-subtle/80 divide-y sm:divide-y-0 sm:divide-x divide-border-subtle/80 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 py-2 sm:py-4">
         {origins.map((origin, index) => {
           const delays = ["delay-100", "delay-200", "delay-300", "delay-400"];
           return (
             <div
               key={origin.name}
-              className={`reveal-on-scroll ${delays[index % 4]} spotlight-card p-5 sm:p-6 rounded-2xl bg-surface-white border border-border-subtle shadow-cozy-sm hover:shadow-roast-bloom hover:-translate-y-2 hover:ring-1 hover:ring-brand-yellow/40 transition-all duration-300 flex flex-col justify-between group ring-1 ring-border-subtle/50`}
+              className={`reveal-on-scroll ${delays[index % 4]} flex flex-col justify-between p-4 sm:p-5 lg:p-6 group hover:bg-surface-cream/40 transition-colors duration-300`}
             >
-              <div>
-                <span className="text-[10px] sm:text-xs font-bold text-brand-yellow uppercase tracking-widest">
-                  {origin.tag}
-                </span>
-                <h3 className="font-serif text-xl sm:text-2xl font-bold text-brand-green mt-1.5 group-hover:text-brand-green-light transition-colors">
+              <div className="flex flex-col gap-1.5">
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] sm:text-[10.5px] font-bold text-brand-yellow uppercase tracking-[0.16em]">
+                    {origin.tag}
+                  </span>
+                  <span className="text-[10px] text-text-muted/60 font-mono">
+                    0{index + 1}
+                  </span>
+                </div>
+
+                <h3 className="font-serif text-2xl sm:text-3xl font-bold text-brand-green group-hover:text-brand-green-light transition-colors mt-1">
                   {origin.name}
                 </h3>
-                <p className="text-xs sm:text-sm text-text-muted mt-2.5 leading-relaxed">
+
+                <p className="text-xs sm:text-[13px] text-text-muted leading-relaxed mt-2">
                   {origin.description}
                 </p>
+              </div>
+
+              <div className="pt-4 mt-4 border-t border-border-subtle/50 flex items-center justify-between text-[11px] text-text-muted font-medium">
+                <span>Cooperative Lot</span>
+                <span className="text-brand-green font-semibold">Direct Allocation</span>
               </div>
             </div>
           );

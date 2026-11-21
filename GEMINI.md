@@ -68,9 +68,11 @@
    - **Pre-Media Checkpoint Tag**: `pre-hero-media-carousel` (Commit: `04eacee`)
    - **Pre-Opening Motion Choreography Tag**: `pre-opening-motion-choreography` (Commit: `d822e2e`)
    - **Pre-Resequencing Checkpoint Tag**: `pre-chronological-resequence` (Commit: `a2d6404`)
-   - **Backup Branches**: `backup-stable-baseline`, `backup-pre-hero-media-carousel`, `backup-pre-opening-motion-choreography`, `backup-pre-chronological-resequence` (Pushed to GitHub `origin`)
+   - **Pre-De-Box Checkpoint Tag**: `pre-debox-transformation` (Commit: `3e6d9ec`)
+   - **Backup Branches**: `backup-stable-baseline`, `backup-pre-hero-media-carousel`, `backup-pre-opening-motion-choreography`, `backup-pre-chronological-resequence`, `backup-pre-debox-transformation` (Pushed to GitHub `origin`)
    - **Remote Synchronization**: Fully backed up on remote GitHub repository.
    - **One-Prompt Revert Protocol**:
+     - To revert to the state before the de-box transformation: `git reset --hard pre-debox-transformation && git clean -fd`
      - To revert to the state before chronological re-sequencing: `git reset --hard pre-chronological-resequence && git clean -fd`
      - To revert to the state before the opening motion choreography: `git reset --hard pre-opening-motion-choreography && git clean -fd`
      - To revert to the state before the media carousel: `git reset --hard pre-hero-media-carousel && git clean -fd`
@@ -127,4 +129,13 @@
      9. `Contact` (`#contact`): Direct booking desk, consultation form, phone, WhatsApp, Telegram.
      10. `Footer` (`#footer`): 4-Column luxury enterprise footer, deep directory, location coordinates.
    - **Navigation Consistency**: Desktop fixed header contains 8 primary links matching the exact chronological sequence. Mobile bottom bar features 6 core thumb destinations with automated scroll mapping.
+   - **Strict Rule Preservation**: ZERO text pill badges, ZERO text bloat, unclipped original ceremony photo, phone `+251925451711`.
+
+## De-Boxed Architecture Standards (Anti-Card Fatigue)
+12. **Organic Layout Archetypes & Monotony Elimination**:
+   - **Hero Proof Metrics**: Borderless, open-air editorial typography with hairline dividers (`divide-x divide-border-subtle/80 py-2.5 border-y border-border-subtle/70`), eliminating 3 card boxes while maintaining live animated roll-ups (`14+`, `250+`, `100%`).
+   - **Trust Ribbon**: Seamless, borderless architectural ribbon separating Hero and Services without card container frames.
+   - **Process ("How We Work")**: Connected progressive timeline with a continuous connecting guideline linking milestone nodes (`01`, `02`, `03`, `04`) and free-flowing deliverables, replacing 4 disconnected card boxes.
+   - **Single Origins**: Unified Artisanal Terroir Ledger with faint vertical dividing rules (`divide-x`), displaying regional terroirs (*Yirgacheffe*, *Sidama*, *Guji*, *Harrar*) as an open sensory table rather than 4 separate card boxes.
+   - **About Section**: Typographic Brand Manifesto featuring a prominent, unboxed pull-quote with amber accent line and asymmetric story pillars, replacing the nested box-within-a-box.
    - **Strict Rule Preservation**: ZERO text pill badges, ZERO text bloat, unclipped original ceremony photo, phone `+251925451711`.

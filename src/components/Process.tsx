@@ -52,45 +52,54 @@ export default function Process() {
         </p>
       </div>
 
-      {/* 4-Step Process Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
-        {steps.map((item, index) => {
-          const delays = ["delay-100", "delay-200", "delay-300", "delay-400"];
-          return (
-            <div
-              key={item.step}
-              className={`reveal-on-scroll ${delays[index % 4]} spotlight-card p-5 sm:p-6 rounded-2xl bg-surface-white border border-border-subtle shadow-cozy-sm hover:shadow-roast-bloom hover:-translate-y-2 hover:border-brand-yellow/50 transition-all duration-300 flex flex-col justify-between group ring-1 ring-border-subtle/50`}
-            >
-              <div className="flex flex-col gap-3">
-                <div className="flex items-center justify-between border-b border-border-subtle pb-3">
-                  <span className="text-xs font-bold text-brand-yellow uppercase tracking-widest">
-                    {item.phase}
-                  </span>
-                  <span className="font-serif text-xl sm:text-2xl font-bold text-text-muted/40 group-hover:text-brand-green/70 transition-colors">
-                    {item.step}
-                  </span>
+      {/* Continuous Stepped Timeline (De-Boxed Runway) */}
+      <div className="relative pt-2">
+        {/* Continuous Connecting Line (Desktop) */}
+        <div className="hidden lg:block absolute top-[21px] left-6 right-6 h-[1.5px] bg-gradient-to-r from-brand-yellow/80 via-brand-green/60 to-brand-yellow/80 z-0 pointer-events-none" />
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6 relative z-10">
+          {steps.map((item, index) => {
+            const delays = ["delay-100", "delay-200", "delay-300", "delay-400"];
+            return (
+              <div
+                key={item.step}
+                className={`reveal-on-scroll ${delays[index % 4]} flex flex-col justify-between group pt-1`}
+              >
+                <div className="flex flex-col gap-3">
+                  {/* Timeline Milestone Header */}
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-surface-white border-2 border-brand-green/30 group-hover:border-brand-yellow group-hover:shadow-roast-bloom group-hover:scale-105 transition-all flex items-center justify-center font-serif text-sm font-bold text-brand-green shadow-cozy-sm shrink-0">
+                      {item.step}
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-[10.5px] font-bold text-brand-yellow uppercase tracking-widest">
+                        {item.phase}
+                      </span>
+                    </div>
+                  </div>
+
+                  <h3 className="font-serif text-lg sm:text-xl font-bold text-text-main group-hover:text-brand-green transition-colors leading-snug mt-1">
+                    {item.title}
+                  </h3>
+
+                  <p className="text-xs sm:text-[13px] text-text-muted leading-relaxed">
+                    {item.summary}
+                  </p>
                 </div>
 
-                <h3 className="font-serif text-lg sm:text-xl font-bold text-brand-green group-hover:text-brand-green-light transition-colors leading-snug">
-                  {item.title}
-                </h3>
-
-                <p className="text-xs text-text-muted leading-relaxed">
-                  {item.summary}
-                </p>
+                {/* Key Deliverable Note (Clean, borderless typography) */}
+                <div className="pt-3 mt-4 border-t border-border-subtle/80 flex flex-col gap-0.5">
+                  <span className="text-[10px] uppercase tracking-wider text-text-muted font-bold">
+                    Key Deliverable
+                  </span>
+                  <span className="text-xs font-semibold text-brand-green leading-snug">
+                    {item.deliverable}
+                  </span>
+                </div>
               </div>
-
-              <div className="pt-4 mt-4 border-t border-border-subtle/60 flex flex-col gap-1">
-                <span className="text-[10px] uppercase tracking-wider text-text-muted/80 font-semibold">
-                  Key Deliverable:
-                </span>
-                <span className="text-[11.5px] font-medium text-brand-green leading-tight">
-                  {item.deliverable}
-                </span>
-              </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
     </section>
   );
