@@ -142,14 +142,64 @@ export default function TrainingCMSClient({
 
   return (
     <div className="flex flex-col gap-6">
+      {/* Step-by-Step Guide for Academy Schedules */}
+      <div className="p-4 rounded-xl bg-surface-container-lowest border border-surface-container-highest shadow-sm flex flex-col gap-3">
+        <div className="flex items-center gap-2">
+          <span className="w-6 h-6 rounded bg-stitch-primary text-white flex items-center justify-center text-xs font-bold shrink-0">
+            ?
+          </span>
+          <h2 className="font-semibold text-xs text-stitch-primary uppercase tracking-wider">
+            Step-by-Step Guide: How to Schedule Barista Classes
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs pt-1">
+          <div className="p-3 rounded-lg bg-surface-container-low border border-surface-container-highest flex items-start gap-2.5">
+            <span className="w-5 h-5 rounded bg-stitch-primary text-white text-[11px] font-bold flex items-center justify-center shrink-0 mt-0.5">
+              1
+            </span>
+            <div className="flex flex-col">
+              <span className="font-bold text-on-surface">Choose Course</span>
+              <span className="text-[11px] text-on-surface-variant mt-0.5 leading-relaxed">
+                Review your courses below. Click <strong>+ Add New Course</strong> if you want to create a brand new curriculum.
+              </span>
+            </div>
+          </div>
+
+          <div className="p-3 rounded-lg bg-surface-container-low border border-surface-container-highest flex items-start gap-2.5">
+            <span className="w-5 h-5 rounded bg-stitch-secondary text-white text-[11px] font-bold flex items-center justify-center shrink-0 mt-0.5">
+              2
+            </span>
+            <div className="flex flex-col">
+              <span className="font-bold text-on-surface">Click &ldquo;Add Class Dates&rdquo;</span>
+              <span className="text-[11px] text-on-surface-variant mt-0.5 leading-relaxed">
+                Set the start date, end date, session hours (e.g. Mon–Fri 9am–1pm), and available student seats.
+              </span>
+            </div>
+          </div>
+
+          <div className="p-3 rounded-lg bg-surface-container-low border border-surface-container-highest flex items-start gap-2.5">
+            <span className="w-5 h-5 rounded bg-[#25D366] text-white text-[11px] font-bold flex items-center justify-center shrink-0 mt-0.5">
+              3
+            </span>
+            <div className="flex flex-col">
+              <span className="font-bold text-on-surface">Publish Online</span>
+              <span className="text-[11px] text-on-surface-variant mt-0.5 leading-relaxed">
+                Your new class dates appear live on the website immediately so visitors can apply!
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Action Header Card */}
       <div className="p-4 sm:p-5 rounded-xl bg-surface-container-lowest border border-surface-container-highest flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-sm">
         <div>
           <h3 className="font-serif text-lg font-semibold text-stitch-primary">
-            Curriculum Authoring &amp; Cohort Scheduling
+            Active Barista Courses ({programs.length})
           </h3>
           <p className="text-xs text-on-surface-variant mt-0.5">
-            Configure barista syllabi and publish upcoming cohort dates that update the main site live.
+            Click <strong>Add Class Dates</strong> on any course below to open a new cohort schedule.
           </p>
         </div>
 
@@ -159,7 +209,7 @@ export default function TrainingCMSClient({
           onClick={() => setShowNewProgramModal(true)}
         >
           <span className="material-symbols-outlined text-base">add</span>
-          <span>New Training Course</span>
+          <span>+ Add New Training Course</span>
         </button>
       </div>
 
@@ -175,9 +225,9 @@ export default function TrainingCMSClient({
               <div className="flex flex-col">
                 <div className="flex items-center gap-2">
                   <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-stitch-tertiary-fixed text-stitch-tertiary">
-                    {prog.level}
+                    {prog.level} Level
                   </span>
-                  <span className="text-xs text-on-surface-variant font-semibold">{prog.duration}</span>
+                  <span className="text-xs text-on-surface-variant font-semibold">Duration: {prog.duration}</span>
                 </div>
                 <h4 className="font-serif text-lg sm:text-xl font-semibold text-stitch-primary mt-1">
                   {prog.title}
@@ -189,18 +239,18 @@ export default function TrainingCMSClient({
 
               <div className="flex items-center gap-4 shrink-0">
                 <div className="text-right">
-                  <span className="text-[10px] uppercase tracking-wider text-on-surface-variant block font-bold">Tuition</span>
+                  <span className="text-[10px] uppercase tracking-wider text-on-surface-variant block font-bold">Tuition Price</span>
                   <span className="font-serif text-lg font-bold text-stitch-primary">
                     {Number(prog.tuition_etb).toLocaleString()} ETB
                   </span>
                 </div>
                 <button
-                  className="px-3.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-stitch-primary text-xs font-semibold flex items-center gap-1.5 transition-colors border border-surface-container-highest"
+                  className="px-3.5 py-2 rounded-lg bg-stitch-primary text-white hover:bg-stitch-primary-container text-xs font-semibold flex items-center gap-1.5 transition-colors shadow-sm"
                   type="button"
                   onClick={() => setSelectedProgramForCohort(prog)}
                 >
-                  <span className="material-symbols-outlined text-sm">add</span>
-                  <span>Add Cohort</span>
+                  <span className="material-symbols-outlined text-sm">calendar_add_on</span>
+                  <span>Add Class Dates</span>
                 </button>
               </div>
             </div>
@@ -208,12 +258,12 @@ export default function TrainingCMSClient({
             {/* Program Cohorts Table */}
             <div className="flex flex-col gap-2">
               <span className="text-xs font-bold text-on-surface">
-                Scheduled Cohort Dates ({prog.schedules.length}):
+                Scheduled Class Dates for this Course ({prog.schedules.length}):
               </span>
 
               {prog.schedules.length === 0 ? (
                 <div className="p-4 rounded-lg bg-surface-container-low/60 border border-surface-container-highest text-xs text-on-surface-variant text-center">
-                  No upcoming cohorts currently scheduled. Click &ldquo;Add Cohort&rdquo; to open enrollment.
+                  No upcoming dates scheduled yet. Click &ldquo;Add Class Dates&rdquo; above to open enrollment for students!
                 </div>
               ) : (
                 <div className="overflow-x-auto rounded-lg border border-surface-container-highest">
@@ -222,10 +272,10 @@ export default function TrainingCMSClient({
                       <tr className="border-b border-surface-container-highest bg-surface-container-low/70 text-on-surface-variant uppercase tracking-wider text-[10px]">
                         <th className="py-2.5 px-3 font-bold">Start Date</th>
                         <th className="py-2.5 px-3 font-bold">End Date</th>
-                        <th className="py-2.5 px-3 font-bold">Session Hours</th>
+                        <th className="py-2.5 px-3 font-bold">Class Hours</th>
                         <th className="py-2.5 px-3 font-bold">Seats Status</th>
                         <th className="py-2.5 px-3 font-bold">Enrollment Status</th>
-                        <th className="py-2.5 px-3 font-bold text-right">Action</th>
+                        <th className="py-2.5 px-3 font-bold text-right">Delete</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-surface-container-highest">
@@ -258,7 +308,7 @@ export default function TrainingCMSClient({
                                   handleStatusChange(cohort.id, prog.id, e.target.value)
                                 }
                               >
-                                <option value="open">Open</option>
+                                <option value="open">Open (Enrolling)</option>
                                 <option value="filling_fast">Filling Fast</option>
                                 <option value="sold_out">Sold Out</option>
                                 <option value="completed">Completed</option>
@@ -266,8 +316,9 @@ export default function TrainingCMSClient({
                             </td>
                             <td className="py-2.5 px-3 text-right">
                               <button
-                                aria-label="Delete cohort schedule"
-                                className="text-error hover:bg-error-container/40 p-1 rounded transition-colors"
+                                aria-label="Delete class dates"
+                                className="text-error hover:bg-error-container/40 p-1.5 rounded transition-colors"
+                                title="Delete this date"
                                 type="button"
                                 onClick={() => handleDeleteCohort(cohort.id, prog.id)}
                               >
@@ -298,10 +349,10 @@ export default function TrainingCMSClient({
             <div className="flex items-center justify-between border-b border-surface-container-highest pb-3">
               <div>
                 <span className="text-[10px] uppercase tracking-wider text-stitch-secondary font-bold">
-                  Curriculum Authoring
+                  Step 1 of 2: Create Course
                 </span>
                 <h3 className="font-serif text-lg font-semibold text-stitch-primary mt-0.5" id="new-program-title">
-                  Create Training Program
+                  Add New Training Course
                 </h3>
               </div>
               <button
@@ -316,11 +367,13 @@ export default function TrainingCMSClient({
 
             <form className="flex flex-col gap-3.5 text-xs" onSubmit={handleCreateProgram}>
               <div className="flex flex-col gap-1">
-                <label className="text-on-surface font-semibold" htmlFor="prog-title">Program Title *</label>
+                <label className="text-on-surface font-semibold" htmlFor="prog-title">
+                  Course Title (e.g. Master Barista &amp; Latte Art) *
+                </label>
                 <input
                   className="px-3 py-2 rounded-lg bg-surface-container-low border border-surface-container-highest text-xs text-on-surface outline-none focus:border-stitch-primary"
                   id="prog-title"
-                  placeholder="e.g. Master Latte Art & Sensory Science"
+                  placeholder="Enter name of course..."
                   required
                   type="text"
                   value={progTitle}
@@ -330,7 +383,7 @@ export default function TrainingCMSClient({
 
               <div className="grid grid-cols-3 gap-2.5">
                 <div className="flex flex-col gap-1">
-                  <label className="text-on-surface font-semibold" htmlFor="prog-level">Level</label>
+                  <label className="text-on-surface font-semibold" htmlFor="prog-level">Skill Level</label>
                   <select
                     className="px-3 py-2 rounded-lg bg-surface-container-low border border-surface-container-highest text-xs text-on-surface outline-none focus:border-stitch-primary"
                     id="prog-level"
@@ -356,11 +409,11 @@ export default function TrainingCMSClient({
                   />
                 </div>
                 <div className="flex flex-col gap-1">
-                  <label className="text-on-surface font-semibold" htmlFor="prog-tuition">Tuition (ETB) *</label>
+                  <label className="text-on-surface font-semibold" htmlFor="prog-tuition">Tuition Fee (ETB) *</label>
                   <input
                     className="px-3 py-2 rounded-lg bg-surface-container-low border border-surface-container-highest text-xs text-on-surface outline-none focus:border-stitch-primary"
                     id="prog-tuition"
-                    placeholder="20000"
+                    placeholder="e.g. 20000"
                     required
                     type="number"
                     value={progTuition}
@@ -374,7 +427,7 @@ export default function TrainingCMSClient({
                 <textarea
                   className="px-3 py-2 rounded-lg bg-surface-container-low border border-surface-container-highest text-xs text-on-surface outline-none focus:border-stitch-primary"
                   id="prog-desc"
-                  placeholder="Detailed description of outcomes and target students..."
+                  placeholder="Explain what students will learn in this course..."
                   required
                   rows={2}
                   value={progDesc}
@@ -383,11 +436,13 @@ export default function TrainingCMSClient({
               </div>
 
               <div className="flex flex-col gap-1">
-                <label className="text-on-surface font-semibold" htmlFor="prog-curriculum">Curriculum Modules (one per line)</label>
+                <label className="text-on-surface font-semibold" htmlFor="prog-curriculum">
+                  Curriculum Topics (type each topic on a new line)
+                </label>
                 <textarea
                   className="px-3 py-2 rounded-lg bg-surface-container-low border border-surface-container-highest text-xs text-on-surface outline-none focus:border-stitch-primary font-mono text-[11px]"
                   id="prog-curriculum"
-                  placeholder="Espresso extraction science&#10;Microfoam milk mechanics&#10;Bar speed management"
+                  placeholder="Espresso extraction science&#10;Milk steaming and microfoam&#10;Latte art free pouring"
                   rows={3}
                   value={progCurriculum}
                   onChange={(e) => setProgCurriculum(e.target.value)}
@@ -407,7 +462,7 @@ export default function TrainingCMSClient({
                   disabled={isPending}
                   type="submit"
                 >
-                  {isPending ? "Creating..." : "Save Program"}
+                  {isPending ? "Saving..." : "Save Course"}
                 </button>
               </div>
             </form>
@@ -427,7 +482,7 @@ export default function TrainingCMSClient({
             <div className="flex items-center justify-between border-b border-surface-container-highest pb-3">
               <div>
                 <span className="text-[10px] uppercase tracking-wider text-stitch-secondary font-bold">
-                  Schedule New Cohort
+                  Step 2 of 2: Schedule Class
                 </span>
                 <h3 className="font-serif text-lg font-semibold text-stitch-primary mt-0.5" id="add-cohort-title">
                   {selectedProgramForCohort.title}
@@ -446,7 +501,7 @@ export default function TrainingCMSClient({
             <form className="flex flex-col gap-3.5 text-xs" onSubmit={handleCreateCohort}>
               <div className="grid grid-cols-2 gap-2.5">
                 <div className="flex flex-col gap-1">
-                  <label className="text-on-surface font-semibold" htmlFor="cohort-start">Start Date *</label>
+                  <label className="text-on-surface font-semibold" htmlFor="cohort-start">Class Start Date *</label>
                   <input
                     className="px-3 py-2 rounded-lg bg-surface-container-low border border-surface-container-highest text-xs text-on-surface outline-none focus:border-stitch-primary"
                     id="cohort-start"
@@ -457,7 +512,7 @@ export default function TrainingCMSClient({
                   />
                 </div>
                 <div className="flex flex-col gap-1">
-                  <label className="text-on-surface font-semibold" htmlFor="cohort-end">End Date *</label>
+                  <label className="text-on-surface font-semibold" htmlFor="cohort-end">Class End Date *</label>
                   <input
                     className="px-3 py-2 rounded-lg bg-surface-container-low border border-surface-container-highest text-xs text-on-surface outline-none focus:border-stitch-primary"
                     id="cohort-end"
@@ -483,7 +538,7 @@ export default function TrainingCMSClient({
               </div>
 
               <div className="flex flex-col gap-1">
-                <label className="text-on-surface font-semibold" htmlFor="cohort-seats">Total Seats Available</label>
+                <label className="text-on-surface font-semibold" htmlFor="cohort-seats">Total Student Seats Available</label>
                 <input
                   className="px-3 py-2 rounded-lg bg-surface-container-low border border-surface-container-highest text-xs text-on-surface outline-none focus:border-stitch-primary"
                   id="cohort-seats"
@@ -494,6 +549,9 @@ export default function TrainingCMSClient({
                   value={cohortSeats}
                   onChange={(e) => setCohortSeats(e.target.value)}
                 />
+                <span className="text-[11px] text-on-surface-variant">
+                  Tip: Most cohorts have 6 to 10 hands-on student seats.
+                </span>
               </div>
 
               <div className="flex justify-end gap-2.5 pt-2 border-t border-surface-container-highest">
@@ -509,7 +567,7 @@ export default function TrainingCMSClient({
                   disabled={isPending}
                   type="submit"
                 >
-                  {isPending ? "Publishing..." : "Publish Cohort"}
+                  {isPending ? "Publishing..." : "Publish Class Dates"}
                 </button>
               </div>
             </form>

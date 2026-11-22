@@ -75,9 +75,11 @@
    - **Pre-Catering Dedicated Showcase Checkpoint Tag**: `pre-catering-dedicated-showcase` (Commit: `1aa0111`)
    - **Pre-Admin Dashboard Checkpoint Tag**: `pre-admin-dashboard` (Commit: `0cd6a0a`)
    - **Pre-Stitch Admin UI Checkpoint Tag**: `pre-stitch-admin-ui` (Commit: `871f5a3`)
-   - **Backup Branches**: `backup-stable-baseline`, `backup-pre-hero-media-carousel`, `backup-pre-opening-motion-choreography`, `backup-pre-chronological-resequence`, `backup-pre-debox-transformation`, `backup-pre-ui-ux-refinements`, `backup-pre-catering-service`, `backup-pre-catering-dedicated-showcase`, `backup-pre-admin-dashboard`, `backup-stitch-admin-ui` (Pushed to GitHub `origin`)
+   - **Pre-Admin Step Guides Checkpoint Tag**: `pre-admin-step-guides` (Commit: `4478579`)
+   - **Backup Branches**: `backup-stable-baseline`, `backup-pre-hero-media-carousel`, `backup-pre-opening-motion-choreography`, `backup-pre-chronological-resequence`, `backup-pre-debox-transformation`, `backup-pre-ui-ux-refinements`, `backup-pre-catering-service`, `backup-pre-catering-dedicated-showcase`, `backup-pre-admin-dashboard`, `backup-stitch-admin-ui`, `backup-admin-step-guides` (Pushed to GitHub `origin`)
    - **Remote Synchronization**: Fully backed up on remote GitHub repository.
    - **One-Prompt Revert Protocol**:
+     - To revert to the state before the admin step-by-step guides: `git reset --hard pre-admin-step-guides && git clean -fd`
      - To revert to the state before the Stitch admin UI redesign: `git reset --hard pre-stitch-admin-ui && git clean -fd`
      - To revert to the state before the admin dashboard: `git reset --hard pre-admin-dashboard && git clean -fd`
      - To revert to the state before the dedicated catering showcase: `git reset --hard pre-catering-dedicated-showcase && git clean -fd`
@@ -231,5 +233,20 @@
    - **Retained Full Backend Capabilities**:
      - 100% of executive telemetry, CRM lifecycle filtering, Supabase database operations, academy cohort scheduling, and asynchronous concierge chat messaging are preserved.
    - **Strict Rule Preservation**: Strictly ZERO text pill badges (`rounded-full` text tags), ZERO text bloat, Slide 0 ceremony photo intact, official phone strictly `+251925451711`.
+
+## Simple Text & Step-by-Step Guidance Architecture
+17. **Universal Step-by-Step Operator Guidance**:
+   - **Sidebar Navigation Clarity**:
+     - All navigation links feature a clear, friendly primary title paired with an action-oriented subtitle (e.g., *Client Inquiries • Read leads & chat on WhatsApp*, *Change Photos • Upload & replace site pictures*, *Training & Cohorts • Add Barista course dates*).
+     - Persistent sidebar mini-guide card outlining the 3 foundational operational steps.
+   - **Embedded Step-by-Step Guides on Every View**:
+     - **Dashboard Overview (`/admin`)**: 4-card action matrix with numbered badges (1 to 4) directing the admin to Leads, Photos, Training Schedules, and Visitor Chat with one-click navigation buttons.
+     - **Inquiries & CRM (`/admin/leads`)**: 3-step banner explaining how to review client notes, engage via the pre-filled green WhatsApp button, and update lifecycle progress status.
+     - **Media Studio (`/admin/media`)**: 3-step banner explaining how to locate any image slot, click Change/Replace, browse from phone/PC, and publish live to the CDN.
+     - **Academy & Cohorts (`/admin/training`)**: 3-step banner explaining how to select/create a course, set upcoming cohort dates/hours/seats, and update enrollment status (`Open`, `Filling Fast`, `Sold Out`).
+     - **Visitor Chat (`/admin/chat`)**: 3-step banner explaining how to select an online visitor from the left inbox, review message history, and send live or asynchronous replies.
+     - **Passcode Login (`/admin/login`)**: 2-step prompt guiding the admin to enter the passcode and unlock the dashboard.
+   - **Strict Rule Preservation**: Strictly ZERO text pill badges, ZERO text bloat, unclipped original ceremony photo on Slide 0, phone strictly `+251925451711`.
+
 
 

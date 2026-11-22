@@ -11,11 +11,11 @@ export default async function AdminTrainingPage() {
         <div className="flex items-center gap-2">
           <span className="w-1.5 h-4 bg-stitch-primary rounded-full shrink-0" />
           <h1 className="font-serif text-2xl sm:text-3xl font-semibold text-stitch-primary">
-            Barista Academy Programs &amp; Cohort Scheduler
+            Barista Training Courses &amp; Class Schedules
           </h1>
         </div>
         <p className="text-xs text-on-surface-variant pl-3.5">
-          Create new barista training courses, configure curricula, and schedule upcoming cohort dates that display live on the website.
+          Follow the simple guide below to add new courses and schedule upcoming class dates so students can register online.
         </p>
       </div>
 

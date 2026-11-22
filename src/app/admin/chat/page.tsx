@@ -11,11 +11,11 @@ export default async function AdminChatPage() {
         <div className="flex items-center gap-2">
           <span className="w-1.5 h-4 bg-stitch-primary rounded-full shrink-0" />
           <h1 className="font-serif text-2xl sm:text-3xl font-semibold text-stitch-primary">
-            Signature Concierge Live Support Inbox
+            Visitor Live Chat &amp; Support Inbox
           </h1>
         </div>
         <p className="text-xs text-on-surface-variant pl-3.5">
-          Asynchronous messaging center for public website visitors. Respond directly to queries even when visitors are offline.
+          Follow the step-by-step guide below to read questions asked by website visitors and send replies easily.
         </p>
       </div>
 

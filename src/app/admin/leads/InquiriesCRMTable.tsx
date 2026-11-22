@@ -52,6 +52,56 @@ export default function InquiriesCRMTable({
 
   return (
     <div className="flex flex-col gap-5">
+      {/* Step-by-Step Guide for Inquiries */}
+      <div className="p-4 rounded-xl bg-surface-container-lowest border border-surface-container-highest shadow-sm flex flex-col gap-3">
+        <div className="flex items-center gap-2">
+          <span className="w-6 h-6 rounded bg-stitch-primary text-white flex items-center justify-center text-xs font-bold shrink-0">
+            ?
+          </span>
+          <h2 className="font-semibold text-xs text-stitch-primary uppercase tracking-wider">
+            Step-by-Step Guide: How to Reply to Website Leads
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs pt-1">
+          <div className="p-3 rounded-lg bg-surface-container-low border border-surface-container-highest flex items-start gap-2.5">
+            <span className="w-5 h-5 rounded bg-stitch-primary text-white text-[11px] font-bold flex items-center justify-center shrink-0 mt-0.5">
+              1
+            </span>
+            <div className="flex flex-col">
+              <span className="font-bold text-on-surface">Review Details</span>
+              <span className="text-[11px] text-on-surface-variant mt-0.5 leading-relaxed">
+                Check the client&apos;s name and what service they need. Click <strong>View note</strong> to read any extra message.
+              </span>
+            </div>
+          </div>
+
+          <div className="p-3 rounded-lg bg-surface-container-low border border-surface-container-highest flex items-start gap-2.5">
+            <span className="w-5 h-5 rounded bg-[#25D366] text-white text-[11px] font-bold flex items-center justify-center shrink-0 mt-0.5">
+              2
+            </span>
+            <div className="flex flex-col">
+              <span className="font-bold text-on-surface">Chat on WhatsApp</span>
+              <span className="text-[11px] text-on-surface-variant mt-0.5 leading-relaxed">
+                Click the green <strong>WhatsApp</strong> button to chat directly on your phone or PC with a pre-filled greeting.
+              </span>
+            </div>
+          </div>
+
+          <div className="p-3 rounded-lg bg-surface-container-low border border-surface-container-highest flex items-start gap-2.5">
+            <span className="w-5 h-5 rounded bg-stitch-secondary text-white text-[11px] font-bold flex items-center justify-center shrink-0 mt-0.5">
+              3
+            </span>
+            <div className="flex flex-col">
+              <span className="font-bold text-on-surface">Update Status</span>
+              <span className="text-[11px] text-on-surface-variant mt-0.5 leading-relaxed">
+                After messaging them, change the status dropdown to <strong>Contacted</strong> or <strong>Scheduled</strong>.
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Controls: Search and Filters */}
       <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 p-4 rounded-xl bg-surface-container-lowest border border-surface-container-highest shadow-sm">
         <div className="relative flex-1">
@@ -60,7 +110,7 @@ export default function InquiriesCRMTable({
           </span>
           <input
             className="w-full pl-9 pr-4 py-2 rounded-lg bg-surface-container-low border border-surface-container-highest text-xs text-on-surface placeholder:text-on-surface-variant outline-none focus:border-stitch-primary"
-            placeholder="Search by client name, phone number, or email..."
+            placeholder="Type a name, phone number, or email to find a client..."
             type="text"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
@@ -68,13 +118,13 @@ export default function InquiriesCRMTable({
         </div>
 
         <div className="flex items-center gap-2">
-          <span className="text-xs text-on-surface-variant whitespace-nowrap font-medium">Service:</span>
+          <span className="text-xs text-on-surface-variant whitespace-nowrap font-medium">Filter by service:</span>
           <select
             className="px-3 py-2 rounded-lg bg-surface-container-low border border-surface-container-highest text-xs text-on-surface outline-none focus:border-stitch-primary"
             value={selectedService}
             onChange={(e) => setSelectedService(e.target.value)}
           >
-            <option value="all">All Practice Areas</option>
+            <option value="all">Show All Services</option>
             {services.map((s) => (
               <option key={s} value={s}>
                 {s}
@@ -90,11 +140,11 @@ export default function InquiriesCRMTable({
           <table className="w-full text-left text-xs">
             <thead>
               <tr className="border-b border-surface-container-highest bg-surface-container-low/70 text-on-surface-variant uppercase tracking-wider text-[10px]">
-                <th className="p-3.5 font-bold">Client Name</th>
-                <th className="p-3.5 font-bold">Service Area</th>
-                <th className="p-3.5 font-bold">Contact Details</th>
-                <th className="p-3.5 font-bold">Inquiry Date</th>
-                <th className="p-3.5 font-bold">Lifecycle Status</th>
+                <th className="p-3.5 font-bold">Client Name &amp; Note</th>
+                <th className="p-3.5 font-bold">Service Requested</th>
+                <th className="p-3.5 font-bold">Phone &amp; Email</th>
+                <th className="p-3.5 font-bold">Date Received</th>
+                <th className="p-3.5 font-bold">Progress Status</th>
                 <th className="p-3.5 font-bold text-right">Actions</th>
               </tr>
             </thead>
@@ -102,7 +152,7 @@ export default function InquiriesCRMTable({
               {filtered.length === 0 ? (
                 <tr>
                   <td className="p-8 text-center text-on-surface-variant" colSpan={6}>
-                    No client inquiries match the current search filters.
+                    No client inquiries match your search. Try typing a different name or clearing the search box.
                   </td>
                 </tr>
               ) : (
@@ -116,7 +166,7 @@ export default function InquiriesCRMTable({
                           type="button"
                           onClick={() => setSelectedInquiry(inq)}
                         >
-                          View project note &rarr;
+                          View client note &rarr;
                         </button>
                       )}
                     </td>
@@ -136,7 +186,7 @@ export default function InquiriesCRMTable({
                         value={inq.status || "new"}
                         onChange={(e) => handleStatusChange(inq.id, e.target.value)}
                       >
-                        <option value="new">New</option>
+                        <option value="new">New (Needs Reply)</option>
                         <option value="contacted">Contacted</option>
                         <option value="scheduled">Scheduled</option>
                         <option value="completed">Completed</option>
@@ -150,10 +200,10 @@ export default function InquiriesCRMTable({
                           type="button"
                           onClick={() => setSelectedInquiry(inq)}
                         >
-                          Details
+                          View Details
                         </button>
                         <a
-                          className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-[#25D366]/15 text-[#0d472a] hover:bg-[#25D366] hover:text-white transition-colors text-xs font-semibold"
+                          className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-[#25D366]/15 text-[#0d472a] hover:bg-[#25D366] hover:text-white transition-colors text-xs font-semibold"
                           href={`https://wa.me/${inq.phone.replace(/[^0-9]/g, "")}?text=Hello%20${encodeURIComponent(
                             inq.full_name
                           )}%2C%20thank%20you%20for%20contacting%20Ethiopian%20Signature%20Coffee%20regarding%20${encodeURIComponent(
@@ -220,10 +270,14 @@ export default function InquiriesCRMTable({
               </div>
 
               <div className="flex flex-col gap-1.5">
-                <span className="text-on-surface font-semibold">Project Notes / Inquiry Message:</span>
+                <span className="text-on-surface font-semibold">Message Written by Client:</span>
                 <div className="p-3.5 rounded-xl bg-surface-container-low border border-surface-container-highest text-on-surface leading-relaxed whitespace-pre-wrap">
-                  {selectedInquiry.notes || "No additional message submitted with this lead."}
+                  {selectedInquiry.notes || "The client did not write an extra message."}
                 </div>
+              </div>
+
+              <div className="p-3 rounded-lg bg-surface-container-low text-[11px] text-on-surface-variant">
+                <strong>Next step:</strong> Click the button below to message this client on WhatsApp. Once you have spoken with them, change their status to <strong>Contacted</strong>.
               </div>
             </div>
 
@@ -237,12 +291,14 @@ export default function InquiriesCRMTable({
               </button>
               <a
                 className="px-4 py-2 rounded-lg bg-[#25D366] hover:bg-[#20ba5a] text-white text-xs font-bold flex items-center gap-1.5 transition-colors shadow-sm"
-                href={`https://wa.me/${selectedInquiry.phone.replace(/[^0-9]/g, "")}`}
+                href={`https://wa.me/${selectedInquiry.phone.replace(/[^0-9]/g, "")}?text=Hello%20${encodeURIComponent(
+                  selectedInquiry.full_name
+                )}%2C%20thank%20you%20for%20contacting%20Ethiopian%20Signature%20Coffee.`}
                 rel="noopener noreferrer"
                 target="_blank"
               >
                 <span className="material-symbols-outlined text-base">chat</span>
-                <span>Open WhatsApp</span>
+                <span>Open WhatsApp Chat</span>
               </a>
             </div>
           </div>

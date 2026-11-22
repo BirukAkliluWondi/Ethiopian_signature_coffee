@@ -11,42 +11,150 @@ export default async function AdminDashboardPage() {
 
   return (
     <div className="flex flex-col gap-6 max-w-7xl mx-auto">
-      {/* Status & Quick Stats Bar matching Stitch UI */}
+      {/* Welcome & Simple Step-by-Step Action Guide */}
+      <section className="bg-surface-container-lowest rounded-xl p-5 border border-surface-container-highest shadow-sm flex flex-col gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-surface-container-highest pb-3">
+          <div className="flex items-center gap-2">
+            <span className="w-1.5 h-4 bg-stitch-primary rounded-full shrink-0" />
+            <h1 className="font-serif text-xl sm:text-2xl font-semibold text-stitch-primary">
+              Website Management &amp; Step-by-Step Guide
+            </h1>
+          </div>
+          <span className="text-xs text-on-surface-variant">
+            Everything you need to control your website is organized below.
+          </span>
+        </div>
+
+        {/* 4 Step Cards for Admin */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-1">
+          {/* Step 1 */}
+          <div className="p-3.5 rounded-lg bg-surface-container-low border border-surface-container-highest flex flex-col justify-between gap-3">
+            <div className="flex flex-col gap-1.5">
+              <div className="flex items-center justify-between">
+                <span className="w-5 h-5 rounded bg-stitch-primary text-white text-[11px] font-bold flex items-center justify-center">
+                  1
+                </span>
+                <span className="material-symbols-outlined text-stitch-primary text-lg">mail</span>
+              </div>
+              <h2 className="font-semibold text-xs text-on-surface">Client Inquiries</h2>
+              <p className="text-[11px] text-on-surface-variant leading-relaxed">
+                Read messages submitted from the contact form. Click <strong>WhatsApp</strong> to reply to clients on your phone.
+              </p>
+            </div>
+            <Link
+              className="text-[11px] font-bold text-stitch-primary hover:underline flex items-center gap-1 mt-1"
+              href="/admin/leads"
+            >
+              <span>View All Leads</span>
+              <span className="material-symbols-outlined text-xs">arrow_forward</span>
+            </Link>
+          </div>
+
+          {/* Step 2 */}
+          <div className="p-3.5 rounded-lg bg-surface-container-low border border-surface-container-highest flex flex-col justify-between gap-3">
+            <div className="flex flex-col gap-1.5">
+              <div className="flex items-center justify-between">
+                <span className="w-5 h-5 rounded bg-stitch-primary text-white text-[11px] font-bold flex items-center justify-center">
+                  2
+                </span>
+                <span className="material-symbols-outlined text-stitch-secondary text-lg">photo_library</span>
+              </div>
+              <h2 className="font-semibold text-xs text-on-surface">Change Photos</h2>
+              <p className="text-[11px] text-on-surface-variant leading-relaxed">
+                Upload new pictures and replace images on the homepage hero banner, catering, or services.
+              </p>
+            </div>
+            <Link
+              className="text-[11px] font-bold text-stitch-primary hover:underline flex items-center gap-1 mt-1"
+              href="/admin/media"
+            >
+              <span>Open Photo Studio</span>
+              <span className="material-symbols-outlined text-xs">arrow_forward</span>
+            </Link>
+          </div>
+
+          {/* Step 3 */}
+          <div className="p-3.5 rounded-lg bg-surface-container-low border border-surface-container-highest flex flex-col justify-between gap-3">
+            <div className="flex flex-col gap-1.5">
+              <div className="flex items-center justify-between">
+                <span className="w-5 h-5 rounded bg-stitch-primary text-white text-[11px] font-bold flex items-center justify-center">
+                  3
+                </span>
+                <span className="material-symbols-outlined text-stitch-tertiary-fixed-dim text-lg">school</span>
+              </div>
+              <h2 className="font-semibold text-xs text-on-surface">Training Classes</h2>
+              <p className="text-[11px] text-on-surface-variant leading-relaxed">
+                Add upcoming Barista Academy cohort dates, seat limits, and tuition prices so students can register.
+              </p>
+            </div>
+            <Link
+              className="text-[11px] font-bold text-stitch-primary hover:underline flex items-center gap-1 mt-1"
+              href="/admin/training"
+            >
+              <span>Manage Schedules</span>
+              <span className="material-symbols-outlined text-xs">arrow_forward</span>
+            </Link>
+          </div>
+
+          {/* Step 4 */}
+          <div className="p-3.5 rounded-lg bg-surface-container-low border border-surface-container-highest flex flex-col justify-between gap-3">
+            <div className="flex flex-col gap-1.5">
+              <div className="flex items-center justify-between">
+                <span className="w-5 h-5 rounded bg-stitch-primary text-white text-[11px] font-bold flex items-center justify-center">
+                  4
+                </span>
+                <span className="material-symbols-outlined text-stitch-primary text-lg">forum</span>
+              </div>
+              <h2 className="font-semibold text-xs text-on-surface">Visitor Chat</h2>
+              <p className="text-[11px] text-on-surface-variant leading-relaxed">
+                Answer live questions from visitors on the website. Visitors can read your answer even if they return later.
+              </p>
+            </div>
+            <Link
+              className="text-[11px] font-bold text-stitch-primary hover:underline flex items-center gap-1 mt-1"
+              href="/admin/chat"
+            >
+              <span>Open Chat Inbox</span>
+              <span className="material-symbols-outlined text-xs">arrow_forward</span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Live Activity Counters */}
       <section className="bg-surface-container-lowest rounded-xl p-4 sm:p-5 border border-surface-container-highest shadow-sm">
         <div className="flex items-center justify-between pb-3 mb-3 bg-surface-container-low rounded-lg p-3">
-          <div className="flex items-center gap-3 min-w-0">
-            <div className="w-8 h-8 rounded-lg bg-stitch-primary-container text-stitch-on-primary-container flex items-center justify-center shrink-0">
-              <span className="material-symbols-outlined text-[18px]">insights</span>
+          <div className="flex items-center gap-2.5 min-w-0">
+            <div className="w-7 h-7 rounded-lg bg-stitch-primary-container text-stitch-on-primary-container flex items-center justify-center shrink-0">
+              <span className="material-symbols-outlined text-base">monitoring</span>
             </div>
             <div className="min-w-0">
-              <span className="text-[11px] font-bold text-stitch-primary uppercase block tracking-wider">
-                Executive Operations
+              <span className="text-xs font-bold text-stitch-primary uppercase tracking-wider block">
+                Live Website Numbers
               </span>
-              <span className="text-xs text-on-surface-variant truncate block">
-                Direct Supabase Live Synchronization &amp; CRM Telemetry
+              <span className="text-[11px] text-on-surface-variant truncate block">
+                All numbers update automatically whenever a client contacts you or a student signs up.
               </span>
             </div>
           </div>
 
-          <div className="flex items-center gap-1.5 bg-surface-container-highest px-2.5 py-1 rounded-lg shrink-0">
-            <span className="w-2 h-2 rounded-full bg-stitch-primary animate-pulse" />
-            <span className="text-[11px] font-bold text-stitch-primary uppercase tracking-wider">
-              Live System
-            </span>
+          <div className="flex items-center gap-1.5 bg-surface-container-highest px-2 py-0.5 rounded text-[11px] font-bold text-stitch-primary shrink-0">
+            <span className="w-1.5 h-1.5 rounded-full bg-stitch-primary animate-pulse" />
+            <span>Connected</span>
           </div>
         </div>
 
-        {/* Quick Metrics Grid */}
+        {/* 4 Simple Metric Boxes */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 text-center">
           <div className="flex flex-col items-center bg-surface-container-low/70 py-3 px-2 rounded-lg">
             <span className="font-serif text-3xl font-bold text-stitch-primary leading-none">
               {kpis?.totalInquiries ?? 0}
             </span>
-            <span className="text-[11px] font-bold uppercase tracking-wider text-on-surface-variant mt-1.5">
-              Total Inquiries
+            <span className="text-xs font-bold text-on-surface mt-1.5">
+              Client Inquiries
             </span>
-            <span className="text-[10px] text-stitch-primary font-semibold mt-0.5">
-              {kpis?.newInquiries ?? 0} new uncontacted
+            <span className="text-[11px] text-stitch-primary font-medium mt-0.5">
+              {kpis?.newInquiries ?? 0} new waiting
             </span>
           </div>
 
@@ -54,10 +162,10 @@ export default async function AdminDashboardPage() {
             <span className="font-serif text-3xl font-bold text-stitch-secondary leading-none">
               {kpis?.activeCohorts ?? 0}
             </span>
-            <span className="text-[11px] font-bold uppercase tracking-wider text-on-surface-variant mt-1.5">
-              Active Cohorts
+            <span className="text-xs font-bold text-on-surface mt-1.5">
+              Active Classes
             </span>
-            <span className="text-[10px] text-on-surface-variant font-medium mt-0.5">
+            <span className="text-[11px] text-on-surface-variant font-medium mt-0.5">
               Across {kpis?.totalPrograms ?? 0} courses
             </span>
           </div>
@@ -66,90 +174,66 @@ export default async function AdminDashboardPage() {
             <span className="font-serif text-3xl font-bold text-stitch-primary leading-none">
               {kpis?.openChats ?? 0}
             </span>
-            <span className="text-[11px] font-bold uppercase tracking-wider text-on-surface-variant mt-1.5">
-              Concierge Chats
+            <span className="text-xs font-bold text-on-surface mt-1.5">
+              Visitor Chats
             </span>
-            <span className="text-[10px] text-on-surface-variant font-medium mt-0.5">
-              Visitor threads
+            <span className="text-[11px] text-on-surface-variant font-medium mt-0.5">
+              Open conversations
             </span>
           </div>
 
           <div className="flex flex-col items-center bg-surface-container-low/70 py-3 px-2 rounded-lg">
-            <span className="font-serif text-xl sm:text-2xl font-bold text-stitch-primary leading-tight">
+            <span className="font-serif text-lg sm:text-xl font-bold text-stitch-primary leading-tight">
               +251 925 451 711
             </span>
-            <span className="text-[11px] font-bold uppercase tracking-wider text-on-surface-variant mt-1.5">
-              Direct Desk
+            <span className="text-xs font-bold text-on-surface mt-1.5">
+              Official Phone
             </span>
-            <span className="text-[10px] text-stitch-secondary font-medium mt-0.5">
+            <span className="text-[11px] text-stitch-secondary font-medium mt-0.5">
               WhatsApp &amp; Telegram
             </span>
           </div>
         </div>
       </section>
 
-      {/* Section Header with Quick Actions */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2">
-        <div className="flex items-center gap-2">
-          <span className="w-1.5 h-4 bg-stitch-primary rounded-full shrink-0" />
-          <h2 className="font-serif text-xl sm:text-2xl font-semibold text-stitch-primary">
-            Active Operations &amp; Client Pipeline
-          </h2>
-        </div>
-
-        <div className="flex items-center gap-2.5">
-          <Link
-            className="px-3.5 py-2 rounded-lg bg-stitch-primary text-white hover:bg-stitch-primary-container font-semibold text-xs tracking-wider transition-colors shadow-sm flex items-center gap-1.5"
-            href="/admin/media"
-          >
-            <span className="material-symbols-outlined text-base">add_photo_alternate</span>
-            <span>Upload Photo</span>
-          </Link>
-          <Link
-            className="px-3.5 py-2 rounded-lg bg-surface-container-low text-on-surface hover:text-stitch-primary hover:bg-surface-container font-semibold text-xs tracking-wider transition-colors border border-surface-container-highest flex items-center gap-1.5"
-            href="/admin/training"
-          >
-            <span className="material-symbols-outlined text-base">calendar_add_on</span>
-            <span>Schedule Cohort</span>
-          </Link>
-        </div>
-      </div>
-
       {/* Recent Client Inquiries Stream */}
-      <div className="bg-surface-container-lowest rounded-xl p-5 border border-surface-container-highest shadow-sm flex flex-col gap-4">
-        <div className="flex items-center justify-between border-b border-surface-container-highest pb-3">
+      <section className="bg-surface-container-lowest rounded-xl p-5 border border-surface-container-highest shadow-sm flex flex-col gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-surface-container-highest pb-3">
           <div>
-            <h3 className="font-serif text-lg font-semibold text-stitch-primary">
-              Recent Client Inquiries
-            </h3>
-            <p className="text-xs text-on-surface-variant mt-0.5">
-              Latest consultation requests, catering inquiries, and barista academy applications.
+            <div className="flex items-center gap-2">
+              <span className="w-1.5 h-4 bg-stitch-primary rounded-full shrink-0" />
+              <h2 className="font-serif text-lg font-semibold text-stitch-primary">
+                Recent Client Inquiries
+              </h2>
+            </div>
+            <p className="text-xs text-on-surface-variant mt-0.5 pl-3.5">
+              Follow this step: Click <strong>WhatsApp</strong> to open a direct chat, or click <strong>Details</strong> to view their full message.
             </p>
           </div>
           <Link
-            className="text-xs font-bold text-stitch-primary hover:underline flex items-center gap-1"
+            className="text-xs font-bold text-stitch-primary hover:underline flex items-center gap-1 self-start sm:self-auto pl-3.5 sm:pl-0"
             href="/admin/leads"
           >
-            <span>View All Leads</span>
+            <span>Open All Inquiries</span>
             <span className="material-symbols-outlined text-sm">arrow_forward</span>
           </Link>
         </div>
 
         {inquiries.length === 0 ? (
           <div className="py-8 text-center text-xs text-on-surface-variant">
-            No inquiries recorded yet. Test submissions from the public contact form will appear here.
+            No inquiries recorded yet. When a visitor submits the contact form on your website, it will appear here immediately.
           </div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
               <thead>
                 <tr className="border-b border-surface-container-highest bg-surface-container-low/70 text-on-surface-variant uppercase tracking-wider text-[10px]">
-                  <th className="py-2.5 px-3 font-bold">Lead Name</th>
-                  <th className="py-2.5 px-3 font-bold">Service Area</th>
-                  <th className="py-2.5 px-3 font-bold">Contact Details</th>
-                  <th className="py-2.5 px-3 font-bold">Date</th>
+                  <th className="py-2.5 px-3 font-bold">Client Name</th>
+                  <th className="py-2.5 px-3 font-bold">Service Needed</th>
+                  <th className="py-2.5 px-3 font-bold">Phone Number</th>
+                  <th className="py-2.5 px-3 font-bold">Date Received</th>
                   <th className="py-2.5 px-3 font-bold">Status</th>
-                  <th className="py-2.5 px-3 font-bold text-right">Action</th>
+                  <th className="py-2.5 px-3 font-bold text-right">How to Reply</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-surface-container-highest">
@@ -161,9 +245,8 @@ export default async function AdminDashboardPage() {
                     <td className="py-3 px-3 text-on-surface-variant font-medium">
                       {inq.service}
                     </td>
-                    <td className="py-3 px-3 text-on-surface-variant">
-                      <div className="font-mono text-xs text-on-surface">{inq.phone}</div>
-                      {inq.email && <div className="text-[11px] text-on-surface-variant">{inq.email}</div>}
+                    <td className="py-3 px-3 text-on-surface-variant font-mono">
+                      {inq.phone}
                     </td>
                     <td className="py-3 px-3 text-on-surface-variant">
                       {new Date(inq.created_at).toLocaleDateString()}
@@ -175,14 +258,14 @@ export default async function AdminDashboardPage() {
                     </td>
                     <td className="py-3 px-3 text-right">
                       <a
-                        className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-[#25D366]/15 text-[#0d472a] hover:bg-[#25D366] hover:text-white transition-colors text-xs font-semibold"
+                        className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-[#25D366]/15 text-[#0d472a] hover:bg-[#25D366] hover:text-white transition-colors text-xs font-semibold"
                         href={`https://wa.me/${inq.phone.replace(/[^0-9]/g, "")}?text=Hello%20${encodeURIComponent(
                           inq.full_name
                         )}%2C%20thank%20you%20for%20contacting%20Ethiopian%20Signature%20Coffee.`}
                         rel="noopener noreferrer"
                         target="_blank"
                       >
-                        <span>WhatsApp</span>
+                        <span>Chat on WhatsApp</span>
                         <span className="material-symbols-outlined text-xs">arrow_outward</span>
                       </a>
                     </td>
@@ -192,7 +275,7 @@ export default async function AdminDashboardPage() {
             </table>
           </div>
         )}
-      </div>
+      </section>
     </div>
   );
 }

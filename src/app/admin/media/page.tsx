@@ -11,11 +11,11 @@ export default async function AdminMediaPage() {
         <div className="flex items-center gap-2">
           <span className="w-1.5 h-4 bg-stitch-primary rounded-full shrink-0" />
           <h1 className="font-serif text-2xl sm:text-3xl font-semibold text-stitch-primary">
-            Media &amp; Assets Studio
+            Change Website Photos &amp; Media Studio
           </h1>
         </div>
         <p className="text-xs text-on-surface-variant pl-3.5">
-          Upload new pictures to local server storage, replace existing carousel slides, and manage photography across all sections.
+          Follow the simple guides below to swap any photo on the website or upload new ceremony, catering, and academy pictures.
         </p>
       </div>
 

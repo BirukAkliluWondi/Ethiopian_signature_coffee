@@ -33,7 +33,7 @@ const DEFAULT_LIBRARY_ASSETS: LibraryAsset[] = [
     category: "ceremony",
     categoryLabel: "Ceremony",
     image_url: "/admin/media-jebena-steam.jpg",
-    desc: "Jebena Pot • In Library",
+    desc: "Traditional Pot • Ready to use",
   },
   {
     id: "lib-2",
@@ -41,7 +41,7 @@ const DEFAULT_LIBRARY_ASSETS: LibraryAsset[] = [
     category: "products",
     categoryLabel: "Roasting",
     image_url: "/admin/media-roasted-pan.jpg",
-    desc: "Origin Beans • In Library",
+    desc: "Origin Beans • Ready to use",
   },
   {
     id: "lib-3",
@@ -49,7 +49,7 @@ const DEFAULT_LIBRARY_ASSETS: LibraryAsset[] = [
     category: "ceremony",
     categoryLabel: "Heritage",
     image_url: "/admin/media-ceremony-tray.jpg",
-    desc: "Cini Porcelain • In Library",
+    desc: "Porcelain Cups • Ready to use",
   },
   {
     id: "lib-4",
@@ -57,7 +57,7 @@ const DEFAULT_LIBRARY_ASSETS: LibraryAsset[] = [
     category: "consulting",
     categoryLabel: "Operations",
     image_url: "/admin/media-cafe-inventory.jpg",
-    desc: "Yirgacheffe Lot • In Library",
+    desc: "Management • Ready to use",
   },
   {
     id: "lib-5",
@@ -65,7 +65,7 @@ const DEFAULT_LIBRARY_ASSETS: LibraryAsset[] = [
     category: "training",
     categoryLabel: "Training",
     image_url: "/admin/slot-academy-barista.jpg",
-    desc: "Espresso Calibration • In Library",
+    desc: "Espresso Calibration • Ready to use",
   },
   {
     id: "lib-6",
@@ -73,7 +73,7 @@ const DEFAULT_LIBRARY_ASSETS: LibraryAsset[] = [
     category: "catering",
     categoryLabel: "Catering",
     image_url: "/catering-services.jpg",
-    desc: "Banquet Mesob • In Library",
+    desc: "Banquet Mesob • Ready to use",
   },
 ];
 
@@ -90,7 +90,6 @@ export default function MediaStudioClient({
   const [customAlt, setCustomAlt] = useState("");
   const [selectedTag, setSelectedTag] = useState("Hero Ceremony");
   const [galleryFilter, setGalleryFilter] = useState("all");
-  const [mode, setMode] = useState<"live" | "draft">("live");
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [pendingChanges, setPendingChanges] = useState(0);
 
@@ -109,7 +108,7 @@ export default function MediaStudioClient({
     setToastMessage(msg);
     setTimeout(() => {
       setToastMessage(null);
-    }, 3000);
+    }, 3500);
   };
 
   const handleOpenSlot = (slot: MediaSlot) => {
@@ -135,21 +134,20 @@ export default function MediaStudioClient({
 
     if (res.success && res.url) {
       setCustomUrl(res.url);
-      // Add to local library
       const newAsset: LibraryAsset = {
         id: "upload-" + Date.now(),
         name: file.name.replace(/\.[^/.]+$/, ""),
         category: "ceremony",
         categoryLabel: selectedTag,
         image_url: res.url,
-        desc: "Local Storage • Just Uploaded",
+        desc: "Uploaded from your device",
       };
       setLibraryAssets((prev) => [newAsset, ...prev]);
       setPendingChanges((p) => p + 1);
-      showToast(`Uploaded ${file.name} to media library!`);
+      showToast(`Uploaded "${file.name}"! You can now assign it below.`);
       setUploadFeedback({
         type: "success",
-        message: `File uploaded to local storage: ${res.url}`,
+        message: `File uploaded successfully: ${res.url}`,
       });
     } else {
       setUploadFeedback({
@@ -186,7 +184,7 @@ export default function MediaStudioClient({
         );
         setActiveSlot(null);
         setPendingChanges(0);
-        showToast(`Slot "${activeSlot.title}" updated live!`);
+        showToast(`Photo for "${activeSlot.title}" has been updated live on your website!`);
       } else {
         setUploadFeedback({
           type: "error",
@@ -202,7 +200,7 @@ export default function MediaStudioClient({
       handleOpenSlot(heroSlot);
       setCustomUrl(asset.image_url);
       setCustomTitle(asset.name);
-      showToast(`Selected "${asset.name}" for ${heroSlot.title}. Click Publish to apply.`);
+      showToast(`Selected "${asset.name}" for Hero Banner. Click "Publish to Site" to apply.`);
     }
   };
 
@@ -213,13 +211,13 @@ export default function MediaStudioClient({
       handleOpenSlot(targetSlot);
       setCustomUrl(asset.image_url);
       setCustomTitle(asset.name);
-      showToast(`Selected "${asset.name}" for ${targetSlot.title}.`);
+      showToast(`Selected "${asset.name}" for ${targetSlot.title}. Click "Publish to Site" to apply.`);
     }
   };
 
   const deleteLibraryAsset = (id: string) => {
     setLibraryAssets((prev) => prev.filter((a) => a.id !== id));
-    showToast("Asset removed from library view.");
+    showToast("Photo removed from library view.");
   };
 
   const heroSlot = slots.find((s) => s.slot_key === "hero_slide_0" || s.section === "hero") || slots[0];
@@ -233,8 +231,9 @@ export default function MediaStudioClient({
     <div className="flex flex-col gap-6 max-w-7xl mx-auto relative pb-20">
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed top-20 left-1/2 -translate-x-1/2 z-50 bg-inverse-surface text-inverse-on-surface px-4 py-2.5 rounded-lg shadow-xl text-center text-xs font-semibold animate-fade-in pointer-events-auto">
-          {toastMessage}
+        <div className="fixed top-20 left-1/2 -translate-x-1/2 z-50 bg-inverse-surface text-inverse-on-surface px-4 py-2.5 rounded-lg shadow-xl text-center text-xs font-semibold animate-fade-in pointer-events-auto flex items-center gap-2">
+          <span className="material-symbols-outlined text-sm text-[#25D366]">check_circle</span>
+          <span>{toastMessage}</span>
         </div>
       )}
 
@@ -247,103 +246,67 @@ export default function MediaStudioClient({
         onChange={handleFileUpload}
       />
 
-      {/* Status & Quick Stats Bar */}
-      <section className="bg-surface-container-lowest rounded-xl p-4 sm:p-5 border border-surface-container-highest shadow-sm">
-        <div className="flex items-center justify-between pb-3 mb-3 bg-surface-container-low rounded-lg p-3">
-          <div className="flex items-center gap-3 min-w-0">
-            <div className="w-8 h-8 rounded-lg bg-stitch-primary-container text-stitch-on-primary-container flex items-center justify-center shrink-0">
-              <span className="material-symbols-outlined text-[18px]">photo_library</span>
-            </div>
-            <div className="min-w-0">
-              <span className="text-[11px] font-bold text-stitch-primary uppercase block tracking-wider">
-                Asset Operations
-              </span>
-              <span className="text-xs text-on-surface-variant truncate block">
-                Direct CMS Synchronization &amp; CloudFront Cache Control
-              </span>
-            </div>
-          </div>
-
-          <div className="flex items-center bg-surface-container-highest p-0.5 rounded-lg shrink-0">
-            <button
-              className={`px-2.5 py-1 text-xs font-semibold rounded-md transition-all ${
-                mode === "draft"
-                  ? "bg-surface text-stitch-primary shadow-sm"
-                  : "text-on-surface-variant"
-              }`}
-              type="button"
-              onClick={() => {
-                setMode("draft");
-                showToast("Switched to Draft Staging view");
-              }}
-            >
-              Draft
-            </button>
-            <button
-              className={`px-2.5 py-1 text-xs font-semibold rounded-md transition-all ${
-                mode === "live"
-                  ? "bg-stitch-primary text-white shadow-sm"
-                  : "text-on-surface-variant"
-              }`}
-              type="button"
-              onClick={() => {
-                setMode("live");
-                showToast("Live Mode: Changes publish directly to website");
-              }}
-            >
-              Live
-            </button>
-          </div>
+      {/* Step-by-Step Guide on How to Change Pictures */}
+      <section className="bg-surface-container-lowest rounded-xl p-5 border border-surface-container-highest shadow-sm flex flex-col gap-3">
+        <div className="flex items-center gap-2">
+          <span className="w-6 h-6 rounded bg-stitch-primary text-white flex items-center justify-center text-xs font-bold shrink-0">
+            ?
+          </span>
+          <h2 className="font-semibold text-xs text-stitch-primary uppercase tracking-wider">
+            Step-by-Step Guide: How to Change Any Picture on the Website
+          </h2>
         </div>
 
-        {/* Quick Metrics Grid */}
-        <div className="grid grid-cols-4 gap-2 text-center pt-1">
-          <div className="flex flex-col items-center bg-surface-container-low/60 py-2 px-1 rounded-lg">
-            <span className="font-serif text-2xl font-bold text-stitch-primary leading-none">
-              {libraryAssets.length + slots.length}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs pt-1">
+          <div className="p-3 rounded-lg bg-surface-container-low border border-surface-container-highest flex items-start gap-2.5">
+            <span className="w-5 h-5 rounded bg-stitch-primary text-white text-[11px] font-bold flex items-center justify-center shrink-0 mt-0.5">
+              1
             </span>
-            <span className="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant mt-1">
-              Live Assets
-            </span>
+            <div className="flex flex-col">
+              <span className="font-bold text-on-surface">Find the Picture Slot</span>
+              <span className="text-[11px] text-on-surface-variant mt-0.5 leading-relaxed">
+                Scroll to the section you want to change below (such as the Hero Banner, Services, or Catering).
+              </span>
+            </div>
           </div>
-          <div className="flex flex-col items-center bg-surface-container-low/60 py-2 px-1 rounded-lg">
-            <span className="font-serif text-2xl font-bold text-stitch-secondary leading-none">
-              {slots.length}
+
+          <div className="p-3 rounded-lg bg-surface-container-low border border-surface-container-highest flex items-start gap-2.5">
+            <span className="w-5 h-5 rounded bg-stitch-secondary text-white text-[11px] font-bold flex items-center justify-center shrink-0 mt-0.5">
+              2
             </span>
-            <span className="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant mt-1">
-              Active Slots
-            </span>
+            <div className="flex flex-col">
+              <span className="font-bold text-on-surface">Click &ldquo;Change&rdquo; or &ldquo;Replace&rdquo;</span>
+              <span className="text-[11px] text-on-surface-variant mt-0.5 leading-relaxed">
+                Click the button on that picture card. A window will open where you can click <strong>Browse</strong> to pick a photo.
+              </span>
+            </div>
           </div>
-          <div className="flex flex-col items-center bg-surface-container-low/60 py-2 px-1 rounded-lg">
-            <span className="font-serif text-2xl font-bold text-stitch-primary leading-none">
-              100%
+
+          <div className="p-3 rounded-lg bg-surface-container-low border border-surface-container-highest flex items-start gap-2.5">
+            <span className="w-5 h-5 rounded bg-[#25D366] text-white text-[11px] font-bold flex items-center justify-center shrink-0 mt-0.5">
+              3
             </span>
-            <span className="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant mt-1">
-              Storage Safe
-            </span>
-          </div>
-          <div className="flex flex-col items-center bg-surface-container-low/60 py-2 px-1 rounded-lg">
-            <span className="font-serif text-2xl font-bold text-stitch-secondary leading-none">
-              Live
-            </span>
-            <span className="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant mt-1">
-              Synced
-            </span>
+            <div className="flex flex-col">
+              <span className="font-bold text-on-surface">Click &ldquo;Publish to Site&rdquo;</span>
+              <span className="text-[11px] text-on-surface-variant mt-0.5 leading-relaxed">
+                Your new photo is saved immediately and will be visible to everyone visiting your website!
+              </span>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Active Homepage Slots Section */}
       <section className="flex flex-col gap-4">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
           <div className="flex items-center gap-2">
             <span className="w-1.5 h-4 bg-stitch-primary rounded-full shrink-0" />
             <h2 className="font-serif text-xl sm:text-2xl font-semibold text-stitch-primary">
-              Active Homepage Slots
+              Active Website Picture Slots
             </h2>
           </div>
-          <span className="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant bg-surface-container-high px-2 py-0.5 rounded">
-            {slots.length} Configured
+          <span className="text-xs text-on-surface-variant pl-3.5 sm:pl-0">
+            Click <strong>Replace</strong> or <strong>Change</strong> on any card below to swap its picture.
           </span>
         </div>
 
@@ -354,21 +317,24 @@ export default function MediaStudioClient({
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-stitch-primary animate-pulse" />
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-stitch-primary">
-                    Slot 01: Hero Banner
+                  <span className="text-xs font-bold uppercase tracking-wider text-stitch-primary">
+                    Slot 1: Homepage Hero Banner
                   </span>
                 </div>
                 <span className="bg-stitch-primary-fixed text-stitch-primary font-bold text-[10px] uppercase tracking-wider px-2 py-0.5 rounded">
-                  Active on Homepage
+                  Showing on Homepage
                 </span>
               </div>
 
-              <h3 className="font-serif text-lg font-semibold text-on-surface mb-3">
-                {heroSlot.title || "Traditional Jebena Ceremony Showcase"}
+              <h3 className="font-serif text-base sm:text-lg font-semibold text-on-surface mb-1">
+                {heroSlot.title || "Traditional Coffee Ceremony Banner"}
               </h3>
+              <p className="text-xs text-on-surface-variant mb-3">
+                This is the large main photo that visitors see at the top of your website.
+              </p>
 
               {/* Preview Image Container */}
-              <div className="relative w-full h-56 sm:h-72 rounded-lg overflow-hidden bg-surface-container mb-3 group">
+              <div className="relative w-full h-56 sm:h-72 rounded-lg overflow-hidden bg-surface-container mb-3 group border border-surface-container-highest">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   alt={heroSlot.alt_text || "Hero Ceremony"}
@@ -379,40 +345,32 @@ export default function MediaStudioClient({
                   <div className="text-white flex items-center justify-between w-full">
                     <span className="text-xs text-white/90 flex items-center gap-1 font-medium">
                       <span className="material-symbols-outlined text-[16px]">aspect_ratio</span>
-                      16:9 Cinema Crop
+                      High-Definition Banner
                     </span>
                     <span className="text-[10px] font-bold uppercase bg-stitch-tertiary-fixed text-stitch-tertiary px-2 py-0.5 rounded">
-                      High Fidelity
+                      Active
                     </span>
                   </div>
                 </div>
               </div>
 
               {/* Slot Actions */}
-              <div className="grid grid-cols-3 gap-2">
+              <div className="grid grid-cols-2 gap-2">
                 <button
-                  className="flex items-center justify-center gap-1 py-2 px-2 bg-stitch-primary text-white rounded-lg text-xs font-semibold hover:bg-stitch-primary-container transition-colors shadow-sm"
+                  className="flex items-center justify-center gap-1.5 py-2.5 px-3 bg-stitch-primary text-white rounded-lg text-xs font-semibold hover:bg-stitch-primary-container transition-colors shadow-sm"
                   type="button"
                   onClick={() => handleOpenSlot(heroSlot)}
                 >
-                  <span className="material-symbols-outlined text-[16px]">sync</span>
-                  <span>Replace</span>
-                </button>
-                <button
-                  className="flex items-center justify-center gap-1 py-2 px-2 bg-surface-container-low text-on-surface-variant hover:text-stitch-primary rounded-lg text-xs font-semibold transition-colors"
-                  type="button"
-                  onClick={() => showToast("Aspect Ratio Tool: Locked to 16:9 Cinema Crop")}
-                >
-                  <span className="material-symbols-outlined text-[16px]">crop</span>
-                  <span>Crop</span>
+                  <span className="material-symbols-outlined text-base">sync</span>
+                  <span>Replace This Hero Picture</span>
                 </button>
                 <Link
-                  className="flex items-center justify-center gap-1 py-2 px-2 bg-surface-container-low text-on-surface-variant hover:text-stitch-primary rounded-lg text-xs font-semibold transition-colors text-center"
+                  className="flex items-center justify-center gap-1.5 py-2.5 px-3 bg-surface-container-low text-on-surface hover:text-stitch-primary rounded-lg text-xs font-semibold transition-colors border border-surface-container-highest text-center"
                   href="/#home"
                   target="_blank"
                 >
-                  <span className="material-symbols-outlined text-[16px]">visibility</span>
-                  <span>Preview</span>
+                  <span className="material-symbols-outlined text-base">visibility</span>
+                  <span>Preview on Live Site</span>
                 </Link>
               </div>
             </div>
@@ -426,7 +384,7 @@ export default function MediaStudioClient({
                 className="bg-surface-container-lowest rounded-xl p-4 border border-surface-container-highest shadow-sm flex items-center justify-between gap-3"
               >
                 <div className="flex items-center gap-3 min-w-0">
-                  <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden bg-surface-container shrink-0">
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden bg-surface-container shrink-0 border border-surface-container-highest">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       alt={slot.alt_text}
@@ -436,23 +394,24 @@ export default function MediaStudioClient({
                   </div>
                   <div className="flex flex-col min-w-0 justify-center">
                     <span className="text-[10px] font-bold uppercase tracking-wider text-stitch-secondary truncate">
-                      Slot 0{idx + 2}: {slot.section}
+                      Slot {idx + 2}: {slot.section} Section
                     </span>
                     <h4 className="font-serif font-semibold text-sm sm:text-base text-on-surface truncate">
                       {slot.title}
                     </h4>
-                    <p className="text-xs text-on-surface-variant truncate font-mono mt-0.5">
-                      {slot.slot_key}
+                    <p className="text-xs text-on-surface-variant truncate mt-0.5">
+                      Click Change to replace this image
                     </p>
                   </div>
                 </div>
 
                 <button
-                  className="py-1.5 px-3 bg-surface-container-low hover:bg-surface-container text-stitch-primary rounded-lg text-xs font-bold shrink-0 transition-colors border border-surface-container-highest"
+                  className="py-2 px-3 bg-surface-container-low hover:bg-surface-container text-stitch-primary rounded-lg text-xs font-bold shrink-0 transition-colors border border-surface-container-highest flex items-center gap-1"
                   type="button"
                   onClick={() => handleOpenSlot(slot)}
                 >
-                  Change
+                  <span className="material-symbols-outlined text-sm">edit</span>
+                  <span>Change</span>
                 </button>
               </div>
             ))}
@@ -461,20 +420,23 @@ export default function MediaStudioClient({
       </section>
 
       {/* Upload New Image Asset Section */}
-      <section className="flex flex-col gap-4 pt-2">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="w-1.5 h-4 bg-stitch-tertiary-fixed-dim rounded-full shrink-0" />
-            <h2 className="font-serif text-xl sm:text-2xl font-semibold text-stitch-primary">
-              Upload Asset
-            </h2>
-          </div>
-          <span className="text-[10px] font-bold uppercase tracking-wider text-stitch-secondary">
-            Cloud Storage
-          </span>
+      <section className="flex flex-col gap-3 pt-2">
+        <div className="flex items-center gap-2">
+          <span className="w-1.5 h-4 bg-stitch-tertiary-fixed-dim rounded-full shrink-0" />
+          <h2 className="font-serif text-xl sm:text-2xl font-semibold text-stitch-primary">
+            Upload a New Photo from Your Device
+          </h2>
         </div>
 
         <div className="bg-surface-container-lowest rounded-xl p-4 sm:p-5 border border-surface-container-highest shadow-sm flex flex-col gap-4">
+          {/* Step Guide for Upload */}
+          <div className="p-3 rounded-lg bg-surface-container-low text-xs text-on-surface-variant flex items-center gap-2">
+            <span className="material-symbols-outlined text-stitch-primary text-base shrink-0">info</span>
+            <span>
+              <strong>How to upload:</strong> Click the box below to pick a photo from your computer or phone. Once uploaded, it will be added to your Photo Library below so you can use it anytime.
+            </span>
+          </div>
+
           {/* Upload Dropzone */}
           <div
             className="cursor-pointer bg-surface-container-low rounded-lg p-6 text-center flex flex-col items-center justify-center transition-all hover:bg-surface-container-high border-2 border-dashed border-surface-container-highest hover:border-stitch-primary/30"
@@ -489,17 +451,17 @@ export default function MediaStudioClient({
               <span className="material-symbols-outlined text-[24px]">cloud_upload</span>
             </div>
             <p className="font-serif font-semibold text-base text-on-surface mb-1">
-              Select Photography Asset
+              Click Here to Choose a Photo
             </p>
-            <p className="text-xs text-on-surface-variant max-w-[280px] mx-auto">
-              Tap to upload high-res ceremony, academy, or estate photography (JPG, PNG, WebP up to 15MB)
+            <p className="text-xs text-on-surface-variant max-w-[300px] mx-auto">
+              Select JPG, PNG, or WebP images from your phone gallery or computer.
             </p>
           </div>
 
           {/* Destination Category Tags */}
           <div>
             <label className="text-xs font-bold uppercase tracking-wider text-on-surface block mb-2">
-              Assign Destination Tag
+              Select What This Photo Is For:
             </label>
             <div className="flex flex-wrap gap-1.5">
               {[
@@ -534,29 +496,29 @@ export default function MediaStudioClient({
             onClick={() => fileInputRef.current?.click()}
           >
             <span className="material-symbols-outlined text-[18px]">add_photo_alternate</span>
-            <span>{isUploading ? "Uploading..." : "Upload & Add to Media Library"}</span>
+            <span>{isUploading ? "Uploading..." : "Click to Upload Photo to Library"}</span>
           </button>
         </div>
       </section>
 
       {/* Media Library & Recent Uploads Gallery */}
-      <section className="flex flex-col gap-4 pt-2">
-        <div className="flex items-center justify-between">
+      <section className="flex flex-col gap-3 pt-2">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
           <div className="flex items-center gap-2">
             <span className="w-1.5 h-4 bg-stitch-secondary rounded-full shrink-0" />
             <h2 className="font-serif text-xl sm:text-2xl font-semibold text-stitch-primary">
-              Media Library
+              Photo Library
             </h2>
           </div>
-          <span className="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">
-            {libraryAssets.length} Assets Available
+          <span className="text-xs text-on-surface-variant pl-3.5 sm:pl-0">
+            Click <strong>Hero</strong> to set as main banner, or <strong>Slot</strong> to use for another section.
           </span>
         </div>
 
         {/* Filter Tabs */}
         <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
           {[
-            { id: "all", label: `All (${libraryAssets.length})` },
+            { id: "all", label: `All Photos (${libraryAssets.length})` },
             { id: "ceremony", label: "Ceremony" },
             { id: "training", label: "Training" },
             { id: "consulting", label: "Consulting" },
@@ -578,7 +540,7 @@ export default function MediaStudioClient({
           ))}
         </div>
 
-        {/* Gallery Grid (2 Columns on mobile, 3-4 Columns on desktop) */}
+        {/* Gallery Grid */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
           {filteredLibrary.map((item) => (
             <div
@@ -610,7 +572,7 @@ export default function MediaStudioClient({
                 <div className="flex items-center justify-between gap-1 mt-2 pt-2 bg-surface-container-low rounded-lg p-1">
                   <button
                     className="flex-1 py-1 text-center text-[10px] font-bold uppercase text-stitch-primary hover:bg-surface-container-highest rounded transition-colors"
-                    title="Assign to Hero Banner"
+                    title="Set as Homepage Hero Banner"
                     type="button"
                     onClick={() => assignAssetToHero(item)}
                   >
@@ -618,7 +580,7 @@ export default function MediaStudioClient({
                   </button>
                   <button
                     className="flex-1 py-1 text-center text-[10px] font-bold uppercase text-stitch-secondary hover:bg-surface-container-highest rounded transition-colors"
-                    title="Assign to Next Slot"
+                    title="Assign to another service slot"
                     type="button"
                     onClick={() => assignAssetToSlot(item)}
                   >
@@ -626,7 +588,7 @@ export default function MediaStudioClient({
                   </button>
                   <button
                     className="w-6 h-6 flex items-center justify-center text-error hover:bg-error-container/50 rounded transition-colors"
-                    title="Delete Asset"
+                    title="Delete from Library"
                     type="button"
                     onClick={() => deleteLibraryAsset(item.id)}
                   >
@@ -638,36 +600,6 @@ export default function MediaStudioClient({
           ))}
         </div>
       </section>
-
-      {/* Sticky Quick Publish Bar matching Stitch UI */}
-      <aside className="fixed bottom-16 md:bottom-6 inset-x-0 z-40 px-4 max-w-2xl mx-auto pointer-events-none">
-        <div className="pointer-events-auto bg-inverse-surface text-inverse-on-surface p-3 rounded-xl shadow-xl flex items-center justify-between gap-3 transition-transform duration-300">
-          <div className="flex items-center gap-2.5 min-w-0">
-            <span className="w-2.5 h-2.5 rounded-full bg-stitch-tertiary-fixed-dim animate-pulse shrink-0" />
-            <div className="min-w-0">
-              <p className="text-xs font-semibold text-inverse-on-surface truncate">
-                {pendingChanges > 0
-                  ? `${pendingChanges} unsaved changes staged`
-                  : "All media assets synchronized live"}
-              </p>
-              <p className="text-[10px] text-stitch-outline-variant uppercase tracking-wider">
-                Staged for CloudFront &amp; CDN
-              </p>
-            </div>
-          </div>
-          <button
-            className="shrink-0 py-1.5 px-3 bg-stitch-primary-fixed text-stitch-primary hover:bg-stitch-primary-fixed-dim rounded-lg text-xs font-bold flex items-center gap-1 transition-colors"
-            type="button"
-            onClick={() => {
-              setPendingChanges(0);
-              showToast("Published live! CDN cache invalidated.");
-            }}
-          >
-            <span className="material-symbols-outlined text-[16px]">rocket_launch</span>
-            <span>Publish Live</span>
-          </button>
-        </div>
-      </aside>
 
       {/* Edit Slot Modal */}
       {activeSlot && (
@@ -681,7 +613,7 @@ export default function MediaStudioClient({
             <div className="flex items-center justify-between border-b border-surface-container-highest pb-3">
               <div>
                 <span className="text-[10px] uppercase tracking-wider text-stitch-secondary font-bold">
-                  Media Assignment
+                  Step 2 of 2: Change Photo
                 </span>
                 <h3 className="font-serif text-lg font-semibold text-stitch-primary mt-0.5" id="edit-slot-title">
                   {activeSlot.title}
@@ -713,32 +645,35 @@ export default function MediaStudioClient({
             )}
 
             {/* Current Image Preview */}
-            <div className="relative aspect-video w-full rounded-lg overflow-hidden bg-surface-container border border-surface-container-highest">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                alt="Preview"
-                className="w-full h-full object-cover"
-                src={customUrl || activeSlot.image_url}
-              />
+            <div className="flex flex-col gap-1">
+              <span className="text-xs font-semibold text-on-surface">Photo Preview:</span>
+              <div className="relative aspect-video w-full rounded-lg overflow-hidden bg-surface-container border border-surface-container-highest">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  alt="Preview"
+                  className="w-full h-full object-cover"
+                  src={customUrl || activeSlot.image_url}
+                />
+              </div>
             </div>
 
             {/* Upload or URL Inputs */}
             <div className="flex flex-col gap-3.5 text-xs">
               <div className="flex flex-col gap-1">
                 <label className="text-on-surface font-semibold" htmlFor="custom-url-input">
-                  Image Path or URL
+                  Select a New Photo:
                 </label>
                 <div className="flex gap-2">
                   <input
                     className="flex-1 px-3 py-2 rounded-lg bg-surface-container-low border border-surface-container-highest text-xs text-on-surface font-mono outline-none focus:border-stitch-primary"
                     id="custom-url-input"
-                    placeholder="/admin/slot-jebena-hero.jpg or /uploads/..."
+                    placeholder="Click Browse to choose a photo..."
                     type="text"
                     value={customUrl}
                     onChange={(e) => setCustomUrl(e.target.value)}
                   />
                   <button
-                    className="px-3 py-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-semibold text-xs border border-surface-container-highest shrink-0 flex items-center gap-1 transition-colors"
+                    className="px-3 py-2 rounded-lg bg-stitch-primary text-white font-semibold text-xs shrink-0 flex items-center gap-1 transition-colors hover:bg-stitch-primary-container"
                     type="button"
                     onClick={() => fileInputRef.current?.click()}
                   >
@@ -746,11 +681,14 @@ export default function MediaStudioClient({
                     <span>Browse</span>
                   </button>
                 </div>
+                <span className="text-[11px] text-on-surface-variant">
+                  Tip: Click Browse to pick a photo from your computer or phone.
+                </span>
               </div>
 
               <div className="flex flex-col gap-1">
                 <label className="text-on-surface font-semibold" htmlFor="custom-title-input">
-                  Display Title
+                  Title (Optional)
                 </label>
                 <input
                   className="px-3 py-2 rounded-lg bg-surface-container-low border border-surface-container-highest text-xs text-on-surface outline-none focus:border-stitch-primary"
@@ -758,19 +696,6 @@ export default function MediaStudioClient({
                   type="text"
                   value={customTitle}
                   onChange={(e) => setCustomTitle(e.target.value)}
-                />
-              </div>
-
-              <div className="flex flex-col gap-1">
-                <label className="text-on-surface font-semibold" htmlFor="custom-alt-input">
-                  Alt Accessibility Text
-                </label>
-                <input
-                  className="px-3 py-2 rounded-lg bg-surface-container-low border border-surface-container-highest text-xs text-on-surface outline-none focus:border-stitch-primary"
-                  id="custom-alt-input"
-                  type="text"
-                  value={customAlt}
-                  onChange={(e) => setCustomAlt(e.target.value)}
                 />
               </div>
             </div>
