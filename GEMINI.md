@@ -74,9 +74,11 @@
    - **Pre-Catering Service Checkpoint Tag**: `pre-catering-service` (Commit: `81b9eb6`)
    - **Pre-Catering Dedicated Showcase Checkpoint Tag**: `pre-catering-dedicated-showcase` (Commit: `1aa0111`)
    - **Pre-Admin Dashboard Checkpoint Tag**: `pre-admin-dashboard` (Commit: `0cd6a0a`)
-   - **Backup Branches**: `backup-stable-baseline`, `backup-pre-hero-media-carousel`, `backup-pre-opening-motion-choreography`, `backup-pre-chronological-resequence`, `backup-pre-debox-transformation`, `backup-pre-ui-ux-refinements`, `backup-pre-catering-service`, `backup-pre-catering-dedicated-showcase`, `backup-pre-admin-dashboard` (Pushed to GitHub `origin`)
+   - **Pre-Stitch Admin UI Checkpoint Tag**: `pre-stitch-admin-ui` (Commit: `871f5a3`)
+   - **Backup Branches**: `backup-stable-baseline`, `backup-pre-hero-media-carousel`, `backup-pre-opening-motion-choreography`, `backup-pre-chronological-resequence`, `backup-pre-debox-transformation`, `backup-pre-ui-ux-refinements`, `backup-pre-catering-service`, `backup-pre-catering-dedicated-showcase`, `backup-pre-admin-dashboard`, `backup-stitch-admin-ui` (Pushed to GitHub `origin`)
    - **Remote Synchronization**: Fully backed up on remote GitHub repository.
    - **One-Prompt Revert Protocol**:
+     - To revert to the state before the Stitch admin UI redesign: `git reset --hard pre-stitch-admin-ui && git clean -fd`
      - To revert to the state before the admin dashboard: `git reset --hard pre-admin-dashboard && git clean -fd`
      - To revert to the state before the dedicated catering showcase: `git reset --hard pre-catering-dedicated-showcase && git clean -fd`
      - To revert to the state before Catering Services was added: `git reset --hard pre-catering-service && git clean -fd`
@@ -208,4 +210,26 @@
      - Conversation state preserved via client-side `localStorage` token.
      - Admin split-pane inbox with real-time polling, thread history, unread counters, and quick canned responses.
    - **Strict Rule Preservation**: ZERO text pill badges, ZERO text bloat, unclipped original ceremony photo on Slide 0, phone strictly `+251925451711`.
+
+## Stitch Modern Editorial Admin UI & Media Asset Architecture
+16. **Editorial Minimalist Admin Suite & Media Studio**:
+   - **Visual Language & Palette**:
+     - Surface foundation: Warm porcelain canvas (`#fcf9f8`) with crisp white card containers (`#ffffff`), hairline structural borders (`#e5e2e1`), and soft ambient shadows (`shadow-sm`).
+     - Chromatic anchors: Forest Coffee Green (`#002f19` / `#0d472a`), Espresso Roast (`#745853` / `#3e2723`), Harvest Gold (`#f5b700` / `#ffdea0`), and Coffee Cherry Crimson alerts (`#ba1a1a`).
+     - Typography: EB Garamond (`font-serif`) for authoritative editorial headings paired with Plus Jakarta Sans for operational telemetry and form controls.
+     - Section headers feature vertical indicator pips (`w-1.5 h-4 bg-stitch-primary rounded-full`).
+   - **Responsive Dual-Mode Navigation Architecture**:
+     - **Desktop Navigation (>= md)**: Fixed left architectural sidebar with brand monogram (`ES`), status dot, active tab highlight (`bg-stitch-primary text-white`), and quick live site link.
+     - **Mobile Navigation (< md)**: Fixed bottom glassmorphic tab bar (`h-16 bg-surface-container-lowest/95 backdrop-blur-xl border-t border-surface-container-highest`) with 5 thumb destinations (`Overview`, `Inquiries`, `Media`, `Training`, `Chat`).
+     - **Sticky Top Bar**: Live site indicator dot, section title, quick utility buttons (tune, notifications), and executive admin profile avatar (`/admin/avatar.jpg`).
+   - **Integrated Media Studio & Asset Library (`/admin/media`)**:
+     - Top asset telemetry card with mode switcher (Draft vs Live) and 4-metric overview (Live Assets, Active Slots, Storage, Synced).
+     - Active Homepage Slots: Featured Slot 01 Hero Banner card with 16:9 cinema crop preview, gradient overlay, and action buttons (Replace, Crop, Preview); compact horizontal cards for Flagship Service, Academy, Sourcing, and Catering.
+     - Cloud storage upload dropzone with category destination tags.
+     - Media Library gallery with category filter tabs and instant slot assignment actions (`Hero`, `Slot`, `Delete`).
+     - Sticky bottom publish bar with unsaved change counter and CloudFront CDN sync indicator.
+   - **Retained Full Backend Capabilities**:
+     - 100% of executive telemetry, CRM lifecycle filtering, Supabase database operations, academy cohort scheduling, and asynchronous concierge chat messaging are preserved.
+   - **Strict Rule Preservation**: Strictly ZERO text pill badges (`rounded-full` text tags), ZERO text bloat, Slide 0 ceremony photo intact, official phone strictly `+251925451711`.
+
 

@@ -120,21 +120,21 @@ export default function AdminChatClient({
   ];
 
   return (
-    <div className="h-[750px] max-h-[80vh] rounded-2xl bg-stone-900 border border-stone-800 overflow-hidden flex flex-col sm:flex-row shadow-sm">
+    <div className="h-[750px] max-h-[80vh] rounded-xl bg-surface-container-lowest border border-surface-container-highest overflow-hidden flex flex-col sm:flex-row shadow-sm">
       {/* Threads Sidebar */}
-      <div className="w-full sm:w-80 border-r border-stone-800 bg-stone-950/40 flex flex-col shrink-0">
-        <div className="p-4 border-b border-stone-800 flex items-center justify-between">
-          <span className="font-serif font-bold text-sm text-white">
+      <div className="w-full sm:w-80 border-r border-surface-container-highest bg-surface-container-low/40 flex flex-col shrink-0">
+        <div className="p-3.5 border-b border-surface-container-highest bg-surface-container-lowest flex items-center justify-between">
+          <span className="font-serif font-semibold text-xs text-stitch-primary uppercase tracking-wider">
             Concierge Conversations
           </span>
-          <span className="text-xs text-stone-400 font-mono">
+          <span className="text-[11px] text-on-surface-variant font-mono font-bold">
             {threads.length} Total
           </span>
         </div>
 
-        <div className="flex-1 overflow-y-auto divide-y divide-stone-800/60">
+        <div className="flex-1 overflow-y-auto divide-y divide-surface-container-highest">
           {threads.length === 0 ? (
-            <div className="p-6 text-center text-xs text-stone-500">
+            <div className="p-6 text-center text-xs text-on-surface-variant">
               No chat conversations initiated yet. Visitor messages from the public site will arrive here.
             </div>
           ) : (
@@ -143,19 +143,19 @@ export default function AdminChatClient({
               return (
                 <button
                   key={thread.id}
-                  className={`w-full p-4 text-left flex flex-col gap-1.5 transition-colors relative ${
+                  className={`w-full p-3.5 text-left flex flex-col gap-1 transition-colors relative ${
                     isSelected
-                      ? "bg-brand-green/15 border-l-2 border-brand-yellow"
-                      : "hover:bg-stone-800/40"
+                      ? "bg-surface-container-lowest border-l-3 border-stitch-primary shadow-xs"
+                      : "hover:bg-surface-container-low/60"
                   }`}
                   type="button"
                   onClick={() => setSelectedThreadId(thread.id)}
                 >
                   <div className="flex items-center justify-between">
-                    <span className="font-semibold text-xs text-white truncate max-w-[170px]">
+                    <span className="font-semibold text-xs text-on-surface truncate max-w-[170px]">
                       {thread.visitor_name}
                     </span>
-                    <span className="text-[10px] text-stone-500 font-mono">
+                    <span className="text-[10px] text-on-surface-variant font-mono">
                       {new Date(thread.last_message_at).toLocaleTimeString([], {
                         hour: "2-digit",
                         minute: "2-digit",
@@ -163,16 +163,16 @@ export default function AdminChatClient({
                     </span>
                   </div>
 
-                  <p className="text-[11px] text-stone-400 truncate leading-snug">
+                  <p className="text-[11px] text-on-surface-variant truncate leading-snug">
                     {thread.latest_message}
                   </p>
 
-                  <div className="flex items-center justify-between pt-1">
-                    <span className="text-[10px] text-stone-500 truncate max-w-[160px]">
+                  <div className="flex items-center justify-between pt-0.5">
+                    <span className="text-[10px] text-on-surface-variant truncate max-w-[160px] font-mono">
                       {thread.visitor_contact || "Anonymous Guest"}
                     </span>
                     {thread.unread_count > 0 && (
-                      <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-brand-yellow text-stone-950">
+                      <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-stitch-primary text-white">
                         {thread.unread_count} new
                       </span>
                     )}
@@ -185,20 +185,20 @@ export default function AdminChatClient({
       </div>
 
       {/* Conversation Thread & Reply Panel */}
-      <div className="flex-1 flex flex-col bg-stone-900 min-w-0">
+      <div className="flex-1 flex flex-col bg-surface min-w-0">
         {selectedThread ? (
           <>
             {/* Thread Header */}
-            <div className="px-6 py-4 border-b border-stone-800 flex items-center justify-between bg-stone-900/60">
+            <div className="px-5 py-3.5 border-b border-surface-container-highest flex items-center justify-between bg-surface-container-lowest">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-brand-green/20 border border-brand-green/40 text-brand-yellow flex items-center justify-center font-bold text-sm">
+                <div className="w-9 h-9 rounded-lg bg-surface-container-low border border-surface-container-highest text-stitch-primary flex items-center justify-center font-serif font-bold text-sm">
                   {selectedThread.visitor_name.substring(0, 2).toUpperCase()}
                 </div>
                 <div className="flex flex-col">
-                  <span className="font-serif font-bold text-sm text-white">
+                  <span className="font-serif font-semibold text-sm text-stitch-primary">
                     {selectedThread.visitor_name}
                   </span>
-                  <span className="text-xs text-stone-400 font-mono">
+                  <span className="text-xs text-on-surface-variant font-mono">
                     {selectedThread.visitor_contact || "Contact not provided yet"}
                   </span>
                 </div>
@@ -206,7 +206,7 @@ export default function AdminChatClient({
 
               {selectedThread.visitor_contact && (
                 <a
-                  className="px-3 py-1.5 rounded-lg bg-[#25D366]/10 text-[#25D366] hover:bg-[#25D366] hover:text-white transition-colors text-xs font-semibold flex items-center gap-1.5"
+                  className="px-3 py-1.5 rounded-lg bg-[#25D366]/15 text-[#0d472a] hover:bg-[#25D366] hover:text-white transition-colors text-xs font-semibold flex items-center gap-1.5"
                   href={`https://wa.me/${selectedThread.visitor_contact.replace(/[^0-9]/g, "")}`}
                   rel="noopener noreferrer"
                   target="_blank"
@@ -218,13 +218,13 @@ export default function AdminChatClient({
             </div>
 
             {/* Messages Stream */}
-            <div className="flex-1 p-6 overflow-y-auto flex flex-col gap-4 bg-stone-950/20">
+            <div className="flex-1 p-5 overflow-y-auto flex flex-col gap-3.5 bg-surface-container-low/30">
               {isLoadingMessages ? (
-                <div className="py-12 text-center text-xs text-stone-500">
+                <div className="py-12 text-center text-xs text-on-surface-variant">
                   Loading conversation history...
                 </div>
               ) : messages.length === 0 ? (
-                <div className="py-12 text-center text-xs text-stone-500">
+                <div className="py-12 text-center text-xs text-on-surface-variant">
                   No messages exchanged in this thread yet.
                 </div>
               ) : (
@@ -238,18 +238,18 @@ export default function AdminChatClient({
                       }`}
                     >
                       <div
-                        className={`p-4 rounded-2xl text-xs leading-relaxed shadow-sm ${
+                        className={`p-3.5 rounded-2xl text-xs leading-relaxed shadow-xs ${
                           isAdmin
-                            ? "rounded-tr-sm bg-brand-green text-white"
-                            : "rounded-tl-sm bg-stone-800 border border-stone-700 text-stone-100"
+                            ? "rounded-tr-sm bg-stitch-primary text-white"
+                            : "rounded-tl-sm bg-surface-container-lowest border border-surface-container-highest text-on-surface"
                         }`}
                       >
-                        <span className="font-semibold block mb-1 text-[11px] opacity-80">
+                        <span className="font-bold block mb-1 text-[10px] opacity-80 uppercase tracking-wider">
                           {isAdmin ? "You (Admin Desk)" : selectedThread.visitor_name}
                         </span>
                         {msg.content}
                       </div>
-                      <span className="text-[10px] text-stone-500 mt-1 px-1">
+                      <span className="text-[10px] text-on-surface-variant font-mono mt-1 px-1">
                         {new Date(msg.created_at).toLocaleTimeString([], {
                           hour: "2-digit",
                           minute: "2-digit",
@@ -262,28 +262,29 @@ export default function AdminChatClient({
               <div ref={messagesEndRef} />
             </div>
 
-            {/* Canned Responses */}
-            <div className="px-6 py-2 bg-stone-950/40 border-t border-stone-800/80 flex items-center gap-2 overflow-x-auto scrollbar-none">
-              <span className="text-[10px] uppercase font-bold text-stone-500 shrink-0">Quick Canned:</span>
-              {cannedResponses.map((cr, idx) => (
+            {/* Canned Quick Replies */}
+            <div className="px-4 py-2 border-t border-surface-container-highest bg-surface-container-lowest flex items-center gap-2 overflow-x-auto scrollbar-none">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant whitespace-nowrap">
+                Quick Reply:
+              </span>
+              {cannedResponses.map((canned, i) => (
                 <button
-                  key={idx}
-                  className="px-2.5 py-1 rounded-md bg-stone-800 hover:bg-stone-700 text-stone-300 text-[11px] whitespace-nowrap transition-colors border border-stone-700 shrink-0"
+                  key={i}
+                  className="px-2.5 py-1 rounded bg-surface-container-low hover:bg-surface-container text-stitch-primary text-[11px] whitespace-nowrap transition-colors border border-surface-container-highest font-medium"
                   type="button"
-                  onClick={() => setReplyText(cr)}
+                  onClick={() => setReplyText(canned)}
                 >
-                  <span>{cr.substring(0, 32)}...</span>
+                  {canned.substring(0, 32)}...
                 </button>
               ))}
             </div>
 
             {/* Reply Input Bar */}
-            <div className="p-4 bg-stone-900 border-t border-stone-800 flex items-center gap-3">
-              <input
-                className="flex-1 px-4 py-3 rounded-xl bg-stone-800 border border-stone-700 text-xs text-white placeholder:text-stone-500 outline-none focus:border-brand-yellow transition-all"
-                disabled={isPending}
-                placeholder="Type your response to the visitor..."
-                type="text"
+            <div className="p-3.5 border-t border-surface-container-highest bg-surface-container-lowest flex items-center gap-2">
+              <textarea
+                className="flex-1 px-3 py-2 rounded-lg bg-surface-container-low border border-surface-container-highest text-xs text-on-surface outline-none focus:border-stitch-primary resize-none placeholder:text-on-surface-variant"
+                placeholder="Type your response to the visitor (they will receive it asynchronously)..."
+                rows={1}
                 value={replyText}
                 onChange={(e) => setReplyText(e.target.value)}
                 onKeyDown={(e) => {
@@ -294,19 +295,23 @@ export default function AdminChatClient({
                 }}
               />
               <button
-                className="px-6 py-3 rounded-xl bg-brand-yellow hover:bg-brand-yellow-light text-stone-950 font-bold text-xs uppercase tracking-wider transition-all shadow-cozy flex items-center gap-2 active:scale-95 disabled:opacity-50 shrink-0"
-                disabled={!replyText.trim() || isPending}
+                className="px-4 py-2 rounded-lg bg-stitch-primary hover:bg-stitch-primary-container text-white text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 transition-colors disabled:opacity-50 shrink-0 shadow-sm"
+                disabled={isPending || !replyText.trim()}
                 type="button"
                 onClick={handleSendReply}
               >
-                <span>{isPending ? "Sending..." : "Send Reply"}</span>
-                <span className="material-symbols-outlined text-base">send</span>
+                <span>Send</span>
+                <span className="material-symbols-outlined text-sm">send</span>
               </button>
             </div>
           </>
         ) : (
-          <div className="flex-1 flex items-center justify-center text-xs text-stone-500">
-            Select a conversation on the left to review messages and reply.
+          <div className="flex-1 flex flex-col items-center justify-center p-8 text-center text-on-surface-variant">
+            <span className="material-symbols-outlined text-4xl text-outline mb-2">forum</span>
+            <p className="text-sm font-semibold text-on-surface">No Conversation Selected</p>
+            <p className="text-xs text-on-surface-variant mt-1 max-w-xs">
+              Select a visitor conversation from the left inbox to view messages and reply.
+            </p>
           </div>
         )}
       </div>

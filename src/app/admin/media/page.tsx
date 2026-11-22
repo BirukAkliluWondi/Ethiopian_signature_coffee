@@ -7,12 +7,15 @@ export default async function AdminMediaPage() {
 
   return (
     <div className="flex flex-col gap-6 max-w-7xl mx-auto">
-      <div>
-        <h1 className="font-serif text-2xl sm:text-3xl font-bold text-white">
-          Visual Media Studio &amp; CMS
-        </h1>
-        <p className="text-xs text-stone-400 mt-1">
-          Upload new pictures to local server storage, replace existing carousel slides, and update photography across all sections.
+      <div className="flex flex-col gap-1">
+        <div className="flex items-center gap-2">
+          <span className="w-1.5 h-4 bg-stitch-primary rounded-full shrink-0" />
+          <h1 className="font-serif text-2xl sm:text-3xl font-semibold text-stitch-primary">
+            Media &amp; Assets Studio
+          </h1>
+        </div>
+        <p className="text-xs text-on-surface-variant pl-3.5">
+          Upload new pictures to local server storage, replace existing carousel slides, and manage photography across all sections.
         </p>
       </div>
 
