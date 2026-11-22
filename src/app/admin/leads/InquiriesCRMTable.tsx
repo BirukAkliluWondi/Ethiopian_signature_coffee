@@ -23,6 +23,7 @@ export default function InquiriesCRMTable({
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedService, setSelectedService] = useState("all");
   const [selectedInquiry, setSelectedInquiry] = useState<Inquiry | null>(null);
+  const [tabFilter, setTabFilter] = useState<"all" | "new" | "with_notes">("all");
   const [isPending, startTransition] = useTransition();
 
   const services = Array.from(
@@ -33,12 +34,20 @@ export default function InquiriesCRMTable({
     const matchesSearch =
       inq.full_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       inq.phone.includes(searchTerm) ||
-      (inq.email && inq.email.toLowerCase().includes(searchTerm.toLowerCase()));
+      (inq.email && inq.email.toLowerCase().includes(searchTerm.toLowerCase())) ||
+      (inq.notes && inq.notes.toLowerCase().includes(searchTerm.toLowerCase()));
 
     const matchesService =
       selectedService === "all" || inq.service === selectedService;
 
-    return matchesSearch && matchesService;
+    const matchesTab =
+      tabFilter === "all"
+        ? true
+        : tabFilter === "new"
+        ? (inq.status || "new") === "new"
+        : Boolean(inq.notes && inq.notes.trim().length > 0);
+
+    return matchesSearch && matchesService && matchesTab;
   });
 
   const handleStatusChange = (id: string, newStatus: string) => {
@@ -50,6 +59,9 @@ export default function InquiriesCRMTable({
     });
   };
 
+  const newCount = inquiries.filter((i) => (i.status || "new") === "new").length;
+  const withNotesCount = inquiries.filter((i) => i.notes && i.notes.trim().length > 0).length;
+
   return (
     <div className="flex flex-col gap-5">
       {/* Step-by-Step Guide for Inquiries */}
@@ -59,7 +71,7 @@ export default function InquiriesCRMTable({
             ?
           </span>
           <h2 className="font-semibold text-xs text-stitch-primary uppercase tracking-wider">
-            Step-by-Step Guide: How to Reply to Website Leads
+            Where to Find &amp; Reply to &ldquo;Contact Me&rdquo; Form Texts
           </h2>
         </div>
 
@@ -69,9 +81,9 @@ export default function InquiriesCRMTable({
               1
             </span>
             <div className="flex flex-col">
-              <span className="font-bold text-on-surface">Review Details</span>
+              <span className="font-bold text-on-surface">Read the Client&apos;s Message</span>
               <span className="text-[11px] text-on-surface-variant mt-0.5 leading-relaxed">
-                Check the client&apos;s name and what service they need. Click <strong>View note</strong> to read any extra message.
+                Look at the <strong>Message Text</strong> column in the table below. Every note written in the &ldquo;Contact Me&rdquo; box appears right here.
               </span>
             </div>
           </div>
@@ -81,9 +93,9 @@ export default function InquiriesCRMTable({
               2
             </span>
             <div className="flex flex-col">
-              <span className="font-bold text-on-surface">Chat on WhatsApp</span>
+              <span className="font-bold text-on-surface">Click &ldquo;WhatsApp&rdquo; to Reply</span>
               <span className="text-[11px] text-on-surface-variant mt-0.5 leading-relaxed">
-                Click the green <strong>WhatsApp</strong> button to chat directly on your phone or PC with a pre-filled greeting.
+                Click the green <strong>WhatsApp</strong> button on any row. It immediately opens a chat on your phone or PC addressed to that person.
               </span>
             </div>
           </div>
@@ -93,44 +105,85 @@ export default function InquiriesCRMTable({
               3
             </span>
             <div className="flex flex-col">
-              <span className="font-bold text-on-surface">Update Status</span>
+              <span className="font-bold text-on-surface">Mark as &ldquo;Contacted&rdquo;</span>
               <span className="text-[11px] text-on-surface-variant mt-0.5 leading-relaxed">
-                After messaging them, change the status dropdown to <strong>Contacted</strong> or <strong>Scheduled</strong>.
+                After messaging them, switch their status dropdown to <strong>Contacted</strong> to keep track of answered inquiries.
               </span>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Controls: Search and Filters */}
-      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 p-4 rounded-xl bg-surface-container-lowest border border-surface-container-highest shadow-sm">
-        <div className="relative flex-1">
-          <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-lg">
-            search
-          </span>
-          <input
-            className="w-full pl-9 pr-4 py-2 rounded-lg bg-surface-container-low border border-surface-container-highest text-xs text-on-surface placeholder:text-on-surface-variant outline-none focus:border-stitch-primary"
-            placeholder="Type a name, phone number, or email to find a client..."
-            type="text"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
+      {/* Filter Tabs & Search Controls */}
+      <div className="flex flex-col gap-3 p-4 rounded-xl bg-surface-container-lowest border border-surface-container-highest shadow-sm">
+        {/* Quick Filter Tabs */}
+        <div className="flex items-center gap-2 border-b border-surface-container-highest pb-3 overflow-x-auto scrollbar-none">
+          <button
+            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors shrink-0 ${
+              tabFilter === "all"
+                ? "bg-stitch-primary text-white shadow-xs"
+                : "bg-surface-container-low text-on-surface-variant hover:text-stitch-primary"
+            }`}
+            type="button"
+            onClick={() => setTabFilter("all")}
+          >
+            All Messages ({inquiries.length})
+          </button>
+          <button
+            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors shrink-0 flex items-center gap-1.5 ${
+              tabFilter === "new"
+                ? "bg-stitch-primary text-white shadow-xs"
+                : "bg-surface-container-low text-on-surface-variant hover:text-stitch-primary"
+            }`}
+            type="button"
+            onClick={() => setTabFilter("new")}
+          >
+            <span className="w-2 h-2 rounded-full bg-stitch-tertiary-fixed-dim" />
+            <span>New / Needs Reply ({newCount})</span>
+          </button>
+          <button
+            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors shrink-0 ${
+              tabFilter === "with_notes"
+                ? "bg-stitch-primary text-white shadow-xs"
+                : "bg-surface-container-low text-on-surface-variant hover:text-stitch-primary"
+            }`}
+            type="button"
+            onClick={() => setTabFilter("with_notes")}
+          >
+            With Written Notes ({withNotesCount})
+          </button>
         </div>
 
-        <div className="flex items-center gap-2">
-          <span className="text-xs text-on-surface-variant whitespace-nowrap font-medium">Filter by service:</span>
-          <select
-            className="px-3 py-2 rounded-lg bg-surface-container-low border border-surface-container-highest text-xs text-on-surface outline-none focus:border-stitch-primary"
-            value={selectedService}
-            onChange={(e) => setSelectedService(e.target.value)}
-          >
-            <option value="all">Show All Services</option>
-            {services.map((s) => (
-              <option key={s} value={s}>
-                {s}
-              </option>
-            ))}
-          </select>
+        {/* Search and Service Select */}
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-1">
+          <div className="relative flex-1">
+            <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-lg">
+              search
+            </span>
+            <input
+              className="w-full pl-9 pr-4 py-2 rounded-lg bg-surface-container-low border border-surface-container-highest text-xs text-on-surface placeholder:text-on-surface-variant outline-none focus:border-stitch-primary"
+              placeholder="Search by client name, message text, phone, or email..."
+              type="text"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
+
+          <div className="flex items-center gap-2">
+            <span className="text-xs text-on-surface-variant whitespace-nowrap font-medium">Service:</span>
+            <select
+              className="px-3 py-2 rounded-lg bg-surface-container-low border border-surface-container-highest text-xs text-on-surface outline-none focus:border-stitch-primary"
+              value={selectedService}
+              onChange={(e) => setSelectedService(e.target.value)}
+            >
+              <option value="all">Show All Services</option>
+              {services.map((s) => (
+                <option key={s} value={s}>
+                  {s}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
       </div>
 
@@ -140,47 +193,79 @@ export default function InquiriesCRMTable({
           <table className="w-full text-left text-xs">
             <thead>
               <tr className="border-b border-surface-container-highest bg-surface-container-low/70 text-on-surface-variant uppercase tracking-wider text-[10px]">
-                <th className="p-3.5 font-bold">Client Name &amp; Note</th>
+                <th className="p-3.5 font-bold">Client Name</th>
+                <th className="p-3.5 font-bold min-w-[280px]">Message Text from &ldquo;Contact Me&rdquo; Form</th>
                 <th className="p-3.5 font-bold">Service Requested</th>
                 <th className="p-3.5 font-bold">Phone &amp; Email</th>
                 <th className="p-3.5 font-bold">Date Received</th>
-                <th className="p-3.5 font-bold">Progress Status</th>
+                <th className="p-3.5 font-bold">Status</th>
                 <th className="p-3.5 font-bold text-right">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-surface-container-highest">
               {filtered.length === 0 ? (
                 <tr>
-                  <td className="p-8 text-center text-on-surface-variant" colSpan={6}>
-                    No client inquiries match your search. Try typing a different name or clearing the search box.
+                  <td className="p-8 text-center text-on-surface-variant" colSpan={7}>
+                    No messages match your search or filter. Try clearing the search box.
                   </td>
                 </tr>
               ) : (
                 filtered.map((inq) => (
                   <tr key={inq.id} className="hover:bg-surface-container-low/50 transition-colors">
-                    <td className="p-3.5 font-semibold text-on-surface">
+                    {/* Client Name */}
+                    <td className="p-3.5 font-semibold text-on-surface whitespace-nowrap align-top">
                       <div>{inq.full_name}</div>
-                      {inq.notes && (
-                        <button
-                          className="text-[11px] text-stitch-secondary hover:underline mt-0.5 block text-left font-medium"
-                          type="button"
-                          onClick={() => setSelectedInquiry(inq)}
-                        >
-                          View client note &rarr;
-                        </button>
+                      <span className="text-[10px] text-on-surface-variant uppercase tracking-wider mt-0.5 block">
+                        via Contact Form
+                      </span>
+                    </td>
+
+                    {/* Prominent Message Text Column */}
+                    <td className="p-3.5 align-top max-w-md">
+                      {inq.notes ? (
+                        <div className="p-2.5 rounded-lg bg-surface-container-low border border-surface-container-highest flex flex-col gap-1">
+                          <div className="flex items-center justify-between gap-1 text-[10px] font-bold text-stitch-primary uppercase tracking-wider">
+                            <div className="flex items-center gap-1">
+                              <span className="material-symbols-outlined text-xs">chat_bubble</span>
+                              <span>Written Message:</span>
+                            </div>
+                            <button
+                              className="text-stitch-secondary hover:underline normal-case font-semibold"
+                              type="button"
+                              onClick={() => setSelectedInquiry(inq)}
+                            >
+                              Expand
+                            </button>
+                          </div>
+                          <p className="text-xs text-on-surface line-clamp-3 leading-relaxed whitespace-pre-wrap">
+                            {inq.notes}
+                          </p>
+                        </div>
+                      ) : (
+                        <div className="text-[11px] text-on-surface-variant italic py-1">
+                          (No extra text written. Client requested: &ldquo;{inq.service}&rdquo;)
+                        </div>
                       )}
                     </td>
-                    <td className="p-3.5 text-on-surface-variant font-medium">
+
+                    {/* Service */}
+                    <td className="p-3.5 text-on-surface-variant font-medium whitespace-nowrap align-top">
                       {inq.service}
                     </td>
-                    <td className="p-3.5 text-on-surface-variant">
-                      <div className="font-mono text-xs text-on-surface">{inq.phone}</div>
-                      {inq.email && <div className="text-[11px] text-on-surface-variant">{inq.email}</div>}
+
+                    {/* Contact details */}
+                    <td className="p-3.5 text-on-surface-variant whitespace-nowrap align-top">
+                      <div className="font-mono text-xs text-on-surface font-semibold">{inq.phone}</div>
+                      {inq.email && <div className="text-[11px] text-on-surface-variant mt-0.5">{inq.email}</div>}
                     </td>
-                    <td className="p-3.5 text-on-surface-variant">
+
+                    {/* Date */}
+                    <td className="p-3.5 text-on-surface-variant whitespace-nowrap align-top">
                       {new Date(inq.created_at).toLocaleDateString()}
                     </td>
-                    <td className="p-3.5">
+
+                    {/* Status */}
+                    <td className="p-3.5 whitespace-nowrap align-top">
                       <select
                         className="px-2.5 py-1 rounded-md text-[11px] font-bold uppercase tracking-wider bg-surface-container-low border border-surface-container-highest text-stitch-primary outline-none focus:border-stitch-primary"
                         value={inq.status || "new"}
@@ -193,7 +278,9 @@ export default function InquiriesCRMTable({
                         <option value="archived">Archived</option>
                       </select>
                     </td>
-                    <td className="p-3.5 text-right">
+
+                    {/* Actions */}
+                    <td className="p-3.5 text-right whitespace-nowrap align-top">
                       <div className="inline-flex items-center gap-1.5">
                         <button
                           className="px-2.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface text-xs font-semibold transition-colors border border-surface-container-highest"
@@ -203,7 +290,7 @@ export default function InquiriesCRMTable({
                           View Details
                         </button>
                         <a
-                          className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-[#25D366]/15 text-[#0d472a] hover:bg-[#25D366] hover:text-white transition-colors text-xs font-semibold"
+                          className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-[#25D366]/15 text-[#0d472a] hover:bg-[#25D366] hover:text-white transition-colors text-xs font-semibold shadow-xs"
                           href={`https://wa.me/${inq.phone.replace(/[^0-9]/g, "")}?text=Hello%20${encodeURIComponent(
                             inq.full_name
                           )}%2C%20thank%20you%20for%20contacting%20Ethiopian%20Signature%20Coffee%20regarding%20${encodeURIComponent(
@@ -237,7 +324,7 @@ export default function InquiriesCRMTable({
             <div className="flex items-center justify-between border-b border-surface-container-highest pb-3">
               <div>
                 <span className="text-[10px] uppercase tracking-wider text-stitch-secondary font-bold">
-                  Client Record
+                  Contact Form Submission
                 </span>
                 <h3 className="font-serif text-xl font-semibold text-stitch-primary mt-0.5" id="inquiry-modal-title">
                   {selectedInquiry.full_name}
@@ -254,10 +341,11 @@ export default function InquiriesCRMTable({
             </div>
 
             <div className="flex flex-col gap-4 text-xs">
+              {/* Contact Information */}
               <div className="grid grid-cols-2 gap-3 p-3.5 rounded-xl bg-surface-container-low border border-surface-container-highest">
                 <div>
                   <span className="text-on-surface-variant block text-[11px]">Phone / WhatsApp</span>
-                  <span className="font-semibold text-on-surface mt-0.5 block">{selectedInquiry.phone}</span>
+                  <span className="font-semibold text-on-surface mt-0.5 block font-mono text-xs">{selectedInquiry.phone}</span>
                 </div>
                 <div>
                   <span className="text-on-surface-variant block text-[11px]">Email Address</span>
@@ -269,10 +357,14 @@ export default function InquiriesCRMTable({
                 </div>
               </div>
 
+              {/* Exact Text from Contact Me Form */}
               <div className="flex flex-col gap-1.5">
-                <span className="text-on-surface font-semibold">Message Written by Client:</span>
-                <div className="p-3.5 rounded-xl bg-surface-container-low border border-surface-container-highest text-on-surface leading-relaxed whitespace-pre-wrap">
-                  {selectedInquiry.notes || "The client did not write an extra message."}
+                <div className="flex items-center gap-1.5 font-bold text-stitch-primary">
+                  <span className="material-symbols-outlined text-base">chat</span>
+                  <span>Text Message Written by Client in &ldquo;Contact Me&rdquo; Form:</span>
+                </div>
+                <div className="p-4 rounded-xl bg-surface-container-low border border-surface-container-highest text-on-surface leading-relaxed whitespace-pre-wrap font-sans text-xs sm:text-sm">
+                  {selectedInquiry.notes || "The client selected the service above but did not type an extra note."}
                 </div>
               </div>
 

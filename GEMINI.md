@@ -76,9 +76,11 @@
    - **Pre-Admin Dashboard Checkpoint Tag**: `pre-admin-dashboard` (Commit: `0cd6a0a`)
    - **Pre-Stitch Admin UI Checkpoint Tag**: `pre-stitch-admin-ui` (Commit: `871f5a3`)
    - **Pre-Admin Step Guides Checkpoint Tag**: `pre-admin-step-guides` (Commit: `4478579`)
-   - **Backup Branches**: `backup-stable-baseline`, `backup-pre-hero-media-carousel`, `backup-pre-opening-motion-choreography`, `backup-pre-chronological-resequence`, `backup-pre-debox-transformation`, `backup-pre-ui-ux-refinements`, `backup-pre-catering-service`, `backup-pre-catering-dedicated-showcase`, `backup-pre-admin-dashboard`, `backup-stitch-admin-ui`, `backup-admin-step-guides` (Pushed to GitHub `origin`)
+   - **Pre-Contact Messages Visibility Checkpoint Tag**: `pre-contact-messages-visibility` (Commit: `9c06865`)
+   - **Backup Branches**: `backup-stable-baseline`, `backup-pre-hero-media-carousel`, `backup-pre-opening-motion-choreography`, `backup-pre-chronological-resequence`, `backup-pre-debox-transformation`, `backup-pre-ui-ux-refinements`, `backup-pre-catering-service`, `backup-pre-catering-dedicated-showcase`, `backup-pre-admin-dashboard`, `backup-stitch-admin-ui`, `backup-admin-step-guides`, `backup-contact-messages-visibility` (Pushed to GitHub `origin`)
    - **Remote Synchronization**: Fully backed up on remote GitHub repository.
    - **One-Prompt Revert Protocol**:
+     - To revert to the state before contact messages visibility enhancements: `git reset --hard pre-contact-messages-visibility && git clean -fd`
      - To revert to the state before the admin step-by-step guides: `git reset --hard pre-admin-step-guides && git clean -fd`
      - To revert to the state before the Stitch admin UI redesign: `git reset --hard pre-stitch-admin-ui && git clean -fd`
      - To revert to the state before the admin dashboard: `git reset --hard pre-admin-dashboard && git clean -fd`
@@ -234,19 +236,24 @@
      - 100% of executive telemetry, CRM lifecycle filtering, Supabase database operations, academy cohort scheduling, and asynchronous concierge chat messaging are preserved.
    - **Strict Rule Preservation**: Strictly ZERO text pill badges (`rounded-full` text tags), ZERO text bloat, Slide 0 ceremony photo intact, official phone strictly `+251925451711`.
 
-## Simple Text & Step-by-Step Guidance Architecture
-17. **Universal Step-by-Step Operator Guidance**:
-   - **Sidebar Navigation Clarity**:
-     - All navigation links feature a clear, friendly primary title paired with an action-oriented subtitle (e.g., *Client Inquiries • Read leads & chat on WhatsApp*, *Change Photos • Upload & replace site pictures*, *Training & Cohorts • Add Barista course dates*).
-     - Persistent sidebar mini-guide card outlining the 3 foundational operational steps.
-   - **Embedded Step-by-Step Guides on Every View**:
-     - **Dashboard Overview (`/admin`)**: 4-card action matrix with numbered badges (1 to 4) directing the admin to Leads, Photos, Training Schedules, and Visitor Chat with one-click navigation buttons.
-     - **Inquiries & CRM (`/admin/leads`)**: 3-step banner explaining how to review client notes, engage via the pre-filled green WhatsApp button, and update lifecycle progress status.
-     - **Media Studio (`/admin/media`)**: 3-step banner explaining how to locate any image slot, click Change/Replace, browse from phone/PC, and publish live to the CDN.
-     - **Academy & Cohorts (`/admin/training`)**: 3-step banner explaining how to select/create a course, set upcoming cohort dates/hours/seats, and update enrollment status (`Open`, `Filling Fast`, `Sold Out`).
-     - **Visitor Chat (`/admin/chat`)**: 3-step banner explaining how to select an online visitor from the left inbox, review message history, and send live or asynchronous replies.
-     - **Passcode Login (`/admin/login`)**: 2-step prompt guiding the admin to enter the passcode and unlock the dashboard.
-   - **Strict Rule Preservation**: Strictly ZERO text pill badges, ZERO text bloat, unclipped original ceremony photo on Slide 0, phone strictly `+251925451711`.
+## Contact Form Messages & Inquiries CRM Architecture
+18. **Public Contact Form to Admin Reception & Response Flow**:
+   - **Data Flow & Database Synchronization**:
+     - Visitors submit inquiries via the public `#contact` section (`Contact.tsx`) providing `fullName`, `phone`, `email` (optional), `service` (selected capability tile), and `notes` (project details or message).
+     - Submissions invoke `submitInquiryAction` (`src/app/actions/inquiry.ts`), which writes directly to the Supabase `inquiries` table.
+     - Row-level security (RLS) policies on `public.inquiries` and `public.academy_enrollments` permit `anon` and `authenticated` roles for SELECT, INSERT, and UPDATE queries (`ALTER POLICY ... TO anon, authenticated;`), ensuring the admin server actions (`getInquiriesAction()`, `updateInquiryStatusAction()`) retrieve and update all submissions seamlessly while guarded by `isAdminAuthenticated()`.
+   - **Dashboard Overview Visibility (`/admin`)**:
+     - Step 1 Action Card prominently titled **"Contact Form Texts"** with direct link *"Read Contact Messages &rarr;"*.
+     - Recent Contact Form Messages table contains a dedicated column: **"Message Text from Contact Form"**, rendering client messages in high-contrast styled quote bubbles (`chat_bubble` indicator, line-clamp, and full context).
+     - One-click green **"Chat on WhatsApp"** button launches direct chat with the visitor using their phone number and a pre-composed greeting.
+   - **Dedicated Messages CRM (`/admin/leads`)**:
+     - Sidebar navigation labeled **"Messages"** (full title: **"Contact Messages"**, icon: `mark_email_unread`, hint: *"Texts from Contact Me form & WhatsApp"*).
+     - Step-by-Step Operator Guide banner: *"Where to Find & Reply to 'Contact Me' Form Texts"*.
+     - Fast filter tabs: *All Messages ({count})*, *New / Needs Reply ({count})*, and *With Written Notes ({count})*.
+     - Dedicated table column: **"Message Text from 'Contact Me' Form"** displaying the exact message with an *"Expand"* button.
+     - Details modal highlighting **"Text Message Written by Client in 'Contact Me' Form:"** alongside full client metadata, status updater dropdown (`New`, `Contacted`, `Scheduled`, `Completed`, `Archived`), and direct WhatsApp launch button.
+   - **Strict Rule Preservation**: Strictly ZERO text pill badges (`rounded-full` text tags), ZERO text bloat, unclipped original ceremony photo on Slide 0, phone strictly `+251925451711`.
+
 
 
 

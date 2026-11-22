@@ -27,30 +27,30 @@ export default async function AdminDashboardPage() {
 
         {/* 4 Step Cards for Admin */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-1">
-          {/* Step 1 */}
+          {/* Step 1: Contact Form Texts */}
           <div className="p-3.5 rounded-lg bg-surface-container-low border border-surface-container-highest flex flex-col justify-between gap-3">
             <div className="flex flex-col gap-1.5">
               <div className="flex items-center justify-between">
                 <span className="w-5 h-5 rounded bg-stitch-primary text-white text-[11px] font-bold flex items-center justify-center">
                   1
                 </span>
-                <span className="material-symbols-outlined text-stitch-primary text-lg">mail</span>
+                <span className="material-symbols-outlined text-stitch-primary text-lg">mark_email_unread</span>
               </div>
-              <h2 className="font-semibold text-xs text-on-surface">Client Inquiries</h2>
+              <h2 className="font-semibold text-xs text-on-surface">Contact Form Texts</h2>
               <p className="text-[11px] text-on-surface-variant leading-relaxed">
-                Read messages submitted from the contact form. Click <strong>WhatsApp</strong> to reply to clients on your phone.
+                All messages and texts sent from the &ldquo;Contact Me&rdquo; section on your website arrive here. Click <strong>WhatsApp</strong> to reply.
               </p>
             </div>
             <Link
               className="text-[11px] font-bold text-stitch-primary hover:underline flex items-center gap-1 mt-1"
               href="/admin/leads"
             >
-              <span>View All Leads</span>
+              <span>Read Contact Messages</span>
               <span className="material-symbols-outlined text-xs">arrow_forward</span>
             </Link>
           </div>
 
-          {/* Step 2 */}
+          {/* Step 2: Change Photos */}
           <div className="p-3.5 rounded-lg bg-surface-container-low border border-surface-container-highest flex flex-col justify-between gap-3">
             <div className="flex flex-col gap-1.5">
               <div className="flex items-center justify-between">
@@ -73,7 +73,7 @@ export default async function AdminDashboardPage() {
             </Link>
           </div>
 
-          {/* Step 3 */}
+          {/* Step 3: Training Classes */}
           <div className="p-3.5 rounded-lg bg-surface-container-low border border-surface-container-highest flex flex-col justify-between gap-3">
             <div className="flex flex-col gap-1.5">
               <div className="flex items-center justify-between">
@@ -96,7 +96,7 @@ export default async function AdminDashboardPage() {
             </Link>
           </div>
 
-          {/* Step 4 */}
+          {/* Step 4: Visitor Chat */}
           <div className="p-3.5 rounded-lg bg-surface-container-low border border-surface-container-highest flex flex-col justify-between gap-3">
             <div className="flex flex-col gap-1.5">
               <div className="flex items-center justify-between">
@@ -151,7 +151,7 @@ export default async function AdminDashboardPage() {
               {kpis?.totalInquiries ?? 0}
             </span>
             <span className="text-xs font-bold text-on-surface mt-1.5">
-              Client Inquiries
+              Contact Form Texts
             </span>
             <span className="text-[11px] text-stitch-primary font-medium mt-0.5">
               {kpis?.newInquiries ?? 0} new waiting
@@ -196,32 +196,32 @@ export default async function AdminDashboardPage() {
         </div>
       </section>
 
-      {/* Recent Client Inquiries Stream */}
+      {/* Recent Contact Form Messages & Inquiries */}
       <section className="bg-surface-container-lowest rounded-xl p-5 border border-surface-container-highest shadow-sm flex flex-col gap-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-surface-container-highest pb-3">
           <div>
             <div className="flex items-center gap-2">
               <span className="w-1.5 h-4 bg-stitch-primary rounded-full shrink-0" />
               <h2 className="font-serif text-lg font-semibold text-stitch-primary">
-                Recent Client Inquiries
+                Recent Contact Form Messages &amp; Inquiries
               </h2>
             </div>
             <p className="text-xs text-on-surface-variant mt-0.5 pl-3.5">
-              Follow this step: Click <strong>WhatsApp</strong> to open a direct chat, or click <strong>Details</strong> to view their full message.
+              Here are messages sent by visitors through the &ldquo;Contact Me&rdquo; section on your website.
             </p>
           </div>
           <Link
             className="text-xs font-bold text-stitch-primary hover:underline flex items-center gap-1 self-start sm:self-auto pl-3.5 sm:pl-0"
             href="/admin/leads"
           >
-            <span>Open All Inquiries</span>
+            <span>Open All Contact Messages</span>
             <span className="material-symbols-outlined text-sm">arrow_forward</span>
           </Link>
         </div>
 
         {inquiries.length === 0 ? (
           <div className="py-8 text-center text-xs text-on-surface-variant">
-            No inquiries recorded yet. When a visitor submits the contact form on your website, it will appear here immediately.
+            No contact form messages recorded yet. When a visitor submits the &ldquo;Contact Me&rdquo; form on your website, it will appear here immediately.
           </div>
         ) : (
           <div className="overflow-x-auto">
@@ -229,34 +229,46 @@ export default async function AdminDashboardPage() {
               <thead>
                 <tr className="border-b border-surface-container-highest bg-surface-container-low/70 text-on-surface-variant uppercase tracking-wider text-[10px]">
                   <th className="py-2.5 px-3 font-bold">Client Name</th>
+                  <th className="py-2.5 px-3 font-bold">Message Text from Contact Form</th>
                   <th className="py-2.5 px-3 font-bold">Service Needed</th>
                   <th className="py-2.5 px-3 font-bold">Phone Number</th>
                   <th className="py-2.5 px-3 font-bold">Date Received</th>
-                  <th className="py-2.5 px-3 font-bold">Status</th>
                   <th className="py-2.5 px-3 font-bold text-right">How to Reply</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-surface-container-highest">
                 {inquiries.map((inq: any) => (
                   <tr key={inq.id} className="hover:bg-surface-container-low/50 transition-colors">
-                    <td className="py-3 px-3 font-semibold text-on-surface">
+                    <td className="py-3 px-3 font-semibold text-on-surface whitespace-nowrap">
                       {inq.full_name}
                     </td>
-                    <td className="py-3 px-3 text-on-surface-variant font-medium">
+                    <td className="py-3 px-3 min-w-[260px] max-w-md">
+                      {inq.notes ? (
+                        <div className="p-2 rounded-lg bg-surface-container-low border border-surface-container-highest">
+                          <div className="flex items-center gap-1 text-[10px] font-bold text-stitch-secondary uppercase tracking-wider mb-0.5">
+                            <span className="material-symbols-outlined text-xs">chat_bubble</span>
+                            <span>What They Wrote:</span>
+                          </div>
+                          <p className="text-xs text-on-surface line-clamp-2 leading-relaxed">
+                            {inq.notes}
+                          </p>
+                        </div>
+                      ) : (
+                        <span className="text-[11px] text-on-surface-variant italic">
+                          No extra message (Selected: {inq.service})
+                        </span>
+                      )}
+                    </td>
+                    <td className="py-3 px-3 text-on-surface-variant font-medium whitespace-nowrap">
                       {inq.service}
                     </td>
-                    <td className="py-3 px-3 text-on-surface-variant font-mono">
+                    <td className="py-3 px-3 text-on-surface-variant font-mono whitespace-nowrap">
                       {inq.phone}
                     </td>
-                    <td className="py-3 px-3 text-on-surface-variant">
+                    <td className="py-3 px-3 text-on-surface-variant whitespace-nowrap">
                       {new Date(inq.created_at).toLocaleDateString()}
                     </td>
-                    <td className="py-3 px-3">
-                      <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-surface-container-high text-stitch-primary border border-surface-container-highest">
-                        {inq.status || "new"}
-                      </span>
-                    </td>
-                    <td className="py-3 px-3 text-right">
+                    <td className="py-3 px-3 text-right whitespace-nowrap">
                       <a
                         className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-[#25D366]/15 text-[#0d472a] hover:bg-[#25D366] hover:text-white transition-colors text-xs font-semibold"
                         href={`https://wa.me/${inq.phone.replace(/[^0-9]/g, "")}?text=Hello%20${encodeURIComponent(

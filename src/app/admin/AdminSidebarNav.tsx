@@ -13,11 +13,11 @@ const navItems = [
     icon: "dashboard",
   },
   {
-    label: "Leads",
-    fullTitle: "Client Inquiries",
-    guideHint: "Read leads & chat on WhatsApp",
+    label: "Messages",
+    fullTitle: "Contact Messages",
+    guideHint: "Texts from Contact Me form & WhatsApp",
     href: "/admin/leads",
-    icon: "mail",
+    icon: "mark_email_unread",
   },
   {
     label: "Photos",
@@ -139,7 +139,7 @@ export default function AdminSidebarNav({ isMobileNav = false }: { isMobileNav?:
               1
             </span>
             <span className="text-on-surface-variant leading-tight">
-              Check <strong>Inquiries</strong> to message clients on WhatsApp.
+              Check <strong>Contact Messages</strong> to read texts from the Contact form.
             </span>
           </div>
           <div className="flex items-start gap-1.5">
