@@ -77,9 +77,11 @@
    - **Pre-Stitch Admin UI Checkpoint Tag**: `pre-stitch-admin-ui` (Commit: `871f5a3`)
    - **Pre-Admin Step Guides Checkpoint Tag**: `pre-admin-step-guides` (Commit: `4478579`)
    - **Pre-Contact Messages Visibility Checkpoint Tag**: `pre-contact-messages-visibility` (Commit: `9c06865`)
-   - **Backup Branches**: `backup-stable-baseline`, `backup-pre-hero-media-carousel`, `backup-pre-opening-motion-choreography`, `backup-pre-chronological-resequence`, `backup-pre-debox-transformation`, `backup-pre-ui-ux-refinements`, `backup-pre-catering-service`, `backup-pre-catering-dedicated-showcase`, `backup-pre-admin-dashboard`, `backup-stitch-admin-ui`, `backup-admin-step-guides`, `backup-contact-messages-visibility` (Pushed to GitHub `origin`)
+   - **Pre-Admin Polish & Auth Checkpoint Tag**: `pre-admin-polish-and-auth` (Commit: `772f02f`)
+   - **Backup Branches**: `backup-stable-baseline`, `backup-pre-hero-media-carousel`, `backup-pre-opening-motion-choreography`, `backup-pre-chronological-resequence`, `backup-pre-debox-transformation`, `backup-pre-ui-ux-refinements`, `backup-pre-catering-service`, `backup-pre-catering-dedicated-showcase`, `backup-pre-admin-dashboard`, `backup-stitch-admin-ui`, `backup-admin-step-guides`, `backup-contact-messages-visibility`, `backup-admin-polish-and-auth` (Pushed to GitHub `origin`)
    - **Remote Synchronization**: Fully backed up on remote GitHub repository.
    - **One-Prompt Revert Protocol**:
+     - To revert to the state before the admin polish and credential authentication: `git reset --hard pre-admin-polish-and-auth && git clean -fd`
      - To revert to the state before contact messages visibility enhancements: `git reset --hard pre-contact-messages-visibility && git clean -fd`
      - To revert to the state before the admin step-by-step guides: `git reset --hard pre-admin-step-guides && git clean -fd`
      - To revert to the state before the Stitch admin UI redesign: `git reset --hard pre-stitch-admin-ui && git clean -fd`
@@ -253,6 +255,27 @@
      - Dedicated table column: **"Message Text from 'Contact Me' Form"** displaying the exact message with an *"Expand"* button.
      - Details modal highlighting **"Text Message Written by Client in 'Contact Me' Form:"** alongside full client metadata, status updater dropdown (`New`, `Contacted`, `Scheduled`, `Completed`, `Archived`), and direct WhatsApp launch button.
    - **Strict Rule Preservation**: Strictly ZERO text pill badges (`rounded-full` text tags), ZERO text bloat, unclipped original ceremony photo on Slide 0, phone strictly `+251925451711`.
+
+## Admin Credential Authentication & Empty State UI Polish
+19. **Email & Password Authentication and Clean Editorial State Standards**:
+   - **Administrative Account Credentials**:
+     - Designated administrative email: strictly **`henoktessma111@gmail.com`**.
+     - Designated administrative password: strictly **`254517`**.
+     - Configured in `.env.local` via `ADMIN_EMAIL` and `ADMIN_PASSWORD` with bulletproof fallback in `src/app/actions/admin-auth.ts`.
+     - Validates both email (case-insensitive) and password with HTTP-only session cookie `ethiopian_sig_admin=authenticated`.
+   - **Polished Login Experience (`/admin/login`)**:
+     - Dual dedicated input fields: "Admin Email Address" (`mail` icon, autocomplete `email`) and "Password" (`lock` icon, autocomplete `current-password`, and interactive show/hide toggle).
+     - 2-Step operator guide clearly outlining entry and sign-in steps.
+     - Smooth button shimmer and clear error indicators.
+   - **Executive Header Personalization (`layout.tsx`)**:
+     - Top administrative bar displays **Henok Tessma** with email **henoktessma111@gmail.com** and verified avatar.
+   - **Pristine Empty States Across All Views**:
+     - **Database Cleanliness**: All artificial sample inquiries and test chat messages removed from Supabase, leaving tables empty and fresh for real public submissions.
+     - **Dashboard Overview (`/admin`)**: Renders elegant **"Inbox Clean & Ready"** empty state with `mark_email_read` iconography, explanatory copy, and quick link to test the public `#contact` section.
+     - **Messages CRM (`/admin/leads`)**: Renders **"No Contact Form Messages Yet"** empty state inside the CRM table with `inbox` iconography, clean tab zero counts (`All Messages (0)`), and link to the public contact form.
+     - **Visitor Chat (`/admin/chat`)**: Renders **"No Active Chats"** in sidebar and **"Concierge Inbox Ready"** with `chat_bubble` iconography in the reply panel.
+   - **Strict Rule Preservation**: Strictly ZERO text pill badges (`rounded-full` text tags), ZERO text bloat, unclipped original ceremony photo on Slide 0, phone strictly `+251925451711`.
+
 
 
 

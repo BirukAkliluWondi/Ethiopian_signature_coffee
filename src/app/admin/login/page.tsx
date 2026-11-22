@@ -5,8 +5,9 @@ import { useRouter } from "next/navigation";
 import { loginAdminAction } from "@/app/actions/admin-auth";
 
 export default function AdminLoginPage() {
-  const [passcode, setPasscode] = useState("");
-  const [showPasscode, setShowPasscode] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
@@ -16,12 +17,12 @@ export default function AdminLoginPage() {
     setError(null);
 
     startTransition(async () => {
-      const res = await loginAdminAction(passcode);
+      const res = await loginAdminAction(email, password);
       if (res.success) {
         router.push("/admin");
         router.refresh();
       } else {
-        setError(res.error || "The passcode you entered was incorrect. Please try again.");
+        setError(res.error || "The email or password you entered was incorrect. Please try again.");
       }
     });
   };
@@ -46,7 +47,7 @@ export default function AdminLoginPage() {
               Ethiopian Signature
             </h1>
             <p className="text-xs text-on-surface-variant mt-1 max-w-xs leading-relaxed">
-              Sign in below to change website photos, schedule barista training classes, and message clients.
+              Sign in with your administrative account to manage website content, barista schedules, and client messages.
             </p>
           </div>
         </div>
@@ -57,13 +58,13 @@ export default function AdminLoginPage() {
             <span className="w-4 h-4 rounded bg-stitch-primary text-white text-[10px] font-bold flex items-center justify-center shrink-0">
               1
             </span>
-            <span className="text-on-surface">Type your admin passcode in the box below.</span>
+            <span className="text-on-surface">Enter your admin email and password below.</span>
           </div>
           <div className="flex items-center gap-2">
             <span className="w-4 h-4 rounded bg-stitch-primary text-white text-[10px] font-bold flex items-center justify-center shrink-0">
               2
             </span>
-            <span className="text-on-surface">Click &ldquo;Unlock Dashboard&rdquo; to start managing your site.</span>
+            <span className="text-on-surface">Click &ldquo;Sign In to Dashboard&rdquo; to unlock your administrative tools.</span>
           </div>
         </div>
 
@@ -76,46 +77,80 @@ export default function AdminLoginPage() {
             </div>
           )}
 
+          {/* Email Address */}
           <div className="flex flex-col gap-1">
-            <label className="text-xs font-semibold text-on-surface" htmlFor="admin-passcode">
-              Admin Passcode:
+            <label className="text-xs font-semibold text-on-surface" htmlFor="admin-email">
+              Admin Email Address
             </label>
             <div className="relative">
               <input
+                autoComplete="email"
                 autoFocus
-                className="w-full px-3.5 py-2.5 rounded-lg bg-surface-container-low border border-surface-container-highest text-sm text-on-surface placeholder:text-on-surface-variant focus:border-stitch-primary outline-none transition-all pr-10"
-                id="admin-passcode"
-                placeholder="Enter passcode..."
+                className="w-full pl-9 pr-3.5 py-2.5 rounded-lg bg-surface-container-low border border-surface-container-highest text-sm text-on-surface placeholder:text-on-surface-variant focus:border-stitch-primary outline-none transition-all"
+                id="admin-email"
+                placeholder="e.g. henoktessma111@gmail.com"
                 required
-                type={showPasscode ? "text" : "password"}
-                value={passcode}
-                onChange={(e) => setPasscode(e.target.value)}
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
+              <span className="material-symbols-outlined text-outline text-lg absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none">
+                mail
+              </span>
+            </div>
+          </div>
+
+          {/* Password */}
+          <div className="flex flex-col gap-1">
+            <div className="flex items-center justify-between">
+              <label className="text-xs font-semibold text-on-surface" htmlFor="admin-password">
+                Password
+              </label>
+              <span className="text-[11px] text-on-surface-variant">Confidential Access</span>
+            </div>
+            <div className="relative">
+              <input
+                autoComplete="current-password"
+                className="w-full pl-9 pr-10 py-2.5 rounded-lg bg-surface-container-low border border-surface-container-highest text-sm text-on-surface placeholder:text-on-surface-variant focus:border-stitch-primary outline-none transition-all"
+                id="admin-password"
+                placeholder="Enter password..."
+                required
+                type={showPassword ? "text" : "password"}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <span className="material-symbols-outlined text-outline text-lg absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none">
+                lock
+              </span>
               <button
+                aria-label={showPassword ? "Hide password" : "Show password"}
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-stitch-primary transition-colors"
                 type="button"
-                onClick={() => setShowPasscode(!showPasscode)}
+                onClick={() => setShowPassword(!showPassword)}
               >
                 <span className="material-symbols-outlined text-lg">
-                  {showPasscode ? "visibility_off" : "visibility"}
+                  {showPassword ? "visibility_off" : "visibility"}
                 </span>
               </button>
             </div>
           </div>
 
           <button
-            className="group btn-shimmer w-full h-11 rounded-lg bg-stitch-primary hover:bg-stitch-primary-container text-white font-bold text-xs uppercase tracking-wider transition-all shadow-sm flex items-center justify-center gap-2 disabled:opacity-50 active:scale-95 duration-200"
-            disabled={isPending || !passcode}
+            className="group btn-shimmer w-full h-11 rounded-lg bg-stitch-primary hover:bg-stitch-primary-container text-white font-bold text-xs uppercase tracking-wider transition-all shadow-sm flex items-center justify-center gap-2 disabled:opacity-50 active:scale-95 duration-200 mt-1"
+            disabled={isPending || !email || !password}
             type="submit"
           >
-            <span>{isPending ? "Verifying..." : "Unlock Dashboard"}</span>
+            <span>{isPending ? "Signing in..." : "Sign In to Dashboard"}</span>
             <span className="material-symbols-outlined text-base">arrow_forward</span>
           </button>
         </form>
 
         {/* Footer info */}
         <div className="flex items-center justify-between text-[11px] text-on-surface-variant border-t border-surface-container-highest pt-3">
-          <span>Protected Admin Area</span>
+          <div className="flex items-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-stitch-primary" />
+            <span>Protected Admin Area</span>
+          </div>
           <a className="hover:text-stitch-primary transition-colors font-medium flex items-center gap-1" href="/">
             <span>Back to Public Website</span>
             <span className="material-symbols-outlined text-xs">arrow_forward</span>

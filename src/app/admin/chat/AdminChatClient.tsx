@@ -186,8 +186,12 @@ export default function AdminChatClient({
 
           <div className="flex-1 overflow-y-auto divide-y divide-surface-container-highest">
             {threads.length === 0 ? (
-              <div className="p-6 text-center text-xs text-on-surface-variant">
-                No chat messages yet. When visitors ask questions on your website, their chats will appear here.
+              <div className="p-8 text-center flex flex-col items-center justify-center gap-2 text-on-surface-variant">
+                <span className="material-symbols-outlined text-2xl text-outline">mark_chat_read</span>
+                <span className="text-xs font-medium text-on-surface">No Active Chats</span>
+                <span className="text-[11px] text-on-surface-variant leading-relaxed">
+                  Incoming questions from site visitors will appear here.
+                </span>
               </div>
             ) : (
               threads.map((thread) => {
@@ -358,12 +362,24 @@ export default function AdminChatClient({
               </div>
             </>
           ) : (
-            <div className="flex-1 flex flex-col items-center justify-center p-8 text-center text-on-surface-variant">
-              <span className="material-symbols-outlined text-4xl text-outline mb-2">forum</span>
-              <p className="text-sm font-semibold text-on-surface">No Chat Selected</p>
-              <p className="text-xs text-on-surface-variant mt-1 max-w-xs">
-                Click any visitor on the left list to read their question and type your answer.
-              </p>
+            <div className="flex-1 flex flex-col items-center justify-center p-8 text-center text-on-surface-variant gap-3">
+              <div className="w-14 h-14 rounded-2xl bg-surface-container-low text-stitch-secondary flex items-center justify-center shadow-xs">
+                <span className="material-symbols-outlined text-3xl">chat_bubble</span>
+              </div>
+              <div className="flex flex-col gap-1 max-w-sm">
+                <p className="text-sm font-semibold text-on-surface">Concierge Inbox Ready</p>
+                <p className="text-xs text-on-surface-variant leading-relaxed">
+                  No active visitor conversations yet. When visitors click the concierge chat bubble on your website, their questions and details will arrive here in real time.
+                </p>
+              </div>
+              <a
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-stitch-primary text-white text-xs font-semibold hover:bg-stitch-primary-container transition-colors mt-1"
+                href="/"
+                target="_blank"
+              >
+                <span>Preview Public Chat Bubble</span>
+                <span className="material-symbols-outlined text-xs">open_in_new</span>
+              </a>
             </div>
           )}
         </div>

@@ -203,7 +203,31 @@ export default function InquiriesCRMTable({
               </tr>
             </thead>
             <tbody className="divide-y divide-surface-container-highest">
-              {filtered.length === 0 ? (
+              {inquiries.length === 0 ? (
+                <tr>
+                  <td className="p-12 text-center" colSpan={7}>
+                    <div className="flex flex-col items-center justify-center gap-3 max-w-md mx-auto">
+                      <div className="w-12 h-12 rounded-xl bg-surface-container-low text-stitch-secondary flex items-center justify-center">
+                        <span className="material-symbols-outlined text-2xl">inbox</span>
+                      </div>
+                      <div className="flex flex-col gap-1">
+                        <span className="font-semibold text-sm text-on-surface">No Contact Form Messages Yet</span>
+                        <p className="text-xs text-on-surface-variant leading-relaxed">
+                          Your messages inbox is clean and empty. When visitors submit consultation inquiries or notes from the &ldquo;Contact Me&rdquo; section on your website, they will appear here automatically.
+                        </p>
+                      </div>
+                      <a
+                        className="mt-1 inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-stitch-primary text-white text-xs font-semibold hover:bg-stitch-primary-container transition-colors"
+                        href="/#contact"
+                        target="_blank"
+                      >
+                        <span>View Public Contact Section</span>
+                        <span className="material-symbols-outlined text-xs">arrow_outward</span>
+                      </a>
+                    </div>
+                  </td>
+                </tr>
+              ) : filtered.length === 0 ? (
                 <tr>
                   <td className="p-8 text-center text-on-surface-variant" colSpan={7}>
                     No messages match your search or filter. Try clearing the search box.

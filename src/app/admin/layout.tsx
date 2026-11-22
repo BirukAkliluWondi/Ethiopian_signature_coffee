@@ -103,15 +103,15 @@ export default async function AdminLayout({
             <div className="pl-1 flex items-center gap-2">
               <div className="relative w-8 h-8 rounded-full overflow-hidden border border-surface-container-highest shrink-0 bg-surface-container">
                 <Image
-                  alt="Admin Profile"
+                  alt="Henok Tessma"
                   className="object-cover"
                   fill
                   src="/admin/avatar.jpg"
                 />
               </div>
-              <div className="hidden lg:flex flex-col text-left">
-                <span className="text-xs font-bold text-on-surface leading-tight">Executive Admin</span>
-                <span className="text-[10px] text-on-surface-variant leading-tight">Addis Ababa</span>
+              <div className="hidden sm:flex flex-col text-left">
+                <span className="text-xs font-bold text-on-surface leading-tight">Henok Tessma</span>
+                <span className="text-[10px] text-on-surface-variant leading-tight">henoktessma111@gmail.com</span>
               </div>
             </div>
           </div>

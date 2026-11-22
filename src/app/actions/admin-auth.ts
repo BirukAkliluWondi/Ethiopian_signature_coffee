@@ -3,17 +3,37 @@
 import { cookies } from "next/headers";
 
 const ADMIN_COOKIE_NAME = "ethiopian_sig_admin";
-const DEFAULT_PASSCODE = "signature2026";
+const DEFAULT_EMAIL = "henoktessma111@gmail.com";
+const DEFAULT_PASSWORD = "254517";
 
 /**
- * Validates the admin passcode and sets an HTTP-only session cookie upon success.
+ * Validates admin email and password credentials and sets an HTTP-only session cookie upon success.
  */
-export async function loginAdminAction(passcode: string): Promise<{ success: boolean; error?: string }> {
+export async function loginAdminAction(
+  emailOrPasscode: string,
+  password?: string
+): Promise<{ success: boolean; error?: string }> {
   try {
-    const validPasscode = process.env.ADMIN_PASSCODE || DEFAULT_PASSCODE;
+    const validEmail = (process.env.ADMIN_EMAIL || DEFAULT_EMAIL).trim().toLowerCase();
+    const validPassword = (process.env.ADMIN_PASSWORD || process.env.ADMIN_PASSCODE || DEFAULT_PASSWORD).trim();
 
-    if (!passcode || passcode.trim() !== validPasscode.trim()) {
-      return { success: false, error: "Incorrect admin passcode. Please try again." };
+    if (password !== undefined) {
+      const email = (emailOrPasscode || "").trim().toLowerCase();
+      const pwd = (password || "").trim();
+
+      if (!email || !pwd) {
+        return { success: false, error: "Please enter both email address and password." };
+      }
+
+      if (email !== validEmail || pwd !== validPassword) {
+        return { success: false, error: "Incorrect admin email or password. Please try again." };
+      }
+    } else {
+      // Direct passcode fallback
+      const code = (emailOrPasscode || "").trim();
+      if (!code || (code !== validPassword && code !== validEmail)) {
+        return { success: false, error: "Incorrect admin credentials. Please try again." };
+      }
     }
 
     const cookieStore = await cookies();

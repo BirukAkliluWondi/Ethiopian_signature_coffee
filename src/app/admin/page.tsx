@@ -220,8 +220,24 @@ export default async function AdminDashboardPage() {
         </div>
 
         {inquiries.length === 0 ? (
-          <div className="py-8 text-center text-xs text-on-surface-variant">
-            No contact form messages recorded yet. When a visitor submits the &ldquo;Contact Me&rdquo; form on your website, it will appear here immediately.
+          <div className="py-12 px-4 rounded-xl bg-surface-container-low/50 border border-dashed border-surface-container-highest flex flex-col items-center justify-center text-center gap-3">
+            <div className="w-12 h-12 rounded-xl bg-surface-container-highest/60 text-stitch-secondary flex items-center justify-center">
+              <span className="material-symbols-outlined text-2xl">mark_email_read</span>
+            </div>
+            <div className="flex flex-col gap-1 max-w-md">
+              <span className="font-semibold text-sm text-on-surface">Inbox Clean &amp; Ready</span>
+              <p className="text-xs text-on-surface-variant leading-relaxed">
+                No new contact form messages yet. When a visitor submits the &ldquo;Contact Me&rdquo; section on your website, their name, service selection, message note, and WhatsApp contact will appear here immediately.
+              </p>
+            </div>
+            <Link
+              className="mt-1 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-stitch-primary text-white text-xs font-semibold hover:bg-stitch-primary-container transition-colors"
+              href="/#contact"
+              target="_blank"
+            >
+              <span>Test Public Contact Form</span>
+              <span className="material-symbols-outlined text-xs">open_in_new</span>
+            </Link>
           </div>
         ) : (
           <div className="overflow-x-auto">
