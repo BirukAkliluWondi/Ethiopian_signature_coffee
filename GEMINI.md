@@ -73,9 +73,11 @@
    - **Pre-UI/UX Refinements Checkpoint Tag**: `pre-ui-ux-refinements` (Commit: `7321bef`)
    - **Pre-Catering Service Checkpoint Tag**: `pre-catering-service` (Commit: `81b9eb6`)
    - **Pre-Catering Dedicated Showcase Checkpoint Tag**: `pre-catering-dedicated-showcase` (Commit: `1aa0111`)
-   - **Backup Branches**: `backup-stable-baseline`, `backup-pre-hero-media-carousel`, `backup-pre-opening-motion-choreography`, `backup-pre-chronological-resequence`, `backup-pre-debox-transformation`, `backup-pre-ui-ux-refinements`, `backup-pre-catering-service`, `backup-pre-catering-dedicated-showcase` (Pushed to GitHub `origin`)
+   - **Pre-Admin Dashboard Checkpoint Tag**: `pre-admin-dashboard` (Commit: `0cd6a0a`)
+   - **Backup Branches**: `backup-stable-baseline`, `backup-pre-hero-media-carousel`, `backup-pre-opening-motion-choreography`, `backup-pre-chronological-resequence`, `backup-pre-debox-transformation`, `backup-pre-ui-ux-refinements`, `backup-pre-catering-service`, `backup-pre-catering-dedicated-showcase`, `backup-pre-admin-dashboard` (Pushed to GitHub `origin`)
    - **Remote Synchronization**: Fully backed up on remote GitHub repository.
    - **One-Prompt Revert Protocol**:
+     - To revert to the state before the admin dashboard: `git reset --hard pre-admin-dashboard && git clean -fd`
      - To revert to the state before the dedicated catering showcase: `git reset --hard pre-catering-dedicated-showcase && git clean -fd`
      - To revert to the state before Catering Services was added: `git reset --hard pre-catering-service && git clean -fd`
      - To revert to the state before UI/UX refinements: `git reset --hard pre-ui-ux-refinements && git clean -fd`
@@ -181,5 +183,29 @@
    - **Ecosystem Consistency**:
      - Contact Form: `Catering Services & Hospitality` selection tile in `Contact.tsx`.
      - Footer: `7. Catering Services & Events` linking directly to `#catering` in `Footer.tsx`.
+   - **Strict Rule Preservation**: ZERO text pill badges, ZERO text bloat, unclipped original ceremony photo on Slide 0, phone strictly `+251925451711`.
+
+## Modern Admin Dashboard, CMS & Signature Concierge Architecture
+15. **Full-Stack Admin Operations & On-Site Async Chat**:
+   - **Admin Authentication (`/admin/login`)**:
+     - Secured by Master Passcode validation and HTTP-only session cookie (`ethiopian_sig_admin`).
+     - Default passcode configured via `process.env.ADMIN_PASSCODE`.
+   - **Executive Dashboard & KPIs (`/admin`)**:
+     - Real-time telemetry: Total Inquiries, Active Cohorts, Open Concierge Chats, Direct Desk status.
+     - Live stream of recent client inquiries with status indicators.
+   - **Inquiries & Student CRM (`/admin/leads`)**:
+     - Full client table with search by name/phone/email, practice area filter, lifecycle status updater (`New` -> `Contacted` -> `Scheduled` -> `Completed` -> `Archived`), and one-click direct WhatsApp engagement.
+   - **CMS Visual Media Studio (`/admin/media`)**:
+     - Direct upload to local server storage (`/public/uploads/`) with auto-sanitization.
+     - Slot management for Hero Carousel, Services cards, Dedicated Catering showcase, and Training photography.
+   - **Barista Academy & Cohort Scheduler (`/admin/training`)**:
+     - Course creation and syllabus editor.
+     - Cohort scheduler with start/end dates, session hours, seat capacity, and live status (`open`, `filling_fast`, `sold_out`).
+     - Directly syncs with `#training` Upcoming Cohorts & Dates tab on the main public site.
+   - **Signature Concierge Support Chat (`/admin/chat` & Public Modal)**:
+     - Asynchronous messaging: visitors send messages without requiring admin to be live online.
+     - Public Dual Action Launcher: expandable luxury floating button allowing visitors to choose between direct WhatsApp advisory and on-site Signature Concierge chat.
+     - Conversation state preserved via client-side `localStorage` token.
+     - Admin split-pane inbox with real-time polling, thread history, unread counters, and quick canned responses.
    - **Strict Rule Preservation**: ZERO text pill badges, ZERO text bloat, unclipped original ceremony photo on Slide 0, phone strictly `+251925451711`.
 
