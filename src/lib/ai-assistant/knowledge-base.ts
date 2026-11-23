@@ -1,3 +1,5 @@
+import { DashboardDataSnapshot } from "./dashboard-data";
+
 /**
  * Master Admin Knowledge Base for the Ethiopian Signature Admin AI Copilot.
  * Strictly focused on Operational UI Steps and Dashboard Procedures.
@@ -170,11 +172,14 @@ export function isTechnicalQuery(query: string): boolean {
 }
 
 /**
- * Offline smart response generator.
- * Used when no GEMINI_API_KEY is configured yet or when remote AI is temporarily unreachable,
- * ensuring instant, reliable, and strictly operational answers.
+ * Context-aware smart offline response generator.
+ * Synthesizes real data from the live database snapshot when remote Gemini API
+ * is unreachable or unconfigured, ensuring instant, factual, and strictly operational answers.
  */
-export function getSmartOfflineAnswer(query: string): string | null {
+export function getSmartOfflineAnswer(
+  query: string,
+  snapshot?: DashboardDataSnapshot | null
+): string {
   const q = query.toLowerCase();
 
   // Strict refusal for code/schema queries
@@ -182,102 +187,329 @@ export function getSmartOfflineAnswer(query: string): string | null {
     return CODEBASE_REFUSAL_MESSAGE;
   }
 
-  if (q.includes("service") || q.includes("pricing") || q.includes("price") || q.includes("package")) {
-    return `### How to Add a New Service Package with Pricing:
+  // 1. Vercel / API Key Setup Guide
+  if (
+    q.includes("vercel") ||
+    (q.includes("api key") && (q.includes("add") || q.includes("how") || q.includes("where") || q.includes("guide") || q.includes("set")))
+  ) {
+    return `### How to Add Your Gemini API Key in Vercel:
 
-1. **Go to Services & Training CMS**: In the admin sidebar, click **Offerings** (or navigate to \`/admin/training\`).
-2. **Open Creator**: Click the top-right button **"+ Add New..."** and select **"💼 Post Service Package"**.
-3. **Fill in Service & Pricing Details**:
-   - **Title**: e.g. *"Barista Quality Audit & SOP Review"*.
-   - **Category**: e.g. *Specialty Audit*, *Turnkey Setup*, or *Menu Engineering*.
-   - **Pricing Model**: Choose *Fixed Price*, *Starting From*, *Per Day / Event*, or *Custom Quote*.
-   - **Price in ETB**: e.g. \`22,000 ETB\`.
-   - **Timeline**: e.g. \`1 Week\`.
-   - **Deliverables**: Add key deliverables (e.g. *"Equipment diagnostic"*, *"Staff performance report"*).
-   - **Booking Form**: Choose which client fields to ask (Email, Business Name, Location, Timeline, Notes, or custom questions).
-4. **Publish**: Click **"Publish Service Package"**.
-5. The package immediately appears on the public website under **#services** with your transparent price and a direct **"Book Service Package"** modal!`;
+1. **Get a Free API Key**:
+   - Go to [Google AI Studio](https://aistudio.google.com/app/apikey).
+   - Sign in with your Google account and click **"Create API key"**.
+   - Copy your key (starts with \`AIzaSy...\`).
+
+2. **Open Vercel Dashboard**:
+   - Visit [vercel.com](https://vercel.com) and log in.
+   - Select your project: **\`ethiopian-signature-coffee\`**.
+
+3. **Navigate to Environment Variables**:
+   - Click the **Settings** tab in the top navigation.
+   - Click **Environment Variables** in the left sidebar.
+
+4. **Add the Key**:
+   - **Key**: \`GEMINI_API_KEY\`
+   - **Value**: Paste your Google AI Studio key (\`AIzaSy...\`)
+   - **Target Environments**: Check *Production*, *Preview*, and *Development*.
+   - Click **Save**.
+
+5. **Redeploy**:
+   - Go to the **Deployments** tab.
+   - Click the three dots (**\`...\`**) on your latest production deployment and click **Redeploy**.
+   - Your Copilot will immediately have full conversational AI enabled!
+
+*Tip: You can also click the ⚙️ icon in the top right of this Copilot window to paste your key locally in your browser for instant testing.*`;
   }
 
-  if (q.includes("export") && (q.includes("student") || q.includes("applicant") || q.includes("training") || q.includes("service") || q.includes("booking") || q.includes("excel"))) {
-    return `### How to Export Registered Students or Service Bookings to Excel (.xlsx):
+  // 2. Photo Revert / Media Studio
+  if (
+    q.includes("revert") ||
+    q.includes("undo") ||
+    ((q.includes("photo") || q.includes("image") || q.includes("media") || q.includes("banner")) &&
+      (q.includes("back") || q.includes("previous") || q.includes("change") || q.includes("swap")))
+  ) {
+    return `### How to Revert or Change Website Photos:
 
-1. **Go to Offerings CMS**: In the admin sidebar, click **Offerings** (or navigate to \`/admin/training\`).
-2. **To Export for a Single Course or Service**:
-   - Find the course or service package card on either the *Training Programs* or *Service Packages* tab.
-   - Click to expand the **"Applicants"** or **"Bookings"** drawer.
-   - Click the golden **"Export Excel"** button inside the card.
-3. **To Export All Registrations & Bookings Across Everything**:
-   - Switch to the **"All Registrations & Bookings"** tab at the top.
-   - Filter by type (*Training* or *Service*) or status if desired.
-   - Click the **"Export All to Excel (.xlsx)"** button in the top right.
-4. The spreadsheet will download immediately with client names, contact details, organization/business, deliverables, custom questions, and submission timestamps.`;
+1. **Open Media Studio**: Click **Media** in the admin sidebar (or navigate to \`/admin/media\`).
+2. **To Change Any Photo**:
+   - Find the slot (Hero Banner, Services, Academy, Sourcing, or Catering).
+   - Click **"Replace"** or **"Change"**.
+   - Click **Browse** to upload an image from your device, then click **"Publish to Site"**.
+3. **To Revert Back to Previous Photo (Undo)**:
+   - If a photo was recently changed, a **"Revert to Previous Photo"** or **"Undo"** button automatically appears on that slot card!
+   - Inside the **Change Photo** window, you can also see the **"Previous Photo on File"** preview box and click **"Restore"**.
+   - Clicking Revert restores the prior image instantly across both the admin preview and the live website.`;
   }
 
-  if (q.includes("contact") || q.includes("inquir") || q.includes("message") || (q.includes("reply") && q.includes("lead"))) {
-    return `### How to View & Reply to Contact Form Inquiries:
+  // 3. Deleting Courses, Packages, or Dummy Data
+  if (q.includes("delete") || q.includes("remove") || q.includes("erase") || q.includes("trash")) {
+    return `### How to Delete Courses or Service Packages:
+
+1. **Go to Offerings CMS**: Click **Offerings** in the admin sidebar (\`/admin/training\`).
+2. **Locate the Item**:
+   - Click either the **Training Programs** tab or the **Service Packages** tab.
+   - Find the course or package card you want to delete (including sample dummy data or real items).
+3. **Click the Delete Button**:
+   - In the top right corner of each card, click the red trash can button (**🗑️**).
+4. **Confirm Deletion**:
+   - Click **"OK"** on the confirmation prompt.
+   - The course or service package will be permanently deleted from the database and immediately removed from the live website!`;
+  }
+
+  // 4. Enrolled Students & Academy Applicants
+  if (
+    q.includes("student") ||
+    q.includes("applicant") ||
+    q.includes("enroll") ||
+    q.includes("who registered") ||
+    q.includes("who applied")
+  ) {
+    if (snapshot?.enrollments?.recent && snapshot.enrollments.recent.length > 0) {
+      const topStudents = snapshot.enrollments.recent.slice(0, 6);
+      const studentRows = topStudents
+        .map(
+          (s, i) =>
+            `${i + 1}. **${s.studentName}** — ${s.courseLevel} | 📞 \`${s.phone}\` | Status: *${s.status}* (${s.date})`
+        )
+        .join("\n");
+
+      return `### 🎓 Registered Students & Academy Applicants:
+
+**Overview**: ${snapshot.enrollments.total} Total Applicants (${snapshot.enrollments.pendingCount} pending review, ${snapshot.enrollments.confirmedCount} confirmed)
+
+**Recent Applicants**:
+${studentRows}
+
+**Operational Actions**:
+- To manage statuses or export student rosters to Excel, go to **Offerings** (\`/admin/training\`) -> click **"All Registrations & Bookings"** tab -> click **"Export All to Excel (.xlsx)"**.`;
+    }
+
+    return `### 🎓 How to View & Manage Registered Students:
+
+1. **Go to Offerings CMS**: In the sidebar, click **Offerings** (\`/admin/training\`).
+2. **View Students for a Specific Course**:
+   - Expand the **"Applicants"** drawer on any training course card to see students enrolled in that specific program.
+3. **View All Students Across All Programs**:
+   - Click the **"All Registrations & Bookings"** tab at the top.
+   - Filter by type (*Training*) or status (*Pending / Confirmed*).
+4. **Export to Excel**: Click **"Export All to Excel (.xlsx)"** in the top right to download the complete roster.`;
+  }
+
+  // 5. Client Service Bookings
+  if (
+    q.includes("booking") ||
+    q.includes("client booking") ||
+    q.includes("booked service") ||
+    q.includes("consultation booking")
+  ) {
+    if (snapshot?.serviceBookings?.recent && snapshot.serviceBookings.recent.length > 0) {
+      const topBookings = snapshot.serviceBookings.recent.slice(0, 5);
+      const bookingRows = topBookings
+        .map(
+          (b, i) =>
+            `${i + 1}. **${b.clientName}** (${b.businessName || "Private"}) — 📍 ${b.venueLocation || "Addis Ababa"} | 📞 \`${b.phone}\` | Status: *${b.status}*`
+        )
+        .join("\n");
+
+      return `### 💼 Client Service Package Bookings:
+
+**Overview**: ${snapshot.serviceBookings.total} Total Bookings (${snapshot.serviceBookings.newCount} new pending)
+
+**Recent Bookings**:
+${bookingRows}
+
+**Operational Actions**:
+- To reply on WhatsApp or update booking status, visit **Offerings** (\`/admin/training\`) -> **Service Packages** tab -> expand **"Bookings"** on that package card.
+- To export all bookings to Excel, click **"All Registrations & Bookings"** -> **"Export All to Excel (.xlsx)"**.`;
+    }
+
+    return `### 💼 How to View & Manage Service Bookings:
+
+1. **Go to Offerings CMS**: In the sidebar, click **Offerings** (\`/admin/training\`).
+2. **Review Service Bookings**:
+   - Click the **Service Packages** tab.
+   - Click to expand the **"Bookings & Inquiries"** drawer on any service card.
+3. **Reply on WhatsApp**: Click the green **"Chat on WhatsApp"** button to message the client directly.
+4. **Export to Excel**: Click the golden **"Export Excel"** button on any package card.`;
+  }
+
+  // 6. Contact Form Messages & Inquiries
+  if (
+    q.includes("inquir") ||
+    q.includes("lead") ||
+    q.includes("message") ||
+    q.includes("contact") ||
+    q.includes("text")
+  ) {
+    if (snapshot?.inquiries?.recent && snapshot.inquiries.recent.length > 0) {
+      const topInquiries = snapshot.inquiries.recent.slice(0, 5);
+      const inqRows = topInquiries
+        .map(
+          (inq, i) =>
+            `${i + 1}. **${inq.fullName}** — Area: *${inq.service}* | 📞 \`${inq.phone}\` | Status: *${inq.status}* (${inq.date})`
+        )
+        .join("\n");
+
+      return `### ✉️ Recent Contact Form Messages & Inquiries:
+
+**Overview**: ${snapshot.inquiries.total} Total Messages (${snapshot.inquiries.newCount} new/uncontacted)
+
+**Recent Inquiries**:
+${inqRows}
+
+**Operational Actions**:
+- Visit **Messages** (\`/admin/leads\`) to review full messages, click **"Chat on WhatsApp"** to reply instantly, or click **"Export to Excel"** to download all records.`;
+    }
+
+    return `### ✉️ How to View & Reply to Contact Messages:
 
 1. **Go to Messages CRM**: Click **Messages** in the sidebar (or visit \`/admin/leads\`).
-2. **Review Inquiries**: You can search by name or filter by service area (Turnkey Setup, Catering, etc.).
-3. **Reply via WhatsApp**: Click the green **"Chat on WhatsApp"** button on any client inquiry to open a direct WhatsApp conversation with their phone number.
-4. **Update Status**: Use the status dropdown to update from \`New\` to \`Contacted\`, \`Scheduled\`, or \`Completed\`.
-5. **Export to Excel**: Click the **"Export to Excel"** button next to the service filter to download all messages into \`.xlsx\`.`;
+2. **Review Messages**: Filter by service area or status (*New*, *Contacted*, *Scheduled*).
+3. **Chat on WhatsApp**: Click **"Chat on WhatsApp"** on any client message card to reply directly to their phone.
+4. **Export to Excel**: Click **"Export to Excel"** in the top right to download all messages into \`.xlsx\`.`;
   }
 
-  if (q.includes("custom question") || (q.includes("form") && q.includes("train")) || q.includes("create course") || q.includes("add course")) {
-    return `### How to Create a Training Course with a Custom Application Form:
+  // 7. Training Courses & Academy Tuition
+  if (
+    q.includes("course") ||
+    q.includes("academy") ||
+    q.includes("tuition") ||
+    q.includes("curriculum")
+  ) {
+    if (snapshot?.programs?.list && snapshot.programs.list.length > 0) {
+      const progRows = snapshot.programs.list
+        .map(
+          (p, i) =>
+            `${i + 1}. **${p.title}** (${p.level}) — Duration: \`${p.duration}\` | Tuition: **${p.tuition ? p.tuition.toLocaleString() + " ETB" : "Negotiated"}**`
+        )
+        .join("\n");
 
-1. **Open Course Creator**: Go to **Offerings** (\`/admin/training\`), click **"+ Add New..."**, and select **"🎓 Post Training Course"**.
-2. **Enter Course Details**: Fill in the title, level (e.g. Masterclass), duration, and tuition.
-3. **Configure the Application Form**:
-   - Scroll down to **Application Form Configuration (What Users Will Fill)**.
-   - Check the boxes for what you want visitors to provide (*Ask for Email*, *Ask Experience Level*, *Ask Café / Organization*, *Ask Goals & Questions*).
-   - To add open-ended custom questions, type in the question field and click **"+ Add"**.
-4. **Publish**: Click **"Publish Course to Academy"**.
-5. Visitors on the public website (\`#training\`) will immediately see your course and can apply using your custom form modal!`;
+      return `### 🎓 Active Barista Academy Courses:
+
+**Overview**: ${snapshot.programs.total} Published Programs
+
+${progRows}
+
+**Operational Actions**:
+- To create a new course, click **"+ Add New..."** -> **"Post Training Course"** in \`/admin/training\`.
+- To schedule a cohort session with seat capacity, click **"+ Schedule Cohort"**.`;
+    }
+
+    return `### 🎓 How to Create & Manage Training Courses:
+
+1. **Go to Offerings CMS**: Click **Offerings** in the sidebar (\`/admin/training\`).
+2. **Add a Course**: Click **"+ Add New..."** -> select **"🎓 Post Training Course"**.
+3. **Enter Details**: Provide title, level, duration, and tuition.
+4. **Configure Form**: Check the boxes for what you want applicants to provide (Email, Experience, Organization, Goals).
+5. **Publish**: Click **"Publish Course to Academy"**.`;
   }
 
-  if (q.includes("hero") || q.includes("photo") || q.includes("image") || q.includes("media") || q.includes("banner")) {
-    return `### How to Replace Photos & Homepage Banners:
+  // 8. Cohort Schedules & Session Dates
+  if (
+    q.includes("cohort") ||
+    q.includes("schedule") ||
+    q.includes("session") ||
+    q.includes("date")
+  ) {
+    if (snapshot?.cohorts?.list && snapshot.cohorts.list.length > 0) {
+      const cohortRows = snapshot.cohorts.list
+        .map(
+          (c, i) =>
+            `${i + 1}. **${c.startDate} to ${c.endDate}** — Time: \`${c.sessionTime}\` | Seats: **${c.seatsBooked}/${c.seatsTotal} booked** (${c.status})`
+        )
+        .join("\n");
 
-1. **Go to Media Studio**: Click **Media** in the admin sidebar (\`/admin/media\`).
-2. **Review Active Slots**: Check *Slot 01: Hero Banner*, *Slot 02: Flagship Service*, *Slot 03: Barista Academy*, etc.
-3. **Upload New Asset**: Drag and drop your image into the upload dropzone (files are saved directly to \`/public/uploads/\`).
-4. **Assign to Slot**: Click the slot tag button on any uploaded thumbnail in your Media Library to assign it to that homepage location.`;
+      return `### 📅 Active Barista Training Cohorts:
+
+**Overview**: ${snapshot.cohorts.totalActive} Active Scheduled Sessions
+
+${cohortRows}
+
+**Operational Actions**:
+- To open a new date session, click **"+ Schedule Cohort"** in \`/admin/training\`. Live seat counts update automatically as students apply!`;
+    }
+
+    return `### 📅 How to Add a New Training Cohort & Schedule:
+
+1. **Go to Training CMS**: Click **Offerings** in the sidebar (\`/admin/training\`).
+2. **Click Schedule Cohort**: In the top right, click **"+ Schedule Cohort"**.
+3. **Fill in Details**:
+   - Select the course from the dropdown.
+   - Choose start and end dates.
+   - Set daily hours (e.g. \`09:00 AM - 01:00 PM\`).
+   - Set total seat capacity (e.g. \`12\`).
+4. **Publish**: Click **"Schedule Cohort"**. It will appear live on the website immediately!`;
   }
 
-  if (q.includes("cohort") || q.includes("schedule") || q.includes("date") || q.includes("session")) {
-    return `### How to Add a New Training Cohort & Schedule:
+  // 9. Service Packages & Pricing
+  if (
+    q.includes("service") ||
+    q.includes("package") ||
+    q.includes("pricing") ||
+    q.includes("price") ||
+    q.includes("rate")
+  ) {
+    if (snapshot?.packages?.list && snapshot.packages.list.length > 0) {
+      const pkgRows = snapshot.packages.list
+        .map(
+          (p, i) =>
+            `${i + 1}. **${p.title}** (${p.category}) — Pricing: **${p.pricingModel === "negotiated" ? "Custom Quote" : p.price ? p.price.toLocaleString() + " ETB" : "Starting From"}** | Timeline: \`${p.timeline}\``
+        )
+        .join("\n");
 
-1. **Go to Training CMS**: Click **Offerings** in the admin sidebar (or visit \`/admin/training\`).
-2. **Click Schedule Cohort**: In the top right corner, click the **"+ Schedule Cohort"** button.
-3. **Fill in Cohort Details**:
-   - Select the **Course** from the dropdown.
-   - Set the **Start Date** and **End Date**.
-   - Enter the **Daily Session Hours** (e.g. \`09:00 AM - 01:00 PM\`).
-   - Set the **Total Seat Capacity** (e.g. \`12\`).
-4. **Publish Schedule**: Click **"Schedule Cohort"**.
-5. The new cohort will immediately appear on the public website under **#training** ("Upcoming Cohorts & Dates"), and live seat reservations will automatically count down as students apply!`;
+      return `### 💼 Active Commercial Service Packages:
+
+**Overview**: ${snapshot.packages.total} Published Packages
+
+${pkgRows}
+
+**Operational Actions**:
+- To create a new service package, click **"+ Add New..."** -> select **"💼 Post Service Package"** in \`/admin/training\`.
+- Packages display transparent pricing and direct booking forms on the public website under **#services**.`;
+    }
+
+    return `### 💼 How to Add a New Service Package with Pricing:
+
+1. **Go to Services CMS**: Click **Offerings** in the sidebar (\`/admin/training\`).
+2. **Click Add New**: Click **"+ Add New..."** -> select **"💼 Post Service Package"**.
+3. **Configure Details**:
+   - Set Title, Category, Pricing Model (*Fixed*, *Starting From*, or *Custom Quote*), and Price in ETB.
+   - Add scope deliverables (e.g. *"Equipment diagnostic"*, *"SOP manual"*).
+   - Select which fields clients will fill out when booking.
+4. **Publish**: Click **"Publish Service Package"**.`;
   }
 
-  return `### Ethiopian Signature Admin Guide:
+  // 10. Excel Export Guide
+  if (
+    q.includes("export") ||
+    q.includes("excel") ||
+    q.includes("xlsx") ||
+    q.includes("spreadsheet")
+  ) {
+    return `### How to Export Data to Excel (.xlsx):
 
-Here is how to manage the primary features of your platform:
+1. **Contact Messages**:
+   - Visit **Messages** (\`/admin/leads\`).
+   - Click the **"Export to Excel"** button in the top right.
+2. **Student Applications & Service Bookings**:
+   - Visit **Offerings** (\`/admin/training\`).
+   - Click the **"All Registrations & Bookings"** tab.
+   - Click the golden **"Export All to Excel (.xlsx)"** button in the top right.
+   - To export a single course or service package, expand its drawer and click **"Export Excel"** on that card.`;
+  }
 
-1. **Contact Messages & Inquiries (\`/admin/leads\`)**:
-   - View text messages written by visitors in the contact form.
-   - Click **"Chat on WhatsApp"** to reply directly to the client.
-   - Click **"Export to Excel"** to download all inquiries.
+  // 11. Intelligent Default Response Synthesized from Real-Time Records
+  return `### Ethiopian Signature Dashboard Status:
 
-2. **Services & Training Management (\`/admin/training\`)**:
-   - Click **"+ Add New..."** to publish either a **Training Course** or a commercial **Service Package** with custom pricing and booking forms.
-   - Click **"+ Schedule Cohort"** to open new date sessions with live seat reservation.
-   - Expand the **"Applicants"** or **"Bookings"** drawer on any course or service card to review clients and export rosters to Excel.
-   - Click **"All Registrations & Bookings"** tab to view the complete client ledger across courses and services.
+Here is the current real-time status of your platform:
+- ✉️ **Contact Inquiries**: ${snapshot?.inquiries?.total ?? 0} total messages (${snapshot?.inquiries?.newCount ?? 0} new)
+- 🎓 **Training Courses**: ${snapshot?.programs?.total ?? 0} published academy programs
+- 📅 **Active Cohorts**: ${snapshot?.cohorts?.totalActive ?? 0} scheduled sessions
+- 👥 **Student Registrations**: ${snapshot?.enrollments?.total ?? 0} registered applicants (${snapshot?.enrollments?.pendingCount ?? 0} pending)
+- 💼 **Service Packages**: ${snapshot?.packages?.total ?? 0} active packages (${snapshot?.serviceBookings?.total ?? 0} bookings)
 
-3. **Homepage Photography (\`/admin/media\`)**:
-   - Upload photography to \`/public/uploads/\` and assign it to Hero, Service, Catering, or Training slots.
-
-4. **Direct Channel Desk**:
-   - Official WhatsApp & Phone: \`+251925451711\`.`;
+**How can I assist you right now?**
+- Ask about specific data (e.g. *"who applied recently?"*, *"show me new leads"*, *"what courses are open?"*)
+- Ask for operational guidance (e.g. *"how to revert a photo"*, *"how to delete a package"*, *"how to add key in Vercel"*)
+- Ask: *"Summarize recent activity"* for an executive operational report.`;
 }

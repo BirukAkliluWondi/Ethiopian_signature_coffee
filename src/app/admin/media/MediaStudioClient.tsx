@@ -5,6 +5,7 @@ import Link from "next/link";
 import {
   uploadMediaFileAction,
   updateMediaSlotAction,
+  revertMediaSlotAction,
 } from "@/app/actions/admin-cms";
 
 interface MediaSlot {
@@ -13,6 +14,7 @@ interface MediaSlot {
   section: string;
   title: string;
   image_url: string;
+  previous_image_url?: string | null;
   alt_text: string;
   updated_at: string;
 }
@@ -160,6 +162,7 @@ export default function MediaStudioClient({
   const handleSaveSlot = () => {
     if (!activeSlot || !customUrl.trim()) return;
 
+    const previousUrl = activeSlot.image_url;
     startTransition(async () => {
       const res = await updateMediaSlotAction(
         activeSlot.slot_key,
@@ -175,6 +178,7 @@ export default function MediaStudioClient({
               ? {
                   ...s,
                   image_url: customUrl.trim(),
+                  previous_image_url: previousUrl !== customUrl.trim() ? previousUrl : s.previous_image_url,
                   title: customTitle.trim() || s.title,
                   alt_text: customAlt.trim() || s.alt_text,
                   updated_at: new Date().toISOString(),
@@ -190,6 +194,46 @@ export default function MediaStudioClient({
           type: "error",
           message: res.error || "Failed to save media slot.",
         });
+      }
+    });
+  };
+
+  const handleRevertSlot = (slot: MediaSlot) => {
+    if (!slot.previous_image_url) return;
+
+    startTransition(async () => {
+      const res = await revertMediaSlotAction(slot.slot_key);
+
+      if (res.success && res.restoredUrl) {
+        setSlots((prev) =>
+          prev.map((s) =>
+            s.slot_key === slot.slot_key
+              ? {
+                  ...s,
+                  image_url: res.restoredUrl!,
+                  previous_image_url: res.previousUrl || s.image_url,
+                  updated_at: new Date().toISOString(),
+                }
+              : s
+          )
+        );
+
+        if (activeSlot && activeSlot.slot_key === slot.slot_key) {
+          setActiveSlot((prev) =>
+            prev
+              ? {
+                  ...prev,
+                  image_url: res.restoredUrl!,
+                  previous_image_url: res.previousUrl || prev.image_url,
+                }
+              : null
+          );
+          setCustomUrl(res.restoredUrl!);
+        }
+
+        showToast(`Reverted "${slot.title}" back to previous photo!`);
+      } else {
+        showToast(res.error || "Failed to revert photo.");
       }
     });
   };
@@ -287,9 +331,9 @@ export default function MediaStudioClient({
               3
             </span>
             <div className="flex flex-col">
-              <span className="font-bold text-on-surface">Click &ldquo;Publish to Site&rdquo;</span>
+              <span className="font-bold text-on-surface">Click &ldquo;Publish to Site&rdquo; (Or Undo Anytime)</span>
               <span className="text-[11px] text-on-surface-variant mt-0.5 leading-relaxed">
-                Your new photo is saved immediately and will be visible to everyone visiting your website!
+                Your new photo goes live immediately. If it doesn&apos;t look right, simply click <strong>&ldquo;Undo / Revert&rdquo;</strong> to restore your previous photo instantly.
               </span>
             </div>
           </div>
@@ -355,22 +399,36 @@ export default function MediaStudioClient({
               </div>
 
               {/* Slot Actions */}
-              <div className="grid grid-cols-2 gap-2">
+              <div className="flex flex-col sm:flex-row gap-2">
                 <button
-                  className="flex items-center justify-center gap-1.5 py-2.5 px-3 bg-stitch-primary text-white rounded-lg text-xs font-semibold hover:bg-stitch-primary-container transition-colors shadow-sm"
+                  className="flex-1 flex items-center justify-center gap-1.5 py-2.5 px-3 bg-stitch-primary text-white rounded-lg text-xs font-semibold hover:bg-stitch-primary-container transition-colors shadow-sm"
                   type="button"
                   onClick={() => handleOpenSlot(heroSlot)}
                 >
                   <span className="material-symbols-outlined text-base">sync</span>
                   <span>Replace This Hero Picture</span>
                 </button>
+
+                {heroSlot.previous_image_url && heroSlot.previous_image_url !== heroSlot.image_url && (
+                  <button
+                    className="flex items-center justify-center gap-1.5 py-2.5 px-3 bg-surface-container-low hover:bg-surface-container text-stitch-primary rounded-lg text-xs font-semibold transition-colors border border-surface-container-highest"
+                    disabled={isPending}
+                    title={`Click to revert to previous image (${heroSlot.previous_image_url})`}
+                    type="button"
+                    onClick={() => handleRevertSlot(heroSlot)}
+                  >
+                    <span className="material-symbols-outlined text-base">undo</span>
+                    <span>Revert to Previous Photo</span>
+                  </button>
+                )}
+
                 <Link
                   className="flex items-center justify-center gap-1.5 py-2.5 px-3 bg-surface-container-low text-on-surface hover:text-stitch-primary rounded-lg text-xs font-semibold transition-colors border border-surface-container-highest text-center"
                   href="/#home"
                   target="_blank"
                 >
                   <span className="material-symbols-outlined text-base">visibility</span>
-                  <span>Preview on Live Site</span>
+                  <span>Preview Live</span>
                 </Link>
               </div>
             </div>
@@ -400,19 +458,36 @@ export default function MediaStudioClient({
                       {slot.title}
                     </h4>
                     <p className="text-xs text-on-surface-variant truncate mt-0.5">
-                      Click Change to replace this image
+                      {slot.previous_image_url && slot.previous_image_url !== slot.image_url
+                        ? "Previous photo available to revert"
+                        : "Click Change to replace this image"}
                     </p>
                   </div>
                 </div>
 
-                <button
-                  className="py-2 px-3 bg-surface-container-low hover:bg-surface-container text-stitch-primary rounded-lg text-xs font-bold shrink-0 transition-colors border border-surface-container-highest flex items-center gap-1"
-                  type="button"
-                  onClick={() => handleOpenSlot(slot)}
-                >
-                  <span className="material-symbols-outlined text-sm">edit</span>
-                  <span>Change</span>
-                </button>
+                <div className="flex items-center gap-1.5 shrink-0">
+                  {slot.previous_image_url && slot.previous_image_url !== slot.image_url && (
+                    <button
+                      className="py-2 px-2.5 bg-surface-container-low hover:bg-surface-container text-stitch-primary rounded-lg text-xs font-bold transition-colors border border-surface-container-highest flex items-center gap-1"
+                      disabled={isPending}
+                      title="Undo: Revert to previous photo"
+                      type="button"
+                      onClick={() => handleRevertSlot(slot)}
+                    >
+                      <span className="material-symbols-outlined text-sm">undo</span>
+                      <span className="hidden sm:inline">Undo</span>
+                    </button>
+                  )}
+
+                  <button
+                    className="py-2 px-3 bg-surface-container-low hover:bg-surface-container text-stitch-primary rounded-lg text-xs font-bold shrink-0 transition-colors border border-surface-container-highest flex items-center gap-1"
+                    type="button"
+                    onClick={() => handleOpenSlot(slot)}
+                  >
+                    <span className="material-symbols-outlined text-sm">edit</span>
+                    <span>Change</span>
+                  </button>
+                </div>
               </div>
             ))}
           </div>
@@ -656,6 +731,39 @@ export default function MediaStudioClient({
                 />
               </div>
             </div>
+
+            {/* Quick Revert to Previous Image (If Available) */}
+            {activeSlot.previous_image_url && activeSlot.previous_image_url !== activeSlot.image_url && (
+              <div className="p-3 rounded-lg bg-surface-container-low border border-surface-container-highest flex items-center justify-between gap-3">
+                <div className="flex items-center gap-2.5 min-w-0">
+                  <div className="w-12 h-12 rounded overflow-hidden bg-surface-container shrink-0 border border-surface-container-highest">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      alt="Previous Photo"
+                      className="w-full h-full object-cover"
+                      src={activeSlot.previous_image_url}
+                    />
+                  </div>
+                  <div className="flex flex-col min-w-0">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-stitch-secondary">
+                      Previous Photo On File
+                    </span>
+                    <span className="text-xs text-on-surface-variant truncate">
+                      Click Restore if you want to switch back to this photo.
+                    </span>
+                  </div>
+                </div>
+                <button
+                  className="py-1.5 px-3 bg-surface-container hover:bg-surface-container-high text-stitch-primary rounded-lg text-xs font-bold transition-colors border border-surface-container-highest flex items-center gap-1 shrink-0"
+                  disabled={isPending}
+                  type="button"
+                  onClick={() => handleRevertSlot(activeSlot)}
+                >
+                  <span className="material-symbols-outlined text-sm">undo</span>
+                  <span>Restore</span>
+                </button>
+              </div>
+            )}
 
             {/* Upload or URL Inputs */}
             <div className="flex flex-col gap-3.5 text-xs">

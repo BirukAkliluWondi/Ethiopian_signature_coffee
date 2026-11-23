@@ -12,10 +12,10 @@ interface Message {
 
 const STARTER_PROMPTS = [
   "📊 Summarize the dashboard & recent activity",
+  "How do I revert or change website photos?",
+  "Who registered or applied recently?",
   "How do I add a new service package and set pricing?",
-  "How do I export registered students to Excel?",
-  "Where do contact form messages arrive?",
-  "How do I replace the hero banner image?",
+  "How do I add the Gemini API key in Vercel?",
 ];
 
 export default function AdminAIAssistantDrawer({
@@ -239,32 +239,63 @@ export default function AdminAIAssistantDrawer({
 
         {/* Optional Collapsible API Key Settings Drawer Section */}
         {showSettings && (
-          <div className="p-4 bg-surface-container-low border-b border-surface-container-highest shrink-0 flex flex-col gap-2.5">
+          <div className="p-4 bg-surface-container-low border-b border-surface-container-highest shrink-0 flex flex-col gap-3">
             <div className="flex items-center justify-between">
               <span className="text-xs font-bold text-stitch-primary flex items-center gap-1.5">
                 <span className="material-symbols-outlined text-sm">key</span>
-                <span>AI Assistant API Key</span>
+                <span>AI Assistant Connection Settings</span>
               </span>
+              <a
+                className="text-[11px] text-stitch-primary hover:underline font-semibold flex items-center gap-0.5"
+                href="https://aistudio.google.com/app/apikey"
+                rel="noreferrer"
+                target="_blank"
+              >
+                <span>Get Free Key</span>
+                <span className="material-symbols-outlined text-[13px]">open_in_new</span>
+              </a>
             </div>
+
             <p className="text-[11px] text-on-surface-variant leading-relaxed">
-              If not set in your server environment (as <code className="font-mono text-[10px]">GEMINI_API_KEY</code>), you can paste your key below to save it locally in your browser.
+              For permanent operation on Vercel, add <code className="font-mono text-[10px] bg-surface-container px-1 py-0.5 rounded">GEMINI_API_KEY</code> in <strong>Vercel &gt; Settings &gt; Environment Variables</strong>. You can also paste your Google AI Studio key (<code className="font-mono text-[10px]">AIzaSy...</code>) below to save it locally in your browser.
             </p>
+
             <div className="flex items-center gap-2">
               <input
-                className="flex-1 px-3 py-1.5 text-xs rounded-lg border border-surface-container-highest bg-white text-on-surface focus:outline-none focus:ring-1 focus:ring-stitch-primary font-mono"
-                placeholder="Enter API key..."
+                className="flex-1 px-3 py-1.5 text-xs rounded-lg border border-surface-container-highest bg-white text-on-surface focus:outline-none focus:ring-1 focus:ring-stitch-primary font-mono placeholder:text-text-muted/50"
+                placeholder="AIzaSy..."
                 type="password"
                 value={tempApiKey}
                 onChange={(e) => setTempApiKey(e.target.value)}
               />
               <button
-                className="px-3 py-1.5 bg-stitch-primary text-white rounded-lg text-xs font-semibold hover:bg-stitch-primary/90 transition-colors"
+                className="px-3 py-1.5 bg-stitch-primary text-white rounded-lg text-xs font-semibold hover:bg-stitch-primary/90 transition-colors shadow-2xs"
                 type="button"
                 onClick={handleSaveApiKey}
               >
                 Save
               </button>
+              {userApiKey && (
+                <button
+                  className="px-2 py-1.5 bg-surface-container text-on-surface-variant hover:text-error rounded-lg text-xs font-semibold transition-colors border border-surface-container-highest"
+                  title="Remove local key"
+                  type="button"
+                  onClick={() => {
+                    setUserApiKey("");
+                    setTempApiKey("");
+                    localStorage.removeItem("admin_gemini_api_key");
+                  }}
+                >
+                  Clear
+                </button>
+              )}
             </div>
+
+            {tempApiKey && !tempApiKey.startsWith("AIzaSy") && (
+              <span className="text-[10px] text-amber-700 bg-amber-50 px-2 py-1 rounded border border-amber-200">
+                ⚠️ Google AI Studio keys typically start with <code className="font-mono font-bold">AIzaSy</code>.
+              </span>
+            )}
           </div>
         )}
 

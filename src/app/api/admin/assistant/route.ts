@@ -21,8 +21,6 @@ interface ChatMessage {
   text: string;
 }
 
-// Runtime fallback key decoded securely at runtime (not indexed as plain string by scanners)
-const DEFAULT_KEY_B64 = "QVEuQWI4Uk42SW50cUhOdmJfOG1CeWVlaDA1TERTMnVJY0g4dU9rNjNEUXRGSU5GTjZwUXc=";
 
 export async function POST(req: NextRequest) {
   try {
@@ -66,15 +64,11 @@ export async function POST(req: NextRequest) {
     const liveSnapshotText = liveSnapshot ? formatLiveDashboardSummaryText(liveSnapshot) : "";
     const isSummary = isSummaryRequest(trimmedQuery);
 
-    // 4. Determine API Key (Vercel env, client-entered override, or server fallback)
-    let fallbackServerKey = "";
-    try {
-      fallbackServerKey = Buffer.from(DEFAULT_KEY_B64, "base64").toString("utf-8");
-    } catch {
-      fallbackServerKey = "";
-    }
-
-    const apiKey = (process.env.GEMINI_API_KEY || userApiKey || fallbackServerKey || "").trim();
+    // 4. Determine API Key (Vercel env or client-entered override)
+    const rawApiKey = (process.env.GEMINI_API_KEY || userApiKey || "").trim();
+    const isRealGeminiKey = Boolean(
+      rawApiKey && rawApiKey.startsWith("AIzaSy") && rawApiKey.length >= 35
+    );
 
     // 5. Construct payload for Google Generative AI
     const formattedContents: Array<{ role: string; parts: Array<{ text: string }> }> = [];
@@ -94,8 +88,8 @@ export async function POST(req: NextRequest) {
       parts: [{ text: trimmedQuery }],
     });
 
-    // gemini-flash-lite-latest is active and verified for this API key on v1beta
-    const CANDIDATE_MODELS = ["gemini-flash-lite-latest", "gemini-flash-latest"];
+    // Modern, stable Gemini models
+    const CANDIDATE_MODELS = ["gemini-2.0-flash", "gemini-1.5-flash", "gemini-flash-latest"];
 
     const dynamicSystemInstruction = liveSnapshotText
       ? `${ADMIN_COPILOT_SYSTEM_INSTRUCTION}
@@ -115,13 +109,13 @@ Instructions for live data usage:
     let candidateText: string | null = null;
     let lastError: string | null = null;
 
-    if (apiKey) {
+    if (isRealGeminiKey) {
       for (const model of CANDIDATE_MODELS) {
         try {
-          const geminiEndpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+          const geminiEndpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${rawApiKey}`;
 
           const controller = new AbortController();
-          const timeoutId = setTimeout(() => controller.abort(), 7000);
+          const timeoutId = setTimeout(() => controller.abort(), 15000);
 
           const response = await fetch(geminiEndpoint, {
             method: "POST",
@@ -178,32 +172,16 @@ Instructions for live data usage:
       });
     }
 
-    // 8. Resilient operational fallback
-    const offlineAnswer = getSmartOfflineAnswer(trimmedQuery);
-    if (offlineAnswer) {
-      return NextResponse.json({
-        answer: offlineAnswer,
-        isOfflineFallback: true,
-      });
+    // 8. Resilient context-aware operational response computed from live database
+    let offlineAnswer = getSmartOfflineAnswer(trimmedQuery, liveSnapshot);
+
+    // If API key is missing or invalid on Vercel, append a helpful operational notice
+    if (!isRealGeminiKey) {
+      offlineAnswer += `\n\n---\n> 💡 *Notice: Remote AI is operating in live-data mode because a valid Gemini API key was not detected. Your answer above was calculated live from your actual database records. To enable conversational AI, add your free key (\`AIzaSy...\`) in Vercel Environment Variables (\`GEMINI_API_KEY\`) or click ⚙️ above.*`;
     }
 
-    // Standard fallback guide if query is unmapped
     return NextResponse.json({
-      answer: liveSnapshotText || `### Ethiopian Signature Admin Operations:
-
-I am your in-dashboard operational assistant. How can I help you navigate your admin panel today?
-
-1. **Services & Pricing (\`/admin/training\`)**:
-   - Click **"+ Add New..."** and select **"Post Service Package"** to publish commercial services with fixed or flexible pricing and deliverables.
-2. **Barista Academy (\`/admin/training\`)**:
-   - Click **"+ Add New..."** and select **"Post Training Course"** to publish courses with custom registration forms.
-   - Click **"+ Schedule Cohort"** to open date sessions with live seat capacity.
-3. **Contact Inquiries (\`/admin/leads\`)**:
-   - Review incoming messages and click **"Chat on WhatsApp"** to reply instantly.
-4. **Excel Exports**:
-   - Export student rosters and service bookings directly into \`.xlsx\` spreadsheets.
-5. **Media Studio (\`/admin/media\`)**:
-   - Upload and assign photos to homepage slots.`,
+      answer: offlineAnswer,
       isOfflineFallback: true,
     });
   } catch (error: any) {

@@ -76,7 +76,7 @@ export async function getMediaSlotsAction() {
 }
 
 /**
- * Update a media slot to point to a new image URL
+ * Update a media slot to point to a new image URL, storing the previous image for 1-click reversion
  */
 export async function updateMediaSlotAction(
   slotKey: string,
@@ -89,10 +89,22 @@ export async function updateMediaSlotAction(
     if (!isAuth) return { success: false, error: "Unauthorized." };
     if (!supabase) return { success: false, error: "Database not configured." };
 
+    // Fetch current slot to record previous_image_url for safe reversion
+    const { data: currentSlot } = await supabase
+      .from("media_assets")
+      .select("image_url")
+      .eq("slot_key", slotKey)
+      .maybeSingle();
+
     const updatePayload: Record<string, unknown> = {
       image_url: imageUrl.trim(),
       updated_at: new Date().toISOString(),
     };
+
+    if (currentSlot?.image_url && currentSlot.image_url !== imageUrl.trim()) {
+      updatePayload.previous_image_url = currentSlot.image_url;
+    }
+
     if (title) updatePayload.title = title.trim();
     if (altText) updatePayload.alt_text = altText.trim();
 
@@ -106,6 +118,55 @@ export async function updateMediaSlotAction(
   } catch (err: unknown) {
     console.error("Error updating media slot:", err);
     return { success: false, error: "Failed to update media slot." };
+  }
+}
+
+/**
+ * Revert a media slot back to its previous image URL
+ */
+export async function revertMediaSlotAction(slotKey: string) {
+  try {
+    const isAuth = await isAdminAuthenticated();
+    if (!isAuth) return { success: false, error: "Unauthorized." };
+    if (!supabase) return { success: false, error: "Database not configured." };
+
+    const { data: currentSlot, error: fetchErr } = await supabase
+      .from("media_assets")
+      .select("*")
+      .eq("slot_key", slotKey)
+      .maybeSingle();
+
+    if (fetchErr || !currentSlot) {
+      return { success: false, error: "Media slot not found." };
+    }
+
+    if (!currentSlot.previous_image_url) {
+      return { success: false, error: "No previous image recorded to revert back to." };
+    }
+
+    const previousUrl = currentSlot.previous_image_url;
+    const currentUrl = currentSlot.image_url;
+
+    // Swap current and previous so user can toggle back and forth if needed
+    const { error: updateErr } = await supabase
+      .from("media_assets")
+      .update({
+        image_url: previousUrl,
+        previous_image_url: currentUrl,
+        updated_at: new Date().toISOString(),
+      })
+      .eq("slot_key", slotKey);
+
+    if (updateErr) throw updateErr;
+
+    return {
+      success: true,
+      restoredUrl: previousUrl,
+      previousUrl: currentUrl,
+    };
+  } catch (err: unknown) {
+    console.error("Error reverting media slot:", err);
+    return { success: false, error: "Failed to revert media slot." };
   }
 }
 

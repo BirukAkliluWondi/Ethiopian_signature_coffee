@@ -85,9 +85,11 @@
    - **Pre-Admin Login Polish Checkpoint Tag**: `pre-admin-login-polish`
    - **Pre-Delete Feature & Login Privacy Checkpoint Tag**: `pre-delete-feature-and-login-privacy`
    - **Pre-Nav Bars Streamline Checkpoint Tag**: `pre-nav-bars-streamline`
-   - **Backup Branches**: `backup-stable-baseline`, `backup-pre-hero-media-carousel`, `backup-pre-opening-motion-choreography`, `backup-pre-chronological-resequence`, `backup-pre-debox-transformation`, `backup-pre-ui-ux-refinements`, `backup-pre-catering-service`, `backup-pre-catering-dedicated-showcase`, `backup-pre-admin-dashboard`, `backup-stitch-admin-ui`, `backup-admin-step-guides`, `backup-contact-messages-visibility`, `backup-admin-polish-and-auth`, `backup-dynamic-applications-excel`, `backup-admin-ai-copilot`, `backup-services-and-pricing-cms`, `backup-multipage-and-ui-cleanup`, `backup-admin-login-polish`, `backup-delete-feature-and-login-privacy`, `backup-nav-bars-streamline` (Pushed to GitHub `origin`)
+   - **Pre-Media Revert & Copilot Fix Checkpoint Tag**: `pre-media-revert-and-copilot-fix`
+   - **Backup Branches**: `backup-stable-baseline`, `backup-pre-hero-media-carousel`, `backup-pre-opening-motion-choreography`, `backup-pre-chronological-resequence`, `backup-pre-debox-transformation`, `backup-pre-ui-ux-refinements`, `backup-pre-catering-service`, `backup-pre-catering-dedicated-showcase`, `backup-pre-admin-dashboard`, `backup-stitch-admin-ui`, `backup-admin-step-guides`, `backup-contact-messages-visibility`, `backup-admin-polish-and-auth`, `backup-dynamic-applications-excel`, `backup-admin-ai-copilot`, `backup-services-and-pricing-cms`, `backup-multipage-and-ui-cleanup`, `backup-admin-login-polish`, `backup-delete-feature-and-login-privacy`, `backup-nav-bars-streamline`, `backup-media-revert-and-copilot-fix` (Pushed to GitHub `origin`)
    - **Remote Synchronization**: Fully backed up on remote GitHub repository.
    - **One-Prompt Revert Protocol**:
+     - To revert to the state before media revert and AI copilot fix: `git reset --hard pre-media-revert-and-copilot-fix && git clean -fd`
      - To revert to the state before navigation bars streamline: `git reset --hard pre-nav-bars-streamline && git clean -fd`
      - To revert to the state before the course/package delete feature and login privacy: `git reset --hard pre-delete-feature-and-login-privacy && git clean -fd`
      - To revert to the state before the admin login page polish: `git reset --hard pre-admin-login-polish && git clean -fd`
