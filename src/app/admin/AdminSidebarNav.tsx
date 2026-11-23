@@ -124,43 +124,6 @@ export default function AdminSidebarNav({ isMobileNav = false }: { isMobileNav?:
         })}
       </nav>
 
-      {/* Helpful Step-by-Step Mini Guide Card */}
-      <div className="p-3 rounded-xl bg-surface-container-low border border-surface-container-highest flex flex-col gap-2 text-xs">
-        <div className="flex items-center gap-1.5 font-bold text-stitch-primary text-[11px] uppercase tracking-wider">
-          <span className="material-symbols-outlined text-sm">help_outline</span>
-          <span>Quick Admin Guide</span>
-        </div>
-        <p className="text-[10px] text-on-surface-variant leading-relaxed">
-          Follow these 3 simple steps to manage your site:
-        </p>
-        <div className="flex flex-col gap-1.5 text-[11px]">
-          <div className="flex items-start gap-1.5">
-            <span className="w-4 h-4 rounded bg-stitch-primary text-white flex items-center justify-center text-[9px] font-bold shrink-0 mt-0.5">
-              1
-            </span>
-            <span className="text-on-surface-variant leading-tight">
-              Check <strong>Contact Messages</strong> to read texts from the Contact form.
-            </span>
-          </div>
-          <div className="flex items-start gap-1.5">
-            <span className="w-4 h-4 rounded bg-stitch-primary text-white flex items-center justify-center text-[9px] font-bold shrink-0 mt-0.5">
-              2
-            </span>
-            <span className="text-on-surface-variant leading-tight">
-              Use <strong>Change Photos</strong> to swap any picture on the site.
-            </span>
-          </div>
-          <div className="flex items-start gap-1.5">
-            <span className="w-4 h-4 rounded bg-stitch-primary text-white flex items-center justify-center text-[9px] font-bold shrink-0 mt-0.5">
-              3
-            </span>
-            <span className="text-on-surface-variant leading-tight">
-              Use <strong>Training</strong> to add new Barista Academy dates.
-            </span>
-          </div>
-        </div>
-      </div>
-
       {/* Sign Out Button */}
       <div className="pt-2 border-t border-surface-container-highest">
         <button

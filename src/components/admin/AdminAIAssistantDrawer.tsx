@@ -183,7 +183,7 @@ export default function AdminAIAssistantDrawer({
               <div className="flex items-center gap-2">
                 <span className="font-serif font-bold text-sm text-stitch-primary">Admin Copilot</span>
                 <span className="text-[10px] px-1.5 py-0.5 rounded bg-stitch-primary/10 text-stitch-primary font-bold tracking-tight">
-                  Gemini 2.0
+                  Assistant
                 </span>
               </div>
               <span className="text-[11px] text-on-surface-variant font-medium">
@@ -209,7 +209,7 @@ export default function AdminAIAssistantDrawer({
               className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors ${
                 showSettings ? "bg-stitch-primary text-white" : "hover:bg-surface-container hover:text-stitch-primary"
               }`}
-              title="Configure Gemini API Key"
+              title="Configure Assistant Key"
               type="button"
               onClick={() => setShowSettings(!showSettings)}
             >
@@ -243,25 +243,16 @@ export default function AdminAIAssistantDrawer({
             <div className="flex items-center justify-between">
               <span className="text-xs font-bold text-stitch-primary flex items-center gap-1.5">
                 <span className="material-symbols-outlined text-sm">key</span>
-                <span>Google Gemini API Key (100% Free)</span>
+                <span>AI Assistant API Key</span>
               </span>
-              <a
-                className="text-[11px] text-stitch-secondary hover:underline font-semibold flex items-center gap-0.5"
-                href="https://aistudio.google.com"
-                rel="noreferrer"
-                target="_blank"
-              >
-                <span>Get free key</span>
-                <span className="material-symbols-outlined text-[12px]">launch</span>
-              </a>
             </div>
             <p className="text-[11px] text-on-surface-variant leading-relaxed">
-              If not set in your server <code className="bg-surface-container px-1 py-0.5 rounded font-mono text-[10px]">.env.local</code> (as <code className="font-mono text-[10px]">GEMINI_API_KEY</code>), you can paste your key below to save it locally in your browser.
+              If not set in your server environment (as <code className="font-mono text-[10px]">GEMINI_API_KEY</code>), you can paste your key below to save it locally in your browser.
             </p>
             <div className="flex items-center gap-2">
               <input
                 className="flex-1 px-3 py-1.5 text-xs rounded-lg border border-surface-container-highest bg-white text-on-surface focus:outline-none focus:ring-1 focus:ring-stitch-primary font-mono"
-                placeholder="AIzaSy..."
+                placeholder="Enter API key..."
                 type="password"
                 value={tempApiKey}
                 onChange={(e) => setTempApiKey(e.target.value)}

@@ -1,27 +1,32 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function MobileBottomNav() {
+  const pathname = usePathname();
   const [activeSection, setActiveSection] = useState("home");
 
   useEffect(() => {
     const handleScroll = () => {
-      const sectionIds = ["home", "services", "process", "training", "origins", "projects", "about", "contact"];
-      const scrollPos = window.scrollY + 220;
+      if (pathname === "/") {
+        const sectionIds = ["home", "services", "process", "origins", "projects", "about", "contact"];
+        const scrollPos = window.scrollY + 220;
 
-      for (let i = sectionIds.length - 1; i >= 0; i--) {
-        const el = document.getElementById(sectionIds[i]);
-        if (el && el.offsetTop <= scrollPos) {
-          const current = sectionIds[i];
-          if (current === "process") {
-            setActiveSection("services");
-          } else if (current === "about") {
-            setActiveSection("projects");
-          } else {
-            setActiveSection(current);
+        for (let i = sectionIds.length - 1; i >= 0; i--) {
+          const el = document.getElementById(sectionIds[i]);
+          if (el && el.offsetTop <= scrollPos) {
+            const current = sectionIds[i];
+            if (current === "process") {
+              setActiveSection("services");
+            } else if (current === "about") {
+              setActiveSection("projects");
+            } else {
+              setActiveSection(current);
+            }
+            break;
           }
-          break;
         }
       }
     };
@@ -29,15 +34,18 @@ export default function MobileBottomNav() {
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [pathname]);
+
+  const isServicesPage = pathname.startsWith("/services");
+  const isTrainingPage = pathname.startsWith("/training");
 
   const items = [
-    { id: "home", label: "Home", href: "#home", icon: "local_cafe" },
-    { id: "services", label: "Services", href: "#services", icon: "corporate_fare" },
-    { id: "training", label: "Training", href: "#training", icon: "school" },
-    { id: "origins", label: "Origins", href: "#origins", icon: "spa" },
-    { id: "projects", label: "Projects", href: "#projects", icon: "foundation" },
-    { id: "contact", label: "Contact", href: "#contact", icon: "alternate_email" },
+    { id: "home", label: "Home", href: pathname === "/" ? "#home" : "/", icon: "local_cafe" },
+    { id: "services", label: "Services", href: "/services", icon: "corporate_fare" },
+    { id: "training", label: "Training", href: "/training", icon: "school" },
+    { id: "origins", label: "Origins", href: pathname === "/" ? "#origins" : "/#origins", icon: "spa" },
+    { id: "projects", label: "Projects", href: pathname === "/" ? "#projects" : "/#projects", icon: "foundation" },
+    { id: "contact", label: "Contact", href: pathname === "/" ? "#contact" : "/#contact", icon: "alternate_email" },
   ];
 
   return (
@@ -47,9 +55,13 @@ export default function MobileBottomNav() {
     >
       <div className="flex items-center justify-around h-14 max-w-lg mx-auto px-2">
         {items.map((item) => {
-          const isActive = activeSection === item.id;
+          const isActive =
+            (item.id === "services" && isServicesPage) ||
+            (item.id === "training" && isTrainingPage) ||
+            (pathname === "/" && activeSection === item.id);
+
           return (
-            <a
+            <Link
               key={item.id}
               className={`flex flex-col items-center justify-center flex-1 py-1 transition-all active:scale-95 relative ${
                 isActive ? "text-brand-green font-bold" : "text-text-muted hover:text-brand-green font-medium"
@@ -65,7 +77,7 @@ export default function MobileBottomNav() {
               {isActive && (
                 <span className="absolute bottom-0 w-3 h-0.5 bg-brand-yellow rounded-full" />
               )}
-            </a>
+            </Link>
           );
         })}
       </div>

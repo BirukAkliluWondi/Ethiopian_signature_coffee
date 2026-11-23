@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Footer() {
   return (
     <footer
@@ -70,46 +72,46 @@ export default function Footer() {
             </h3>
             <ul className="flex flex-col gap-2.5 text-xs sm:text-sm text-white/75">
               <li>
-                <a className="hover:text-white transition-colors flex items-center gap-2 group" href="#services">
+                <Link className="hover:text-white transition-colors flex items-center gap-2 group" href="/services">
                   <span className="w-1.5 h-1.5 rounded-full bg-brand-yellow/60 group-hover:bg-brand-yellow transition-colors" />
                   <span>1. Coffee Shop Setup &amp; Organization</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a className="hover:text-white transition-colors flex items-center gap-2 group" href="#training">
+                <Link className="hover:text-white transition-colors flex items-center gap-2 group" href="/training">
                   <span className="w-1.5 h-1.5 rounded-full bg-brand-yellow/60 group-hover:bg-brand-yellow transition-colors" />
                   <span>2. Barista &amp; Sensory Academy</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a className="hover:text-white transition-colors flex items-center gap-2 group" href="#services">
+                <Link className="hover:text-white transition-colors flex items-center gap-2 group" href="/services">
                   <span className="w-1.5 h-1.5 rounded-full bg-brand-yellow/60 group-hover:bg-brand-yellow transition-colors" />
                   <span>3. Business Consultancy &amp; Feasibility</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a className="hover:text-white transition-colors flex items-center gap-2 group" href="#services">
+                <Link className="hover:text-white transition-colors flex items-center gap-2 group" href="/services">
                   <span className="w-1.5 h-1.5 rounded-full bg-brand-yellow/60 group-hover:bg-brand-yellow transition-colors" />
                   <span>4. Operations &amp; Workflow Systems</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a className="hover:text-white transition-colors flex items-center gap-2 group" href="#services">
+                <Link className="hover:text-white transition-colors flex items-center gap-2 group" href="/services">
                   <span className="w-1.5 h-1.5 rounded-full bg-brand-yellow/60 group-hover:bg-brand-yellow transition-colors" />
                   <span>5. Menu Engineering &amp; Profitability</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a className="hover:text-white transition-colors flex items-center gap-2 group" href="#services">
+                <Link className="hover:text-white transition-colors flex items-center gap-2 group" href="/services">
                   <span className="w-1.5 h-1.5 rounded-full bg-brand-yellow/60 group-hover:bg-brand-yellow transition-colors" />
                   <span>6. Turnkey Opening Launch Support</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a className="hover:text-white transition-colors flex items-center gap-2 group" href="#catering">
+                <Link className="hover:text-white transition-colors flex items-center gap-2 group" href="/services#catering">
                   <span className="w-1.5 h-1.5 rounded-full bg-brand-yellow/60 group-hover:bg-brand-yellow transition-colors" />
                   <span>7. Catering Services &amp; Events</span>
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

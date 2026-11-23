@@ -1,8 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function Header() {
+  const pathname = usePathname();
   const [activeSection, setActiveSection] = useState("home");
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -10,14 +13,17 @@ export default function Header() {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
-      const sectionIds = ["home", "services", "process", "training", "origins", "projects", "about", "contact"];
-      const scrollPos = window.scrollY + 220;
 
-      for (let i = sectionIds.length - 1; i >= 0; i--) {
-        const el = document.getElementById(sectionIds[i]);
-        if (el && el.offsetTop <= scrollPos) {
-          setActiveSection(sectionIds[i]);
-          break;
+      if (pathname === "/") {
+        const sectionIds = ["home", "services", "process", "origins", "projects", "about", "contact"];
+        const scrollPos = window.scrollY + 220;
+
+        for (let i = sectionIds.length - 1; i >= 0; i--) {
+          const el = document.getElementById(sectionIds[i]);
+          if (el && el.offsetTop <= scrollPos) {
+            setActiveSection(sectionIds[i]);
+            break;
+          }
         }
       }
 
@@ -31,17 +37,20 @@ export default function Header() {
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [pathname]);
+
+  const isServicesPage = pathname.startsWith("/services");
+  const isTrainingPage = pathname.startsWith("/training");
 
   const navLinks = [
-    { id: "home", label: "Home", href: "#home" },
-    { id: "services", label: "Services", href: "#services" },
-    { id: "process", label: "Process", href: "#process" },
-    { id: "training", label: "Training", href: "#training" },
-    { id: "origins", label: "Origins", href: "#origins" },
-    { id: "projects", label: "Projects", href: "#projects" },
-    { id: "about", label: "About", href: "#about" },
-    { id: "contact", label: "Contact", href: "#contact" },
+    { id: "home", label: "Home", href: pathname === "/" ? "#home" : "/" },
+    { id: "services", label: "Services", href: "/services" },
+    { id: "training", label: "Training", href: "/training" },
+    { id: "process", label: "Process", href: pathname === "/" ? "#process" : "/#process" },
+    { id: "origins", label: "Origins", href: pathname === "/" ? "#origins" : "/#origins" },
+    { id: "projects", label: "Projects", href: pathname === "/" ? "#projects" : "/#projects" },
+    { id: "about", label: "About", href: pathname === "/" ? "#about" : "/#about" },
+    { id: "contact", label: "Contact", href: pathname === "/" ? "#contact" : "/#contact" },
   ];
 
   return (
@@ -56,7 +65,7 @@ export default function Header() {
         {/* Main Header Row */}
         <div className="flex items-center justify-between h-16 sm:h-20">
           {/* Logo & Branding */}
-          <a href="#home" className="flex items-center gap-2.5 sm:gap-3.5 group shrink-0">
+          <Link href={pathname === "/" ? "#home" : "/"} className="flex items-center gap-2.5 sm:gap-3.5 group shrink-0">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               alt="Ethiopian Signature Coffee Logo"
@@ -71,14 +80,18 @@ export default function Header() {
                 Building Coffee Businesses
               </span>
             </div>
-          </a>
+          </Link>
 
           {/* Desktop Navigation Links (Full Desktop Only: lg and up, 1024px+) */}
           <nav className="hidden lg:flex items-center gap-5 xl:gap-7">
             {navLinks.map((link) => {
-              const isActive = activeSection === link.id;
+              const isActive =
+                (link.id === "services" && isServicesPage) ||
+                (link.id === "training" && isTrainingPage) ||
+                (pathname === "/" && activeSection === link.id);
+
               return (
-                <a
+                <Link
                   key={link.id}
                   className={`text-[13px] tracking-wide py-1 transition-all relative ${
                     isActive
@@ -88,7 +101,7 @@ export default function Header() {
                   href={link.href}
                 >
                   <span>{link.label}</span>
-                </a>
+                </Link>
               );
             })}
           </nav>

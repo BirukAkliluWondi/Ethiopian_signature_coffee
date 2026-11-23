@@ -81,9 +81,11 @@
    - **Pre-Dynamic Applications & Excel Export Tag**: `pre-dynamic-applications-excel` (Commit: `b0dd250`)
    - **Pre-Admin AI Copilot Checkpoint Tag**: `pre-admin-ai-copilot`
    - **Pre-Services & Pricing CMS Checkpoint Tag**: `pre-services-and-pricing-cms`
-   - **Backup Branches**: `backup-stable-baseline`, `backup-pre-hero-media-carousel`, `backup-pre-opening-motion-choreography`, `backup-pre-chronological-resequence`, `backup-pre-debox-transformation`, `backup-pre-ui-ux-refinements`, `backup-pre-catering-service`, `backup-pre-catering-dedicated-showcase`, `backup-pre-admin-dashboard`, `backup-stitch-admin-ui`, `backup-admin-step-guides`, `backup-contact-messages-visibility`, `backup-admin-polish-and-auth`, `backup-dynamic-applications-excel`, `backup-admin-ai-copilot`, `backup-services-and-pricing-cms` (Pushed to GitHub `origin`)
+   - **Pre-Multi-Page & UI Cleanup Checkpoint Tag**: `pre-multipage-and-ui-cleanup`
+   - **Backup Branches**: `backup-stable-baseline`, `backup-pre-hero-media-carousel`, `backup-pre-opening-motion-choreography`, `backup-pre-chronological-resequence`, `backup-pre-debox-transformation`, `backup-pre-ui-ux-refinements`, `backup-pre-catering-service`, `backup-pre-catering-dedicated-showcase`, `backup-pre-admin-dashboard`, `backup-stitch-admin-ui`, `backup-admin-step-guides`, `backup-contact-messages-visibility`, `backup-admin-polish-and-auth`, `backup-dynamic-applications-excel`, `backup-admin-ai-copilot`, `backup-services-and-pricing-cms`, `backup-multipage-and-ui-cleanup` (Pushed to GitHub `origin`)
    - **Remote Synchronization**: Fully backed up on remote GitHub repository.
    - **One-Prompt Revert Protocol**:
+     - To revert to the state before multi-page architecture and UI cleanup: `git reset --hard pre-multipage-and-ui-cleanup && git clean -fd`
      - To revert to the state before Services & Pricing CMS: `git reset --hard pre-services-and-pricing-cms && git clean -fd`
      - To revert to the state before the Admin AI Copilot: `git reset --hard pre-admin-ai-copilot && git clean -fd`
      - To revert to the state before dynamic training applications and Excel export: `git reset --hard pre-dynamic-applications-excel && git clean -fd`
@@ -350,3 +352,22 @@
    - **Admin AI Copilot Knowledge Base Integration**:
      - Injected with `service_packages` and `service_bookings` database schemas and operator recipes for adding services and exporting data.
    - **Strict Rule Preservation**: Strictly ZERO text pill badges (`rounded-full` text tags), ZERO text bloat, unclipped original ceremony photo on Slide 0, phone strictly `+251925451711`, admin credentials strictly `henoktessma111@gmail.com` / `254517`.
+
+## Multi-Page Architecture, Homepage Teaser, Sidebar Cleanup & Copilot Model Privacy
+23. **Multi-Page Transformation, Sidebar Streamlining & AI Model Name Anonymization**:
+    - **AI Model Name Anonymization & Neutral Branding (`AdminAIAssistantDrawer.tsx`)**:
+      - Replaced vendor/model branding ("Gemini 2.0") with neutral, enterprise badge ("Assistant").
+      - Replaced "Google Gemini API Key" with "AI Assistant API Key".
+      - Cleared provider names from input placeholders, displaying `Paste your API key (AIzaSy...)` without mentioning Google or Gemini.
+      - Copilot identity prompt updated to present itself as "Ethiopian Signature Admin Copilot" without disclosing underlying model architectures.
+    - **Admin Sidebar Quick Guide Removal (`AdminSidebarNav.tsx`)**:
+      - Removed the 3-step numbered guide card from the admin sidebar navigation to eliminate visual clutter and redundant text now that the interactive AI Copilot drawer is accessible from any admin screen.
+    - **Multi-Page Website Transformation**:
+      - **Homepage (`/`)**: Replaced long services stack with a clean, co-planar `ServicesTeaser.tsx` spotlighting Turnkey Café Setup with dual CTAs ("Book Setup Consultation" and "Explore All Services & Packages →"). Completely removed the extensive training curriculum and dynamic posts from the homepage, eliminating vertical page fatigue.
+      - **Dedicated Services Page (`/services`)**: Full presentation featuring dedicated banner, all 6 turnkey practices, dynamic service packages with transparent pricing, deliverables checklists, booking drawers, and full luxury catering showcase (`#catering`).
+      - **Dedicated Training Page (`/training`)**: Comprehensive Barista Academy page featuring dedicated banner, 4-stage professional curriculum, scheduled cohorts with real-time seat counters, dynamic courses, and enrollment modal.
+    - **Navigation Routing & Active Indicators**:
+      - **Desktop Header (`Header.tsx`)**: Uses Next.js `usePathname()`, routing `Services` to `/services`, `Training` to `/training`, and section anchors to `/#...`, with active gold indicators.
+      - **Mobile Bottom Nav (`MobileBottomNav.tsx`)**: Seamlessly navigates between `/`, `/services`, and `/training` with active indicators, while anchoring to `/#contact` for inquiries.
+      - **Footer (`Footer.tsx`)**: Updated directory links to route directly to `/services`, `/services#catering`, and `/training`.
+    - **Strict Rule Preservation**: Strictly ZERO text pill badges (`rounded-full` text tags), ZERO text bloat, unclipped original ceremony photo on Slide 0, phone strictly `+251925451711`, admin credentials strictly `henoktessma111@gmail.com` / `254517`.

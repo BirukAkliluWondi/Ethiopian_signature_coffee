@@ -2,9 +2,8 @@ import TopAccentLine from "@/components/TopAccentLine";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import TrustRibbon from "@/components/TrustRibbon";
-import Services from "@/components/Services";
+import ServicesTeaser from "@/components/ServicesTeaser";
 import Process from "@/components/Process";
-import Training from "@/components/Training";
 import SingleOrigins from "@/components/SingleOrigins";
 import Projects from "@/components/Projects";
 import About from "@/components/About";
@@ -23,7 +22,7 @@ export default function Home() {
       {/* Top Brand Accent Line */}
       <TopAccentLine />
 
-      {/* Responsive Header with Active Chapter Navigation */}
+      {/* Responsive Header with Active Navigation */}
       <Header />
 
       {/* Main Content Container with Warm Porcelain Base */}
@@ -31,9 +30,8 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-14 sm:gap-20 md:gap-28">
           <Hero />
           <TrustRibbon />
-          <Services />
+          <ServicesTeaser />
           <Process />
-          <Training />
           <SingleOrigins />
           <Projects />
           <About />
