@@ -77,56 +77,78 @@ In the meantime, you can ask about:
       parts: [{ text: trimmedQuery }],
     });
 
-    const geminiEndpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+    const CANDIDATE_MODELS = [
+      "gemini-2.5-flash",
+      "gemini-flash-latest",
+      "gemini-2.0-flash",
+      "gemini-pro-latest",
+      "gemini-1.5-flash",
+    ];
 
-    const response = await fetch(geminiEndpoint, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        systemInstruction: {
-          parts: [{ text: ADMIN_COPILOT_SYSTEM_INSTRUCTION }],
-        },
-        contents: formattedContents,
-        generationConfig: {
-          temperature: 0.2,
-          maxOutputTokens: 2048,
-          topP: 0.95,
-        },
-      }),
-    });
+    let lastError: string | null = null;
+    let candidateText: string | null = null;
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error("Gemini API Error:", response.status, errorText);
+    for (const model of CANDIDATE_MODELS) {
+      try {
+        const geminiEndpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
 
-      // If invalid key or quota, attempt smart offline fallback before failing
-      const offlineAnswer = getSmartOfflineAnswer(trimmedQuery);
-      if (offlineAnswer) {
-        return NextResponse.json({
-          answer: `${offlineAnswer}\n\n*(Note: Gemini API returned status ${response.status}. Served from embedded knowledge base.)*`,
-          isOfflineFallback: true,
+        const response = await fetch(geminiEndpoint, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            systemInstruction: {
+              parts: [{ text: ADMIN_COPILOT_SYSTEM_INSTRUCTION }],
+            },
+            contents: formattedContents,
+            generationConfig: {
+              temperature: 0.2,
+              maxOutputTokens: 2048,
+              topP: 0.95,
+            },
+          }),
         });
-      }
 
-      return NextResponse.json(
-        {
-          error: `Gemini API returned status ${response.status}. Please check your API key in Copilot Settings.`,
-        },
-        { status: 502 }
-      );
+        if (response.ok) {
+          const data = await response.json();
+          const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
+          if (text) {
+            candidateText = text;
+            break;
+          }
+        } else {
+          const errBody = await response.text();
+          lastError = `${response.status} ${response.statusText}`;
+          console.warn(`Model ${model} returned error ${response.status}:`, errBody.slice(0, 150));
+        }
+      } catch (err: any) {
+        lastError = err?.message || "Fetch failed";
+      }
     }
 
-    const data = await response.json();
-    const candidateText =
-      data.candidates?.[0]?.content?.parts?.[0]?.text ||
-      "I received your request, but no answer text was returned. Please try rephrasing.";
+    if (candidateText) {
+      return NextResponse.json({
+        answer: candidateText,
+        isOfflineFallback: false,
+      });
+    }
 
-    return NextResponse.json({
-      answer: candidateText,
-      isOfflineFallback: false,
-    });
+    // If all remote attempts fail or hit quota, serve seamlessly from the rich embedded knowledge base
+    const offlineAnswer = getSmartOfflineAnswer(trimmedQuery);
+    if (offlineAnswer) {
+      return NextResponse.json({
+        answer: offlineAnswer,
+        isOfflineFallback: true,
+      });
+    }
+
+    return NextResponse.json(
+      {
+        error: `Gemini API was unable to generate content (${lastError || "Rate limit or network error"}). Please try again or check Copilot settings.`,
+      },
+      { status: 502 }
+    );
   } catch (error: any) {
     console.error("Assistant Route Handler Exception:", error);
     return NextResponse.json(
