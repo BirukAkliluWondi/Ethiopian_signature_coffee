@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { getTrainingProgramsAction, getServicePackagesAction } from "@/app/actions/admin-cms";
 import TrainingCMSClient from "./TrainingCMSClient";
 
@@ -24,7 +25,9 @@ export default async function AdminTrainingPage() {
         </p>
       </div>
 
-      <TrainingCMSClient initialPrograms={programs} initialServicePackages={servicePackages} />
+      <Suspense fallback={<div className="p-8 text-center text-xs text-on-surface-variant">Loading operations hub...</div>}>
+        <TrainingCMSClient initialPrograms={programs} initialServicePackages={servicePackages} />
+      </Suspense>
     </div>
   );
 }

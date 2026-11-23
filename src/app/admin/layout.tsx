@@ -5,6 +5,7 @@ import { isAdminAuthenticated } from "@/app/actions/admin-auth";
 import AdminLoginPage from "./login/page";
 import AdminSidebarNav from "./AdminSidebarNav";
 import AdminCopilotTrigger from "@/components/admin/AdminCopilotTrigger";
+import AdminHeaderActions from "@/components/admin/AdminHeaderActions";
 
 export const metadata = {
   title: "Admin Suite | Ethiopian Signature Coffee",
@@ -91,22 +92,7 @@ export default async function AdminLayout({
               <span>Public Site</span>
             </Link>
 
-            <div className="flex items-center gap-1 text-on-surface-variant">
-              <button
-                aria-label="Quick Actions"
-                className="w-9 h-9 flex items-center justify-center rounded-lg bg-surface-container-low text-on-surface-variant hover:text-stitch-primary transition-colors"
-                type="button"
-              >
-                <span className="material-symbols-outlined text-[18px]">tune</span>
-              </button>
-              <button
-                aria-label="Notifications"
-                className="w-9 h-9 flex items-center justify-center rounded-lg bg-surface-container-low text-on-surface-variant hover:text-stitch-primary transition-colors"
-                type="button"
-              >
-                <span className="material-symbols-outlined text-[18px]">notifications</span>
-              </button>
-            </div>
+            <AdminHeaderActions />
 
             <div className="pl-1 flex items-center gap-2">
               <div className="relative w-8 h-8 rounded-full overflow-hidden border border-surface-container-highest shrink-0 bg-surface-container">

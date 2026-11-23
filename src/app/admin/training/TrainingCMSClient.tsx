@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useState, useTransition, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import {
   createTrainingProgramAction,
   deleteTrainingProgramAction,
@@ -76,6 +77,32 @@ export default function TrainingCMSClient({
   const [programs, setPrograms] = useState<Program[]>(initialPrograms);
   const [servicePackages, setServicePackages] = useState<ServicePackageItem[]>(initialServicePackages);
   const [activeTab, setActiveTab] = useState<"courses" | "services" | "applicants">("courses");
+
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const tab = searchParams.get("tab");
+    if (tab === "services" || tab === "packages") {
+      setActiveTab("services");
+    } else if (tab === "applicants" || tab === "all") {
+      setActiveTab("applicants");
+    } else if (tab === "courses" || tab === "programs") {
+      setActiveTab("courses");
+    }
+
+    const search = searchParams.get("search");
+    if (search) {
+      setUnifiedSearch(search);
+    }
+    const status = searchParams.get("status");
+    if (status) {
+      setUnifiedStatusFilter(status);
+    }
+    const type = searchParams.get("type");
+    if (type === "all" || type === "training" || type === "service") {
+      setUnifiedTypeFilter(type);
+    }
+  }, [searchParams]);
 
   // Expanded drawers
   const [expandedApplicantsProgramId, setExpandedApplicantsProgramId] = useState<string | null>(null);

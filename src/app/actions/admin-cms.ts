@@ -839,3 +839,126 @@ export async function deleteServiceBookingAction(id: string) {
     return { success: false, error: "Failed to delete booking." };
   }
 }
+
+export interface AdminNotification {
+  id: string;
+  type: "inquiry" | "enrollment" | "booking" | "cohort";
+  title: string;
+  subtitle: string;
+  timeAgo: string;
+  href: string;
+  actionText: string;
+  isNew: boolean;
+  phone?: string;
+}
+
+function formatRelativeTime(dateString?: string): string {
+  if (!dateString) return "Recently";
+  const then = new Date(dateString).getTime();
+  const now = Date.now();
+  const diffSec = Math.floor((now - then) / 1000);
+  if (diffSec < 60) return "Just now";
+  const diffMin = Math.floor(diffSec / 60);
+  if (diffMin < 60) return `${diffMin}m ago`;
+  const diffHours = Math.floor(diffMin / 60);
+  if (diffHours < 24) return `${diffHours}h ago`;
+  const diffDays = Math.floor(diffHours / 24);
+  if (diffDays === 1) return "Yesterday";
+  if (diffDays < 7) return `${diffDays}d ago`;
+  return new Date(dateString).toLocaleDateString([], { month: "short", day: "numeric" });
+}
+
+/**
+ * Fetch real-time notifications for the Admin Header Notification Bell
+ */
+export async function getAdminNotificationsAction(): Promise<{
+  success: boolean;
+  notifications: AdminNotification[];
+  unreadCount: number;
+}> {
+  try {
+    const isAuth = await isAdminAuthenticated();
+    if (!isAuth || !supabase) {
+      return { success: false, notifications: [], unreadCount: 0 };
+    }
+
+    const [inqRes, enrollRes, bookRes, schedRes] = await Promise.all([
+      supabase.from("inquiries").select("*").order("created_at", { ascending: false }).limit(8),
+      supabase.from("academy_enrollments").select("*, training_programs(title)").order("created_at", { ascending: false }).limit(6),
+      supabase.from("service_bookings").select("*, service_packages(title)").order("created_at", { ascending: false }).limit(6),
+      supabase.from("training_schedules").select("*, training_programs(title)").order("start_date", { ascending: true }).limit(5),
+    ]);
+
+    const notifications: AdminNotification[] = [];
+
+    // 1. Inquiries
+    for (const inq of inqRes.data || []) {
+      const isNew = inq.status === "new" || !inq.status || inq.status === "open";
+      notifications.push({
+        id: `inq-${inq.id}`,
+        type: "inquiry",
+        title: `Inquiry from ${inq.full_name}`,
+        subtitle: `${inq.service || "General Inquiry"}${inq.notes ? ` — "${inq.notes.slice(0, 45)}..."` : ""}`,
+        timeAgo: formatRelativeTime(inq.created_at),
+        href: `/admin/leads?search=${encodeURIComponent(inq.full_name)}`,
+        actionText: "Chat on WhatsApp",
+        isNew,
+        phone: inq.phone,
+      });
+    }
+
+    // 2. Student enrollments
+    for (const enr of enrollRes.data || []) {
+      const isNew = enr.status === "pending" || !enr.status;
+      notifications.push({
+        id: `enr-${enr.id}`,
+        type: "enrollment",
+        title: `Student Application: ${enr.student_name}`,
+        subtitle: `${enr.training_programs?.title || enr.course_level || "Barista Academy"} | 📞 ${enr.phone}`,
+        timeAgo: formatRelativeTime(enr.created_at),
+        href: `/admin/training?tab=applicants&search=${encodeURIComponent(enr.student_name)}`,
+        actionText: "Review Student",
+        isNew,
+        phone: enr.phone,
+      });
+    }
+
+    // 3. Service Bookings
+    for (const bkg of bookRes.data || []) {
+      const isNew = bkg.status === "new" || bkg.status === "pending" || !bkg.status;
+      notifications.push({
+        id: `bkg-${bkg.id}`,
+        type: "booking",
+        title: `Service Booking: ${bkg.client_name}`,
+        subtitle: `${bkg.service_packages?.title || "Custom Service"} (${bkg.business_name || bkg.venue_location || "Addis Ababa"})`,
+        timeAgo: formatRelativeTime(bkg.created_at),
+        href: `/admin/training?tab=services`,
+        actionText: "View Booking",
+        isNew,
+        phone: bkg.phone,
+      });
+    }
+
+    // 4. Cohorts Sold Out
+    for (const sch of schedRes.data || []) {
+      if (sch.seats_booked >= sch.seats_total && sch.seats_total > 0) {
+        notifications.push({
+          id: `sch-${sch.id}`,
+          type: "cohort",
+          title: `Cohort Session Sold Out`,
+          subtitle: `${sch.training_programs?.title || "Academy Program"} — All ${sch.seats_total} seats booked for ${sch.start_date}`,
+          timeAgo: formatRelativeTime(sch.start_date),
+          href: `/admin/training?tab=courses`,
+          actionText: "Schedule Cohort",
+          isNew: true,
+        });
+      }
+    }
+
+    const unreadCount = notifications.filter((n) => n.isNew).length;
+    return { success: true, notifications, unreadCount };
+  } catch (err) {
+    console.error("Error fetching notifications:", err);
+    return { success: false, notifications: [], unreadCount: 0 };
+  }
+}

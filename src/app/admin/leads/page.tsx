@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { getInquiriesAction } from "@/app/actions/admin-cms";
 import InquiriesCRMTable from "./InquiriesCRMTable";
 
@@ -19,7 +20,9 @@ export default async function AdminLeadsPage() {
         </p>
       </div>
 
-      <InquiriesCRMTable initialInquiries={inquiries} />
+      <Suspense fallback={<div className="p-8 text-center text-xs text-on-surface-variant">Loading messages...</div>}>
+        <InquiriesCRMTable initialInquiries={inquiries} />
+      </Suspense>
     </div>
   );
 }

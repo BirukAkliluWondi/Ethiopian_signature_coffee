@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useState, useTransition, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { updateInquiryStatusAction } from "@/app/actions/admin-cms";
 import { exportInquiriesToExcel } from "@/lib/excel-export";
 
@@ -26,6 +27,23 @@ export default function InquiriesCRMTable({
   const [selectedInquiry, setSelectedInquiry] = useState<Inquiry | null>(null);
   const [tabFilter, setTabFilter] = useState<"all" | "new" | "with_notes">("all");
   const [isPending, startTransition] = useTransition();
+
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const tabParam = searchParams.get("tab");
+    if (tabParam === "new" || tabParam === "with_notes" || tabParam === "all") {
+      setTabFilter(tabParam);
+    }
+    const serviceParam = searchParams.get("service");
+    if (serviceParam) {
+      setSelectedService(serviceParam);
+    }
+    const searchParam = searchParams.get("search");
+    if (searchParam) {
+      setSearchTerm(searchParam);
+    }
+  }, [searchParams]);
 
   const services = Array.from(
     new Set(initialInquiries.map((i) => i.service).filter(Boolean))
