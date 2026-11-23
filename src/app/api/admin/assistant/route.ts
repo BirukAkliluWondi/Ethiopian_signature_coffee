@@ -78,11 +78,10 @@ In the meantime, you can ask about:
     });
 
     const CANDIDATE_MODELS = [
-      "gemini-2.5-flash",
+      "gemini-flash-lite-latest",
       "gemini-flash-latest",
+      "gemini-2.5-flash",
       "gemini-2.0-flash",
-      "gemini-pro-latest",
-      "gemini-1.5-flash",
     ];
 
     let lastError: string | null = null;
