@@ -7,6 +7,11 @@ import {
   isTechnicalQuery,
   getSmartOfflineAnswer,
 } from "@/lib/ai-assistant/knowledge-base";
+import {
+  getLiveDashboardDataSnapshot,
+  formatLiveDashboardSummaryText,
+  isSummaryRequest,
+} from "@/lib/ai-assistant/dashboard-data";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 30;
@@ -47,7 +52,7 @@ export async function POST(req: NextRequest) {
     const trimmedQuery = message.trim();
 
     // 2. STRICT CUSTOM RULE ENFORCEMENT:
-    // If the query asks about the codebase, code, database schemas, SQL, or internal details,
+    // If the query asks about the codebase, source code, database schemas, SQL, or internal details,
     // immediately return the polite operational refusal.
     if (isTechnicalQuery(trimmedQuery)) {
       return NextResponse.json({
@@ -56,7 +61,12 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    // 3. Determine API Key (Vercel env, client-entered override, or server fallback)
+    // 3. Retrieve real-time live operational snapshot from the database
+    const liveSnapshot = await getLiveDashboardDataSnapshot();
+    const liveSnapshotText = liveSnapshot ? formatLiveDashboardSummaryText(liveSnapshot) : "";
+    const isSummary = isSummaryRequest(trimmedQuery);
+
+    // 4. Determine API Key (Vercel env, client-entered override, or server fallback)
     let fallbackServerKey = "";
     try {
       fallbackServerKey = Buffer.from(DEFAULT_KEY_B64, "base64").toString("utf-8");
@@ -66,7 +76,7 @@ export async function POST(req: NextRequest) {
 
     const apiKey = (process.env.GEMINI_API_KEY || userApiKey || fallbackServerKey || "").trim();
 
-    // 4. Construct payload for Google Generative AI
+    // 5. Construct payload for Google Generative AI
     const formattedContents: Array<{ role: string; parts: Array<{ text: string }> }> = [];
 
     // Append prior history if any (keep last 4 turns for context efficiency)
@@ -87,6 +97,21 @@ export async function POST(req: NextRequest) {
     // gemini-flash-lite-latest is active and verified for this API key on v1beta
     const CANDIDATE_MODELS = ["gemini-flash-lite-latest", "gemini-flash-latest"];
 
+    const dynamicSystemInstruction = liveSnapshotText
+      ? `${ADMIN_COPILOT_SYSTEM_INSTRUCTION}
+
+---
+
+### LIVE DASHBOARD DATA SNAPSHOT (Current real-time operational database records):
+${liveSnapshotText}
+
+Instructions for live data usage:
+- You have full real-time access to the live inquiries, courses, cohort capacity, enrolled students, and service packages listed above.
+- When the admin asks for an executive summary, status report, recent activity, list of leads, or what needs attention, synthesize and answer using this exact real-time operational data.
+- Highlight urgent action items first (new inquiries, pending student registrations, pending service bookings).
+- NEVER reveal internal database column names, SQL, or server action code. Present all information as clear, executive operational business data!`
+      : ADMIN_COPILOT_SYSTEM_INSTRUCTION;
+
     let candidateText: string | null = null;
     let lastError: string | null = null;
 
@@ -105,12 +130,12 @@ export async function POST(req: NextRequest) {
             },
             body: JSON.stringify({
               systemInstruction: {
-                parts: [{ text: ADMIN_COPILOT_SYSTEM_INSTRUCTION }],
+                parts: [{ text: dynamicSystemInstruction }],
               },
               contents: formattedContents,
               generationConfig: {
                 temperature: 0.2,
-                maxOutputTokens: 1500,
+                maxOutputTokens: 1800,
                 topP: 0.95,
               },
             }),
@@ -137,7 +162,7 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // 5. If model successfully responded, return answer
+    // 6. If model successfully responded, return answer
     if (candidateText) {
       return NextResponse.json({
         answer: candidateText,
@@ -145,7 +170,15 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    // 6. Resilient operational fallback (ensures Vercel ALWAYS returns an accurate answer)
+    // 7. If the admin asked for a summary and remote model is unreachable, return live snapshot directly
+    if (isSummary && liveSnapshotText) {
+      return NextResponse.json({
+        answer: liveSnapshotText,
+        isOfflineFallback: true,
+      });
+    }
+
+    // 8. Resilient operational fallback
     const offlineAnswer = getSmartOfflineAnswer(trimmedQuery);
     if (offlineAnswer) {
       return NextResponse.json({
@@ -156,7 +189,7 @@ export async function POST(req: NextRequest) {
 
     // Standard fallback guide if query is unmapped
     return NextResponse.json({
-      answer: `### Ethiopian Signature Admin Operations:
+      answer: liveSnapshotText || `### Ethiopian Signature Admin Operations:
 
 I am your in-dashboard operational assistant. How can I help you navigate your admin panel today?
 
@@ -177,7 +210,7 @@ I am your in-dashboard operational assistant. How can I help you navigate your a
     console.error("Assistant Route Exception:", error);
     return NextResponse.json(
       {
-        answer: getSmartOfflineAnswer("general") || "Please try again or navigate to /admin/training.",
+        answer: "An error occurred while compiling your dashboard report. Please try again.",
         isOfflineFallback: true,
       },
       { status: 200 }

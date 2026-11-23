@@ -11,9 +11,9 @@ interface Message {
 }
 
 const STARTER_PROMPTS = [
+  "📊 Summarize the dashboard & recent activity",
   "How do I add a new service package and set pricing?",
   "How do I export registered students to Excel?",
-  "How do I create a course with custom questions?",
   "Where do contact form messages arrive?",
   "How do I replace the hero banner image?",
 ];
@@ -193,6 +193,17 @@ export default function AdminAIAssistantDrawer({
           </div>
 
           <div className="flex items-center gap-1 text-on-surface-variant">
+            <button
+              aria-label="Summarize Dashboard"
+              className="px-2 py-1 rounded-lg flex items-center gap-1 hover:bg-surface-container text-stitch-primary hover:text-stitch-primary-dark transition-colors text-xs font-semibold mr-1 bg-stitch-primary/10"
+              title="Generate real-time executive dashboard summary"
+              type="button"
+              onClick={() => handleSendMessage("Summarize the dashboard and recent activity")}
+            >
+              <span className="material-symbols-outlined text-[16px]">insights</span>
+              <span className="text-[11px]">Summarize</span>
+            </button>
+
             <button
               aria-label="API Key Settings"
               className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors ${

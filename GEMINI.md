@@ -311,10 +311,14 @@
      - Dual-source authentication checks both `req.cookies.get("ethiopian_sig_admin")` and Next.js `cookies()` for guaranteed session validation across Vercel Edge and Node.js runtimes.
      - Supports `process.env.GEMINI_API_KEY`, in-drawer browser overrides (`localStorage`), and safe runtime server fallback so the Copilot functions seamlessly on Vercel out-of-the-box.
      - Built-in resilient offline fallback guarantees that even during external network drops, operational answers are always served with zero downtime.
+   - **Real-Time Live Dashboard Data Ingestion & On-Demand Executive Summaries**:
+     - Connected directly to live Supabase tables (`inquiries`, `training_programs`, `training_schedules`, `academy_enrollments`, `service_packages`, `service_bookings`) via `getLiveDashboardDataSnapshot()` in `dashboard-data.ts`.
+     - Injects real-time operational context into every prompt turn, allowing the AI to synthesize up-to-the-second business summaries: immediate action items (unhandled inquiries, pending registrations, pending bookings), recent client submissions with names and phone numbers, cohort capacities, and active pricing.
+     - Dedicated one-click **"Summarize"** action button in drawer header (`insights` icon) and prominent starter prompt **"📊 Summarize the dashboard & recent activity"** for instant executive briefings on demand.
    - **Slide-Over Side Drawer Architecture (`AdminAIAssistantDrawer.tsx`)**:
      - Mounted via React portal (`createPortal(..., document.body)`) to ensure full-height (`100vh`) unconstrained display above sticky headers.
      - Subtitle reflects **"Operations & Admin Workflow Guide"**.
-     - Starter prompt shortcuts feature 100% operational UI questions (Service creation & pricing, Excel export, custom course questions, contact messages, hero media).
+     - Starter prompt shortcuts feature 100% operational UI questions (Executive Summary, Service creation & pricing, Excel export, custom course questions, contact messages, hero media).
      - Inline API key configuration panel supporting custom browser-local overrides (`localStorage`).
    - **Strict Rule Preservation**: Strictly ZERO text pill badges (`rounded-full` text tags), ZERO text bloat, unclipped original ceremony photo on Slide 0, phone strictly `+251925451711`, admin credentials strictly `henoktessma111@gmail.com` / `254517`.
 
