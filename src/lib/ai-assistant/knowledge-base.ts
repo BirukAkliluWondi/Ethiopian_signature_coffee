@@ -216,6 +216,20 @@ export function getSmartOfflineAnswer(query: string): string | null {
 4. **Assign to Slot**: Click the slot tag button on any uploaded thumbnail in your Media Library to assign it to that homepage location.`;
   }
 
+  if (q.includes("cohort") || q.includes("schedule") || q.includes("date") || q.includes("session")) {
+    return `### How to Add a New Training Cohort & Schedule:
+
+1. **Go to Training CMS**: Click **Training** in the admin sidebar (or visit \`/admin/training\`).
+2. **Click Schedule Cohort**: In the top right corner, click the **"+ Schedule Cohort"** button.
+3. **Fill in Cohort Details**:
+   - Select the **Course** from the dropdown.
+   - Set the **Start Date** and **End Date**.
+   - Enter the **Daily Session Hours** (e.g. \`09:00 AM - 01:00 PM\`).
+   - Set the **Total Seat Capacity** (e.g. \`12\`).
+4. **Publish Schedule**: Click **"Schedule Cohort"**.
+5. The new cohort will immediately appear on the public website under **#training** ("Upcoming Cohorts & Dates"), and live seat reservations will automatically count down as students apply!`;
+  }
+
   if (q.includes("schema") || q.includes("table") || q.includes("database") || q.includes("sql") || q.includes("server action")) {
     return `### Technical Database & Code Architecture:
 
@@ -231,5 +245,24 @@ export function getSmartOfflineAnswer(query: string): string | null {
   - \`src/lib/excel-export.ts\`: Native OpenXML Excel generation.`;
   }
 
-  return null;
+  return `### Ethiopian Signature Admin Guide:
+
+Here is how to manage the primary features of your platform:
+
+1. **Contact Messages & Inquiries (\`/admin/leads\`)**:
+   - View text messages written by visitors in the contact form.
+   - Click **"Chat on WhatsApp"** to reply directly to the client.
+   - Click **"Export to Excel"** to download all inquiries.
+
+2. **Training & Cohort Management (\`/admin/training\`)**:
+   - Click **"+ Add New Training Course"** to publish courses with custom application forms.
+   - Click **"+ Schedule Cohort"** to open new date sessions with live seat reservation.
+   - Expand the **"Applicants"** drawer on any course to review students and export course rosters.
+   - Click **"All Registered Students"** tab to view all applicants and export the master database.
+
+3. **Homepage Photography (\`/admin/media\`)**:
+   - Upload photography to \`/public/uploads/\` and assign it to Hero, Service, Catering, or Training slots.
+
+4. **Direct Channel Desk**:
+   - Official WhatsApp & Phone: \`+251925451711\`.`;
 }
