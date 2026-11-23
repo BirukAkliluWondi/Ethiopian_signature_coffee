@@ -2,6 +2,7 @@
 
 import { useState, useTransition } from "react";
 import { updateInquiryStatusAction } from "@/app/actions/admin-cms";
+import { exportInquiriesToExcel } from "@/lib/excel-export";
 
 interface Inquiry {
   id: string;
@@ -169,7 +170,7 @@ export default function InquiriesCRMTable({
             />
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <span className="text-xs text-on-surface-variant whitespace-nowrap font-medium">Service:</span>
             <select
               className="px-3 py-2 rounded-lg bg-surface-container-low border border-surface-container-highest text-xs text-on-surface outline-none focus:border-stitch-primary"
@@ -183,6 +184,16 @@ export default function InquiriesCRMTable({
                 </option>
               ))}
             </select>
+
+            <button
+              className="px-3.5 py-2 rounded-lg bg-[#25D366] hover:bg-[#20ba5a] text-white font-bold text-xs uppercase tracking-wider transition-colors shadow-sm flex items-center gap-1.5 shrink-0 disabled:opacity-50"
+              disabled={inquiries.length === 0}
+              type="button"
+              onClick={() => exportInquiriesToExcel(filtered)}
+            >
+              <span className="material-symbols-outlined text-base">file_download</span>
+              <span>Export to Excel</span>
+            </button>
           </div>
         </div>
       </div>

@@ -78,9 +78,11 @@
    - **Pre-Admin Step Guides Checkpoint Tag**: `pre-admin-step-guides` (Commit: `4478579`)
    - **Pre-Contact Messages Visibility Checkpoint Tag**: `pre-contact-messages-visibility` (Commit: `9c06865`)
    - **Pre-Admin Polish & Auth Checkpoint Tag**: `pre-admin-polish-and-auth` (Commit: `772f02f`)
-   - **Backup Branches**: `backup-stable-baseline`, `backup-pre-hero-media-carousel`, `backup-pre-opening-motion-choreography`, `backup-pre-chronological-resequence`, `backup-pre-debox-transformation`, `backup-pre-ui-ux-refinements`, `backup-pre-catering-service`, `backup-pre-catering-dedicated-showcase`, `backup-pre-admin-dashboard`, `backup-stitch-admin-ui`, `backup-admin-step-guides`, `backup-contact-messages-visibility`, `backup-admin-polish-and-auth` (Pushed to GitHub `origin`)
+   - **Pre-Dynamic Applications & Excel Export Tag**: `pre-dynamic-applications-excel`
+   - **Backup Branches**: `backup-stable-baseline`, `backup-pre-hero-media-carousel`, `backup-pre-opening-motion-choreography`, `backup-pre-chronological-resequence`, `backup-pre-debox-transformation`, `backup-pre-ui-ux-refinements`, `backup-pre-catering-service`, `backup-pre-catering-dedicated-showcase`, `backup-pre-admin-dashboard`, `backup-stitch-admin-ui`, `backup-admin-step-guides`, `backup-contact-messages-visibility`, `backup-admin-polish-and-auth`, `backup-dynamic-applications-excel` (Pushed to GitHub `origin`)
    - **Remote Synchronization**: Fully backed up on remote GitHub repository.
    - **One-Prompt Revert Protocol**:
+     - To revert to the state before dynamic training applications and Excel export: `git reset --hard pre-dynamic-applications-excel && git clean -fd`
      - To revert to the state before the admin polish and credential authentication: `git reset --hard pre-admin-polish-and-auth && git clean -fd`
      - To revert to the state before contact messages visibility enhancements: `git reset --hard pre-contact-messages-visibility && git clean -fd`
      - To revert to the state before the admin step-by-step guides: `git reset --hard pre-admin-step-guides && git clean -fd`
@@ -276,7 +278,20 @@
      - **Visitor Chat (`/admin/chat`)**: Renders **"No Active Chats"** in sidebar and **"Concierge Inbox Ready"** with `chat_bubble` iconography in the reply panel.
    - **Strict Rule Preservation**: Strictly ZERO text pill badges (`rounded-full` text tags), ZERO text bloat, unclipped original ceremony photo on Slide 0, phone strictly `+251925451711`.
 
-
-
-
-
+## Dynamic Training Applications & Excel (.xlsx) Export Architecture
+20. **Configurable Application Forms, Applicant CRM & Native Excel Export**:
+   - **Form Configuration Engine (`training_programs.form_config`)**:
+     - Program creation in `/admin/training` allows admins to configure dynamic enrollment forms via standard toggles (`ask_email`, `ask_experience`, `ask_organization`, `ask_notes`) and custom open-ended questions stored as JSONB.
+     - When toggled active, public visitor registration buttons dynamically render the tailored questions without hardcoded schemas.
+   - **Luxury Branded Application Experience (`TrainingApplicationModal.tsx`)**:
+     - Public cohort cards on `#training` launch a luxury branded modal (`bg-stone-900 border border-brand-yellow/30 shadow-2xl`) displaying course details, schedule dates, tuition, and dynamic fields.
+     - Submitting invokes `submitTrainingApplicationAction`, securely recording applicants to `public.academy_enrollments` while incrementing cohort seat bookings in real time.
+     - Confirmation screen provides a summary and direct 1-click WhatsApp verification to `+251925451711`.
+   - **Dual-Level Applicant Management in Admin (`TrainingCMSClient.tsx`)**:
+     - **Per-Course Applicant Drawer**: Each course card features an expandable "Applicants ({count})" drawer showing the enrolled students, status updater dropdown, direct WhatsApp link, and dedicated course-level "Export Excel" button.
+     - **Global Master Applicant Ledger**: Top-level tab "All Registered Students" provides a cross-course master table with search, status filters (`All`, `Pending`, `Confirmed`, `Contacted`, `Cancelled`), and a master "Export All to Excel (.xlsx)" button.
+   - **Contact Messages Excel Export (`/admin/leads`)**:
+     - Direct "Export to Excel" button in `InquiriesCRMTable.tsx` allows downloading all filtered client contact messages into `.xlsx`.
+   - **Native Client-Side Excel Generation (`src/lib/excel-export.ts`)**:
+     - Uses `xlsx` library to generate binary OpenXML spreadsheet buffers locally in the browser with auto-fitted column widths and formatted headers.
+   - **Strict Rule Preservation**: Strictly ZERO text pill badges (`rounded-full` text tags), ZERO text bloat, unclipped original ceremony photo on Slide 0, phone strictly `+251925451711`, admin credentials strictly `henoktessma111@gmail.com` / `254517`.
