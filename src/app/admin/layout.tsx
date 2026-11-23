@@ -4,6 +4,7 @@ import Image from "next/image";
 import { isAdminAuthenticated } from "@/app/actions/admin-auth";
 import AdminLoginPage from "./login/page";
 import AdminSidebarNav from "./AdminSidebarNav";
+import AdminCopilotTrigger from "@/components/admin/AdminCopilotTrigger";
 
 export const metadata = {
   title: "Admin Suite | Ethiopian Signature Coffee",
@@ -74,6 +75,8 @@ export default async function AdminLayout({
           </div>
 
           <div className="flex items-center gap-2 sm:gap-3">
+            <AdminCopilotTrigger />
+
             <Link
               className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container-low text-on-surface-variant hover:text-stitch-primary hover:bg-surface-container text-xs font-semibold transition-colors"
               href="/"

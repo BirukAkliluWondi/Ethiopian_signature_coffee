@@ -78,10 +78,12 @@
    - **Pre-Admin Step Guides Checkpoint Tag**: `pre-admin-step-guides` (Commit: `4478579`)
    - **Pre-Contact Messages Visibility Checkpoint Tag**: `pre-contact-messages-visibility` (Commit: `9c06865`)
    - **Pre-Admin Polish & Auth Checkpoint Tag**: `pre-admin-polish-and-auth` (Commit: `772f02f`)
-   - **Pre-Dynamic Applications & Excel Export Tag**: `pre-dynamic-applications-excel`
-   - **Backup Branches**: `backup-stable-baseline`, `backup-pre-hero-media-carousel`, `backup-pre-opening-motion-choreography`, `backup-pre-chronological-resequence`, `backup-pre-debox-transformation`, `backup-pre-ui-ux-refinements`, `backup-pre-catering-service`, `backup-pre-catering-dedicated-showcase`, `backup-pre-admin-dashboard`, `backup-stitch-admin-ui`, `backup-admin-step-guides`, `backup-contact-messages-visibility`, `backup-admin-polish-and-auth`, `backup-dynamic-applications-excel` (Pushed to GitHub `origin`)
+   - **Pre-Dynamic Applications & Excel Export Tag**: `pre-dynamic-applications-excel` (Commit: `b0dd250`)
+   - **Pre-Admin AI Copilot Checkpoint Tag**: `pre-admin-ai-copilot`
+   - **Backup Branches**: `backup-stable-baseline`, `backup-pre-hero-media-carousel`, `backup-pre-opening-motion-choreography`, `backup-pre-chronological-resequence`, `backup-pre-debox-transformation`, `backup-pre-ui-ux-refinements`, `backup-pre-catering-service`, `backup-pre-catering-dedicated-showcase`, `backup-pre-admin-dashboard`, `backup-stitch-admin-ui`, `backup-admin-step-guides`, `backup-contact-messages-visibility`, `backup-admin-polish-and-auth`, `backup-dynamic-applications-excel`, `backup-admin-ai-copilot` (Pushed to GitHub `origin`)
    - **Remote Synchronization**: Fully backed up on remote GitHub repository.
    - **One-Prompt Revert Protocol**:
+     - To revert to the state before the Admin AI Copilot: `git reset --hard pre-admin-ai-copilot && git clean -fd`
      - To revert to the state before dynamic training applications and Excel export: `git reset --hard pre-dynamic-applications-excel && git clean -fd`
      - To revert to the state before the admin polish and credential authentication: `git reset --hard pre-admin-polish-and-auth && git clean -fd`
      - To revert to the state before contact messages visibility enhancements: `git reset --hard pre-contact-messages-visibility && git clean -fd`
@@ -294,4 +296,19 @@
      - Direct "Export to Excel" button in `InquiriesCRMTable.tsx` allows downloading all filtered client contact messages into `.xlsx`.
    - **Native Client-Side Excel Generation (`src/lib/excel-export.ts`)**:
      - Uses `xlsx` library to generate binary OpenXML spreadsheet buffers locally in the browser with auto-fitted column widths and formatted headers.
+   - **Strict Rule Preservation**: Strictly ZERO text pill badges (`rounded-full` text tags), ZERO text bloat, unclipped original ceremony photo on Slide 0, phone strictly `+251925451711`, admin credentials strictly `henoktessma111@gmail.com` / `254517`.
+
+## Free Admin AI Copilot (Gemini 2.0 Flash) & Codebase Operations Guide
+21. **In-Dashboard AI Assistant, Injected Knowledge Base & Slide-Over Interface**:
+   - **Google Gemini 2.0 Flash Integration**:
+     - Connects to Google AI Studio's 100% free tier (15 RPM, 1,500 RPD, 1M token context) with zero credit card required.
+     - Secured by `isAdminAuthenticated()` session guard on `/api/admin/assistant`.
+     - Injects complete codebase knowledge base (`src/lib/ai-assistant/knowledge-base.ts`) covering all routes, Supabase tables (`inquiries`, `training_programs`, `training_schedules`, `academy_enrollments`, `homepage_media`), server actions, and step-by-step operator recipes.
+     - Includes built-in smart offline responder fallback so common admin questions receive immediate, accurate step-by-step guidance even before an API key is configured.
+   - **Slide-Over Side Drawer Architecture (`AdminAIAssistantDrawer.tsx`)**:
+     - Mounted via React portal (`createPortal(..., document.body)`) to ensure full-height (`100vh`) unconstrained display above sticky headers.
+     - Triggered via top header 'Ask Copilot' button with `auto_awesome` sparkle icon and global keyboard shortcut `Ctrl + Space` (and `Cmd + Space` on Mac).
+     - Clean typography matching Stitch admin palette with copy-to-clipboard actions and formatted Markdown.
+     - Starter prompt shortcuts for instant operational guidance (Excel export, custom form builder, contact messages, hero media, database schema).
+     - Inline API key configuration panel supporting custom browser-local overrides (`localStorage`).
    - **Strict Rule Preservation**: Strictly ZERO text pill badges (`rounded-full` text tags), ZERO text bloat, unclipped original ceremony photo on Slide 0, phone strictly `+251925451711`, admin credentials strictly `henoktessma111@gmail.com` / `254517`.
