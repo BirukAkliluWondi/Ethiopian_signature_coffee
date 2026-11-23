@@ -106,7 +106,7 @@ export default function AdminLoginPage() {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="e.g. henoktessma111@gmail.com"
+                  placeholder="Enter your admin email..."
                   className="w-full pl-10 pr-4 py-2.5 sm:py-3 rounded-xl bg-stone-50/70 border border-border-subtle text-sm text-text-main placeholder:text-text-muted/40 focus:bg-white focus:border-brand-green focus:ring-2 focus:ring-brand-green/15 outline-none transition-all duration-200"
                 />
                 <span className="material-symbols-outlined text-stone-400 text-lg absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none">
