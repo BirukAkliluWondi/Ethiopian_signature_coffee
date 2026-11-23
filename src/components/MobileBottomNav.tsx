@@ -20,8 +20,8 @@ export default function MobileBottomNav() {
             const current = sectionIds[i];
             if (current === "process") {
               setActiveSection("services");
-            } else if (current === "about") {
-              setActiveSection("projects");
+            } else if (current === "origins" || current === "projects") {
+              setActiveSection("about");
             } else {
               setActiveSection(current);
             }
@@ -43,9 +43,8 @@ export default function MobileBottomNav() {
     { id: "home", label: "Home", href: pathname === "/" ? "#home" : "/", icon: "local_cafe" },
     { id: "services", label: "Services", href: "/services", icon: "corporate_fare" },
     { id: "training", label: "Training", href: "/training", icon: "school" },
-    { id: "origins", label: "Origins", href: pathname === "/" ? "#origins" : "/#origins", icon: "spa" },
-    { id: "projects", label: "Projects", href: pathname === "/" ? "#projects" : "/#projects", icon: "foundation" },
-    { id: "contact", label: "Contact", href: pathname === "/" ? "#contact" : "/#contact", icon: "alternate_email" },
+    { id: "about", label: "About", href: pathname === "/" ? "#about" : "/#about", icon: "auto_stories" },
+    { id: "contact", label: "Contact", href: pathname === "/" ? "#contact" : "/#contact", icon: "chat" },
   ];
 
   return (

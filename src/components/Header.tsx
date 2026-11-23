@@ -21,7 +21,14 @@ export default function Header() {
         for (let i = sectionIds.length - 1; i >= 0; i--) {
           const el = document.getElementById(sectionIds[i]);
           if (el && el.offsetTop <= scrollPos) {
-            setActiveSection(sectionIds[i]);
+            const current = sectionIds[i];
+            if (current === "process") {
+              setActiveSection("services");
+            } else if (current === "origins" || current === "projects") {
+              setActiveSection("about");
+            } else {
+              setActiveSection(current);
+            }
             break;
           }
         }
@@ -46,9 +53,6 @@ export default function Header() {
     { id: "home", label: "Home", href: pathname === "/" ? "#home" : "/" },
     { id: "services", label: "Services", href: "/services" },
     { id: "training", label: "Training", href: "/training" },
-    { id: "process", label: "Process", href: pathname === "/" ? "#process" : "/#process" },
-    { id: "origins", label: "Origins", href: pathname === "/" ? "#origins" : "/#origins" },
-    { id: "projects", label: "Projects", href: pathname === "/" ? "#projects" : "/#projects" },
     { id: "about", label: "About", href: pathname === "/" ? "#about" : "/#about" },
     { id: "contact", label: "Contact", href: pathname === "/" ? "#contact" : "/#contact" },
   ];

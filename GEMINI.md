@@ -84,9 +84,11 @@
    - **Pre-Multi-Page & UI Cleanup Checkpoint Tag**: `pre-multipage-and-ui-cleanup`
    - **Pre-Admin Login Polish Checkpoint Tag**: `pre-admin-login-polish`
    - **Pre-Delete Feature & Login Privacy Checkpoint Tag**: `pre-delete-feature-and-login-privacy`
-   - **Backup Branches**: `backup-stable-baseline`, `backup-pre-hero-media-carousel`, `backup-pre-opening-motion-choreography`, `backup-pre-chronological-resequence`, `backup-pre-debox-transformation`, `backup-pre-ui-ux-refinements`, `backup-pre-catering-service`, `backup-pre-catering-dedicated-showcase`, `backup-pre-admin-dashboard`, `backup-stitch-admin-ui`, `backup-admin-step-guides`, `backup-contact-messages-visibility`, `backup-admin-polish-and-auth`, `backup-dynamic-applications-excel`, `backup-admin-ai-copilot`, `backup-services-and-pricing-cms`, `backup-multipage-and-ui-cleanup`, `backup-admin-login-polish`, `backup-delete-feature-and-login-privacy` (Pushed to GitHub `origin`)
+   - **Pre-Nav Bars Streamline Checkpoint Tag**: `pre-nav-bars-streamline`
+   - **Backup Branches**: `backup-stable-baseline`, `backup-pre-hero-media-carousel`, `backup-pre-opening-motion-choreography`, `backup-pre-chronological-resequence`, `backup-pre-debox-transformation`, `backup-pre-ui-ux-refinements`, `backup-pre-catering-service`, `backup-pre-catering-dedicated-showcase`, `backup-pre-admin-dashboard`, `backup-stitch-admin-ui`, `backup-admin-step-guides`, `backup-contact-messages-visibility`, `backup-admin-polish-and-auth`, `backup-dynamic-applications-excel`, `backup-admin-ai-copilot`, `backup-services-and-pricing-cms`, `backup-multipage-and-ui-cleanup`, `backup-admin-login-polish`, `backup-delete-feature-and-login-privacy`, `backup-nav-bars-streamline` (Pushed to GitHub `origin`)
    - **Remote Synchronization**: Fully backed up on remote GitHub repository.
    - **One-Prompt Revert Protocol**:
+     - To revert to the state before navigation bars streamline: `git reset --hard pre-nav-bars-streamline && git clean -fd`
      - To revert to the state before the course/package delete feature and login privacy: `git reset --hard pre-delete-feature-and-login-privacy && git clean -fd`
      - To revert to the state before the admin login page polish: `git reset --hard pre-admin-login-polish && git clean -fd`
      - To revert to the state before multi-page architecture and UI cleanup: `git reset --hard pre-multipage-and-ui-cleanup && git clean -fd`
@@ -411,4 +413,17 @@
       - Each training course and service package card features prominent delete buttons in both the card header and the bottom action bar next to "Export Excel".
       - Confirmation dialogs protect against accidental deletion.
       - Dynamic empty states rendered when all courses or packages are removed, providing direct action buttons to publish official offerings.
+    - **Strict Rule Preservation**: Strictly ZERO text pill badges (`rounded-full` text tags), ZERO text bloat, unclipped original ceremony photo on Slide 0, phone strictly `+251925451711`, admin credentials strictly `henoktessma111@gmail.com` / `254517`.
+
+## Streamlined 5-Pillar Navigation Architecture (Desktop & Mobile)
+26. **Consolidated 5-Pillar Navigation & Responsive Ergonomics**:
+    - **Elimination of Navigation Clutter**:
+      - Consolidated the previous 8 crowded desktop links down to 5 intuitive, luxury brand pillars: `Home`, `Services`, `Training`, `About`, `Contact`.
+      - Consolidated mobile bottom navigation from 6 cramped tabs down to 5 spacious, comfortable touch targets.
+    - **Logical Domain Mergers**:
+      - **`Process` merged into `Services`**: The 4-stage turnkey setup methodology is completely integrated within the Services domain.
+      - **`Origins` and `Projects` merged into `About`**: Direct-trade highland terroirs and demonstrated client venues are unified under the brand story and organizational heritage.
+    - **Seamless Continuous Scroll Tracking**:
+      - `Header.tsx` and `MobileBottomNav.tsx` intelligently track scroll position across homepage sections: `#home` highlights `Home`, `#services` & `#process` highlight `Services`, `#origins`, `#projects` & `#about` highlight `About`, and `#contact` highlights `Contact`.
+      - Dedicated route pages `/services` and `/training` maintain exact active highlights.
     - **Strict Rule Preservation**: Strictly ZERO text pill badges (`rounded-full` text tags), ZERO text bloat, unclipped original ceremony photo on Slide 0, phone strictly `+251925451711`, admin credentials strictly `henoktessma111@gmail.com` / `254517`.
