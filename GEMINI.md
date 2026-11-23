@@ -80,9 +80,11 @@
    - **Pre-Admin Polish & Auth Checkpoint Tag**: `pre-admin-polish-and-auth` (Commit: `772f02f`)
    - **Pre-Dynamic Applications & Excel Export Tag**: `pre-dynamic-applications-excel` (Commit: `b0dd250`)
    - **Pre-Admin AI Copilot Checkpoint Tag**: `pre-admin-ai-copilot`
-   - **Backup Branches**: `backup-stable-baseline`, `backup-pre-hero-media-carousel`, `backup-pre-opening-motion-choreography`, `backup-pre-chronological-resequence`, `backup-pre-debox-transformation`, `backup-pre-ui-ux-refinements`, `backup-pre-catering-service`, `backup-pre-catering-dedicated-showcase`, `backup-pre-admin-dashboard`, `backup-stitch-admin-ui`, `backup-admin-step-guides`, `backup-contact-messages-visibility`, `backup-admin-polish-and-auth`, `backup-dynamic-applications-excel`, `backup-admin-ai-copilot` (Pushed to GitHub `origin`)
+   - **Pre-Services & Pricing CMS Checkpoint Tag**: `pre-services-and-pricing-cms`
+   - **Backup Branches**: `backup-stable-baseline`, `backup-pre-hero-media-carousel`, `backup-pre-opening-motion-choreography`, `backup-pre-chronological-resequence`, `backup-pre-debox-transformation`, `backup-pre-ui-ux-refinements`, `backup-pre-catering-service`, `backup-pre-catering-dedicated-showcase`, `backup-pre-admin-dashboard`, `backup-stitch-admin-ui`, `backup-admin-step-guides`, `backup-contact-messages-visibility`, `backup-admin-polish-and-auth`, `backup-dynamic-applications-excel`, `backup-admin-ai-copilot`, `backup-services-and-pricing-cms` (Pushed to GitHub `origin`)
    - **Remote Synchronization**: Fully backed up on remote GitHub repository.
    - **One-Prompt Revert Protocol**:
+     - To revert to the state before Services & Pricing CMS: `git reset --hard pre-services-and-pricing-cms && git clean -fd`
      - To revert to the state before the Admin AI Copilot: `git reset --hard pre-admin-ai-copilot && git clean -fd`
      - To revert to the state before dynamic training applications and Excel export: `git reset --hard pre-dynamic-applications-excel && git clean -fd`
      - To revert to the state before the admin polish and credential authentication: `git reset --hard pre-admin-polish-and-auth && git clean -fd`
@@ -311,4 +313,33 @@
      - Clean typography matching Stitch admin palette with copy-to-clipboard actions and formatted Markdown.
      - Starter prompt shortcuts for instant operational guidance (Excel export, custom form builder, contact messages, hero media, database schema).
      - Inline API key configuration panel supporting custom browser-local overrides (`localStorage`).
+   - **Strict Rule Preservation**: Strictly ZERO text pill badges (`rounded-full` text tags), ZERO text bloat, unclipped original ceremony photo on Slide 0, phone strictly `+251925451711`, admin credentials strictly `henoktessma111@gmail.com` / `254517`.
+
+## Unified Services & Pricing CMS Architecture
+22. **Dynamic Service Packages, Pricing Models, Client Booking & Excel Export**:
+   - **Unified Admin Section (`/admin/training`)**:
+     - Renamed sidebar item to **"Offerings"** / **"Services & Training"** with `workspace_premium` iconography.
+     - Top-level 3-tab navigation:
+       1. `Training Programs ({count})`: Barista Academy courses and scheduled cohorts.
+       2. `Service Packages ({count})`: Commercial services with transparent pricing, deliverables checklists, and booking drawers.
+       3. `All Registrations & Bookings ({count})`: Unified master CRM of both academy students and service client bookings.
+     - **"+ Add New..." Choice Modal**: Allows admin to select between **"Post Training Course"** and **"Post Service Package"**.
+   - **Service Package Creator & Pricing Models**:
+     - Configurable fields: Title, Category, Pricing Model (`Fixed Price`, `Starting From`, `Per Day / Event`, `Custom Quote`), Price in ETB, Project Timeline, and dynamic Scope Deliverables builder (`+ Add Deliverable`).
+     - Dynamic Booking Form Configuration: Checkbox toggles (`ask_email`, `ask_business`, `ask_location`, `ask_timeline`, `ask_notes`) plus open-ended custom questions stored as JSONB.
+     - Persisted in Supabase table `public.service_packages` with RLS policies.
+   - **Public Website Integration (`src/components/DynamicServicePackages.tsx`)**:
+     - Mounted inside `#services` directly after the core specialized practices and before Catering.
+     - Displays dynamic service packages with transparent pricing badge, timeline indicator, deliverables checklist with amber checkmarks, and high-contrast "Book Service Package" button.
+   - **Luxury Branded Booking Modal (`ServiceBookingModal.tsx`)**:
+     - Dynamically renders configured inquiry fields (Name, Phone, Email, Business Name, Location, Timeline, Notes, custom questions).
+     - Submitting invokes `submitServiceBookingAction`, inserting into `public.service_bookings`.
+     - Confirmation screen presents summary and instant direct WhatsApp verification to `+251925451711`.
+   - **Dual-Level Admin CRM & Excel Export**:
+     - **Per-Service Booking Drawer**: Expandable drawer displaying client bookings, status updater dropdown (`Pending`, `Contacted`, `Scheduled`, `Completed`, `Cancelled`), direct WhatsApp button, and dedicated `.xlsx` export.
+     - **Unified Master Table**: Complete ledger displaying both student applications and service bookings with type indicator, search, status filters, and master "Export All to Excel (.xlsx)" button.
+   - **Native Excel Generator (`src/lib/excel-export.ts`)**:
+     - Exports client bookings with auto-fitted column widths and formatted headers.
+   - **Admin AI Copilot Knowledge Base Integration**:
+     - Injected with `service_packages` and `service_bookings` database schemas and operator recipes for adding services and exporting data.
    - **Strict Rule Preservation**: Strictly ZERO text pill badges (`rounded-full` text tags), ZERO text bloat, unclipped original ceremony photo on Slide 0, phone strictly `+251925451711`, admin credentials strictly `henoktessma111@gmail.com` / `254517`.

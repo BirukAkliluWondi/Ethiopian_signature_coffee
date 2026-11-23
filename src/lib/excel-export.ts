@@ -27,6 +27,22 @@ export interface InquiryExportItem {
   status?: string | null;
 }
 
+export interface ServiceBookingExportItem {
+  id: string;
+  created_at: string;
+  package_id?: string | null;
+  package_title?: string | null;
+  client_name: string;
+  phone: string;
+  email?: string | null;
+  business_name?: string | null;
+  venue_location?: string | null;
+  target_timeline?: string | null;
+  notes?: string | null;
+  custom_answers?: Record<string, any> | null;
+  status?: string | null;
+}
+
 /**
  * Downloads a worksheet as a native Excel .xlsx file in the browser.
  */
@@ -182,5 +198,95 @@ export function exportInquiriesToExcel(inquiries: InquiryExportItem[]) {
 
   const wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, ws, "Contact Messages");
+  downloadWorkbook(wb, filename);
+}
+
+/**
+ * Exports client bookings for a specific service package to Excel.
+ */
+export function exportServiceBookingsToExcel(packageTitle: string, bookings: ServiceBookingExportItem[]) {
+  const sanitizedTitle = packageTitle.replace(/[^a-zA-Z0-9]/g, "_").slice(0, 30);
+  const dateStr = new Date().toISOString().split("T")[0];
+  const filename = `${sanitizedTitle}_Bookings_${dateStr}.xlsx`;
+
+  const rows = bookings.map((b, index) => {
+    let customNotes = b.notes || "";
+    if (b.custom_answers && Object.keys(b.custom_answers).length > 0) {
+      const qa = Object.entries(b.custom_answers)
+        .map(([q, a]) => `${q}: ${a}`)
+        .join(" | ");
+      customNotes = customNotes ? `${customNotes} [QA: ${qa}]` : qa;
+    }
+
+    return {
+      "No.": index + 1,
+      "Client Name": b.client_name,
+      "Phone Number": b.phone,
+      "Email": b.email || "N/A",
+      "Business / Venue": b.business_name || "N/A",
+      "Location": b.venue_location || "N/A",
+      "Target Timeline": b.target_timeline || "Flexible",
+      "Project Scope / Notes": customNotes || "None",
+      "Booking Date": new Date(b.created_at).toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+      }),
+      "Status": (b.status || "new").toUpperCase(),
+    };
+  });
+
+  const ws = XLSX.utils.json_to_sheet(rows);
+  ws["!cols"] = autoFitColumns(rows);
+
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, "Service Bookings");
+  downloadWorkbook(wb, filename);
+}
+
+/**
+ * Exports all service bookings across all service packages to Excel.
+ */
+export function exportAllServiceBookingsToExcel(bookings: ServiceBookingExportItem[]) {
+  const dateStr = new Date().toISOString().split("T")[0];
+  const filename = `Ethiopian_Signature_All_Service_Bookings_${dateStr}.xlsx`;
+
+  const rows = bookings.map((b, index) => {
+    let customNotes = b.notes || "";
+    if (b.custom_answers && Object.keys(b.custom_answers).length > 0) {
+      const qa = Object.entries(b.custom_answers)
+        .map(([q, a]) => `${q}: ${a}`)
+        .join(" | ");
+      customNotes = customNotes ? `${customNotes} [QA: ${qa}]` : qa;
+    }
+
+    return {
+      "No.": index + 1,
+      "Service Package": b.package_title || "Specialized Advisory",
+      "Client Name": b.client_name,
+      "Phone Number": b.phone,
+      "Email": b.email || "N/A",
+      "Business / Venue": b.business_name || "N/A",
+      "Location": b.venue_location || "N/A",
+      "Target Timeline": b.target_timeline || "Flexible",
+      "Project Scope / Notes": customNotes || "None",
+      "Booking Date": new Date(b.created_at).toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+      }),
+      "Status": (b.status || "new").toUpperCase(),
+    };
+  });
+
+  const ws = XLSX.utils.json_to_sheet(rows);
+  ws["!cols"] = autoFitColumns(rows);
+
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, "All Service Bookings");
   downloadWorkbook(wb, filename);
 }

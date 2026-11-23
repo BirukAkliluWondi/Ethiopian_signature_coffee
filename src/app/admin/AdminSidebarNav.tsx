@@ -27,11 +27,11 @@ const navItems = [
     icon: "photo_library",
   },
   {
-    label: "Classes",
-    fullTitle: "Training & Cohorts",
-    guideHint: "Add Barista course dates",
+    label: "Offerings",
+    fullTitle: "Services & Training",
+    guideHint: "Courses, service packages & bookings",
     href: "/admin/training",
-    icon: "school",
+    icon: "workspace_premium",
   },
   {
     label: "Chat",

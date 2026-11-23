@@ -1,3 +1,5 @@
+import DynamicServicePackages from "./DynamicServicePackages";
+
 export default function Services() {
   return (
     <section className="reveal-on-scroll flex flex-col gap-8 sm:gap-10 scroll-mt-28 relative section-transition-glow" id="services">
@@ -207,6 +209,9 @@ export default function Services() {
           </div>
         </article>
       </div>
+
+      {/* Featured Service Packages & Transparent Pricing (Dynamic CMS) */}
+      <DynamicServicePackages />
 
       {/* Dedicated Luxury Catering Showcase (Flagship 2) */}
       <article

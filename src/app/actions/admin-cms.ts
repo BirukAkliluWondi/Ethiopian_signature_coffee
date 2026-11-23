@@ -193,7 +193,7 @@ export async function createTrainingProgramAction(payload: {
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/^-|-$/g, "");
 
-    const { error } = await supabase.from("training_programs").insert([
+    const { data, error } = await supabase.from("training_programs").insert([
       {
         title: payload.title.trim(),
         slug: `${slug}-${Date.now().toString().slice(-4)}`,
@@ -212,10 +212,10 @@ export async function createTrainingProgramAction(payload: {
         },
         is_active: true,
       },
-    ]);
+    ]).select().single();
 
     if (error) throw error;
-    return { success: true };
+    return { success: true, data };
   } catch (err: unknown) {
     console.error("Error creating training program:", err);
     return { success: false, error: "Failed to create program." };
@@ -237,20 +237,24 @@ export async function createCohortScheduleAction(payload: {
     if (!isAuth) return { success: false, error: "Unauthorized." };
     if (!supabase) return { success: false, error: "Database not configured." };
 
-    const { error } = await supabase.from("training_schedules").insert([
-      {
-        program_id: payload.program_id,
-        start_date: payload.start_date,
-        end_date: payload.end_date,
-        session_time: payload.session_time.trim(),
-        seats_total: Number(payload.seats_total) || 8,
-        seats_booked: 0,
-        status: "open",
-      },
-    ]);
+    const { data, error } = await supabase
+      .from("training_schedules")
+      .insert([
+        {
+          program_id: payload.program_id,
+          start_date: payload.start_date,
+          end_date: payload.end_date,
+          session_time: payload.session_time.trim(),
+          seats_total: Number(payload.seats_total) || 8,
+          seats_booked: 0,
+          status: "open",
+        },
+      ])
+      .select()
+      .single();
 
     if (error) throw error;
-    return { success: true };
+    return { success: true, data };
   } catch (err: unknown) {
     console.error("Error creating cohort schedule:", err);
     return { success: false, error: "Failed to add cohort schedule." };
@@ -466,5 +470,282 @@ export async function deleteAcademyApplicantAction(id: string) {
   } catch (err) {
     console.error("Error deleting applicant:", err);
     return { success: false, error: "Failed to delete applicant." };
+  }
+}
+
+/**
+ * ============================================================================
+ * SERVICE PACKAGES & CLIENT BOOKINGS MANAGEMENT ACTIONS
+ * ============================================================================
+ */
+
+export interface ServicePackageItem {
+  id: string;
+  created_at: string;
+  title: string;
+  slug: string;
+  category: string;
+  description: string;
+  price_etb: number;
+  pricing_model: "fixed" | "starting_from" | "per_day" | "custom_quote";
+  timeline: string;
+  deliverables: string[];
+  image_url?: string | null;
+  is_active: boolean;
+  has_booking_form: boolean;
+  form_config?: {
+    ask_email?: boolean;
+    ask_business?: boolean;
+    ask_location?: boolean;
+    ask_timeline?: boolean;
+    ask_notes?: boolean;
+    custom_questions?: string[];
+  };
+  bookings?: any[];
+  booking_count?: number;
+}
+
+/**
+ * Fetch all Service Packages enriched with client bookings.
+ */
+export async function getServicePackagesAction(): Promise<{
+  success: boolean;
+  data: ServicePackageItem[];
+}> {
+  try {
+    if (!supabase) return { success: false, data: [] };
+
+    const { data: packages, error: pkgError } = await supabase
+      .from("service_packages")
+      .select("*")
+      .order("created_at", { ascending: false });
+
+    if (pkgError) throw pkgError;
+    if (!packages || packages.length === 0) return { success: true, data: [] };
+
+    // Fetch all service bookings to attach to packages
+    const { data: bookings, error: bookError } = await supabase
+      .from("service_bookings")
+      .select("*")
+      .order("created_at", { ascending: false });
+
+    if (bookError) throw bookError;
+
+    const enriched: ServicePackageItem[] = packages.map((pkg: any) => {
+      const pkgBookings = (bookings || [])
+        .filter((b: any) => b.package_id === pkg.id)
+        .map((b: any) => ({
+          ...b,
+          package_title: pkg.title,
+        }));
+
+      return {
+        ...pkg,
+        price_etb: Number(pkg.price_etb) || 0,
+        deliverables: Array.isArray(pkg.deliverables) ? pkg.deliverables : [],
+        bookings: pkgBookings,
+        booking_count: pkgBookings.length,
+      };
+    });
+
+    return { success: true, data: enriched };
+  } catch (err) {
+    console.error("Error fetching service packages:", err);
+    return { success: false, data: [] };
+  }
+}
+
+/**
+ * Create a new Service Package with pricing and scope.
+ */
+export async function createServicePackageAction(payload: {
+  title: string;
+  category: string;
+  description: string;
+  price_etb: number;
+  pricing_model: "fixed" | "starting_from" | "per_day" | "custom_quote";
+  timeline: string;
+  deliverables: string[];
+  image_url?: string;
+  has_booking_form?: boolean;
+  form_config?: {
+    ask_email?: boolean;
+    ask_business?: boolean;
+    ask_location?: boolean;
+    ask_timeline?: boolean;
+    ask_notes?: boolean;
+    custom_questions?: string[];
+  };
+}) {
+  try {
+    const isAuth = await isAdminAuthenticated();
+    if (!isAuth) return { success: false, error: "Unauthorized." };
+    if (!supabase) return { success: false, error: "Database not configured." };
+
+    if (!payload.title || !payload.category) {
+      return { success: false, error: "Title and Category are required." };
+    }
+
+    const slug =
+      payload.title
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/(^-|-$)+/g, "") +
+      "-" +
+      Math.floor(1000 + Math.random() * 9000);
+
+    const insertData = {
+      title: payload.title.trim(),
+      slug,
+      category: payload.category.trim(),
+      description: payload.description?.trim() || "",
+      price_etb: payload.price_etb || 0,
+      pricing_model: payload.pricing_model || "fixed",
+      timeline: payload.timeline?.trim() || "Flexible",
+      deliverables: payload.deliverables || [],
+      image_url: payload.image_url?.trim() || "/coffee-shop-setup.jpg",
+      is_active: true,
+      has_booking_form: payload.has_booking_form !== false,
+      form_config: payload.form_config || {
+        ask_email: true,
+        ask_business: true,
+        ask_location: true,
+        ask_timeline: true,
+        ask_notes: true,
+        custom_questions: [],
+      },
+    };
+
+    const { data, error } = await supabase
+      .from("service_packages")
+      .insert([insertData])
+      .select()
+      .single();
+
+    if (error) throw error;
+    return { success: true, data };
+  } catch (err: any) {
+    console.error("Error creating service package:", err);
+    return { success: false, error: err?.message || "Failed to create service package." };
+  }
+}
+
+/**
+ * Update an existing Service Package.
+ */
+export async function updateServicePackageAction(
+  id: string,
+  payload: Partial<ServicePackageItem>
+) {
+  try {
+    const isAuth = await isAdminAuthenticated();
+    if (!isAuth) return { success: false, error: "Unauthorized." };
+    if (!supabase) return { success: false, error: "Database not configured." };
+
+    const { data, error } = await supabase
+      .from("service_packages")
+      .update(payload)
+      .eq("id", id)
+      .select()
+      .single();
+
+    if (error) throw error;
+    return { success: true, data };
+  } catch (err: any) {
+    console.error("Error updating service package:", err);
+    return { success: false, error: err?.message || "Failed to update service package." };
+  }
+}
+
+/**
+ * Delete a Service Package.
+ */
+export async function deleteServicePackageAction(id: string) {
+  try {
+    const isAuth = await isAdminAuthenticated();
+    if (!isAuth) return { success: false, error: "Unauthorized." };
+    if (!supabase) return { success: false, error: "Database not configured." };
+
+    const { error } = await supabase.from("service_packages").delete().eq("id", id);
+    if (error) throw error;
+    return { success: true };
+  } catch (err: any) {
+    console.error("Error deleting service package:", err);
+    return { success: false, error: err?.message || "Failed to delete service package." };
+  }
+}
+
+/**
+ * Fetch all Service Bookings across all packages.
+ */
+export async function getServiceBookingsAction(packageId?: string) {
+  try {
+    const isAuth = await isAdminAuthenticated();
+    if (!isAuth) return { success: false, data: [] };
+    if (!supabase) return { success: false, data: [] };
+
+    let query = supabase
+      .from("service_bookings")
+      .select("*, service_packages(title, category, price_etb)")
+      .order("created_at", { ascending: false });
+
+    if (packageId) {
+      query = query.eq("package_id", packageId);
+    }
+
+    const { data, error } = await query;
+    if (error) throw error;
+
+    const formatted = (data || []).map((row: any) => ({
+      ...row,
+      package_title: row.service_packages?.title || "Specialty Service Package",
+      package_category: row.service_packages?.category || "Advisory",
+      price_etb: row.service_packages?.price_etb || 0,
+    }));
+
+    return { success: true, data: formatted };
+  } catch (err) {
+    console.error("Error fetching service bookings:", err);
+    return { success: false, data: [] };
+  }
+}
+
+/**
+ * Update the status of a service booking.
+ */
+export async function updateServiceBookingStatusAction(id: string, status: string) {
+  try {
+    const isAuth = await isAdminAuthenticated();
+    if (!isAuth) return { success: false, error: "Unauthorized." };
+    if (!supabase) return { success: false, error: "Database not configured." };
+
+    const { error } = await supabase
+      .from("service_bookings")
+      .update({ status })
+      .eq("id", id);
+
+    if (error) throw error;
+    return { success: true };
+  } catch (err) {
+    console.error("Error updating service booking status:", err);
+    return { success: false, error: "Failed to update booking status." };
+  }
+}
+
+/**
+ * Delete a service booking record.
+ */
+export async function deleteServiceBookingAction(id: string) {
+  try {
+    const isAuth = await isAdminAuthenticated();
+    if (!isAuth) return { success: false, error: "Unauthorized." };
+    if (!supabase) return { success: false, error: "Database not configured." };
+
+    const { error } = await supabase.from("service_bookings").delete().eq("id", id);
+    if (error) throw error;
+    return { success: true };
+  } catch (err) {
+    console.error("Error deleting service booking:", err);
+    return { success: false, error: "Failed to delete booking." };
   }
 }

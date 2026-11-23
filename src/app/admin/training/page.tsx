@@ -1,9 +1,14 @@
-import { getTrainingProgramsAction } from "@/app/actions/admin-cms";
+import { getTrainingProgramsAction, getServicePackagesAction } from "@/app/actions/admin-cms";
 import TrainingCMSClient from "./TrainingCMSClient";
 
 export default async function AdminTrainingPage() {
-  const res = await getTrainingProgramsAction();
-  const programs = res.success && res.data ? res.data : [];
+  const [progRes, pkgRes] = await Promise.all([
+    getTrainingProgramsAction(),
+    getServicePackagesAction(),
+  ]);
+
+  const programs = progRes.success && progRes.data ? progRes.data : [];
+  const servicePackages = pkgRes.success && pkgRes.data ? pkgRes.data : [];
 
   return (
     <div className="flex flex-col gap-6 max-w-7xl mx-auto">
@@ -11,15 +16,15 @@ export default async function AdminTrainingPage() {
         <div className="flex items-center gap-2">
           <span className="w-1.5 h-4 bg-stitch-primary rounded-full shrink-0" />
           <h1 className="font-serif text-2xl sm:text-3xl font-semibold text-stitch-primary">
-            Barista Training Courses &amp; Class Schedules
+            Services &amp; Training Operations Hub
           </h1>
         </div>
         <p className="text-xs text-on-surface-variant pl-3.5">
-          Follow the simple guide below to add new courses and schedule upcoming class dates so students can register online.
+          Manage training academy courses, commercial service packages, pricing, client bookings, and Excel rosters.
         </p>
       </div>
 
-      <TrainingCMSClient initialPrograms={programs} />
+      <TrainingCMSClient initialPrograms={programs} initialServicePackages={servicePackages} />
     </div>
   );
 }
