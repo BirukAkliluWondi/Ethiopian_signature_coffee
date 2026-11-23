@@ -300,18 +300,21 @@
      - Uses `xlsx` library to generate binary OpenXML spreadsheet buffers locally in the browser with auto-fitted column widths and formatted headers.
    - **Strict Rule Preservation**: Strictly ZERO text pill badges (`rounded-full` text tags), ZERO text bloat, unclipped original ceremony photo on Slide 0, phone strictly `+251925451711`, admin credentials strictly `henoktessma111@gmail.com` / `254517`.
 
-## Free Admin AI Copilot (Gemini 2.0 Flash) & Codebase Operations Guide
-21. **In-Dashboard AI Assistant, Injected Knowledge Base & Slide-Over Interface**:
-   - **Google Gemini 2.0 Flash Integration**:
-     - Connects to Google AI Studio's 100% free tier (15 RPM, 1,500 RPD, 1M token context) with zero credit card required.
-     - Secured by `isAdminAuthenticated()` session guard on `/api/admin/assistant`.
-     - Injects complete codebase knowledge base (`src/lib/ai-assistant/knowledge-base.ts`) covering all routes, Supabase tables (`inquiries`, `training_programs`, `training_schedules`, `academy_enrollments`, `homepage_media`), server actions, and step-by-step operator recipes.
-     - Includes built-in smart offline responder fallback so common admin questions receive immediate, accurate step-by-step guidance even before an API key is configured.
+## Free Admin AI Copilot & Strict Operational Workflow Architecture
+21. **In-Dashboard AI Assistant, Strict Operational Restriction & Vercel Resilience**:
+   - **Strict Operational-Only Rule**:
+     - System prompt and server pre-flight checks strictly enforce an operational boundary: the AI **never** answers questions about the codebase, source code files, programming, database schemas, SQL queries, server actions, or internal architecture.
+     - Any inquiry attempting to inspect technical details or schemas is politely declined with a standard operational guide directing the user to dashboard workflows (Service Packages, Academy, Inquiries, Excel, Media).
+   - **Google Gemini API Integration & Vercel Resilience**:
+     - Connects to Google AI Studio via `gemini-flash-lite-latest` endpoint on `v1beta`.
+     - Route handler configured with `export const dynamic = "force-dynamic"` and `export const maxDuration = 30` to prevent serverless timeouts on Vercel.
+     - Dual-source authentication checks both `req.cookies.get("ethiopian_sig_admin")` and Next.js `cookies()` for guaranteed session validation across Vercel Edge and Node.js runtimes.
+     - Supports `process.env.GEMINI_API_KEY`, in-drawer browser overrides (`localStorage`), and safe runtime server fallback so the Copilot functions seamlessly on Vercel out-of-the-box.
+     - Built-in resilient offline fallback guarantees that even during external network drops, operational answers are always served with zero downtime.
    - **Slide-Over Side Drawer Architecture (`AdminAIAssistantDrawer.tsx`)**:
      - Mounted via React portal (`createPortal(..., document.body)`) to ensure full-height (`100vh`) unconstrained display above sticky headers.
-     - Triggered via top header 'Ask Copilot' button with `auto_awesome` sparkle icon and global keyboard shortcut `Ctrl + Space` (and `Cmd + Space` on Mac).
-     - Clean typography matching Stitch admin palette with copy-to-clipboard actions and formatted Markdown.
-     - Starter prompt shortcuts for instant operational guidance (Excel export, custom form builder, contact messages, hero media, database schema).
+     - Subtitle reflects **"Operations & Admin Workflow Guide"**.
+     - Starter prompt shortcuts feature 100% operational UI questions (Service creation & pricing, Excel export, custom course questions, contact messages, hero media).
      - Inline API key configuration panel supporting custom browser-local overrides (`localStorage`).
    - **Strict Rule Preservation**: Strictly ZERO text pill badges (`rounded-full` text tags), ZERO text bloat, unclipped original ceremony photo on Slide 0, phone strictly `+251925451711`, admin credentials strictly `henoktessma111@gmail.com` / `254517`.
 

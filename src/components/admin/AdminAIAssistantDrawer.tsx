@@ -11,11 +11,11 @@ interface Message {
 }
 
 const STARTER_PROMPTS = [
+  "How do I add a new service package and set pricing?",
   "How do I export registered students to Excel?",
   "How do I create a course with custom questions?",
   "Where do contact form messages arrive?",
   "How do I replace the hero banner image?",
-  "Explain the database schema for enrollments.",
 ];
 
 export default function AdminAIAssistantDrawer({
@@ -187,7 +187,7 @@ export default function AdminAIAssistantDrawer({
                 </span>
               </div>
               <span className="text-[11px] text-on-surface-variant font-medium">
-                Live Codebase & Operations Guide
+                Operations & Admin Workflow Guide
               </span>
             </div>
           </div>
@@ -277,7 +277,7 @@ export default function AdminAIAssistantDrawer({
                 How can I assist your operations?
               </h3>
               <p className="text-xs text-on-surface-variant leading-relaxed mb-6">
-                I know every feature, button, database table, and server action in this admin panel. Ask anything or pick a quick topic below:
+                I can guide you step-by-step through every feature, workflow, and action in this admin panel. Ask anything or pick a quick topic below:
               </p>
 
               <div className="w-full flex flex-col gap-2">
