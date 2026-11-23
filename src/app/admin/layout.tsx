@@ -31,8 +31,13 @@ export default async function AdminLayout({
           {/* Brand Header */}
           <div className="p-5 border-b border-surface-container-highest flex items-center justify-between">
             <Link className="flex items-center gap-3 group" href="/admin">
-              <div className="w-9 h-9 rounded-lg bg-stitch-primary text-stitch-tertiary-fixed flex items-center justify-center font-serif font-bold text-base shadow-sm group-hover:scale-105 transition-transform">
-                ES
+              <div className="w-10 h-10 rounded-xl bg-white border border-border-subtle flex items-center justify-center p-1.5 shadow-sm group-hover:scale-105 transition-transform shrink-0">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/logo.png"
+                  alt="Ethiopian Signature Logo"
+                  className="w-full h-full object-contain"
+                />
               </div>
               <div className="flex flex-col">
                 <span className="font-serif font-semibold text-sm text-stitch-primary tracking-tight">

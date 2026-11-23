@@ -82,9 +82,11 @@
    - **Pre-Admin AI Copilot Checkpoint Tag**: `pre-admin-ai-copilot`
    - **Pre-Services & Pricing CMS Checkpoint Tag**: `pre-services-and-pricing-cms`
    - **Pre-Multi-Page & UI Cleanup Checkpoint Tag**: `pre-multipage-and-ui-cleanup`
-   - **Backup Branches**: `backup-stable-baseline`, `backup-pre-hero-media-carousel`, `backup-pre-opening-motion-choreography`, `backup-pre-chronological-resequence`, `backup-pre-debox-transformation`, `backup-pre-ui-ux-refinements`, `backup-pre-catering-service`, `backup-pre-catering-dedicated-showcase`, `backup-pre-admin-dashboard`, `backup-stitch-admin-ui`, `backup-admin-step-guides`, `backup-contact-messages-visibility`, `backup-admin-polish-and-auth`, `backup-dynamic-applications-excel`, `backup-admin-ai-copilot`, `backup-services-and-pricing-cms`, `backup-multipage-and-ui-cleanup` (Pushed to GitHub `origin`)
+   - **Pre-Admin Login Polish Checkpoint Tag**: `pre-admin-login-polish`
+   - **Backup Branches**: `backup-stable-baseline`, `backup-pre-hero-media-carousel`, `backup-pre-opening-motion-choreography`, `backup-pre-chronological-resequence`, `backup-pre-debox-transformation`, `backup-pre-ui-ux-refinements`, `backup-pre-catering-service`, `backup-pre-catering-dedicated-showcase`, `backup-pre-admin-dashboard`, `backup-stitch-admin-ui`, `backup-admin-step-guides`, `backup-contact-messages-visibility`, `backup-admin-polish-and-auth`, `backup-dynamic-applications-excel`, `backup-admin-ai-copilot`, `backup-services-and-pricing-cms`, `backup-multipage-and-ui-cleanup`, `backup-admin-login-polish` (Pushed to GitHub `origin`)
    - **Remote Synchronization**: Fully backed up on remote GitHub repository.
    - **One-Prompt Revert Protocol**:
+     - To revert to the state before the admin login page polish: `git reset --hard pre-admin-login-polish && git clean -fd`
      - To revert to the state before multi-page architecture and UI cleanup: `git reset --hard pre-multipage-and-ui-cleanup && git clean -fd`
      - To revert to the state before Services & Pricing CMS: `git reset --hard pre-services-and-pricing-cms && git clean -fd`
      - To revert to the state before the Admin AI Copilot: `git reset --hard pre-admin-ai-copilot && git clean -fd`
@@ -370,4 +372,24 @@
       - **Desktop Header (`Header.tsx`)**: Uses Next.js `usePathname()`, routing `Services` to `/services`, `Training` to `/training`, and section anchors to `/#...`, with active gold indicators.
       - **Mobile Bottom Nav (`MobileBottomNav.tsx`)**: Seamlessly navigates between `/`, `/services`, and `/training` with active indicators, while anchoring to `/#contact` for inquiries.
       - **Footer (`Footer.tsx`)**: Updated directory links to route directly to `/services`, `/services#catering`, and `/training`.
+    - **Strict Rule Preservation**: Strictly ZERO text pill badges (`rounded-full` text tags), ZERO text bloat, unclipped original ceremony photo on Slide 0, phone strictly `+251925451711`, admin credentials strictly `henoktessma111@gmail.com` / `254517`.
+
+## Polished Admin Login Architecture & Official Coffee Branding
+24. **Luxury Editorial Admin Login, Authentic Logo Integration & Streamlined Ergonomics**:
+    - **Authentic Brand Emblem (`/logo.png`)**:
+      - Replaced the generic lock icon with the official high-resolution Ethiopian Signature Coffee logo within an elevated, soft-bordered card container (`bg-gradient-to-b from-[#FDFBF7] to-white border border-border-subtle/80 shadow-sm p-2.5 rounded-2xl`).
+      - Updated the desktop sidebar header in `src/app/admin/layout.tsx` to display the authentic `/logo.png` instead of the plain 'ES' text.
+    - **Atmospheric Editorial Aesthetics**:
+      - Background features a warm ivory porcelain tone (`#F9F7F2`) with subtle radial amber roast blooms (`bg-brand-yellow/10 blur-3xl`) and deep emerald hints (`bg-brand-green/8 blur-3xl`).
+      - Centered card (`max-w-[440px] bg-white/95 backdrop-blur-xl border border-border-subtle rounded-3xl p-7 sm:p-9 shadow-[0_20px_50px_-10px_rgba(20,9,3,0.12),0_4px_24px_rgba(212,136,0,0.06)] ring-1 ring-black/[0.03]`).
+      - Hairline gold gradient accent line along the card's top edge (`h-1 bg-gradient-to-r from-transparent via-brand-yellow to-transparent`).
+      - Refined brand typography: `ETHIOPIAN SIGNATURE` in serif display, uppercase tracked kicker `EXECUTIVE PORTAL`, and brand tagline `BUILDING COFFEE BUSINESSES`.
+    - **Clutter Elimination & Form Ergonomics**:
+      - Removed the clunky numbered "1, 2" steps box from the login card.
+      - Sleek email field with `mail` icon and custom focus ring in `brand-green`.
+      - Password field with `lock` icon, confidentiality note, and interactive show/hide eye toggle button (`visibility` / `visibility_off`).
+      - High-contrast primary action button (`h-12 bg-brand-green-dark hover:bg-brand-green text-white font-bold uppercase tracking-[0.16em] btn-shimmer`) with dynamic loading spinner ring during credential verification.
+    - **Security & Error Handling**:
+      - Sleek error alert banner (`bg-red-50/90 border border-red-200/80 text-red-800 text-xs`) displaying explicit validation errors upon invalid attempts.
+      - Card footer features `verified_user` badge: "Encrypted 256-Bit Session", direct link back to public website (`/`), and top ambient bar with official support number `+251925451711`.
     - **Strict Rule Preservation**: Strictly ZERO text pill badges (`rounded-full` text tags), ZERO text bloat, unclipped original ceremony photo on Slide 0, phone strictly `+251925451711`, admin credentials strictly `henoktessma111@gmail.com` / `254517`.
