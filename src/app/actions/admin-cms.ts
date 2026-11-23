@@ -312,6 +312,31 @@ export async function deleteCohortScheduleAction(id: string) {
 }
 
 /**
+ * Delete a Training Program and its associated cohort schedules and enrollments from the database.
+ */
+export async function deleteTrainingProgramAction(id: string) {
+  try {
+    const isAuth = await isAdminAuthenticated();
+    if (!isAuth) return { success: false, error: "Unauthorized." };
+    if (!supabase) return { success: false, error: "Database not configured." };
+
+    // 1. Delete associated enrollments
+    await supabase.from("academy_enrollments").delete().eq("program_id", id);
+
+    // 2. Delete associated cohort schedules
+    await supabase.from("training_schedules").delete().eq("program_id", id);
+
+    // 3. Delete the training program itself
+    const { error } = await supabase.from("training_programs").delete().eq("id", id);
+    if (error) throw error;
+    return { success: true };
+  } catch (err: any) {
+    console.error("Error deleting training program:", err);
+    return { success: false, error: err?.message || "Failed to delete training program." };
+  }
+}
+
+/**
  * Fetch all inquiries for the CRM view
  */
 export async function getInquiriesAction() {
@@ -658,7 +683,7 @@ export async function updateServicePackageAction(
 }
 
 /**
- * Delete a Service Package.
+ * Delete a Service Package and its associated bookings from the database.
  */
 export async function deleteServicePackageAction(id: string) {
   try {
@@ -666,6 +691,10 @@ export async function deleteServicePackageAction(id: string) {
     if (!isAuth) return { success: false, error: "Unauthorized." };
     if (!supabase) return { success: false, error: "Database not configured." };
 
+    // 1. Delete associated bookings for this package
+    await supabase.from("service_bookings").delete().eq("package_id", id);
+
+    // 2. Delete the service package
     const { error } = await supabase.from("service_packages").delete().eq("id", id);
     if (error) throw error;
     return { success: true };

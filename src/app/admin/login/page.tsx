@@ -46,9 +46,10 @@ export default function AdminLoginPage() {
           </span>
           <span>Back to Ethiopian Signature</span>
         </Link>
-        <span className="text-[11px] text-text-muted/70 tracking-wide font-medium">
-          Official Support: +251925451711
-        </span>
+        <div className="flex items-center gap-1.5 text-[11px] text-text-muted/70 font-medium">
+          <span className="material-symbols-outlined text-xs text-brand-green">lock</span>
+          <span>Administrative Gateway</span>
+        </div>
       </div>
 
       {/* Main Luxury Login Card */}

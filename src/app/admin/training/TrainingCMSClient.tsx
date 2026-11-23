@@ -3,6 +3,7 @@
 import { useState, useTransition } from "react";
 import {
   createTrainingProgramAction,
+  deleteTrainingProgramAction,
   createCohortScheduleAction,
   updateCohortScheduleAction,
   deleteCohortScheduleAction,
@@ -393,6 +394,20 @@ export default function TrainingCMSClient({
     });
   };
 
+  // Delete Entire Training Course / Program
+  const handleDeleteProgram = (programId: string) => {
+    if (
+      !confirm(
+        "Are you sure you want to delete this entire training course? This will remove the course and its scheduled cohorts from both the admin dashboard and public website."
+      )
+    )
+      return;
+    setPrograms((prev) => prev.filter((p) => p.id !== programId));
+    startTransition(async () => {
+      await deleteTrainingProgramAction(programId);
+    });
+  };
+
   // Update Applicant Status
   const handleUpdateApplicantStatus = (programId: string, applicantId: string, newStatus: string) => {
     setPrograms((prev) =>
@@ -466,7 +481,12 @@ export default function TrainingCMSClient({
 
   // Delete Service Package
   const handleDeleteServicePackage = (packageId: string) => {
-    if (!confirm("Are you sure you want to remove this service package?")) return;
+    if (
+      !confirm(
+        "Are you sure you want to remove this service package? This will permanently delete the package and remove it from the public website."
+      )
+    )
+      return;
     setServicePackages((prev) => prev.filter((p) => p.id !== packageId));
     startTransition(async () => {
       await deleteServicePackageAction(packageId);
@@ -602,25 +622,52 @@ export default function TrainingCMSClient({
       {/* ========================================================================= */}
       {activeTab === "courses" && (
         <div className="flex flex-col gap-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {programs.map((prog) => {
-              const isExpanded = expandedApplicantsProgramId === prog.id;
-              const applicantsList = prog.applicants || [];
+          {programs.length === 0 ? (
+            <div className="p-12 text-center bg-surface-container-lowest border border-surface-container-highest rounded-2xl flex flex-col items-center justify-center gap-3">
+              <span className="material-symbols-outlined text-4xl text-outline">school</span>
+              <h3 className="font-serif text-lg font-bold text-on-surface">No Training Courses Published</h3>
+              <p className="text-xs text-on-surface-variant max-w-sm">
+                All training courses have been removed. Click &ldquo;+ Add New...&rdquo; above to publish a course or cohort schedule.
+              </p>
+              <button
+                className="mt-2 px-4 py-2 bg-stitch-primary text-white text-xs font-bold rounded-lg hover:bg-stitch-primary/90 transition-all flex items-center gap-1.5"
+                type="button"
+                onClick={() => setShowNewProgramModal(true)}
+              >
+                <span className="material-symbols-outlined text-sm">add</span>
+                <span>Post First Training Course</span>
+              </button>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {programs.map((prog) => {
+                const isExpanded = expandedApplicantsProgramId === prog.id;
+                const applicantsList = prog.applicants || [];
 
-              return (
-                <div
-                  key={prog.id}
-                  className="bg-surface-container-lowest border border-surface-container-highest rounded-2xl p-5 flex flex-col justify-between shadow-xs hover:border-stitch-primary/30 transition-all gap-5"
-                >
-                  <div className="flex flex-col gap-3">
-                    <div className="flex items-center justify-between">
-                      <span className="text-[11px] font-bold text-stitch-secondary tracking-wider uppercase">
-                        {prog.level} Level
-                      </span>
-                      <span className="text-xs font-semibold text-on-surface-variant">
-                        {prog.duration}
-                      </span>
-                    </div>
+                return (
+                  <div
+                    key={prog.id}
+                    className="bg-surface-container-lowest border border-surface-container-highest rounded-2xl p-5 flex flex-col justify-between shadow-xs hover:border-stitch-primary/30 transition-all gap-5"
+                  >
+                    <div className="flex flex-col gap-3">
+                      <div className="flex items-center justify-between">
+                        <span className="text-[11px] font-bold text-stitch-secondary tracking-wider uppercase">
+                          {prog.level} Level
+                        </span>
+                        <div className="flex items-center gap-1.5">
+                          <span className="text-xs font-semibold text-on-surface-variant">
+                            {prog.duration}
+                          </span>
+                          <button
+                            className="text-outline hover:text-red-600 transition-colors p-1"
+                            title="Delete training course from website"
+                            type="button"
+                            onClick={() => handleDeleteProgram(prog.id)}
+                          >
+                            <span className="material-symbols-outlined text-base">delete</span>
+                          </button>
+                        </div>
+                      </div>
 
                     <div>
                       <h3 className="font-serif text-lg font-bold text-on-surface">{prog.title}</h3>
@@ -709,6 +756,15 @@ export default function TrainingCMSClient({
                         <span className="material-symbols-outlined text-sm">file_download</span>
                         <span>Export Excel</span>
                       </button>
+
+                      <button
+                        className="p-2 text-outline hover:text-red-600 hover:border-red-200 hover:bg-red-50 transition-colors rounded-xl border border-surface-container-highest flex items-center justify-center shrink-0"
+                        title="Delete course from website"
+                        type="button"
+                        onClick={() => handleDeleteProgram(prog.id)}
+                      >
+                        <span className="material-symbols-outlined text-base">delete</span>
+                      </button>
                     </div>
 
                     <button
@@ -789,6 +845,7 @@ export default function TrainingCMSClient({
               );
             })}
           </div>
+          )}
         </div>
       )}
 
@@ -829,11 +886,21 @@ export default function TrainingCMSClient({
                         <span className="text-[11px] font-bold text-stitch-secondary tracking-wider uppercase">
                           {pkg.category}
                         </span>
-                        {pkg.timeline && (
-                          <span className="text-xs font-semibold text-on-surface-variant bg-surface-container-low px-2 py-0.5 rounded border border-surface-container-highest">
-                            {pkg.timeline}
-                          </span>
-                        )}
+                        <div className="flex items-center gap-1.5">
+                          {pkg.timeline && (
+                            <span className="text-xs font-semibold text-on-surface-variant bg-surface-container-low px-2 py-0.5 rounded border border-surface-container-highest">
+                              {pkg.timeline}
+                            </span>
+                          )}
+                          <button
+                            className="text-outline hover:text-red-600 transition-colors p-1"
+                            title="Delete service package from website"
+                            type="button"
+                            onClick={() => handleDeleteServicePackage(pkg.id)}
+                          >
+                            <span className="material-symbols-outlined text-base">delete</span>
+                          </button>
+                        </div>
                       </div>
 
                       <div>
@@ -890,8 +957,8 @@ export default function TrainingCMSClient({
                         </button>
 
                         <button
-                          className="p-2 text-outline hover:text-stitch-error transition-colors rounded-xl border border-surface-container-highest hover:bg-surface-container"
-                          title="Delete package"
+                          className="p-2 text-outline hover:text-red-600 hover:border-red-200 hover:bg-red-50 transition-colors rounded-xl border border-surface-container-highest flex items-center justify-center shrink-0"
+                          title="Delete package from website"
                           type="button"
                           onClick={() => handleDeleteServicePackage(pkg.id)}
                         >

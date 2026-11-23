@@ -83,9 +83,11 @@
    - **Pre-Services & Pricing CMS Checkpoint Tag**: `pre-services-and-pricing-cms`
    - **Pre-Multi-Page & UI Cleanup Checkpoint Tag**: `pre-multipage-and-ui-cleanup`
    - **Pre-Admin Login Polish Checkpoint Tag**: `pre-admin-login-polish`
-   - **Backup Branches**: `backup-stable-baseline`, `backup-pre-hero-media-carousel`, `backup-pre-opening-motion-choreography`, `backup-pre-chronological-resequence`, `backup-pre-debox-transformation`, `backup-pre-ui-ux-refinements`, `backup-pre-catering-service`, `backup-pre-catering-dedicated-showcase`, `backup-pre-admin-dashboard`, `backup-stitch-admin-ui`, `backup-admin-step-guides`, `backup-contact-messages-visibility`, `backup-admin-polish-and-auth`, `backup-dynamic-applications-excel`, `backup-admin-ai-copilot`, `backup-services-and-pricing-cms`, `backup-multipage-and-ui-cleanup`, `backup-admin-login-polish` (Pushed to GitHub `origin`)
+   - **Pre-Delete Feature & Login Privacy Checkpoint Tag**: `pre-delete-feature-and-login-privacy`
+   - **Backup Branches**: `backup-stable-baseline`, `backup-pre-hero-media-carousel`, `backup-pre-opening-motion-choreography`, `backup-pre-chronological-resequence`, `backup-pre-debox-transformation`, `backup-pre-ui-ux-refinements`, `backup-pre-catering-service`, `backup-pre-catering-dedicated-showcase`, `backup-pre-admin-dashboard`, `backup-stitch-admin-ui`, `backup-admin-step-guides`, `backup-contact-messages-visibility`, `backup-admin-polish-and-auth`, `backup-dynamic-applications-excel`, `backup-admin-ai-copilot`, `backup-services-and-pricing-cms`, `backup-multipage-and-ui-cleanup`, `backup-admin-login-polish`, `backup-delete-feature-and-login-privacy` (Pushed to GitHub `origin`)
    - **Remote Synchronization**: Fully backed up on remote GitHub repository.
    - **One-Prompt Revert Protocol**:
+     - To revert to the state before the course/package delete feature and login privacy: `git reset --hard pre-delete-feature-and-login-privacy && git clean -fd`
      - To revert to the state before the admin login page polish: `git reset --hard pre-admin-login-polish && git clean -fd`
      - To revert to the state before multi-page architecture and UI cleanup: `git reset --hard pre-multipage-and-ui-cleanup && git clean -fd`
      - To revert to the state before Services & Pricing CMS: `git reset --hard pre-services-and-pricing-cms && git clean -fd`
@@ -392,4 +394,21 @@
     - **Security & Error Handling**:
       - Sleek error alert banner (`bg-red-50/90 border border-red-200/80 text-red-800 text-xs`) displaying explicit validation errors upon invalid attempts.
       - Card footer features `verified_user` badge: "Encrypted 256-Bit Session", direct link back to public website (`/`), and top ambient bar with official support number `+251925451711`.
+    - **Strict Rule Preservation**: Strictly ZERO text pill badges (`rounded-full` text tags), ZERO text bloat, unclipped original ceremony photo on Slide 0, phone strictly `+251925451711`, admin credentials strictly `henoktessma111@gmail.com` / `254517`.
+
+## Course & Service Package Deletion & Full Login Privacy Architecture
+25. **Full Dynamic Deletion Engine, Cascade Cleanups & Login Privacy Protection**:
+    - **Login Screen Privacy Protection (`src/app/admin/login/page.tsx`)**:
+      - Completely removed phone number (`+251925451711`) from the top right of the login screen, replacing it with a neutral "Administrative Gateway" status indicator with lock icon.
+      - Removed personal email from the admin email input placeholder, using generic prompt `Enter your admin email...`. Zero sensitive credentials or phone numbers are exposed on the unauthenticated login portal.
+    - **Training Course Deletion Engine (`deleteTrainingProgramAction`)**:
+      - Server action in `src/app/actions/admin-cms.ts` cascade-deletes all associated `academy_enrollments` and `training_schedules` before deleting the `training_programs` record, preventing foreign key constraint failures.
+      - Optimistically removes the course from admin state and immediately removes it from the public website (`/training`).
+    - **Service Package Deletion Engine (`deleteServicePackageAction`)**:
+      - Enhanced server action in `src/app/actions/admin-cms.ts` to cascade-delete all child `service_bookings` before deleting the `service_packages` record.
+      - Optimistically removes the package from admin state and immediately removes it from the public website (`/services`).
+    - **Symmetrical UI & Empty States (`TrainingCMSClient.tsx`)**:
+      - Each training course and service package card features prominent delete buttons in both the card header and the bottom action bar next to "Export Excel".
+      - Confirmation dialogs protect against accidental deletion.
+      - Dynamic empty states rendered when all courses or packages are removed, providing direct action buttons to publish official offerings.
     - **Strict Rule Preservation**: Strictly ZERO text pill badges (`rounded-full` text tags), ZERO text bloat, unclipped original ceremony photo on Slide 0, phone strictly `+251925451711`, admin credentials strictly `henoktessma111@gmail.com` / `254517`.
