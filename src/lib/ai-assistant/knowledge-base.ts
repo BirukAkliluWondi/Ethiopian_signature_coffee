@@ -153,34 +153,20 @@ I am strictly programmed to assist with operational steps and workflows in the E
 
 /**
  * Checks if a user's query is asking about the codebase, code, database schemas, or internal details.
+ * Uses strict regex patterns to avoid falsely triggering on operational terms like "tables in admin" or "passcode".
  */
 export function isTechnicalQuery(query: string): boolean {
   const q = query.toLowerCase();
-  const technicalKeywords = [
-    "code",
-    "codebase",
-    "source code",
-    "schema",
-    "database",
-    "table",
-    "sql",
-    "server action",
-    "backend",
-    "internal detail",
-    "internal architecture",
-    "file path",
-    "route handler",
-    "typescript",
-    "nextjs",
-    "react component",
-    "supabase table",
-    "how is this implemented",
-    "show me the code",
-    "give me the code",
-    "api endpoint",
-    "package.json",
+  const technicalPatterns = [
+    /\b(source\s+code|codebase|show\s+code|give\s+code|write\s+code|backend\s+code)\b/,
+    /\b(database\s+schema|db\s+schema|database\s+table|sql\s+table|supabase\s+table|sql\s+query|postgres|database\s+columns)\b/,
+    /\b(server\s+action|server\s+actions|route\s+handler|api\s+route|api\s+endpoint)\b/,
+    /\b(file\s+path|file\s+paths|folder\s+structure|directory\s+structure)\b/,
+    /\b(typescript|nextjs|next\.js|tailwind|react\s+component|package\.json)\b/,
+    /\b(internal\s+architecture|backend\s+architecture|how\s+is\s+this\s+coded|how\s+is\s+this\s+implemented\s+in\s+code)\b/,
+    /\b(schema|schemas|sql)\b/,
   ];
-  return technicalKeywords.some((kw) => q.includes(kw));
+  return technicalPatterns.some((pattern) => pattern.test(q));
 }
 
 /**
