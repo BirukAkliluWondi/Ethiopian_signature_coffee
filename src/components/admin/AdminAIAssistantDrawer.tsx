@@ -257,13 +257,13 @@ export default function AdminAIAssistantDrawer({
             </div>
 
             <p className="text-[11px] text-on-surface-variant leading-relaxed">
-              For permanent operation on Vercel, add <code className="font-mono text-[10px] bg-surface-container px-1 py-0.5 rounded">GEMINI_API_KEY</code> in <strong>Vercel &gt; Settings &gt; Environment Variables</strong>. You can also paste your Google AI Studio key (<code className="font-mono text-[10px]">AIzaSy...</code>) below to save it locally in your browser.
+              For permanent operation on Vercel, add <code className="font-mono text-[10px] bg-surface-container px-1 py-0.5 rounded">GEMINI_API_KEY</code> in <strong>Vercel &gt; Settings &gt; Environment Variables</strong>. You can also paste your Google AI Studio key below to save it locally in your browser.
             </p>
 
             <div className="flex items-center gap-2">
               <input
                 className="flex-1 px-3 py-1.5 text-xs rounded-lg border border-surface-container-highest bg-white text-on-surface focus:outline-none focus:ring-1 focus:ring-stitch-primary font-mono placeholder:text-text-muted/50"
-                placeholder="AIzaSy..."
+                placeholder="Paste your API key (AIzaSy... or AQ....)"
                 type="password"
                 value={tempApiKey}
                 onChange={(e) => setTempApiKey(e.target.value)}
@@ -291,9 +291,9 @@ export default function AdminAIAssistantDrawer({
               )}
             </div>
 
-            {tempApiKey && !tempApiKey.startsWith("AIzaSy") && (
+            {tempApiKey && !tempApiKey.startsWith("AIzaSy") && !tempApiKey.startsWith("AQ.") && (
               <span className="text-[10px] text-amber-700 bg-amber-50 px-2 py-1 rounded border border-amber-200">
-                ⚠️ Google AI Studio keys typically start with <code className="font-mono font-bold">AIzaSy</code>.
+                ⚠️ Google AI API keys typically start with <code className="font-mono font-bold">AIzaSy</code> or <code className="font-mono font-bold">AQ.</code>.
               </span>
             )}
           </div>

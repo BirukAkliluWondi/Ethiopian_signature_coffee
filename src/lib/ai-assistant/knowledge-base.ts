@@ -121,15 +121,14 @@ You are the **Ethiopian Signature Coffee Admin AI Copilot**, an intelligent oper
 
 #### 4. Visual Media Studio (\`/admin/media\`)
 - **Purpose**: Manage visual assets and replace photography on the live website.
-- **Active Homepage Slots**:
-  - *Slot 01: Hero Banner* (Cinema 16:9 crop preview with action buttons: Replace, Preview).
-  - *Slot 02: Flagship Service* (Turnkey Café Setup).
-  - *Slot 03: Barista Academy* (Training facility).
-  - *Slot 04: Single Origins* (Direct-trade green coffee sourcing).
-  - *Slot 05: Catering Showcase* (Banquet hospitality).
+- **Active Picture Slots**:
+  - Covers Hero Banner Slides, Catering Showcase, Turnkey Café Setup, Barista Academy, Menu Engineering, Consulting, Operations, and Financial Modeling.
 - **Direct Asset Upload**:
-  - Drag and drop or browse images into the upload zone (saved locally to \`/public/uploads/\`).
-- **Assigning to Slots**: Click the slot tag on any media library thumbnail to immediately assign it to a homepage slot.
+  - Drag and drop or browse images into the upload zone (saved locally to \`/public/uploads/\`), or select an existing image from the Media Library.
+- **Undo & Revert to Original Safety Net**:
+  - **Revert to Previous (Undo)**: Click **"Undo"** / **"Revert to Previous Photo"** on any modified card (or **"Restore"** inside the edit modal) to roll back the last change.
+  - **Revert to Original (Single Slot)**: Click **"Revert to Original"** / **"Original"** on any card or inside the **"Change"** modal under **"Pristine Original Photo"** to restore the baseline photo that shipped with the site.
+  - **Master Site-Wide Reset**: Click **"Revert All to Original"** in the **Active Website Picture Slots** header to restore every single photo across the website back to its pristine factory baseline at once.
 
 #### 5. Signature Concierge Chat (\`/admin/chat\`)
 - **Purpose**: Asynchronous live visitor chat for inquiries and consultations.
@@ -197,7 +196,7 @@ export function getSmartOfflineAnswer(
 1. **Get a Free API Key**:
    - Go to [Google AI Studio](https://aistudio.google.com/app/apikey).
    - Sign in with your Google account and click **"Create API key"**.
-   - Copy your key (starts with \`AIzaSy...\`).
+   - Copy your key (starts with \`AIzaSy...\` or \`AQ...\`).
 
 2. **Open Vercel Dashboard**:
    - Visit [vercel.com](https://vercel.com) and log in.
@@ -209,7 +208,7 @@ export function getSmartOfflineAnswer(
 
 4. **Add the Key**:
    - **Key**: \`GEMINI_API_KEY\`
-   - **Value**: Paste your Google AI Studio key (\`AIzaSy...\`)
+   - **Value**: Paste your Google AI Studio key (\`AIzaSy...\` or \`AQ...\`)
    - **Target Environments**: Check *Production*, *Preview*, and *Development*.
    - Click **Save**.
 

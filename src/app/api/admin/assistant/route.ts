@@ -64,10 +64,13 @@ export async function POST(req: NextRequest) {
     const liveSnapshotText = liveSnapshot ? formatLiveDashboardSummaryText(liveSnapshot) : "";
     const isSummary = isSummaryRequest(trimmedQuery);
 
-    // 4. Determine API Key (Vercel env or client-entered override)
-    const rawApiKey = (process.env.GEMINI_API_KEY || userApiKey || "").trim();
+    // 4. Determine API Key (Client override or Vercel env)
+    const rawApiKey = (userApiKey || process.env.GEMINI_API_KEY || "").trim();
     const isRealGeminiKey = Boolean(
-      rawApiKey && rawApiKey.startsWith("AIzaSy") && rawApiKey.length >= 35
+      rawApiKey &&
+      rawApiKey.length >= 25 &&
+      !rawApiKey.toLowerCase().includes("your_") &&
+      !rawApiKey.toLowerCase().includes("placeholder")
     );
 
     // 5. Construct payload for Google Generative AI
@@ -88,8 +91,14 @@ export async function POST(req: NextRequest) {
       parts: [{ text: trimmedQuery }],
     });
 
-    // Modern, stable Gemini models
-    const CANDIDATE_MODELS = ["gemini-2.0-flash", "gemini-1.5-flash", "gemini-flash-latest"];
+    // Modern, stable Gemini models (excluding deprecated 1.5/2.0 endpoints)
+    const CANDIDATE_MODELS = [
+      "gemini-3.5-flash",
+      "gemini-3.5-flash-lite",
+      "gemini-3.8-flash",
+      "gemini-flash-latest",
+      "gemini-flash-lite-latest",
+    ];
 
     const dynamicSystemInstruction = liveSnapshotText
       ? `${ADMIN_COPILOT_SYSTEM_INSTRUCTION}
@@ -175,9 +184,9 @@ Instructions for live data usage:
     // 8. Resilient context-aware operational response computed from live database
     let offlineAnswer = getSmartOfflineAnswer(trimmedQuery, liveSnapshot);
 
-    // If API key is missing or invalid on Vercel, append a helpful operational notice
+    // If API key is missing on Vercel/server, append a helpful operational notice
     if (!isRealGeminiKey) {
-      offlineAnswer += `\n\n---\n> 💡 *Notice: Remote AI is operating in live-data mode because a valid Gemini API key was not detected. Your answer above was calculated live from your actual database records. To enable conversational AI, add your free key (\`AIzaSy...\`) in Vercel Environment Variables (\`GEMINI_API_KEY\`) or click ⚙️ above.*`;
+      offlineAnswer += `\n\n---\n> 💡 *Notice: Remote AI is operating in live-data mode because no API key is configured. Your answer above was calculated live from your actual database records. To enable conversational AI, add \`GEMINI_API_KEY\` in Vercel Environment Variables or click ⚙️ above.*`;
     }
 
     return NextResponse.json({
