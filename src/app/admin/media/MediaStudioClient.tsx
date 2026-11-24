@@ -6,7 +6,10 @@ import {
   uploadMediaFileAction,
   updateMediaSlotAction,
   revertMediaSlotAction,
+  revertSlotToOriginalAction,
+  revertAllSlotsToOriginalAction,
 } from "@/app/actions/admin-cms";
+import { ORIGINAL_MEDIA_BASELINE } from "@/lib/cms-media";
 
 interface MediaSlot {
   id: string;
@@ -15,6 +18,7 @@ interface MediaSlot {
   title: string;
   image_url: string;
   previous_image_url?: string | null;
+  original_image_url?: string | null;
   alt_text: string;
   updated_at: string;
 }
@@ -238,6 +242,91 @@ export default function MediaStudioClient({
     });
   };
 
+  const handleRevertSlotToOriginal = (slot: MediaSlot) => {
+    startTransition(async () => {
+      const res = await revertSlotToOriginalAction(slot.slot_key);
+
+      if (res.success && res.restoredUrl) {
+        setSlots((prev) =>
+          prev.map((s) =>
+            s.slot_key === slot.slot_key
+              ? {
+                  ...s,
+                  image_url: res.restoredUrl!,
+                  previous_image_url: res.previousUrl || s.image_url,
+                  updated_at: new Date().toISOString(),
+                }
+              : s
+          )
+        );
+
+        if (activeSlot && activeSlot.slot_key === slot.slot_key) {
+          setActiveSlot((prev) =>
+            prev
+              ? {
+                  ...prev,
+                  image_url: res.restoredUrl!,
+                  previous_image_url: res.previousUrl || prev.image_url,
+                }
+              : null
+          );
+          setCustomUrl(res.restoredUrl!);
+        }
+
+        showToast(`Reverted "${slot.title}" back to the original photo!`);
+      } else {
+        showToast(res.error || "Failed to revert photo to original.");
+      }
+    });
+  };
+
+  const handleRevertAllToOriginal = () => {
+    const confirmed = window.confirm(
+      "Are you sure you want to revert all website photos back to their pristine original versions? This will reset all hero, catering, and service photos to the original baseline."
+    );
+    if (!confirmed) return;
+
+    startTransition(async () => {
+      const res = await revertAllSlotsToOriginalAction();
+
+      if (res.success) {
+        setSlots((prev) =>
+          prev.map((s) => {
+            const orig = s.original_image_url || ORIGINAL_MEDIA_BASELINE[s.slot_key];
+            return orig
+              ? {
+                  ...s,
+                  image_url: orig,
+                  previous_image_url: s.image_url !== orig ? s.image_url : s.previous_image_url,
+                  updated_at: new Date().toISOString(),
+                }
+              : s;
+          })
+        );
+
+        if (activeSlot) {
+          const orig = activeSlot.original_image_url || ORIGINAL_MEDIA_BASELINE[activeSlot.slot_key];
+          if (orig) {
+            setCustomUrl(orig);
+            setActiveSlot((prev) =>
+              prev
+                ? {
+                    ...prev,
+                    image_url: orig,
+                    previous_image_url: prev.image_url !== orig ? prev.image_url : prev.previous_image_url,
+                  }
+                : null
+            );
+          }
+        }
+
+        showToast("All website photos have been successfully reverted to the original versions!");
+      } else {
+        showToast(res.error || "Failed to reset photos.");
+      }
+    });
+  };
+
   const assignAssetToHero = (asset: LibraryAsset) => {
     const heroSlot = slots.find((s) => s.slot_key === "hero_slide_0" || s.section === "hero") || slots[0];
     if (heroSlot) {
@@ -331,9 +420,9 @@ export default function MediaStudioClient({
               3
             </span>
             <div className="flex flex-col">
-              <span className="font-bold text-on-surface">Click &ldquo;Publish to Site&rdquo; (Or Undo Anytime)</span>
+              <span className="font-bold text-on-surface">Click &ldquo;Publish to Site&rdquo; (Or Revert Anytime)</span>
               <span className="text-[11px] text-on-surface-variant mt-0.5 leading-relaxed">
-                Your new photo goes live immediately. If it doesn&apos;t look right, simply click <strong>&ldquo;Undo / Revert&rdquo;</strong> to restore your previous photo instantly.
+                Your new photo goes live immediately. If you make a mistake or want to start fresh, simply click <strong>&ldquo;Undo&rdquo;</strong> or <strong>&ldquo;Revert to Original&rdquo;</strong> to restore the original baseline photo.
               </span>
             </div>
           </div>
@@ -342,16 +431,25 @@ export default function MediaStudioClient({
 
       {/* Active Homepage Slots Section */}
       <section className="flex flex-col gap-4">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div className="flex items-center gap-2">
             <span className="w-1.5 h-4 bg-stitch-primary rounded-full shrink-0" />
             <h2 className="font-serif text-xl sm:text-2xl font-semibold text-stitch-primary">
               Active Website Picture Slots
             </h2>
           </div>
-          <span className="text-xs text-on-surface-variant pl-3.5 sm:pl-0">
-            Click <strong>Replace</strong> or <strong>Change</strong> on any card below to swap its picture.
-          </span>
+          <div className="flex items-center gap-2">
+            <button
+              className="py-1.5 px-3 rounded-lg bg-surface-container-low hover:bg-surface-container text-stitch-secondary hover:text-stitch-primary text-xs font-bold transition-all border border-surface-container-highest flex items-center gap-1.5 shadow-2xs"
+              disabled={isPending}
+              title="Reset all website photos back to their pristine original baseline photos"
+              type="button"
+              onClick={handleRevertAllToOriginal}
+            >
+              <span className="material-symbols-outlined text-[16px]">restart_alt</span>
+              <span>Revert All to Original</span>
+            </button>
+          </div>
         </div>
 
         <div className="flex flex-col gap-4">
@@ -422,6 +520,19 @@ export default function MediaStudioClient({
                   </button>
                 )}
 
+                {heroSlot.image_url !== (heroSlot.original_image_url || ORIGINAL_MEDIA_BASELINE[heroSlot.slot_key]) && (
+                  <button
+                    className="flex items-center justify-center gap-1.5 py-2.5 px-3 bg-surface-container-low hover:bg-surface-container text-stitch-secondary hover:text-stitch-primary rounded-lg text-xs font-semibold transition-colors border border-surface-container-highest"
+                    disabled={isPending}
+                    title="Revert back to the pristine original baseline photo"
+                    type="button"
+                    onClick={() => handleRevertSlotToOriginal(heroSlot)}
+                  >
+                    <span className="material-symbols-outlined text-base">restart_alt</span>
+                    <span>Revert to Original</span>
+                  </button>
+                )}
+
                 <Link
                   className="flex items-center justify-center gap-1.5 py-2.5 px-3 bg-surface-container-low text-on-surface hover:text-stitch-primary rounded-lg text-xs font-semibold transition-colors border border-surface-container-highest text-center"
                   href="/#home"
@@ -458,7 +569,9 @@ export default function MediaStudioClient({
                       {slot.title}
                     </h4>
                     <p className="text-xs text-on-surface-variant truncate mt-0.5">
-                      {slot.previous_image_url && slot.previous_image_url !== slot.image_url
+                      {slot.image_url !== (slot.original_image_url || ORIGINAL_MEDIA_BASELINE[slot.slot_key])
+                        ? "Custom photo active (Original available)"
+                        : slot.previous_image_url && slot.previous_image_url !== slot.image_url
                         ? "Previous photo available to revert"
                         : "Click Change to replace this image"}
                     </p>
@@ -475,7 +588,20 @@ export default function MediaStudioClient({
                       onClick={() => handleRevertSlot(slot)}
                     >
                       <span className="material-symbols-outlined text-sm">undo</span>
-                      <span className="hidden sm:inline">Undo</span>
+                      <span className="hidden xl:inline">Undo</span>
+                    </button>
+                  )}
+
+                  {slot.image_url !== (slot.original_image_url || ORIGINAL_MEDIA_BASELINE[slot.slot_key]) && (
+                    <button
+                      className="py-2 px-2.5 bg-surface-container-low hover:bg-surface-container text-stitch-secondary hover:text-stitch-primary rounded-lg text-xs font-bold transition-colors border border-surface-container-highest flex items-center gap-1"
+                      disabled={isPending}
+                      title="Revert to pristine original baseline photo"
+                      type="button"
+                      onClick={() => handleRevertSlotToOriginal(slot)}
+                    >
+                      <span className="material-symbols-outlined text-sm">restart_alt</span>
+                      <span className="hidden xl:inline">Original</span>
                     </button>
                   )}
 
@@ -761,6 +887,40 @@ export default function MediaStudioClient({
                 >
                   <span className="material-symbols-outlined text-sm">undo</span>
                   <span>Restore</span>
+                </button>
+              </div>
+            )}
+
+            {/* Pristine Original Photo Revert */}
+            {(activeSlot.original_image_url || ORIGINAL_MEDIA_BASELINE[activeSlot.slot_key]) &&
+              activeSlot.image_url !== (activeSlot.original_image_url || ORIGINAL_MEDIA_BASELINE[activeSlot.slot_key]) && (
+              <div className="p-3 rounded-lg bg-surface-container-low border border-surface-container-highest flex items-center justify-between gap-3">
+                <div className="flex items-center gap-2.5 min-w-0">
+                  <div className="w-12 h-12 rounded overflow-hidden bg-surface-container shrink-0 border border-surface-container-highest">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      alt="Original Baseline Photo"
+                      className="w-full h-full object-cover"
+                      src={activeSlot.original_image_url || ORIGINAL_MEDIA_BASELINE[activeSlot.slot_key]}
+                    />
+                  </div>
+                  <div className="flex flex-col min-w-0">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-stitch-secondary">
+                      Pristine Original Photo
+                    </span>
+                    <span className="text-xs text-on-surface-variant truncate">
+                      Restore the original photo that shipped with this website.
+                    </span>
+                  </div>
+                </div>
+                <button
+                  className="py-1.5 px-3 bg-surface-container hover:bg-surface-container-high text-stitch-secondary hover:text-stitch-primary rounded-lg text-xs font-bold transition-colors border border-surface-container-highest flex items-center gap-1 shrink-0"
+                  disabled={isPending}
+                  type="button"
+                  onClick={() => handleRevertSlotToOriginal(activeSlot)}
+                >
+                  <span className="material-symbols-outlined text-sm">restart_alt</span>
+                  <span>Revert to Original</span>
                 </button>
               </div>
             )}

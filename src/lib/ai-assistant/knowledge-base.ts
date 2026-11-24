@@ -221,24 +221,27 @@ export function getSmartOfflineAnswer(
 *Tip: You can also click the ⚙️ icon in the top right of this Copilot window to paste your key locally in your browser for instant testing.*`;
   }
 
-  // 2. Photo Revert / Media Studio
+  // 2. Photo Revert / Media Studio / Revert to Original
   if (
     q.includes("revert") ||
     q.includes("undo") ||
+    q.includes("original") ||
     ((q.includes("photo") || q.includes("image") || q.includes("media") || q.includes("banner")) &&
-      (q.includes("back") || q.includes("previous") || q.includes("change") || q.includes("swap")))
+      (q.includes("back") || q.includes("previous") || q.includes("change") || q.includes("swap") || q.includes("reset") || q.includes("restore")))
   ) {
-    return `### How to Revert or Change Website Photos:
+    return `### How to Revert or Restore Website Photos:
 
 1. **Open Media Studio**: Click **Media** in the admin sidebar (or navigate to \`/admin/media\`).
 2. **To Change Any Photo**:
    - Find the slot (Hero Banner, Services, Academy, Sourcing, or Catering).
    - Click **"Replace"** or **"Change"**.
    - Click **Browse** to upload an image from your device, then click **"Publish to Site"**.
-3. **To Revert Back to Previous Photo (Undo)**:
+3. **To Undo the Last Change (Revert to Previous)**:
    - If a photo was recently changed, a **"Revert to Previous Photo"** or **"Undo"** button automatically appears on that slot card!
    - Inside the **Change Photo** window, you can also see the **"Previous Photo on File"** preview box and click **"Restore"**.
-   - Clicking Revert restores the prior image instantly across both the admin preview and the live website.`;
+4. **To Revert Back to the Pristine Original Baseline**:
+   - If you ever mess up or want the clean original photos back, click the **"Revert to Original"** button on any custom photo card!
+   - You can also click **"Revert All to Original"** at the top of the **Picture Slots** section to instantly reset every hero, catering, and service photo on the site back to the original baseline photos that shipped with the site.`;
   }
 
   // 3. Deleting Courses, Packages, or Dummy Data

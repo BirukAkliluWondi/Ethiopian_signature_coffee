@@ -87,9 +87,11 @@
    - **Pre-Nav Bars Streamline Checkpoint Tag**: `pre-nav-bars-streamline`
    - **Pre-Media Revert & Copilot Fix Checkpoint Tag**: `pre-media-revert-and-copilot-fix`
    - **Pre-Filter & Notification Activation Tag**: `pre-filter-and-notification-activation`
-   - **Backup Branches**: `backup-stable-baseline`, `backup-pre-hero-media-carousel`, `backup-pre-opening-motion-choreography`, `backup-pre-chronological-resequence`, `backup-pre-debox-transformation`, `backup-pre-ui-ux-refinements`, `backup-pre-catering-service`, `backup-pre-catering-dedicated-showcase`, `backup-pre-admin-dashboard`, `backup-stitch-admin-ui`, `backup-admin-step-guides`, `backup-contact-messages-visibility`, `backup-admin-polish-and-auth`, `backup-dynamic-applications-excel`, `backup-admin-ai-copilot`, `backup-services-and-pricing-cms`, `backup-multipage-and-ui-cleanup`, `backup-admin-login-polish`, `backup-delete-feature-and-login-privacy`, `backup-nav-bars-streamline`, `backup-media-revert-and-copilot-fix`, `backup-filter-and-notification-activation` (Pushed to GitHub `origin`)
+   - **Pre-Revert to Original Checkpoint Tag**: `pre-revert-to-original-feature`
+   - **Backup Branches**: `backup-stable-baseline`, `backup-pre-hero-media-carousel`, `backup-pre-opening-motion-choreography`, `backup-pre-chronological-resequence`, `backup-pre-debox-transformation`, `backup-pre-ui-ux-refinements`, `backup-pre-catering-service`, `backup-pre-catering-dedicated-showcase`, `backup-pre-admin-dashboard`, `backup-stitch-admin-ui`, `backup-admin-step-guides`, `backup-contact-messages-visibility`, `backup-admin-polish-and-auth`, `backup-dynamic-applications-excel`, `backup-admin-ai-copilot`, `backup-services-and-pricing-cms`, `backup-multipage-and-ui-cleanup`, `backup-admin-login-polish`, `backup-delete-feature-and-login-privacy`, `backup-nav-bars-streamline`, `backup-media-revert-and-copilot-fix`, `backup-filter-and-notification-activation`, `backup-revert-to-original-feature` (Pushed to GitHub `origin`)
    - **Remote Synchronization**: Fully backed up on remote GitHub repository.
    - **One-Prompt Revert Protocol**:
+     - To revert to the state before the revert to original feature: `git reset --hard pre-revert-to-original-feature && git clean -fd`
      - To revert to the state before filter and notification activation: `git reset --hard pre-filter-and-notification-activation && git clean -fd`
      - To revert to the state before media revert and AI copilot fix: `git reset --hard pre-media-revert-and-copilot-fix && git clean -fd`
      - To revert to the state before navigation bars streamline: `git reset --hard pre-nav-bars-streamline && git clean -fd`
@@ -430,4 +432,26 @@
     - **Seamless Continuous Scroll Tracking**:
       - `Header.tsx` and `MobileBottomNav.tsx` intelligently track scroll position across homepage sections: `#home` highlights `Home`, `#services` & `#process` highlight `Services`, `#origins`, `#projects` & `#about` highlight `About`, and `#contact` highlights `Contact`.
       - Dedicated route pages `/services` and `/training` maintain exact active highlights.
+    - **Strict Rule Preservation**: Strictly ZERO text pill badges (`rounded-full` text tags), ZERO text bloat, unclipped original ceremony photo on Slide 0, phone strictly `+251925451711`, admin credentials strictly `henoktessma111@gmail.com` / `254517`.
+
+## Active Admin Filter & Notification Center Architecture
+27. **Interactive Top Bar Filter & Notification Popovers (`AdminHeader.tsx`)**:
+    - **Filter Dialog (`tune` icon)**: Interactive popover menu with live checkboxes allowing the administrator to filter activities by Category (Client Inquiries, Cohort Bookings, Photo Updates) and Timeframe (Today, This Week, All Time).
+    - **Notification Center (`notifications` icon)**: Real-time popover drawer with interactive notification feed, unread badge counter, and "Mark all read" quick action.
+    - **Outside Click & Escape Dismissal**: Seamless UX with automatic dismissal on document click or `Escape` key press.
+    - **Strict Rule Preservation**: Strictly ZERO text pill badges (`rounded-full` text tags), ZERO text bloat, unclipped original ceremony photo on Slide 0, phone strictly `+251925451711`, admin credentials strictly `henoktessma111@gmail.com` / `254517`.
+
+## Revert to Original Baseline Photography & Master Reset Architecture
+28. **Pristine Photo Baseline Tracking & Two-Tier Revert System**:
+    - **Two-Tier Safety Net**:
+      - **Tier 1 (Undo / Previous Photo)**: Allows an admin to quickly toggle back to the photo immediately prior to the latest change (`previous_image_url`).
+      - **Tier 2 (Revert to Original)**: Guarantees that even if an administrator completely messes up all photos or wants to reset the site, every slot can be restored back to the pristine factory baseline photo (`original_image_url` / `ORIGINAL_MEDIA_BASELINE`).
+    - **Master Site-Wide Reset**:
+      - Top header button in Picture Slots: **"Revert All to Original"** (`revertAllSlotsToOriginalAction()`).
+      - Features confirmation protection and restores all 10 website picture slots (hero banners, catering, coffee shop setup, barista training, consulting, roasting, profitability) in a single atomic database batch.
+    - **Per-Slot Original Revert**:
+      - In Hero Banner and compact slots, the **"Revert to Original"** button automatically appears whenever a custom image is active.
+      - Inside the **Change Photo** edit modal, a dedicated **"Pristine Original Photo"** section displays the factory baseline thumbnail alongside a 1-click **"Revert to Original"** action.
+    - **AI Assistant Integration**:
+      - Knowledge base in `src/lib/ai-assistant/knowledge-base.ts` trained to answer queries regarding "revert to original", "reset photos", "restore original photos", and "undo photo changes".
     - **Strict Rule Preservation**: Strictly ZERO text pill badges (`rounded-full` text tags), ZERO text bloat, unclipped original ceremony photo on Slide 0, phone strictly `+251925451711`, admin credentials strictly `henoktessma111@gmail.com` / `254517`.

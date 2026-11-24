@@ -3,6 +3,7 @@
 import fs from "fs/promises";
 import path from "path";
 import { supabase } from "@/lib/supabase";
+import { ORIGINAL_MEDIA_BASELINE } from "@/lib/cms-media";
 import { isAdminAuthenticated } from "./admin-auth";
 
 /**
@@ -167,6 +168,103 @@ export async function revertMediaSlotAction(slotKey: string) {
   } catch (err: unknown) {
     console.error("Error reverting media slot:", err);
     return { success: false, error: "Failed to revert media slot." };
+  }
+}
+
+
+/**
+ * Revert an individual media slot to its pristine original photo
+ */
+export async function revertSlotToOriginalAction(slotKey: string) {
+  try {
+    const isAuth = await isAdminAuthenticated();
+    if (!isAuth) return { success: false, error: "Unauthorized." };
+    if (!supabase) return { success: false, error: "Database not configured." };
+
+    const { data: currentSlot, error: fetchErr } = await supabase
+      .from("media_assets")
+      .select("*")
+      .eq("slot_key", slotKey)
+      .maybeSingle();
+
+    if (fetchErr || !currentSlot) {
+      return { success: false, error: "Media slot not found." };
+    }
+
+    const originalUrl = currentSlot.original_image_url || ORIGINAL_MEDIA_BASELINE[slotKey];
+    if (!originalUrl) {
+      return { success: false, error: "No original baseline image registered for this slot." };
+    }
+
+    if (currentSlot.image_url === originalUrl) {
+      return { success: false, error: "This photo is already at the original version." };
+    }
+
+    const currentUrl = currentSlot.image_url;
+
+    const { error: updateErr } = await supabase
+      .from("media_assets")
+      .update({
+        image_url: originalUrl,
+        previous_image_url: currentUrl,
+        updated_at: new Date().toISOString(),
+      })
+      .eq("slot_key", slotKey);
+
+    if (updateErr) throw updateErr;
+
+    return {
+      success: true,
+      restoredUrl: originalUrl,
+      previousUrl: currentUrl,
+    };
+  } catch (err: unknown) {
+    console.error("Error reverting to original media slot:", err);
+    return { success: false, error: "Failed to revert to original photo." };
+  }
+}
+
+/**
+ * Master reset: Revert all website photos back to their pristine original baseline
+ */
+export async function revertAllSlotsToOriginalAction() {
+  try {
+    const isAuth = await isAdminAuthenticated();
+    if (!isAuth) return { success: false, error: "Unauthorized." };
+    if (!supabase) return { success: false, error: "Database not configured." };
+
+    const { data: allSlots, error: fetchErr } = await supabase
+      .from("media_assets")
+      .select("*");
+
+    if (fetchErr || !allSlots) {
+      return { success: false, error: "Could not fetch media slots." };
+    }
+
+    let updatedCount = 0;
+    for (const slot of allSlots) {
+      const originalUrl = slot.original_image_url || ORIGINAL_MEDIA_BASELINE[slot.slot_key];
+      if (originalUrl && slot.image_url !== originalUrl) {
+        await supabase
+          .from("media_assets")
+          .update({
+            image_url: originalUrl,
+            previous_image_url: slot.image_url,
+            updated_at: new Date().toISOString(),
+          })
+          .eq("id", slot.id);
+        updatedCount++;
+      }
+    }
+
+    return {
+      success: true,
+      updatedCount,
+      message: `Reverted ${updatedCount} photo${updatedCount === 1 ? "" : "s"} back to original baseline!`,
+    };
+  } catch (err: unknown) {
+    console.error("Error resetting all media slots to original:", err);
+    return { success: false, error: "Failed to reset photos to original." };
   }
 }
 
