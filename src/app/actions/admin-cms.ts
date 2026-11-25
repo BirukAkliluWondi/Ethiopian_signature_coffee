@@ -578,6 +578,118 @@ export async function getExecutiveKPIsAction() {
 }
 
 /**
+ * Compile rich executive analytics for the modern dashboard overview (KPIs, 7-day trend, service demand, cohort occupancy)
+ */
+export async function getExecutiveDashboardAnalyticsAction() {
+  try {
+    const isAuth = await isAdminAuthenticated();
+    if (!isAuth) return null;
+    if (!supabase) return null;
+
+    const [inqRes, bookRes, progRes, schedRes, chatRes, enrollRes, pkgRes, mediaRes] = await Promise.all([
+      supabase.from("inquiries").select("id, service, status, created_at"),
+      supabase.from("service_bookings").select("id, package_id, status, created_at, service_packages(title)"),
+      supabase.from("training_programs").select("id, title"),
+      supabase.from("training_schedules").select("id, program_id, start_date, seats_total, seats_booked, status, training_programs(title)").order("start_date", { ascending: true }),
+      supabase.from("chat_threads").select("id, status"),
+      supabase.from("academy_enrollments").select("id, created_at"),
+      supabase.from("service_packages").select("id, is_active"),
+      supabase.from("media_assets").select("slot_key, image_url, original_image_url"),
+    ]);
+
+    const inquiries = inqRes.data || [];
+    const bookings = bookRes.data || [];
+    const enrollments = enrollRes.data || [];
+    const schedules = schedRes.data || [];
+    const chats = chatRes.data || [];
+    const programs = progRes.data || [];
+    const packages = pkgRes.data || [];
+    const media = mediaRes.data || [];
+
+    const newInquiries = inquiries.filter((i: any) => !i.status || i.status === "new" || i.status === "open").length;
+    const pendingBookings = bookings.filter((b: any) => !b.status || b.status === "new" || b.status === "pending").length;
+    const activeCohortsCount = schedules.filter((s: any) => s.status !== "completed").length;
+    const openChats = chats.filter((c: any) => c.status === "open").length;
+    const customMediaCount = media.filter((m: any) => {
+      const orig = m.original_image_url || ORIGINAL_MEDIA_BASELINE[m.slot_key];
+      return orig && m.image_url !== orig;
+    }).length;
+
+    // 7-day rolling activity series
+    const activitySeries: Array<{ dateLabel: string; dayShort: string; inquiries: number; bookings: number }> = [];
+    const now = new Date();
+    for (let offset = 6; offset >= 0; offset--) {
+      const d = new Date(now);
+      d.setDate(now.getDate() - offset);
+      const isoPrefix = d.toISOString().slice(0, 10);
+      const dayShort = d.toLocaleDateString("en-US", { weekday: "short" });
+      const dateLabel = d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+
+      const dayInq = inquiries.filter((i: any) => (i.created_at || "").startsWith(isoPrefix)).length;
+      const dayBook =
+        bookings.filter((b: any) => (b.created_at || "").startsWith(isoPrefix)).length +
+        enrollments.filter((e: any) => (e.created_at || "").startsWith(isoPrefix)).length;
+
+      activitySeries.push({ dateLabel, dayShort, inquiries: dayInq, bookings: dayBook });
+    }
+
+    // Service demand aggregation across inquiries & bookings
+    const demandMap = new Map<string, number>();
+    for (const i of inquiries) {
+      const key = (i.service || "General Inquiry").trim();
+      demandMap.set(key, (demandMap.get(key) || 0) + 1);
+    }
+    for (const b of bookings as any[]) {
+      const title = b.service_packages?.title || "Service Package";
+      demandMap.set(title, (demandMap.get(title) || 0) + 1);
+    }
+
+    const totalDemand = Array.from(demandMap.values()).reduce((sum, v) => sum + v, 0);
+    const serviceDemand = Array.from(demandMap.entries())
+      .map(([name, count]) => ({
+        name,
+        count,
+        percentage: totalDemand > 0 ? Math.round((count / totalDemand) * 100) : 0,
+      }))
+      .sort((a, b) => b.count - a.count)
+      .slice(0, 5);
+
+    const cohorts = (schedules as any[])
+      .filter((s) => s.status !== "completed")
+      .slice(0, 4)
+      .map((s) => ({
+        id: s.id,
+        programTitle: s.training_programs?.title || "Barista Cohort",
+        startDate: s.start_date,
+        seatsTotal: s.seats_total || 10,
+        seatsBooked: s.seats_booked || 0,
+        status: s.status || "open",
+      }));
+
+    return {
+      kpis: {
+        totalInquiries: inquiries.length,
+        newInquiries,
+        totalServiceBookings: bookings.length,
+        pendingBookings,
+        totalEnrollments: enrollments.length,
+        activeCohorts: activeCohortsCount,
+        totalPrograms: programs.length,
+        totalPackages: packages.length,
+        openChats,
+        customMediaCount,
+      },
+      activitySeries,
+      serviceDemand,
+      cohorts,
+    };
+  } catch (err) {
+    console.error("Error compiling dashboard analytics:", err);
+    return null;
+  }
+}
+
+/**
  * Fetch all academy applicants across all courses, optionally filtered by programId.
  */
 export async function getAcademyApplicantsAction(programId?: string) {

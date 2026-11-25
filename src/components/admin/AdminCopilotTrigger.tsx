@@ -23,16 +23,16 @@ export default function AdminCopilotTrigger() {
     <>
       <button
         aria-label="Open Admin AI Copilot"
-        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-stitch-primary/10 text-stitch-primary hover:bg-stitch-primary/20 text-xs font-semibold transition-colors border border-stitch-primary/20 shadow-2xs group"
-        title="Ask anything about the admin dashboard or code (Ctrl + Space)"
+        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#062b18] text-white hover:bg-[#0b4627] text-xs font-semibold transition-all shadow-xs group"
+        title="Ask anything about your admin operations or live data (Ctrl + Space)"
         type="button"
         onClick={() => setIsOpen(true)}
       >
-        <span className="material-symbols-outlined text-[16px] text-stitch-tertiary-fixed group-hover:scale-110 transition-transform">
+        <span className="material-symbols-outlined text-[16px] text-[#fbbc0e] group-hover:scale-110 transition-transform">
           auto_awesome
         </span>
-        <span className="font-serif tracking-tight">Ask Copilot</span>
-        <span className="hidden lg:inline-block text-[10px] px-1 py-0.5 rounded bg-white/70 text-outline border border-surface-container-highest font-mono leading-none ml-0.5">
+        <span className="tracking-tight font-sans">Ask Copilot</span>
+        <span className="hidden lg:inline-block text-[10px] px-1.5 py-0.5 rounded bg-white/15 text-emerald-100 font-mono leading-none ml-0.5">
           Ctrl+Space
         </span>
       </button>

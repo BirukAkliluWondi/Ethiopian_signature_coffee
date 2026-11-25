@@ -4,7 +4,8 @@ import { supabase } from "@/lib/supabase";
  * Pristine original baseline images for all website slots
  */
 export const ORIGINAL_MEDIA_BASELINE: Record<string, string> = {
-  hero_slide_0: "/hero/ceremony-woman.jpg",
+  hero_slide_0:
+    "https://lh3.googleusercontent.com/aida-public/AB6AXuCDDk-iFEvRORMomf5aJppkPdG4X1Afc0D1RwBOm5ZtWA5r-y2Fyk-Srlgmy6w0-XU6hgHyrtZHntI6m50dGyZiGAT5Z4lVML8lFr_PhoYRLtlSA0cAmeC_YyVt7YCSt2qR49OxsjXxr-zwduJ6SQPKxbroL9vdg2pZU8E_F-s3VpJPowK1lkr1Gms7ycTU43SRwoS98u0CrzuJ3y8S2Ym8a7J-x4IWdPiRIOE_vxRrmiLghhNGr-x5",
   hero_slide_1: "/hero/roast-and-jebena.jpg",
   hero_slide_2: "/hero/coffee-community-celebration.jpg",
   service_setup: "/coffee-shop-setup.jpg",

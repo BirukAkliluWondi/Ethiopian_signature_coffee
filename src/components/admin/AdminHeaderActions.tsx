@@ -82,16 +82,16 @@ export default function AdminHeaderActions() {
     notifTab === "new" ? notifications.filter((n) => n.isNew) : notifications;
 
   return (
-    <div className="flex items-center gap-1.5 text-on-surface-variant relative">
+    <div className="flex items-center gap-1.5 text-slate-600 relative">
       {/* 1. Quick Filters & View Console (Tune Icon) */}
       <div className="relative" ref={filterRef}>
         <button
           aria-expanded={isFilterOpen}
           aria-label="Quick Filters & Search Console"
-          className={`w-9 h-9 flex items-center justify-center rounded-lg transition-all ${
+          className={`w-9 h-9 flex items-center justify-center rounded-lg border transition-all ${
             isFilterOpen
-              ? "bg-stitch-primary text-white shadow-sm ring-2 ring-stitch-primary/20"
-              : "bg-surface-container-low text-on-surface-variant hover:text-stitch-primary hover:bg-surface-container"
+              ? "bg-[#062b18] text-white border-[#062b18] shadow-sm"
+              : "bg-slate-50 border-slate-200 text-slate-600 hover:text-[#062b18] hover:bg-slate-100"
           }`}
           title="Quick Filters & Workspace Scope"
           type="button"
@@ -105,17 +105,17 @@ export default function AdminHeaderActions() {
 
         {/* Quick Filter Popover Menu */}
         {isFilterOpen && (
-          <div className="absolute right-0 top-11 w-80 sm:w-96 bg-surface-container-lowest border border-surface-container-highest rounded-2xl shadow-2xl p-4 z-50 animate-in fade-in zoom-in-95 duration-150 flex flex-col gap-3.5">
+          <div className="absolute right-0 top-11 w-80 sm:w-96 bg-white border border-slate-200 rounded-xl shadow-2xl p-4 z-50 animate-in fade-in zoom-in-95 duration-150 flex flex-col gap-3.5">
             {/* Header */}
-            <div className="flex items-center justify-between border-b border-surface-container-highest pb-2.5">
+            <div className="flex items-center justify-between border-b border-slate-100 pb-2.5">
               <div className="flex items-center gap-2">
-                <span className="material-symbols-outlined text-stitch-primary text-lg">filter_alt</span>
-                <span className="font-serif font-bold text-xs text-stitch-primary">
+                <span className="material-symbols-outlined text-[#062b18] text-lg">filter_alt</span>
+                <span className="font-sans font-bold text-xs text-slate-900">
                   Admin Quick Filters &amp; Search
                 </span>
               </div>
               <button
-                className="w-6 h-6 flex items-center justify-center text-on-surface-variant hover:text-stitch-primary rounded transition-colors text-xs"
+                className="w-6 h-6 flex items-center justify-center text-slate-400 hover:text-slate-700 rounded transition-colors text-xs"
                 type="button"
                 onClick={() => setIsFilterOpen(false)}
               >
@@ -125,12 +125,12 @@ export default function AdminHeaderActions() {
 
             {/* Quick Search Box */}
             <div className="flex flex-col gap-1.5">
-              <label className="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant" htmlFor="filter-search-input">
+              <label className="text-[10px] font-bold uppercase tracking-wider text-slate-500" htmlFor="filter-search-input">
                 Universal Client &amp; Record Search
               </label>
               <div className="relative">
                 <input
-                  className="w-full px-3 py-2 pr-8 rounded-lg bg-surface-container-low border border-surface-container-highest text-xs text-on-surface placeholder:text-on-surface-variant/60 outline-none focus:border-stitch-primary"
+                  className="w-full px-3 py-2 pr-8 rounded-lg bg-slate-50 border border-slate-200 text-xs text-slate-900 placeholder:text-slate-400 outline-none focus:border-[#062b18] focus:bg-white transition-colors"
                   id="filter-search-input"
                   placeholder="Type name, phone, or service..."
                   type="text"
@@ -141,7 +141,7 @@ export default function AdminHeaderActions() {
                   }}
                 />
                 <button
-                  className="absolute right-2 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-stitch-primary"
+                  className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 hover:text-[#062b18]"
                   title="Search Inquiries"
                   type="button"
                   onClick={() => handleQuickSearch("/admin/leads")}
@@ -153,18 +153,18 @@ export default function AdminHeaderActions() {
               {filterSearch.trim() && (
                 <div className="flex items-center gap-1.5 pt-1">
                   <button
-                    className="flex-1 py-1 px-2 rounded bg-stitch-primary text-white text-[10px] font-bold hover:bg-stitch-primary-container transition-colors"
+                    className="flex-1 py-1.5 px-2 rounded-lg bg-[#062b18] text-white text-[10px] font-bold hover:bg-[#0b4627] transition-colors"
                     type="button"
                     onClick={() => handleQuickSearch("/admin/leads")}
                   >
-                    Search in Inquiries
+                    Search Inquiries
                   </button>
                   <button
-                    className="flex-1 py-1 px-2 rounded bg-surface-container text-on-surface text-[10px] font-bold hover:bg-surface-container-high transition-colors border border-surface-container-highest"
+                    className="flex-1 py-1.5 px-2 rounded-lg bg-slate-100 text-slate-800 text-[10px] font-bold hover:bg-slate-200 transition-colors border border-slate-200"
                     type="button"
                     onClick={() => handleQuickSearch("/admin/training")}
                   >
-                    Search in Offerings
+                    Search Offerings
                   </button>
                 </div>
               )}
@@ -172,81 +172,69 @@ export default function AdminHeaderActions() {
 
             {/* Quick Status Presets */}
             <div className="flex flex-col gap-1.5">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500">
                 Quick View Presets
               </span>
               <div className="grid grid-cols-2 gap-1.5 text-xs">
                 <Link
-                  className="p-2 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface flex items-center gap-2 transition-colors border border-surface-container-highest group"
+                  className="p-2 rounded-lg bg-slate-50 hover:bg-emerald-50/70 text-slate-700 hover:text-[#062b18] flex items-center gap-2 transition-colors border border-slate-200/80 group"
                   href="/admin/leads?tab=new"
                   onClick={() => setIsFilterOpen(false)}
                 >
-                  <span className="material-symbols-outlined text-stitch-primary text-base group-hover:scale-110 transition-transform">
-                    mark_email_unread
-                  </span>
+                  <span className="material-symbols-outlined text-[#062b18] text-base">mark_email_unread</span>
                   <span className="text-[11px] font-semibold truncate">New Inquiries</span>
                 </Link>
 
                 <Link
-                  className="p-2 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface flex items-center gap-2 transition-colors border border-surface-container-highest group"
+                  className="p-2 rounded-lg bg-slate-50 hover:bg-emerald-50/70 text-slate-700 hover:text-[#062b18] flex items-center gap-2 transition-colors border border-slate-200/80 group"
                   href="/admin/leads?tab=with_notes"
                   onClick={() => setIsFilterOpen(false)}
                 >
-                  <span className="material-symbols-outlined text-stitch-secondary text-base group-hover:scale-110 transition-transform">
-                    notes
-                  </span>
+                  <span className="material-symbols-outlined text-amber-600 text-base">notes</span>
                   <span className="text-[11px] font-semibold truncate">With Notes</span>
                 </Link>
 
                 <Link
-                  className="p-2 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface flex items-center gap-2 transition-colors border border-surface-container-highest group"
+                  className="p-2 rounded-lg bg-slate-50 hover:bg-emerald-50/70 text-slate-700 hover:text-[#062b18] flex items-center gap-2 transition-colors border border-slate-200/80 group"
                   href="/admin/training?tab=courses"
                   onClick={() => setIsFilterOpen(false)}
                 >
-                  <span className="material-symbols-outlined text-stitch-primary text-base group-hover:scale-110 transition-transform">
-                    school
-                  </span>
+                  <span className="material-symbols-outlined text-[#062b18] text-base">school</span>
                   <span className="text-[11px] font-semibold truncate">Training Courses</span>
                 </Link>
 
                 <Link
-                  className="p-2 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface flex items-center gap-2 transition-colors border border-surface-container-highest group"
+                  className="p-2 rounded-lg bg-slate-50 hover:bg-emerald-50/70 text-slate-700 hover:text-[#062b18] flex items-center gap-2 transition-colors border border-slate-200/80 group"
                   href="/admin/training?tab=services"
                   onClick={() => setIsFilterOpen(false)}
                 >
-                  <span className="material-symbols-outlined text-stitch-secondary text-base group-hover:scale-110 transition-transform">
-                    business_center
-                  </span>
+                  <span className="material-symbols-outlined text-amber-600 text-base">business_center</span>
                   <span className="text-[11px] font-semibold truncate">Service Packages</span>
                 </Link>
 
                 <Link
-                  className="p-2 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface flex items-center gap-2 transition-colors border border-surface-container-highest group"
+                  className="p-2 rounded-lg bg-slate-50 hover:bg-emerald-50/70 text-slate-700 hover:text-[#062b18] flex items-center gap-2 transition-colors border border-slate-200/80 group"
                   href="/admin/training?tab=applicants"
                   onClick={() => setIsFilterOpen(false)}
                 >
-                  <span className="material-symbols-outlined text-stitch-tertiary-fixed-dim text-base group-hover:scale-110 transition-transform">
-                    group
-                  </span>
+                  <span className="material-symbols-outlined text-[#062b18] text-base">group</span>
                   <span className="text-[11px] font-semibold truncate">All Registrations</span>
                 </Link>
 
                 <Link
-                  className="p-2 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface flex items-center gap-2 transition-colors border border-surface-container-highest group"
+                  className="p-2 rounded-lg bg-slate-50 hover:bg-emerald-50/70 text-slate-700 hover:text-[#062b18] flex items-center gap-2 transition-colors border border-slate-200/80 group"
                   href="/admin/media"
                   onClick={() => setIsFilterOpen(false)}
                 >
-                  <span className="material-symbols-outlined text-stitch-primary text-base group-hover:scale-110 transition-transform">
-                    photo_library
-                  </span>
-                  <span className="text-[11px] font-semibold truncate">Photo Studio</span>
+                  <span className="material-symbols-outlined text-amber-600 text-base">photo_library</span>
+                  <span className="text-[11px] font-semibold truncate">Media Studio</span>
                 </Link>
               </div>
             </div>
 
             {/* Filter by Practice Domain */}
-            <div className="flex flex-col gap-1.5 pt-1 border-t border-surface-container-highest">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">
+            <div className="flex flex-col gap-1.5 pt-2 border-t border-slate-100">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500">
                 Filter Inquiries by Service Area
               </span>
               <div className="flex flex-wrap gap-1">
@@ -258,7 +246,7 @@ export default function AdminHeaderActions() {
                 ].map((item) => (
                   <Link
                     key={item.label}
-                    className="py-1 px-2.5 rounded-md text-[10px] font-semibold bg-surface-container-low hover:bg-stitch-primary hover:text-white text-on-surface-variant transition-colors border border-surface-container-highest"
+                    className="py-1 px-2.5 rounded-md text-[10px] font-semibold bg-slate-50 hover:bg-[#062b18] hover:text-white text-slate-600 transition-colors border border-slate-200"
                     href={`/admin/leads?service=${encodeURIComponent(item.service)}`}
                     onClick={() => setIsFilterOpen(false)}
                   >
@@ -276,10 +264,10 @@ export default function AdminHeaderActions() {
         <button
           aria-expanded={isNotifOpen}
           aria-label={`Notifications (${unreadCount} unread)`}
-          className={`w-9 h-9 flex items-center justify-center rounded-lg relative transition-all ${
+          className={`w-9 h-9 flex items-center justify-center rounded-lg border relative transition-all ${
             isNotifOpen
-              ? "bg-stitch-primary text-white shadow-sm ring-2 ring-stitch-primary/20"
-              : "bg-surface-container-low text-on-surface-variant hover:text-stitch-primary hover:bg-surface-container"
+              ? "bg-[#062b18] text-white border-[#062b18] shadow-sm"
+              : "bg-slate-50 border-slate-200 text-slate-600 hover:text-[#062b18] hover:bg-slate-100"
           }`}
           title="Live Notifications & Alerts"
           type="button"
@@ -290,7 +278,7 @@ export default function AdminHeaderActions() {
         >
           <span className="material-symbols-outlined text-[19px]">notifications</span>
           {unreadCount > 0 && (
-            <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] rounded-full bg-error text-white font-bold text-[10px] flex items-center justify-center px-1 shadow-sm animate-pulse">
+            <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] rounded-md bg-rose-600 text-white font-bold text-[10px] flex items-center justify-center px-1 shadow-xs">
               {unreadCount > 9 ? "9+" : unreadCount}
             </span>
           )}
@@ -298,13 +286,13 @@ export default function AdminHeaderActions() {
 
         {/* Notification Center Popover */}
         {isNotifOpen && (
-          <div className="absolute right-0 top-11 w-80 sm:w-96 bg-surface-container-lowest border border-surface-container-highest rounded-2xl shadow-2xl p-4 z-50 animate-in fade-in zoom-in-95 duration-150 flex flex-col gap-3">
+          <div className="absolute right-0 top-11 w-80 sm:w-96 bg-white border border-slate-200 rounded-xl shadow-2xl p-4 z-50 animate-in fade-in zoom-in-95 duration-150 flex flex-col gap-3">
             {/* Header */}
-            <div className="flex items-center justify-between border-b border-surface-container-highest pb-2.5">
+            <div className="flex items-center justify-between border-b border-slate-100 pb-2.5">
               <div className="flex items-center gap-2">
-                <span className="font-serif font-bold text-sm text-stitch-primary">Notifications</span>
+                <span className="font-sans font-bold text-sm text-slate-900">Notifications</span>
                 {unreadCount > 0 && (
-                  <span className="bg-error/10 text-error font-bold text-[10px] px-1.5 py-0.5 rounded">
+                  <span className="bg-rose-50 text-rose-700 font-bold text-[10px] px-1.5 py-0.5 rounded border border-rose-200">
                     {unreadCount} New
                   </span>
                 )}
@@ -313,7 +301,7 @@ export default function AdminHeaderActions() {
               <div className="flex items-center gap-2">
                 {unreadCount > 0 && (
                   <button
-                    className="text-[11px] font-semibold text-stitch-primary hover:underline"
+                    className="text-[11px] font-semibold text-[#062b18] hover:underline"
                     type="button"
                     onClick={handleMarkAllAsRead}
                   >
@@ -321,7 +309,7 @@ export default function AdminHeaderActions() {
                   </button>
                 )}
                 <button
-                  className="w-6 h-6 flex items-center justify-center text-on-surface-variant hover:text-stitch-primary rounded transition-colors text-xs"
+                  className="w-6 h-6 flex items-center justify-center text-slate-400 hover:text-slate-700 rounded transition-colors text-xs"
                   type="button"
                   onClick={() => setIsNotifOpen(false)}
                 >
@@ -331,12 +319,12 @@ export default function AdminHeaderActions() {
             </div>
 
             {/* Notification Tabs */}
-            <div className="flex items-center gap-1 bg-surface-container-low p-1 rounded-lg">
+            <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-lg">
               <button
-                className={`flex-1 py-1 rounded text-[11px] font-bold transition-colors ${
+                className={`flex-1 py-1 rounded-md text-[11px] font-bold transition-colors ${
                   notifTab === "all"
-                    ? "bg-white text-stitch-primary shadow-xs"
-                    : "text-on-surface-variant hover:text-stitch-primary"
+                    ? "bg-white text-slate-900 shadow-2xs"
+                    : "text-slate-500 hover:text-slate-900"
                 }`}
                 type="button"
                 onClick={() => setNotifTab("all")}
@@ -344,10 +332,10 @@ export default function AdminHeaderActions() {
                 All ({notifications.length})
               </button>
               <button
-                className={`flex-1 py-1 rounded text-[11px] font-bold transition-colors ${
+                className={`flex-1 py-1 rounded-md text-[11px] font-bold transition-colors ${
                   notifTab === "new"
-                    ? "bg-white text-stitch-primary shadow-xs"
-                    : "text-on-surface-variant hover:text-stitch-primary"
+                    ? "bg-white text-slate-900 shadow-2xs"
+                    : "text-slate-500 hover:text-slate-900"
                 }`}
                 type="button"
                 onClick={() => setNotifTab("new")}
@@ -359,10 +347,10 @@ export default function AdminHeaderActions() {
             {/* Notifications List */}
             <div className="max-h-72 overflow-y-auto flex flex-col gap-2 pr-1 scrollbar-thin">
               {filteredNotifications.length === 0 ? (
-                <div className="py-8 flex flex-col items-center text-center text-on-surface-variant gap-1.5">
-                  <span className="material-symbols-outlined text-3xl text-outline">check_circle</span>
-                  <span className="text-xs font-semibold">You&apos;re all caught up!</span>
-                  <span className="text-[11px] text-on-surface-variant/70">
+                <div className="py-8 flex flex-col items-center text-center text-slate-500 gap-1.5">
+                  <span className="material-symbols-outlined text-3xl text-slate-300">check_circle</span>
+                  <span className="text-xs font-semibold text-slate-700">You&apos;re all caught up!</span>
+                  <span className="text-[11px] text-slate-400">
                     No unread inquiries or pending student registrations.
                   </span>
                 </div>
@@ -370,10 +358,10 @@ export default function AdminHeaderActions() {
                 filteredNotifications.map((notif) => (
                   <Link
                     key={notif.id}
-                    className={`p-2.5 rounded-xl border transition-all flex items-start gap-2.5 group ${
+                    className={`p-2.5 rounded-lg border transition-all flex items-start gap-2.5 group ${
                       notif.isNew
-                        ? "bg-stitch-primary-fixed/10 border-stitch-primary-fixed/40 hover:bg-stitch-primary-fixed/20"
-                        : "bg-surface-container-low border-surface-container-highest hover:bg-surface-container"
+                        ? "bg-emerald-50/50 border-emerald-200 hover:bg-emerald-50"
+                        : "bg-slate-50/60 border-slate-200/70 hover:bg-slate-100"
                     }`}
                     href={notif.href}
                     onClick={() => {
@@ -389,12 +377,12 @@ export default function AdminHeaderActions() {
                     <div
                       className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 mt-0.5 ${
                         notif.type === "inquiry"
-                          ? "bg-stitch-primary text-white"
+                          ? "bg-[#062b18] text-white"
                           : notif.type === "enrollment"
-                          ? "bg-stitch-secondary text-white"
+                          ? "bg-amber-600 text-white"
                           : notif.type === "booking"
-                          ? "bg-stitch-tertiary-fixed-dim text-white"
-                          : "bg-error text-white"
+                          ? "bg-emerald-600 text-white"
+                          : "bg-rose-600 text-white"
                       }`}
                     >
                       <span className="material-symbols-outlined text-sm">
@@ -410,20 +398,20 @@ export default function AdminHeaderActions() {
 
                     <div className="flex-1 min-w-0 flex flex-col">
                       <div className="flex items-center justify-between gap-1">
-                        <span className="font-semibold text-xs text-on-surface truncate group-hover:text-stitch-primary transition-colors">
+                        <span className="font-semibold text-xs text-slate-900 truncate group-hover:text-[#062b18] transition-colors">
                           {notif.title}
                         </span>
-                        <span className="text-[10px] text-on-surface-variant shrink-0 font-medium">
+                        <span className="text-[10px] text-slate-400 shrink-0 font-medium">
                           {notif.timeAgo}
                         </span>
                       </div>
-                      <p className="text-[11px] text-on-surface-variant truncate mt-0.5">
+                      <p className="text-[11px] text-slate-500 truncate mt-0.5">
                         {notif.subtitle}
                       </p>
                     </div>
 
                     {notif.isNew && (
-                      <span className="w-2 h-2 rounded-full bg-stitch-primary shrink-0 mt-2" />
+                      <span className="w-2 h-2 rounded-full bg-emerald-600 shrink-0 mt-2" />
                     )}
                   </Link>
                 ))
@@ -431,7 +419,7 @@ export default function AdminHeaderActions() {
             </div>
 
             {/* Quick Links Footer */}
-            <div className="pt-2 border-t border-surface-container-highest flex items-center justify-between text-[11px] font-semibold text-stitch-primary">
+            <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] font-semibold text-[#062b18]">
               <Link
                 className="hover:underline flex items-center gap-0.5"
                 href="/admin/leads"

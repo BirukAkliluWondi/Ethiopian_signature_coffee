@@ -12,20 +12,17 @@ export default async function AdminTrainingPage() {
   const servicePackages = pkgRes.success && pkgRes.data ? pkgRes.data : [];
 
   return (
-    <div className="flex flex-col gap-6 max-w-7xl mx-auto">
+    <div className="flex flex-col gap-6 w-full">
       <div className="flex flex-col gap-1">
-        <div className="flex items-center gap-2">
-          <span className="w-1.5 h-4 bg-stitch-primary rounded-full shrink-0" />
-          <h1 className="font-serif text-2xl sm:text-3xl font-semibold text-stitch-primary">
-            Services &amp; Training Operations Hub
-          </h1>
-        </div>
-        <p className="text-xs text-on-surface-variant pl-3.5">
-          Manage training academy courses, commercial service packages, pricing, client bookings, and Excel rosters.
+        <h1 className="text-2xl font-bold text-slate-900 tracking-tight">
+          Services &amp; Training Hub
+        </h1>
+        <p className="text-xs text-slate-500">
+          Manage academy courses, commercial service packages, dynamic pricing, client bookings, and Excel rosters.
         </p>
       </div>
 
-      <Suspense fallback={<div className="p-8 text-center text-xs text-on-surface-variant">Loading operations hub...</div>}>
+      <Suspense fallback={<div className="p-8 text-center text-xs text-slate-500">Loading operations hub...</div>}>
         <TrainingCMSClient initialPrograms={programs} initialServicePackages={servicePackages} />
       </Suspense>
     </div>

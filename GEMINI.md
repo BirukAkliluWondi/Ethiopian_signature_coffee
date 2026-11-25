@@ -88,9 +88,11 @@
    - **Pre-Media Revert & Copilot Fix Checkpoint Tag**: `pre-media-revert-and-copilot-fix`
    - **Pre-Filter & Notification Activation Tag**: `pre-filter-and-notification-activation`
    - **Pre-Revert to Original Checkpoint Tag**: `pre-revert-to-original-feature`
-   - **Backup Branches**: `backup-stable-baseline`, `backup-pre-hero-media-carousel`, `backup-pre-opening-motion-choreography`, `backup-pre-chronological-resequence`, `backup-pre-debox-transformation`, `backup-pre-ui-ux-refinements`, `backup-pre-catering-service`, `backup-pre-catering-dedicated-showcase`, `backup-pre-admin-dashboard`, `backup-stitch-admin-ui`, `backup-admin-step-guides`, `backup-contact-messages-visibility`, `backup-admin-polish-and-auth`, `backup-dynamic-applications-excel`, `backup-admin-ai-copilot`, `backup-services-and-pricing-cms`, `backup-multipage-and-ui-cleanup`, `backup-admin-login-polish`, `backup-delete-feature-and-login-privacy`, `backup-nav-bars-streamline`, `backup-media-revert-and-copilot-fix`, `backup-filter-and-notification-activation`, `backup-revert-to-original-feature` (Pushed to GitHub `origin`)
+   - **Pre-Executive Admin Overhaul Checkpoint Tag**: `pre-executive-admin-overhaul`
+   - **Backup Branches**: `backup-stable-baseline`, `backup-pre-hero-media-carousel`, `backup-pre-opening-motion-choreography`, `backup-pre-chronological-resequence`, `backup-pre-debox-transformation`, `backup-pre-ui-ux-refinements`, `backup-pre-catering-service`, `backup-pre-catering-dedicated-showcase`, `backup-pre-admin-dashboard`, `backup-stitch-admin-ui`, `backup-admin-step-guides`, `backup-contact-messages-visibility`, `backup-admin-polish-and-auth`, `backup-dynamic-applications-excel`, `backup-admin-ai-copilot`, `backup-services-and-pricing-cms`, `backup-multipage-and-ui-cleanup`, `backup-admin-login-polish`, `backup-delete-feature-and-login-privacy`, `backup-nav-bars-streamline`, `backup-media-revert-and-copilot-fix`, `backup-filter-and-notification-activation`, `backup-revert-to-original-feature`, `backup-executive-admin-overhaul` (Pushed to GitHub `origin`)
    - **Remote Synchronization**: Fully backed up on remote GitHub repository.
    - **One-Prompt Revert Protocol**:
+     - To revert to the state before the Executive Admin Dashboard overhaul: `git reset --hard pre-executive-admin-overhaul && git clean -fd`
      - To revert to the state before the revert to original feature: `git reset --hard pre-revert-to-original-feature && git clean -fd`
      - To revert to the state before filter and notification activation: `git reset --hard pre-filter-and-notification-activation && git clean -fd`
      - To revert to the state before media revert and AI copilot fix: `git reset --hard pre-media-revert-and-copilot-fix && git clean -fd`
@@ -455,3 +457,13 @@
     - **AI Assistant Integration**:
       - Knowledge base in `src/lib/ai-assistant/knowledge-base.ts` trained to answer queries regarding "revert to original", "reset photos", "restore original photos", and "undo photo changes".
     - **Strict Rule Preservation**: Strictly ZERO text pill badges (`rounded-full` text tags), ZERO text bloat, unclipped original ceremony photo on Slide 0, phone strictly `+251925451711`, admin credentials strictly `henoktessma111@gmail.com` / `254517`.
+
+## Modern Coffeehouse Executive Admin Dashboard Architecture
+29. **Executive SaaS Admin Shell, Analytics & Guide-Free Views**:
+    - **Visual Identity Shift (Anti-Newsletter Standard)**:
+      - Eliminated warm paper backgrounds (`#fcf9f8`), beige inner boxes, ubiquitous `EB Garamond` serif display headers, and all numbered `1–2–3–4` instructional tutorial boxes across all 5 admin routes (`/admin`, `/admin/leads`, `/admin/media`, `/admin/training`, `/admin/chat`).
+      - Adopted **Modern Coffeehouse Executive** SaaS design: **Deep Emerald Sidebar (`#062b18`)** with single-line clean navigation & gold accent indicators, **Cool Alabaster Canvas (`#F4F6F5`)**, crisp pure-white elevated cards (`#FFFFFF`, `border-slate-200/80`), **100% Sans-Serif Dashboard Typography (`Plus Jakarta Sans`)**, and never-failing `HT` monogram header avatar badge.
+    - **Executive Overview & Interactive Analytics (`/admin` & `AdminOverviewCharts.tsx`)**:
+      - Real-time telemetry powered by `getExecutiveDashboardAnalyticsAction()` in `src/app/actions/admin-cms.ts`.
+      - Features Quick Action Header Bar, 4 Modern KPI Stat Cards (`Contact Inquiries`, `Service Bookings`, `Academy Enrollments`, `Open Visitor Chats`), a responsive `grid-cols-7` **7-Day Client Activity** interactive bar chart with zero-shift floating hover tooltips, **Demand by Service Category** progress bars, **Upcoming Academy Cohorts** seat occupancy bars, and an upgraded **Recent Client Inquiries** CRM table.
+    - **Strict Rule Preservation**: Strictly ZERO `rounded-full` text pill badges, ZERO exposed AI model names, ZERO bulky tutorial boxes (AI Copilot provides on-demand help), phone strictly `+251925451711`, admin credentials strictly `henoktessma111@gmail.com` / `254517`.

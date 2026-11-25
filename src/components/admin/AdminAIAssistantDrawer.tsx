@@ -172,30 +172,30 @@ export default function AdminAIAssistantDrawer({
       />
 
       {/* Slide-Over Drawer Container */}
-      <div className="relative w-full sm:w-[480px] h-full bg-[#fcf9f8] border-l border-surface-container-highest shadow-2xl flex flex-col z-10 animate-in slide-in-from-right duration-300">
+      <div className="relative w-full sm:w-[480px] h-full bg-[#F4F6F5] border-l border-slate-200 shadow-2xl flex flex-col z-10 animate-in slide-in-from-right duration-300">
         {/* Drawer Header */}
-        <div className="h-16 px-5 border-b border-surface-container-highest bg-surface-container-lowest flex items-center justify-between shrink-0">
+        <div className="h-16 px-5 border-b border-slate-200 bg-white flex items-center justify-between shrink-0">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-stitch-primary text-stitch-tertiary-fixed flex items-center justify-center shadow-sm">
+            <div className="w-8 h-8 rounded-lg bg-[#062b18] text-[#fbbc0e] flex items-center justify-center shadow-sm">
               <span className="material-symbols-outlined text-[20px]">auto_awesome</span>
             </div>
             <div className="flex flex-col">
               <div className="flex items-center gap-2">
-                <span className="font-serif font-bold text-sm text-stitch-primary">Admin Copilot</span>
-                <span className="text-[10px] px-1.5 py-0.5 rounded bg-stitch-primary/10 text-stitch-primary font-bold tracking-tight">
+                <span className="font-sans font-bold text-sm text-[#062b18]">Admin Copilot</span>
+                <span className="text-[10px] px-1.5 py-0.5 rounded bg-[#062b18]/10 text-[#062b18] font-bold tracking-tight">
                   Assistant
                 </span>
               </div>
-              <span className="text-[11px] text-on-surface-variant font-medium">
+              <span className="text-[11px] text-slate-500 font-medium">
                 Operations & Admin Workflow Guide
               </span>
             </div>
           </div>
 
-          <div className="flex items-center gap-1 text-on-surface-variant">
+          <div className="flex items-center gap-1 text-slate-500">
             <button
               aria-label="Summarize Dashboard"
-              className="px-2 py-1 rounded-lg flex items-center gap-1 hover:bg-surface-container text-stitch-primary hover:text-stitch-primary-dark transition-colors text-xs font-semibold mr-1 bg-stitch-primary/10"
+              className="px-2 py-1 rounded-lg flex items-center gap-1 hover:bg-slate-100 text-[#062b18] hover:text-[#062b18]-dark transition-colors text-xs font-semibold mr-1 bg-[#062b18]/10"
               title="Generate real-time executive dashboard summary"
               type="button"
               onClick={() => handleSendMessage("Summarize the dashboard and recent activity")}
@@ -207,7 +207,7 @@ export default function AdminAIAssistantDrawer({
             <button
               aria-label="API Key Settings"
               className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors ${
-                showSettings ? "bg-stitch-primary text-white" : "hover:bg-surface-container hover:text-stitch-primary"
+                showSettings ? "bg-[#062b18] text-white" : "hover:bg-slate-100 hover:text-[#062b18]"
               }`}
               title="Configure Assistant Key"
               type="button"
@@ -218,7 +218,7 @@ export default function AdminAIAssistantDrawer({
 
             <button
               aria-label="Clear Chat History"
-              className="w-8 h-8 rounded-lg flex items-center justify-center hover:bg-surface-container hover:text-stitch-error transition-colors"
+              className="w-8 h-8 rounded-lg flex items-center justify-center hover:bg-slate-100 hover:text-stitch-error transition-colors"
               title="Clear conversation"
               type="button"
               onClick={handleClearChat}
@@ -228,7 +228,7 @@ export default function AdminAIAssistantDrawer({
 
             <button
               aria-label="Close Copilot"
-              className="w-8 h-8 rounded-lg flex items-center justify-center hover:bg-surface-container hover:text-stitch-primary transition-colors ml-1"
+              className="w-8 h-8 rounded-lg flex items-center justify-center hover:bg-slate-100 hover:text-[#062b18] transition-colors ml-1"
               type="button"
               onClick={onClose}
             >
@@ -239,14 +239,14 @@ export default function AdminAIAssistantDrawer({
 
         {/* Optional Collapsible API Key Settings Drawer Section */}
         {showSettings && (
-          <div className="p-4 bg-surface-container-low border-b border-surface-container-highest shrink-0 flex flex-col gap-3">
+          <div className="p-4 bg-slate-50 border-b border-slate-200 shrink-0 flex flex-col gap-3">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-bold text-stitch-primary flex items-center gap-1.5">
+              <span className="text-xs font-bold text-[#062b18] flex items-center gap-1.5">
                 <span className="material-symbols-outlined text-sm">key</span>
                 <span>AI Assistant Connection Settings</span>
               </span>
               <a
-                className="text-[11px] text-stitch-primary hover:underline font-semibold flex items-center gap-0.5"
+                className="text-[11px] text-[#062b18] hover:underline font-semibold flex items-center gap-0.5"
                 href="https://aistudio.google.com/app/apikey"
                 rel="noreferrer"
                 target="_blank"
@@ -256,20 +256,20 @@ export default function AdminAIAssistantDrawer({
               </a>
             </div>
 
-            <p className="text-[11px] text-on-surface-variant leading-relaxed">
-              For permanent operation on Vercel, add <code className="font-mono text-[10px] bg-surface-container px-1 py-0.5 rounded">GEMINI_API_KEY</code> in <strong>Vercel &gt; Settings &gt; Environment Variables</strong>. You can also paste your Google AI Studio key below to save it locally in your browser.
+            <p className="text-[11px] text-slate-500 leading-relaxed">
+              For permanent operation on Vercel, add <code className="font-mono text-[10px] bg-slate-100 px-1 py-0.5 rounded">GEMINI_API_KEY</code> in <strong>Vercel &gt; Settings &gt; Environment Variables</strong>. You can also paste your Google AI Studio key below to save it locally in your browser.
             </p>
 
             <div className="flex items-center gap-2">
               <input
-                className="flex-1 px-3 py-1.5 text-xs rounded-lg border border-surface-container-highest bg-white text-on-surface focus:outline-none focus:ring-1 focus:ring-stitch-primary font-mono placeholder:text-text-muted/50"
+                className="flex-1 px-3 py-1.5 text-xs rounded-lg border border-slate-200 bg-white text-slate-900 focus:outline-none focus:ring-1 focus:ring-stitch-primary font-mono placeholder:text-text-muted/50"
                 placeholder="Paste your API key (AIzaSy... or AQ....)"
                 type="password"
                 value={tempApiKey}
                 onChange={(e) => setTempApiKey(e.target.value)}
               />
               <button
-                className="px-3 py-1.5 bg-stitch-primary text-white rounded-lg text-xs font-semibold hover:bg-stitch-primary/90 transition-colors shadow-2xs"
+                className="px-3 py-1.5 bg-[#062b18] text-white rounded-lg text-xs font-semibold hover:bg-[#062b18]/90 transition-colors shadow-2xs"
                 type="button"
                 onClick={handleSaveApiKey}
               >
@@ -277,7 +277,7 @@ export default function AdminAIAssistantDrawer({
               </button>
               {userApiKey && (
                 <button
-                  className="px-2 py-1.5 bg-surface-container text-on-surface-variant hover:text-error rounded-lg text-xs font-semibold transition-colors border border-surface-container-highest"
+                  className="px-2 py-1.5 bg-slate-100 text-slate-500 hover:text-error rounded-lg text-xs font-semibold transition-colors border border-slate-200"
                   title="Remove local key"
                   type="button"
                   onClick={() => {
@@ -303,13 +303,13 @@ export default function AdminAIAssistantDrawer({
         <div className="flex-1 overflow-y-auto p-4 sm:p-5 flex flex-col gap-4">
           {messages.length === 0 ? (
             <div className="my-auto flex flex-col items-center text-center max-w-sm mx-auto py-6">
-              <div className="w-12 h-12 rounded-xl bg-stitch-primary/10 text-stitch-primary flex items-center justify-center mb-3">
+              <div className="w-12 h-12 rounded-xl bg-[#062b18]/10 text-[#062b18] flex items-center justify-center mb-3">
                 <span className="material-symbols-outlined text-2xl">chat</span>
               </div>
-              <h3 className="font-serif font-bold text-base text-stitch-primary mb-1">
+              <h3 className="font-sans font-bold text-base text-[#062b18] mb-1">
                 How can I assist your operations?
               </h3>
-              <p className="text-xs text-on-surface-variant leading-relaxed mb-6">
+              <p className="text-xs text-slate-500 leading-relaxed mb-6">
                 I can guide you step-by-step through every feature, workflow, and action in this admin panel. Ask anything or pick a quick topic below:
               </p>
 
@@ -317,12 +317,12 @@ export default function AdminAIAssistantDrawer({
                 {STARTER_PROMPTS.map((prompt, index) => (
                   <button
                     key={index}
-                    className="w-full p-2.5 rounded-xl bg-white border border-surface-container-highest hover:border-stitch-primary/40 hover:bg-surface-container-low text-left text-xs font-medium text-on-surface transition-all flex items-center justify-between group shadow-2xs"
+                    className="w-full p-2.5 rounded-xl bg-white border border-slate-200 hover:border-[#062b18]/40 hover:bg-slate-50 text-left text-xs font-medium text-slate-900 transition-all flex items-center justify-between group shadow-2xs"
                     type="button"
                     onClick={() => handleSendMessage(prompt)}
                   >
                     <span>{prompt}</span>
-                    <span className="material-symbols-outlined text-sm text-outline group-hover:text-stitch-primary group-hover:translate-x-0.5 transition-all">
+                    <span className="material-symbols-outlined text-sm text-slate-400 group-hover:text-[#062b18] group-hover:translate-x-0.5 transition-all">
                       arrow_forward
                     </span>
                   </button>
@@ -339,8 +339,8 @@ export default function AdminAIAssistantDrawer({
                   <div
                     className={`p-3.5 rounded-2xl text-xs leading-relaxed max-w-[94%] ${
                       m.role === "user"
-                        ? "bg-stitch-primary text-white rounded-tr-xs shadow-xs"
-                        : "bg-white text-on-surface border border-surface-container-highest rounded-tl-xs shadow-2xs"
+                        ? "bg-[#062b18] text-white rounded-tr-xs shadow-xs"
+                        : "bg-white text-slate-900 border border-slate-200 rounded-tl-xs shadow-2xs"
                     }`}
                   >
                     <div className="prose prose-xs max-w-none text-current">
@@ -349,10 +349,10 @@ export default function AdminAIAssistantDrawer({
                   </div>
 
                   <div className="flex items-center gap-2 px-1">
-                    <span className="text-[10px] text-outline">{m.timestamp}</span>
+                    <span className="text-[10px] text-slate-400">{m.timestamp}</span>
                     {m.role === "model" && (
                       <button
-                        className="text-[10px] text-outline hover:text-stitch-primary flex items-center gap-0.5"
+                        className="text-[10px] text-slate-400 hover:text-[#062b18] flex items-center gap-0.5"
                         type="button"
                         onClick={() => handleCopyText(m.id, m.text)}
                       >
@@ -368,9 +368,9 @@ export default function AdminAIAssistantDrawer({
 
               {isLoading && (
                 <div className="flex flex-col items-start gap-1">
-                  <div className="p-3.5 rounded-2xl rounded-tl-xs bg-white border border-surface-container-highest text-xs text-on-surface shadow-2xs flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-stitch-primary animate-ping" />
-                    <span className="text-on-surface-variant font-medium">Consulting codebase & workflows...</span>
+                  <div className="p-3.5 rounded-2xl rounded-tl-xs bg-white border border-slate-200 text-xs text-slate-900 shadow-2xs flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-[#062b18] animate-ping" />
+                    <span className="text-slate-500 font-medium">Consulting codebase & workflows...</span>
                   </div>
                 </div>
               )}
@@ -381,7 +381,7 @@ export default function AdminAIAssistantDrawer({
         </div>
 
         {/* Input Bar */}
-        <div className="p-4 border-t border-surface-container-highest bg-surface-container-lowest shrink-0">
+        <div className="p-4 border-t border-slate-200 bg-white shrink-0">
           <form
             className="flex items-end gap-2"
             onSubmit={(e) => {
@@ -392,7 +392,7 @@ export default function AdminAIAssistantDrawer({
             <div className="flex-1 relative">
               <textarea
                 ref={textareaRef}
-                className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-surface-container-highest bg-white text-on-surface placeholder:text-outline focus:outline-none focus:ring-1 focus:ring-stitch-primary resize-none max-h-28 min-h-[42px] leading-relaxed"
+                className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-slate-200 bg-white text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-1 focus:ring-stitch-primary resize-none max-h-28 min-h-[42px] leading-relaxed"
                 placeholder="Ask how to do anything in the admin panel..."
                 rows={1}
                 value={inputQuery}
@@ -408,7 +408,7 @@ export default function AdminAIAssistantDrawer({
 
             <button
               aria-label="Send Query"
-              className="h-[42px] px-3.5 rounded-xl bg-stitch-primary text-white hover:bg-stitch-primary/90 disabled:opacity-40 disabled:cursor-not-allowed transition-all flex items-center justify-center shrink-0 shadow-xs"
+              className="h-[42px] px-3.5 rounded-xl bg-[#062b18] text-white hover:bg-[#062b18]/90 disabled:opacity-40 disabled:cursor-not-allowed transition-all flex items-center justify-center shrink-0 shadow-xs"
               disabled={isLoading || !inputQuery.trim()}
               type="submit"
             >
@@ -416,8 +416,8 @@ export default function AdminAIAssistantDrawer({
             </button>
           </form>
           <div className="mt-1.5 flex items-center justify-between px-1">
-            <span className="text-[10px] text-outline">Press Enter to send, Shift+Enter for newline</span>
-            <span className="text-[10px] text-outline">Press Esc to close</span>
+            <span className="text-[10px] text-slate-400">Press Enter to send, Shift+Enter for newline</span>
+            <span className="text-[10px] text-slate-400">Press Esc to close</span>
           </div>
         </div>
       </div>
@@ -444,14 +444,14 @@ function FormattedMarkdown({ content }: { content: string }) {
         // Headers
         if (trimmed.startsWith("### ")) {
           return (
-            <h4 key={idx} className="font-serif font-bold text-xs text-stitch-primary mt-2 mb-1">
+            <h4 key={idx} className="font-sans font-bold text-xs text-[#062b18] mt-2 mb-1">
               {trimmed.replace("### ", "")}
             </h4>
           );
         }
         if (trimmed.startsWith("## ")) {
           return (
-            <h3 key={idx} className="font-serif font-bold text-sm text-stitch-primary mt-2 mb-1">
+            <h3 key={idx} className="font-sans font-bold text-sm text-[#062b18] mt-2 mb-1">
               {trimmed.replace("## ", "")}
             </h3>
           );
@@ -462,7 +462,7 @@ function FormattedMarkdown({ content }: { content: string }) {
         if (matchNumber) {
           return (
             <div key={idx} className="flex items-start gap-1.5 pl-1 my-0.5">
-              <span className="font-bold text-stitch-primary shrink-0">{matchNumber[1]}.</span>
+              <span className="font-bold text-[#062b18] shrink-0">{matchNumber[1]}.</span>
               <div>{renderFormattedSpans(matchNumber[2])}</div>
             </div>
           );
@@ -472,7 +472,7 @@ function FormattedMarkdown({ content }: { content: string }) {
         if (trimmed.startsWith("- ") || trimmed.startsWith("* ")) {
           return (
             <div key={idx} className="flex items-start gap-1.5 pl-1 my-0.5">
-              <span className="text-stitch-primary shrink-0 leading-tight">•</span>
+              <span className="text-[#062b18] shrink-0 leading-tight">•</span>
               <div>{renderFormattedSpans(trimmed.substring(2))}</div>
             </div>
           );
@@ -496,7 +496,7 @@ function renderFormattedSpans(text: string) {
       return (
         <code
           key={pIdx}
-          className="px-1 py-0.5 rounded bg-surface-container text-stitch-primary font-mono text-[10px] border border-surface-container-highest"
+          className="px-1 py-0.5 rounded bg-slate-100 text-[#062b18] font-mono text-[10px] border border-slate-200"
         >
           {part.slice(1, -1)}
         </code>
@@ -508,7 +508,7 @@ function renderFormattedSpans(text: string) {
     return boldParts.map((bPart, bIdx) => {
       if (bPart.startsWith("**") && bPart.endsWith("**")) {
         return (
-          <strong key={`${pIdx}_${bIdx}`} className="font-semibold text-on-surface">
+          <strong key={`${pIdx}_${bIdx}`} className="font-semibold text-slate-900">
             {bPart.slice(2, -2)}
           </strong>
         );

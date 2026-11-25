@@ -1,304 +1,289 @@
 import Link from "next/link";
-import { getExecutiveKPIsAction, getInquiriesAction } from "@/app/actions/admin-cms";
+import {
+  getExecutiveDashboardAnalyticsAction,
+  getInquiriesAction,
+} from "@/app/actions/admin-cms";
+import AdminOverviewCharts from "@/components/admin/AdminOverviewCharts";
 
 export default async function AdminDashboardPage() {
-  const [kpis, inqRes] = await Promise.all([
-    getExecutiveKPIsAction(),
+  const [analytics, inqRes] = await Promise.all([
+    getExecutiveDashboardAnalyticsAction(),
     getInquiriesAction(),
   ]);
 
-  const inquiries = inqRes.success && inqRes.data ? inqRes.data.slice(0, 5) : [];
+  const inquiries = inqRes.success && inqRes.data ? inqRes.data.slice(0, 6) : [];
+  const kpis = analytics?.kpis || {
+    totalInquiries: 0,
+    newInquiries: 0,
+    totalServiceBookings: 0,
+    pendingBookings: 0,
+    totalEnrollments: 0,
+    activeCohorts: 0,
+    totalPrograms: 0,
+    totalPackages: 0,
+    openChats: 0,
+    customMediaCount: 0,
+  };
 
   return (
-    <div className="flex flex-col gap-6 max-w-7xl mx-auto">
-      {/* Welcome & Simple Step-by-Step Action Guide */}
-      <section className="bg-surface-container-lowest rounded-xl p-5 border border-surface-container-highest shadow-sm flex flex-col gap-4">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-surface-container-highest pb-3">
-          <div className="flex items-center gap-2">
-            <span className="w-1.5 h-4 bg-stitch-primary rounded-full shrink-0" />
-            <h1 className="font-serif text-xl sm:text-2xl font-semibold text-stitch-primary">
-              Website Management &amp; Step-by-Step Guide
-            </h1>
-          </div>
-          <span className="text-xs text-on-surface-variant">
-            Everything you need to control your website is organized below.
-          </span>
+    <div className="flex flex-col gap-6 w-full">
+      {/* Executive Command Header & Quick Actions */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-bold text-slate-900 tracking-tight">
+            Operations Overview
+          </h1>
+          <p className="text-xs text-slate-500 mt-1">
+            Real-time telemetry across client inquiries, academy cohorts, service bookings, and media assets.
+          </p>
         </div>
 
-        {/* 4 Step Cards for Admin */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-1">
-          {/* Step 1: Contact Form Texts */}
-          <div className="p-3.5 rounded-lg bg-surface-container-low border border-surface-container-highest flex flex-col justify-between gap-3">
-            <div className="flex flex-col gap-1.5">
-              <div className="flex items-center justify-between">
-                <span className="w-5 h-5 rounded bg-stitch-primary text-white text-[11px] font-bold flex items-center justify-center">
-                  1
-                </span>
-                <span className="material-symbols-outlined text-stitch-primary text-lg">mark_email_unread</span>
-              </div>
-              <h2 className="font-semibold text-xs text-on-surface">Contact Form Texts</h2>
-              <p className="text-[11px] text-on-surface-variant leading-relaxed">
-                All messages and texts sent from the &ldquo;Contact Me&rdquo; section on your website arrive here. Click <strong>WhatsApp</strong> to reply.
-              </p>
-            </div>
-            <Link
-              className="text-[11px] font-bold text-stitch-primary hover:underline flex items-center gap-1 mt-1"
-              href="/admin/leads"
-            >
-              <span>Read Contact Messages</span>
-              <span className="material-symbols-outlined text-xs">arrow_forward</span>
-            </Link>
-          </div>
-
-          {/* Step 2: Change Photos */}
-          <div className="p-3.5 rounded-lg bg-surface-container-low border border-surface-container-highest flex flex-col justify-between gap-3">
-            <div className="flex flex-col gap-1.5">
-              <div className="flex items-center justify-between">
-                <span className="w-5 h-5 rounded bg-stitch-primary text-white text-[11px] font-bold flex items-center justify-center">
-                  2
-                </span>
-                <span className="material-symbols-outlined text-stitch-secondary text-lg">photo_library</span>
-              </div>
-              <h2 className="font-semibold text-xs text-on-surface">Change Photos</h2>
-              <p className="text-[11px] text-on-surface-variant leading-relaxed">
-                Upload new pictures and replace images on the homepage hero banner, catering, or services.
-              </p>
-            </div>
-            <Link
-              className="text-[11px] font-bold text-stitch-primary hover:underline flex items-center gap-1 mt-1"
-              href="/admin/media"
-            >
-              <span>Open Photo Studio</span>
-              <span className="material-symbols-outlined text-xs">arrow_forward</span>
-            </Link>
-          </div>
-
-          {/* Step 3: Training Classes */}
-          <div className="p-3.5 rounded-lg bg-surface-container-low border border-surface-container-highest flex flex-col justify-between gap-3">
-            <div className="flex flex-col gap-1.5">
-              <div className="flex items-center justify-between">
-                <span className="w-5 h-5 rounded bg-stitch-primary text-white text-[11px] font-bold flex items-center justify-center">
-                  3
-                </span>
-                <span className="material-symbols-outlined text-stitch-tertiary-fixed-dim text-lg">school</span>
-              </div>
-              <h2 className="font-semibold text-xs text-on-surface">Training Classes</h2>
-              <p className="text-[11px] text-on-surface-variant leading-relaxed">
-                Add upcoming Barista Academy cohort dates, seat limits, and tuition prices so students can register.
-              </p>
-            </div>
-            <Link
-              className="text-[11px] font-bold text-stitch-primary hover:underline flex items-center gap-1 mt-1"
-              href="/admin/training"
-            >
-              <span>Manage Schedules</span>
-              <span className="material-symbols-outlined text-xs">arrow_forward</span>
-            </Link>
-          </div>
-
-          {/* Step 4: Visitor Chat */}
-          <div className="p-3.5 rounded-lg bg-surface-container-low border border-surface-container-highest flex flex-col justify-between gap-3">
-            <div className="flex flex-col gap-1.5">
-              <div className="flex items-center justify-between">
-                <span className="w-5 h-5 rounded bg-stitch-primary text-white text-[11px] font-bold flex items-center justify-center">
-                  4
-                </span>
-                <span className="material-symbols-outlined text-stitch-primary text-lg">forum</span>
-              </div>
-              <h2 className="font-semibold text-xs text-on-surface">Visitor Chat</h2>
-              <p className="text-[11px] text-on-surface-variant leading-relaxed">
-                Answer live questions from visitors on the website. Visitors can read your answer even if they return later.
-              </p>
-            </div>
-            <Link
-              className="text-[11px] font-bold text-stitch-primary hover:underline flex items-center gap-1 mt-1"
-              href="/admin/chat"
-            >
-              <span>Open Chat Inbox</span>
-              <span className="material-symbols-outlined text-xs">arrow_forward</span>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Live Activity Counters */}
-      <section className="bg-surface-container-lowest rounded-xl p-4 sm:p-5 border border-surface-container-highest shadow-sm">
-        <div className="flex items-center justify-between pb-3 mb-3 bg-surface-container-low rounded-lg p-3">
-          <div className="flex items-center gap-2.5 min-w-0">
-            <div className="w-7 h-7 rounded-lg bg-stitch-primary-container text-stitch-on-primary-container flex items-center justify-center shrink-0">
-              <span className="material-symbols-outlined text-base">monitoring</span>
-            </div>
-            <div className="min-w-0">
-              <span className="text-xs font-bold text-stitch-primary uppercase tracking-wider block">
-                Live Website Numbers
+        <div className="flex flex-wrap items-center gap-2">
+          <Link
+            className="px-3.5 py-2 rounded-lg bg-white border border-slate-200 hover:border-slate-300 text-slate-700 hover:text-slate-900 text-xs font-semibold transition-all flex items-center gap-1.5 shadow-2xs"
+            href="/admin/media"
+          >
+            <span className="material-symbols-outlined text-[16px] text-amber-600">photo_library</span>
+            <span>Media Studio</span>
+            {kpis.customMediaCount > 0 && (
+              <span className="ml-0.5 px-1.5 py-0.5 rounded bg-amber-50 text-amber-700 text-[10px] font-bold">
+                {kpis.customMediaCount}
               </span>
-              <span className="text-[11px] text-on-surface-variant truncate block">
-                All numbers update automatically whenever a client contacts you or a student signs up.
-              </span>
+            )}
+          </Link>
+
+          <Link
+            className="px-3.5 py-2 rounded-lg bg-white border border-slate-200 hover:border-slate-300 text-slate-700 hover:text-slate-900 text-xs font-semibold transition-all flex items-center gap-1.5 shadow-2xs"
+            href="/admin/leads"
+          >
+            <span className="material-symbols-outlined text-[16px] text-[#062b18]">mark_email_unread</span>
+            <span>All Messages</span>
+          </Link>
+
+          <Link
+            className="px-3.5 py-2 rounded-lg bg-[#062b18] hover:bg-[#0b4627] text-white text-xs font-semibold transition-all flex items-center gap-1.5 shadow-xs"
+            href="/admin/training"
+          >
+            <span className="material-symbols-outlined text-[16px] text-[#fbbc0e]">add_circle</span>
+            <span>Manage Offerings</span>
+          </Link>
+        </div>
+      </div>
+
+      {/* 4 Crisp Modern KPI Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {/* KPI 1: Contact Inquiries */}
+        <Link
+          className="bg-white rounded-xl p-5 border border-slate-200/80 shadow-[0_1px_3px_rgba(0,0,0,0.03)] hover:border-emerald-300 hover:shadow-md transition-all flex flex-col justify-between gap-4 group"
+          href="/admin/leads"
+        >
+          <div className="flex items-center justify-between">
+            <div className="w-10 h-10 rounded-lg bg-emerald-50 border border-emerald-100 text-[#062b18] flex items-center justify-center group-hover:scale-105 transition-transform">
+              <span className="material-symbols-outlined text-xl">mark_email_unread</span>
             </div>
+            {kpis.newInquiries > 0 ? (
+              <span className="px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold">
+                {kpis.newInquiries} New
+              </span>
+            ) : (
+              <span className="px-2 py-0.5 rounded-md bg-slate-50 text-slate-500 border border-slate-200 text-[11px] font-semibold">
+                Up to date
+              </span>
+            )}
           </div>
-
-          <div className="flex items-center gap-1.5 bg-surface-container-highest px-2 py-0.5 rounded text-[11px] font-bold text-stitch-primary shrink-0">
-            <span className="w-1.5 h-1.5 rounded-full bg-stitch-primary animate-pulse" />
-            <span>Connected</span>
-          </div>
-        </div>
-
-        {/* 4 Simple Metric Boxes */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 text-center">
-          <div className="flex flex-col items-center bg-surface-container-low/70 py-3 px-2 rounded-lg">
-            <span className="font-serif text-3xl font-bold text-stitch-primary leading-none">
-              {kpis?.totalInquiries ?? 0}
-            </span>
-            <span className="text-xs font-bold text-on-surface mt-1.5">
-              Contact Form Texts
-            </span>
-            <span className="text-[11px] text-stitch-primary font-medium mt-0.5">
-              {kpis?.newInquiries ?? 0} new waiting
-            </span>
-          </div>
-
-          <div className="flex flex-col items-center bg-surface-container-low/70 py-3 px-2 rounded-lg">
-            <span className="font-serif text-3xl font-bold text-stitch-secondary leading-none">
-              {kpis?.activeCohorts ?? 0}
-            </span>
-            <span className="text-xs font-bold text-on-surface mt-1.5">
-              Active Classes
-            </span>
-            <span className="text-[11px] text-on-surface-variant font-medium mt-0.5">
-              Across {kpis?.totalPrograms ?? 0} courses
-            </span>
-          </div>
-
-          <div className="flex flex-col items-center bg-surface-container-low/70 py-3 px-2 rounded-lg">
-            <span className="font-serif text-3xl font-bold text-stitch-primary leading-none">
-              {kpis?.openChats ?? 0}
-            </span>
-            <span className="text-xs font-bold text-on-surface mt-1.5">
-              Visitor Chats
-            </span>
-            <span className="text-[11px] text-on-surface-variant font-medium mt-0.5">
-              Open conversations
-            </span>
-          </div>
-
-          <div className="flex flex-col items-center bg-surface-container-low/70 py-3 px-2 rounded-lg">
-            <span className="font-serif text-lg sm:text-xl font-bold text-stitch-primary leading-tight">
-              +251 925 451 711
-            </span>
-            <span className="text-xs font-bold text-on-surface mt-1.5">
-              Official Phone
-            </span>
-            <span className="text-[11px] text-stitch-secondary font-medium mt-0.5">
-              WhatsApp &amp; Telegram
-            </span>
-          </div>
-        </div>
-      </section>
-
-      {/* Recent Contact Form Messages & Inquiries */}
-      <section className="bg-surface-container-lowest rounded-xl p-5 border border-surface-container-highest shadow-sm flex flex-col gap-4">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-surface-container-highest pb-3">
           <div>
-            <div className="flex items-center gap-2">
-              <span className="w-1.5 h-4 bg-stitch-primary rounded-full shrink-0" />
-              <h2 className="font-serif text-lg font-semibold text-stitch-primary">
-                Recent Contact Form Messages &amp; Inquiries
-              </h2>
+            <div className="text-3xl font-bold text-slate-900 tracking-tight tabular-nums">
+              {kpis.totalInquiries}
             </div>
-            <p className="text-xs text-on-surface-variant mt-0.5 pl-3.5">
-              Here are messages sent by visitors through the &ldquo;Contact Me&rdquo; section on your website.
+            <div className="text-xs font-medium text-slate-500 mt-1 flex items-center justify-between">
+              <span>Contact Form Inquiries</span>
+              <span className="material-symbols-outlined text-sm text-slate-300 group-hover:text-[#062b18] transition-colors">
+                arrow_forward
+              </span>
+            </div>
+          </div>
+        </Link>
+
+        {/* KPI 2: Commercial Service Bookings */}
+        <Link
+          className="bg-white rounded-xl p-5 border border-slate-200/80 shadow-[0_1px_3px_rgba(0,0,0,0.03)] hover:border-amber-300 hover:shadow-md transition-all flex flex-col justify-between gap-4 group"
+          href="/admin/training?tab=services"
+        >
+          <div className="flex items-center justify-between">
+            <div className="w-10 h-10 rounded-lg bg-amber-50 border border-amber-100 text-amber-700 flex items-center justify-center group-hover:scale-105 transition-transform">
+              <span className="material-symbols-outlined text-xl">business_center</span>
+            </div>
+            <span className="px-2 py-0.5 rounded-md bg-amber-50 text-amber-800 border border-amber-200 text-[11px] font-bold">
+              {kpis.totalPackages} Packages
+            </span>
+          </div>
+          <div>
+            <div className="text-3xl font-bold text-slate-900 tracking-tight tabular-nums">
+              {kpis.totalServiceBookings}
+            </div>
+            <div className="text-xs font-medium text-slate-500 mt-1 flex items-center justify-between">
+              <span>Service Package Bookings</span>
+              <span className="material-symbols-outlined text-sm text-slate-300 group-hover:text-amber-700 transition-colors">
+                arrow_forward
+              </span>
+            </div>
+          </div>
+        </Link>
+
+        {/* KPI 3: Academy Enrollments & Cohorts */}
+        <Link
+          className="bg-white rounded-xl p-5 border border-slate-200/80 shadow-[0_1px_3px_rgba(0,0,0,0.03)] hover:border-emerald-300 hover:shadow-md transition-all flex flex-col justify-between gap-4 group"
+          href="/admin/training?tab=courses"
+        >
+          <div className="flex items-center justify-between">
+            <div className="w-10 h-10 rounded-lg bg-emerald-50 border border-emerald-100 text-[#0b4627] flex items-center justify-center group-hover:scale-105 transition-transform">
+              <span className="material-symbols-outlined text-xl">school</span>
+            </div>
+            <span className="px-2 py-0.5 rounded-md bg-slate-50 text-slate-700 border border-slate-200 text-[11px] font-bold">
+              {kpis.activeCohorts} Active Cohorts
+            </span>
+          </div>
+          <div>
+            <div className="text-3xl font-bold text-slate-900 tracking-tight tabular-nums">
+              {kpis.totalEnrollments}
+            </div>
+            <div className="text-xs font-medium text-slate-500 mt-1 flex items-center justify-between">
+              <span>Academy Registrations ({kpis.totalPrograms} courses)</span>
+              <span className="material-symbols-outlined text-sm text-slate-300 group-hover:text-[#062b18] transition-colors">
+                arrow_forward
+              </span>
+            </div>
+          </div>
+        </Link>
+
+        {/* KPI 4: Visitor Live Chat */}
+        <Link
+          className="bg-white rounded-xl p-5 border border-slate-200/80 shadow-[0_1px_3px_rgba(0,0,0,0.03)] hover:border-slate-300 hover:shadow-md transition-all flex flex-col justify-between gap-4 group"
+          href="/admin/chat"
+        >
+          <div className="flex items-center justify-between">
+            <div className="w-10 h-10 rounded-lg bg-slate-100 border border-slate-200 text-slate-800 flex items-center justify-center group-hover:scale-105 transition-transform">
+              <span className="material-symbols-outlined text-xl">forum</span>
+            </div>
+            <span className="px-2 py-0.5 rounded-md bg-emerald-50 text-[#062b18] border border-emerald-200 text-[11px] font-bold">
+              Concierge Desk
+            </span>
+          </div>
+          <div>
+            <div className="text-3xl font-bold text-slate-900 tracking-tight tabular-nums">
+              {kpis.openChats}
+            </div>
+            <div className="text-xs font-medium text-slate-500 mt-1 flex items-center justify-between">
+              <span>Open Visitor Conversations</span>
+              <span className="material-symbols-outlined text-sm text-slate-300 group-hover:text-slate-900 transition-colors">
+                arrow_forward
+              </span>
+            </div>
+          </div>
+        </Link>
+      </div>
+
+      {/* Interactive Analytics Visualizations Row */}
+      <AdminOverviewCharts
+        activitySeries={analytics?.activitySeries || []}
+        cohorts={analytics?.cohorts || []}
+        serviceDemand={analytics?.serviceDemand || []}
+      />
+
+      {/* Recent Inquiries Table */}
+      <section className="bg-white rounded-xl border border-slate-200/80 shadow-[0_1px_3px_rgba(0,0,0,0.03)] overflow-hidden">
+        <div className="px-5 py-4 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <div>
+            <h2 className="text-sm font-bold text-slate-900 tracking-tight">
+              Recent Client Inquiries
+            </h2>
+            <p className="text-xs text-slate-500 mt-0.5">
+              Latest submissions from your public website contact desk
             </p>
           </div>
           <Link
-            className="text-xs font-bold text-stitch-primary hover:underline flex items-center gap-1 self-start sm:self-auto pl-3.5 sm:pl-0"
+            className="text-xs font-semibold text-[#062b18] hover:underline flex items-center gap-1 self-start sm:self-auto"
             href="/admin/leads"
           >
-            <span>Open All Contact Messages</span>
+            <span>View Full CRM</span>
             <span className="material-symbols-outlined text-sm">arrow_forward</span>
           </Link>
         </div>
 
         {inquiries.length === 0 ? (
-          <div className="py-12 px-4 rounded-xl bg-surface-container-low/50 border border-dashed border-surface-container-highest flex flex-col items-center justify-center text-center gap-3">
-            <div className="w-12 h-12 rounded-xl bg-surface-container-highest/60 text-stitch-secondary flex items-center justify-center">
+          <div className="py-12 px-4 flex flex-col items-center justify-center text-center gap-2.5">
+            <div className="w-11 h-11 rounded-lg bg-slate-100 text-slate-400 flex items-center justify-center">
               <span className="material-symbols-outlined text-2xl">mark_email_read</span>
             </div>
-            <div className="flex flex-col gap-1 max-w-md">
-              <span className="font-semibold text-sm text-on-surface">Inbox Clean &amp; Ready</span>
-              <p className="text-xs text-on-surface-variant leading-relaxed">
-                No new contact form messages yet. When a visitor submits the &ldquo;Contact Me&rdquo; section on your website, their name, service selection, message note, and WhatsApp contact will appear here immediately.
-              </p>
-            </div>
-            <Link
-              className="mt-1 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-stitch-primary text-white text-xs font-semibold hover:bg-stitch-primary-container transition-colors"
-              href="/#contact"
-              target="_blank"
-            >
-              <span>Test Public Contact Form</span>
-              <span className="material-symbols-outlined text-xs">open_in_new</span>
-            </Link>
+            <div className="text-sm font-semibold text-slate-800">No inquiries received yet</div>
+            <p className="text-xs text-slate-500 max-w-sm">
+              Submissions from the Contact form on your public website will appear here in real time.
+            </p>
           </div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
               <thead>
-                <tr className="border-b border-surface-container-highest bg-surface-container-low/70 text-on-surface-variant uppercase tracking-wider text-[10px]">
-                  <th className="py-2.5 px-3 font-bold">Client Name</th>
-                  <th className="py-2.5 px-3 font-bold">Message Text from Contact Form</th>
-                  <th className="py-2.5 px-3 font-bold">Service Needed</th>
-                  <th className="py-2.5 px-3 font-bold">Phone Number</th>
-                  <th className="py-2.5 px-3 font-bold">Date Received</th>
-                  <th className="py-2.5 px-3 font-bold text-right">How to Reply</th>
+                <tr className="border-b border-slate-100 bg-slate-50/70 text-slate-500 uppercase tracking-wider text-[10px]">
+                  <th className="py-3 px-5 font-bold">Client</th>
+                  <th className="py-3 px-4 font-bold">Service Domain</th>
+                  <th className="py-3 px-4 font-bold">Message Note</th>
+                  <th className="py-3 px-4 font-bold">Status</th>
+                  <th className="py-3 px-4 font-bold">Date</th>
+                  <th className="py-3 px-5 font-bold text-right">Quick Reply</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-surface-container-highest">
-                {inquiries.map((inq: any) => (
-                  <tr key={inq.id} className="hover:bg-surface-container-low/50 transition-colors">
-                    <td className="py-3 px-3 font-semibold text-on-surface whitespace-nowrap">
-                      {inq.full_name}
-                    </td>
-                    <td className="py-3 px-3 min-w-[260px] max-w-md">
-                      {inq.notes ? (
-                        <div className="p-2 rounded-lg bg-surface-container-low border border-surface-container-highest">
-                          <div className="flex items-center gap-1 text-[10px] font-bold text-stitch-secondary uppercase tracking-wider mb-0.5">
-                            <span className="material-symbols-outlined text-xs">chat_bubble</span>
-                            <span>What They Wrote:</span>
-                          </div>
-                          <p className="text-xs text-on-surface line-clamp-2 leading-relaxed">
-                            {inq.notes}
-                          </p>
-                        </div>
-                      ) : (
-                        <span className="text-[11px] text-on-surface-variant italic">
-                          No extra message (Selected: {inq.service})
+              <tbody className="divide-y divide-slate-100">
+                {inquiries.map((inq: any) => {
+                  const status = (inq.status || "new").toLowerCase();
+                  return (
+                    <tr key={inq.id} className="hover:bg-slate-50/80 transition-colors">
+                      <td className="py-3.5 px-5 whitespace-nowrap">
+                        <div className="font-semibold text-slate-900">{inq.full_name}</div>
+                        <div className="text-[11px] text-slate-400 font-mono mt-0.5">{inq.phone}</div>
+                      </td>
+                      <td className="py-3.5 px-4 text-slate-700 font-medium whitespace-nowrap">
+                        {inq.service}
+                      </td>
+                      <td className="py-3.5 px-4 max-w-xs">
+                        {inq.notes ? (
+                          <p className="text-xs text-slate-600 line-clamp-1">{inq.notes}</p>
+                        ) : (
+                          <span className="text-[11px] text-slate-400 italic">No message note</span>
+                        )}
+                      </td>
+                      <td className="py-3.5 px-4 whitespace-nowrap">
+                        <span
+                          className={`inline-block px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider border ${
+                            status === "new"
+                              ? "bg-amber-50 text-amber-800 border-amber-200"
+                              : status === "contacted"
+                              ? "bg-emerald-50 text-emerald-700 border-emerald-200"
+                              : "bg-slate-100 text-slate-600 border-slate-200"
+                          }`}
+                        >
+                          {status}
                         </span>
-                      )}
-                    </td>
-                    <td className="py-3 px-3 text-on-surface-variant font-medium whitespace-nowrap">
-                      {inq.service}
-                    </td>
-                    <td className="py-3 px-3 text-on-surface-variant font-mono whitespace-nowrap">
-                      {inq.phone}
-                    </td>
-                    <td className="py-3 px-3 text-on-surface-variant whitespace-nowrap">
-                      {new Date(inq.created_at).toLocaleDateString()}
-                    </td>
-                    <td className="py-3 px-3 text-right whitespace-nowrap">
-                      <a
-                        className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-[#25D366]/15 text-[#0d472a] hover:bg-[#25D366] hover:text-white transition-colors text-xs font-semibold"
-                        href={`https://wa.me/${inq.phone.replace(/[^0-9]/g, "")}?text=Hello%20${encodeURIComponent(
-                          inq.full_name
-                        )}%2C%20thank%20you%20for%20contacting%20Ethiopian%20Signature%20Coffee.`}
-                        rel="noopener noreferrer"
-                        target="_blank"
-                      >
-                        <span>Chat on WhatsApp</span>
-                        <span className="material-symbols-outlined text-xs">arrow_outward</span>
-                      </a>
-                    </td>
-                  </tr>
-                ))}
+                      </td>
+                      <td className="py-3.5 px-4 text-slate-500 whitespace-nowrap tabular-nums">
+                        {new Date(inq.created_at).toLocaleDateString()}
+                      </td>
+                      <td className="py-3.5 px-5 text-right whitespace-nowrap">
+                        <a
+                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#25D366]/12 text-[#062b18] hover:bg-[#25D366] hover:text-white transition-colors text-xs font-semibold border border-[#25D366]/25"
+                          href={`https://wa.me/${inq.phone.replace(/[^0-9]/g, "")}?text=Hello%20${encodeURIComponent(
+                            inq.full_name
+                          )}%2C%20thank%20you%20for%20contacting%20Ethiopian%20Signature%20Coffee.`}
+                          rel="noopener noreferrer"
+                          target="_blank"
+                        >
+                          <span>WhatsApp</span>
+                          <span className="material-symbols-outlined text-xs">arrow_outward</span>
+                        </a>
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>
