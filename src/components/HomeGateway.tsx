@@ -35,7 +35,24 @@ const GATEWAY_CARDS = [
   },
 ];
 
-export default function HomeGateway() {
+export default function HomeGateway({
+  mediaSlots,
+}: {
+  mediaSlots?: Record<string, string>;
+}) {
+  const gatewayCards = GATEWAY_CARDS.map((card) => {
+    if (card.href === "/services") {
+      return { ...card, image: mediaSlots?.service_setup || card.image };
+    }
+    if (card.href === "/training") {
+      return { ...card, image: mediaSlots?.service_barista || card.image };
+    }
+    if (card.href === "/about") {
+      return { ...card, image: mediaSlots?.catering_showcase || card.image };
+    }
+    return card;
+  });
+
   return (
     <div className="flex flex-col gap-10 sm:gap-14">
       <section className="flex flex-col gap-6 sm:gap-8">
@@ -55,7 +72,7 @@ export default function HomeGateway() {
 
         {/* Clean 3-Card Gateway Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {GATEWAY_CARDS.map((card) => (
+          {gatewayCards.map((card) => (
             <Link
               key={card.href}
               className="spotlight-card group flex flex-col rounded-2xl bg-surface-white border border-border-subtle overflow-hidden shadow-cozy hover:shadow-roast-bloom hover:-translate-y-1.5 hover:border-brand-yellow/60 transition-all duration-300"

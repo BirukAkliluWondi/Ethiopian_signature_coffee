@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef, useCallback } from "react";
+import { useEffect, useState, useRef, useCallback, useMemo } from "react";
 import Link from "next/link";
 
 function useCounter(target: number, duration: number = 1200, delay: number = 0) {
@@ -90,21 +90,40 @@ const HERO_SLIDES: MediaSlide[] = [
   },
 ];
 
-export default function Hero() {
+export default function Hero({
+  mediaSlots,
+}: {
+  mediaSlots?: Record<string, string>;
+}) {
   const venuesCount = useCounter(14, 1000, 500);
   const baristasCount = useCounter(250, 1200, 600);
   const originsCount = useCounter(100, 1100, 700);
+
+  const slides = useMemo(() => {
+    return HERO_SLIDES.map((slide) => {
+      if (slide.id === "ceremony-woman" && mediaSlots?.hero_slide_0) {
+        return { ...slide, src: mediaSlots.hero_slide_0 };
+      }
+      if (slide.id === "roast-and-jebena" && mediaSlots?.hero_slide_1) {
+        return { ...slide, src: mediaSlots.hero_slide_1 };
+      }
+      if (slide.id === "coffee-community" && mediaSlots?.hero_slide_2) {
+        return { ...slide, src: mediaSlots.hero_slide_2 };
+      }
+      return slide;
+    });
+  }, [mediaSlots]);
 
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [isMuted, setIsMuted] = useState(true);
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-  const currentSlide = HERO_SLIDES[currentSlideIndex];
+  const currentSlide = slides[currentSlideIndex];
 
   const nextSlide = useCallback(() => {
-    setCurrentSlideIndex((prev) => (prev + 1) % HERO_SLIDES.length);
-  }, []);
+    setCurrentSlideIndex((prev) => (prev + 1) % slides.length);
+  }, [slides.length]);
 
   // Handle automatic slide progression for static images
   useEffect(() => {
@@ -192,18 +211,18 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* CTAs: Secondary Outline on Left, Primary Main Action on Right (Fully responsive) */}
-        <div className="mount-cta flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1 sm:pt-2 w-full sm:w-auto">
+        {/* CTAs: Secondary Outline on Left, Primary Main Action on Right (Side-by-side on mobile & desktop for clean above-the-fold framing) */}
+        <div className="mount-cta grid grid-cols-2 sm:flex sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 pt-1 sm:pt-2 w-full sm:w-auto">
           {/* Secondary Outline Action (Left) */}
           <Link
-            className="group h-12 w-full sm:w-auto px-6 sm:px-8 rounded-xl border-2 border-brand-green text-brand-green bg-white hover:bg-brand-green/5 text-center font-semibold text-sm whitespace-nowrap active:scale-95 transition-all shadow-cozy-sm hover:shadow-cozy flex items-center justify-center hover:-translate-y-0.5 duration-200"
+            className="group h-12 w-full sm:w-auto px-3 sm:px-8 rounded-xl border-2 border-brand-green text-brand-green bg-white hover:bg-brand-green/5 text-center font-semibold text-[13px] sm:text-sm whitespace-nowrap active:scale-95 transition-all shadow-cozy-sm hover:shadow-cozy flex items-center justify-center hover:-translate-y-0.5 duration-200"
             href="/services"
           >
             <span>Explore Services</span>
           </Link>
           {/* Primary Solid Confirmation Action (Right) */}
           <Link
-            className="group btn-shimmer h-12 w-full sm:w-auto px-6 sm:px-8 rounded-xl bg-brand-green hover:bg-brand-green-dark text-white text-center font-semibold text-sm shadow-cozy hover:shadow-cozy-float whitespace-nowrap active:scale-95 transition-all flex items-center justify-center hover:-translate-y-0.5 duration-200"
+            className="group btn-shimmer h-12 w-full sm:w-auto px-3 sm:px-8 rounded-xl bg-brand-green hover:bg-brand-green-dark text-white text-center font-semibold text-[13px] sm:text-sm shadow-cozy hover:shadow-cozy-float whitespace-nowrap active:scale-95 transition-all flex items-center justify-center hover:-translate-y-0.5 duration-200"
             href="/contact"
           >
             <span>Start Advisory</span>
@@ -216,7 +235,7 @@ export default function Hero() {
         <div className="mount-hero-card relative w-full max-w-lg lg:max-w-none rounded-2xl sm:rounded-3xl overflow-hidden shadow-roast-bloom border border-border-subtle bg-stone-900 group ring-1 ring-border-subtle">
           <div className="relative w-full aspect-[4/3] sm:aspect-[4/3] lg:aspect-[4/3.5] xl:aspect-[4/3.3] max-h-[480px]">
             {/* Sequential Crossfading Media Showcase */}
-            {HERO_SLIDES.map((slide, index) => {
+            {slides.map((slide, index) => {
               const isActive = index === currentSlideIndex;
               return (
                 <div
@@ -275,7 +294,7 @@ export default function Hero() {
               className="absolute bottom-3 sm:bottom-3.5 left-1/2 -translate-x-1/2 z-30 flex items-center gap-1.5"
               aria-label="Hero visual media slides"
             >
-              {HERO_SLIDES.map((slide, index) => {
+              {slides.map((slide, index) => {
                 const isActive = index === currentSlideIndex;
                 return (
                   <button

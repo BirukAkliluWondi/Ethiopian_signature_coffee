@@ -2,6 +2,7 @@
 
 import fs from "fs/promises";
 import path from "path";
+import { revalidatePath } from "next/cache";
 import { supabase } from "@/lib/supabase";
 import { ORIGINAL_MEDIA_BASELINE } from "@/lib/cms-media";
 import { isAdminAuthenticated } from "./admin-auth";
@@ -115,6 +116,7 @@ export async function updateMediaSlotAction(
       .eq("slot_key", slotKey);
 
     if (error) throw error;
+    revalidatePath("/", "layout");
     return { success: true };
   } catch (err: unknown) {
     console.error("Error updating media slot:", err);
@@ -160,6 +162,7 @@ export async function revertMediaSlotAction(slotKey: string) {
 
     if (updateErr) throw updateErr;
 
+    revalidatePath("/", "layout");
     return {
       success: true,
       restoredUrl: previousUrl,
@@ -213,6 +216,7 @@ export async function revertSlotToOriginalAction(slotKey: string) {
 
     if (updateErr) throw updateErr;
 
+    revalidatePath("/", "layout");
     return {
       success: true,
       restoredUrl: originalUrl,
@@ -257,6 +261,7 @@ export async function revertAllSlotsToOriginalAction() {
       }
     }
 
+    revalidatePath("/", "layout");
     return {
       success: true,
       updatedCount,
@@ -441,6 +446,7 @@ export async function updateCohortScheduleAction(
       .eq("id", id);
 
     if (error) throw error;
+    revalidatePath("/", "layout");
     return { success: true };
   } catch (err: unknown) {
     console.error("Error updating cohort schedule:", err);
@@ -463,6 +469,7 @@ export async function deleteCohortScheduleAction(id: string) {
       .eq("id", id);
 
     if (error) throw error;
+    revalidatePath("/", "layout");
     return { success: true };
   } catch (err: unknown) {
     console.error("Error deleting cohort schedule:", err);
@@ -488,6 +495,7 @@ export async function deleteTrainingProgramAction(id: string) {
     // 3. Delete the training program itself
     const { error } = await supabase.from("training_programs").delete().eq("id", id);
     if (error) throw error;
+    revalidatePath("/", "layout");
     return { success: true };
   } catch (err: any) {
     console.error("Error deleting training program:", err);
@@ -532,6 +540,7 @@ export async function updateInquiryStatusAction(id: string, status: string) {
       .eq("id", id);
 
     if (error) throw error;
+    revalidatePath("/", "layout");
     return { success: true };
   } catch (err: unknown) {
     console.error("Error updating inquiry status:", err);
@@ -740,6 +749,7 @@ export async function updateAcademyApplicantStatusAction(id: string, status: str
       .eq("id", id);
 
     if (error) throw error;
+    revalidatePath("/", "layout");
     return { success: true };
   } catch (err) {
     console.error("Error updating applicant status:", err);
@@ -762,6 +772,7 @@ export async function deleteAcademyApplicantAction(id: string) {
       .eq("id", id);
 
     if (error) throw error;
+    revalidatePath("/", "layout");
     return { success: true };
   } catch (err) {
     console.error("Error deleting applicant:", err);
@@ -968,6 +979,7 @@ export async function deleteServicePackageAction(id: string) {
     // 2. Delete the service package
     const { error } = await supabase.from("service_packages").delete().eq("id", id);
     if (error) throw error;
+    revalidatePath("/", "layout");
     return { success: true };
   } catch (err: any) {
     console.error("Error deleting service package:", err);
@@ -1025,6 +1037,7 @@ export async function updateServiceBookingStatusAction(id: string, status: strin
       .eq("id", id);
 
     if (error) throw error;
+    revalidatePath("/", "layout");
     return { success: true };
   } catch (err) {
     console.error("Error updating service booking status:", err);
@@ -1043,6 +1056,7 @@ export async function deleteServiceBookingAction(id: string) {
 
     const { error } = await supabase.from("service_bookings").delete().eq("id", id);
     if (error) throw error;
+    revalidatePath("/", "layout");
     return { success: true };
   } catch (err) {
     console.error("Error deleting service booking:", err);

@@ -19,7 +19,7 @@ export default function Footer() {
               <img
                 alt="Ethiopian Signature Coffee Logo"
                 className="h-10 sm:h-11 w-auto object-contain shrink-0 transition-transform group-hover:scale-105"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVGdMLvm7cdqUrGHWpdNQhrRzkiXAIUefB5waMuZVNpKSYJK9djSqpMmraBGiO69PGClOSLjIebLEKsMP28psqrRRZ7ruqU8HrOR8qblIEVsgmefxkBJ9dSynoEEHbqZ_iOVQV_9gPo5XIBSSYZ8A7KlmhMBDO5l-W5ShQxQKXBW0Bytvubwlbiuam7Nr44kXjWnI20WUSLARG0IRiupi7x9opX2d8s7XerGo47sfegBJN8R_TmNp5"
+                src="/logo.png"
               />
               <div className="flex flex-col justify-center">
                 <span className="font-serif text-lg sm:text-xl font-bold tracking-tight text-white leading-none">
@@ -149,7 +149,7 @@ export default function Footer() {
               <li className="pt-1">
                 <Link
                   className="hover:text-brand-yellow transition-colors text-xs text-brand-yellow/90 font-medium flex items-center gap-1"
-                  href="/contact"
+                  href="/contact?service=Premium%20Ethiopian%20Coffee%20Sourcing"
                 >
                   <span>Cooperative Allocations</span>
                   <span className="text-[10px]">→</span>
@@ -200,7 +200,7 @@ export default function Footer() {
 
               <Link
                 className="btn-shimmer mt-1 h-11 px-5 rounded-xl bg-brand-yellow hover:bg-brand-yellow-light text-stone-950 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-cozy hover:shadow-cozy-float active:scale-95 transition-all text-center hover:-translate-y-0.5 duration-200"
-                href="/contact"
+                href="/contact?service=Coffee%20Shop%20Setup%20%26%20Organization"
               >
                 <span>Book Setup Advisory</span>
                 <span className="material-symbols-outlined text-sm">arrow_forward</span>

@@ -1,7 +1,11 @@
 import Link from "next/link";
 import DynamicServicePackages from "./DynamicServicePackages";
 
-export function CoreServicesSection() {
+export function CoreServicesSection({
+  mediaSlots,
+}: {
+  mediaSlots?: Record<string, string>;
+}) {
   return (
     <section className="reveal-on-scroll flex flex-col gap-8 sm:gap-10 scroll-mt-28 relative section-transition-glow" id="services">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 sm:gap-4">
@@ -23,7 +27,7 @@ export function CoreServicesSection() {
           <img
             alt="Coffee Shop Setup & Organization"
             className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
-            src="/coffee-shop-setup.jpg"
+            src={mediaSlots?.service_setup || "/coffee-shop-setup.jpg"}
           />
         </div>
 
@@ -60,7 +64,7 @@ export function CoreServicesSection() {
           <div className="pt-1 sm:pt-2">
             <Link
               className="group btn-shimmer inline-flex items-center justify-center h-12 w-full sm:w-auto px-6 sm:px-8 rounded-xl bg-brand-green hover:bg-brand-green-dark text-white font-semibold text-sm whitespace-nowrap shadow-cozy hover:shadow-cozy-float active:scale-95 transition-all text-center hover:-translate-y-0.5 duration-200"
-              href="/contact"
+              href="/contact?service=Coffee%20Shop%20Setup%20%26%20Organization"
             >
               <span>Book Setup Consultation</span>
             </Link>
@@ -77,7 +81,10 @@ export function CoreServicesSection() {
             <img
               alt="Barista Training"
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-              src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=800&auto=format&fit=crop"
+              src={
+                mediaSlots?.service_barista ||
+                "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=800&auto=format&fit=crop"
+              }
             />
           </div>
           <div className="p-5 sm:p-6 flex flex-col justify-between flex-1 gap-4 sm:gap-5">
@@ -105,7 +112,10 @@ export function CoreServicesSection() {
             <img
               alt="Menu & Recipe Development"
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-              src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=800&auto=format&fit=crop"
+              src={
+                mediaSlots?.service_menu ||
+                "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=800&auto=format&fit=crop"
+              }
             />
           </div>
           <div className="p-5 sm:p-6 flex flex-col justify-between flex-1 gap-4 sm:gap-5">
@@ -119,7 +129,7 @@ export function CoreServicesSection() {
             </div>
             <Link
               className="group w-full h-11 px-5 rounded-xl border border-brand-green text-brand-green font-bold text-xs uppercase tracking-wider hover:bg-brand-green hover:text-white transition-all shadow-cozy-sm flex items-center justify-center whitespace-nowrap active:scale-95"
-              href="/contact"
+              href="/contact?service=Menu%20Engineering%20%26%20Profitability"
             >
               <span>Inquire Menus</span>
             </Link>
@@ -133,7 +143,10 @@ export function CoreServicesSection() {
             <img
               alt="Coffee Business Consulting"
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-              src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?q=80&w=800&auto=format&fit=crop"
+              src={
+                mediaSlots?.service_consulting ||
+                "https://images.unsplash.com/photo-1442512595331-e89e73853f31?q=80&w=800&auto=format&fit=crop"
+              }
             />
           </div>
           <div className="p-5 sm:p-6 flex flex-col justify-between flex-1 gap-4 sm:gap-5">
@@ -147,7 +160,7 @@ export function CoreServicesSection() {
             </div>
             <Link
               className="group w-full h-11 px-5 rounded-xl border border-brand-green text-brand-green font-bold text-xs uppercase tracking-wider hover:bg-brand-green hover:text-white transition-all shadow-cozy-sm flex items-center justify-center whitespace-nowrap active:scale-95"
-              href="/contact"
+              href="/contact?service=Business%20Consultancy%20%26%20Feasibility"
             >
               <span>Book Advisory</span>
             </Link>
@@ -161,7 +174,10 @@ export function CoreServicesSection() {
             <img
               alt="Coffee Shop Operations Management"
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-              src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?q=80&w=800&auto=format&fit=crop"
+              src={
+                mediaSlots?.service_operations ||
+                "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?q=80&w=800&auto=format&fit=crop"
+              }
             />
           </div>
           <div className="p-5 sm:p-6 flex flex-col justify-between flex-1 gap-4 sm:gap-5">
@@ -175,7 +191,7 @@ export function CoreServicesSection() {
             </div>
             <Link
               className="group w-full h-11 px-5 rounded-xl border border-brand-green text-brand-green font-bold text-xs uppercase tracking-wider hover:bg-brand-green hover:text-white transition-all shadow-cozy-sm flex items-center justify-center whitespace-nowrap active:scale-95"
-              href="/contact"
+              href="/contact?service=Operations%20%26%20Workflow%20Systems"
             >
               <span>View Operations</span>
             </Link>
@@ -189,7 +205,10 @@ export function CoreServicesSection() {
             <img
               alt="Menu Engineering & Profitability"
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-              src="https://images.unsplash.com/photo-1559496417-e7f25cb247f3?q=80&w=800&auto=format&fit=crop"
+              src={
+                mediaSlots?.service_profitability ||
+                "https://images.unsplash.com/photo-1559496417-e7f25cb247f3?q=80&w=800&auto=format&fit=crop"
+              }
             />
           </div>
           <div className="p-5 sm:p-6 flex flex-col justify-between flex-1 gap-4 sm:gap-5">
@@ -203,7 +222,7 @@ export function CoreServicesSection() {
             </div>
             <Link
               className="group w-full h-11 px-5 rounded-xl border border-brand-green text-brand-green font-bold text-xs uppercase tracking-wider hover:bg-brand-green hover:text-white transition-all shadow-cozy-sm flex items-center justify-center whitespace-nowrap active:scale-95"
-              href="/contact"
+              href="/contact?service=Menu%20Engineering%20%26%20Profitability"
             >
               <span>Improve Margins</span>
             </Link>
@@ -214,7 +233,11 @@ export function CoreServicesSection() {
   );
 }
 
-export function CateringShowcaseSection() {
+export function CateringShowcaseSection({
+  mediaSlots,
+}: {
+  mediaSlots?: Record<string, string>;
+}) {
   return (
     <article
       id="catering"
@@ -226,7 +249,7 @@ export function CateringShowcaseSection() {
         <img
           alt="Ethiopian Signature Catering Services & Event Hospitality"
           className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
-          src="/catering-services.jpg"
+          src={mediaSlots?.catering_showcase || "/catering-services.jpg"}
         />
       </div>
 
@@ -276,7 +299,7 @@ export function CateringShowcaseSection() {
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1 sm:pt-2">
           <Link
             className="group btn-shimmer inline-flex items-center justify-center h-12 w-full sm:w-auto px-6 sm:px-8 rounded-xl bg-brand-green hover:bg-brand-green-dark text-white font-semibold text-sm whitespace-nowrap shadow-cozy hover:shadow-cozy-float active:scale-95 transition-all text-center hover:-translate-y-0.5 duration-200"
-            href="/contact"
+            href="/contact?service=Catering%20Services%20%26%20Hospitality"
           >
             <span>Request a Quote</span>
           </Link>
@@ -295,12 +318,16 @@ export function CateringShowcaseSection() {
   );
 }
 
-export default function Services() {
+export default function Services({
+  mediaSlots,
+}: {
+  mediaSlots?: Record<string, string>;
+}) {
   return (
     <div className="flex flex-col gap-10">
-      <CoreServicesSection />
+      <CoreServicesSection mediaSlots={mediaSlots} />
       <DynamicServicePackages />
-      <CateringShowcaseSection />
+      <CateringShowcaseSection mediaSlots={mediaSlots} />
     </div>
   );
 }

@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Link from "next/link";
 import TopAccentLine from "@/components/TopAccentLine";
 import Header from "@/components/Header";
@@ -47,7 +48,15 @@ export default function ContactPage() {
           </div>
 
           {/* Dedicated Contact Form & Channels */}
-          <Contact />
+          <Suspense
+            fallback={
+              <div className="p-10 rounded-2xl bg-surface-white border border-border-subtle text-center text-xs text-text-muted">
+                Loading advisory desk...
+              </div>
+            }
+          >
+            <Contact />
+          </Suspense>
         </div>
       </main>
 

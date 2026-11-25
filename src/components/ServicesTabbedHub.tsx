@@ -11,8 +11,10 @@ type ServiceTab = "practices" | "packages" | "catering" | "process";
 
 export default function ServicesTabbedHub({
   initialPackages,
+  mediaSlots,
 }: {
   initialPackages: ServicePackageForBooking[];
+  mediaSlots?: Record<string, string>;
 }) {
   const searchParams = useSearchParams();
   const [activeTab, setActiveTab] = useState<ServiceTab>("practices");
@@ -63,7 +65,7 @@ export default function ServicesTabbedHub({
       {/* Active Tab Viewport */}
       {activeTab === "practices" && (
         <div className="animate-in fade-in duration-300">
-          <CoreServicesSection />
+          <CoreServicesSection mediaSlots={mediaSlots} />
         </div>
       )}
 
@@ -89,7 +91,7 @@ export default function ServicesTabbedHub({
 
       {activeTab === "catering" && (
         <div className="animate-in fade-in duration-300">
-          <CateringShowcaseSection />
+          <CateringShowcaseSection mediaSlots={mediaSlots} />
         </div>
       )}
 

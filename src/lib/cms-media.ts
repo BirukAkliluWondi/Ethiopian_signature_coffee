@@ -39,3 +39,29 @@ export async function getMediaSlotUrl(
     return fallbackUrl;
   }
 }
+
+/**
+ * Fetch all active media slots as a dictionary merged over baseline defaults.
+ */
+export async function getAllMediaSlotsMap(): Promise<Record<string, string>> {
+  const result: Record<string, string> = { ...ORIGINAL_MEDIA_BASELINE };
+  try {
+    if (!supabase) return result;
+
+    const { data, error } = await supabase
+      .from("media_assets")
+      .select("slot_key, image_url")
+      .eq("is_active", true);
+
+    if (error || !data) return result;
+
+    for (const row of data) {
+      if (row.slot_key && row.image_url) {
+        result[row.slot_key] = row.image_url;
+      }
+    }
+    return result;
+  } catch {
+    return result;
+  }
+}

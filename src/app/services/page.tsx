@@ -9,6 +9,7 @@ import MobileBottomNav from "@/components/MobileBottomNav";
 import StickyChatButton from "@/components/StickyChatButton";
 import ScrollRevealInit from "@/components/ScrollRevealInit";
 import { getServicePackagesAction } from "@/app/actions/admin-cms";
+import { getAllMediaSlotsMap } from "@/lib/cms-media";
 
 export const dynamic = "force-dynamic";
 
@@ -19,7 +20,10 @@ export const metadata = {
 };
 
 export default async function ServicesPage() {
-  const res = await getServicePackagesAction();
+  const [res, mediaSlots] = await Promise.all([
+    getServicePackagesAction(),
+    getAllMediaSlotsMap(),
+  ]);
   const activePackages =
     res.success && res.data ? res.data.filter((p: any) => p.is_active) : [];
 
@@ -63,7 +67,10 @@ export default async function ServicesPage() {
               </div>
             }
           >
-            <ServicesTabbedHub initialPackages={activePackages} />
+            <ServicesTabbedHub
+              initialPackages={activePackages}
+              mediaSlots={mediaSlots}
+            />
           </Suspense>
 
           {/* Compact Consultation CTA */}

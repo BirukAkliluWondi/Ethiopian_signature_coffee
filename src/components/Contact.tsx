@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useState, useEffect, type FormEvent } from "react";
+import { useSearchParams } from "next/navigation";
 import { submitInquiryAction } from "@/app/actions/inquiry";
 
 const SERVICE_OPTIONS = [
@@ -15,6 +16,7 @@ const SERVICE_OPTIONS = [
 ];
 
 export default function Contact() {
+  const searchParams = useSearchParams();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [feedback, setFeedback] = useState<{
     type: "success" | "error" | null;
@@ -28,6 +30,13 @@ export default function Contact() {
     service: "Coffee Shop Setup & Organization",
     notes: "",
   });
+
+  useEffect(() => {
+    const requestedService = searchParams.get("service");
+    if (requestedService && SERVICE_OPTIONS.includes(requestedService)) {
+      setFormData((prev) => ({ ...prev, service: requestedService }));
+    }
+  }, [searchParams]);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();

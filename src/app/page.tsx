@@ -7,8 +7,13 @@ import Footer from "@/components/Footer";
 import MobileBottomNav from "@/components/MobileBottomNav";
 import StickyChatButton from "@/components/StickyChatButton";
 import ScrollRevealInit from "@/components/ScrollRevealInit";
+import { getAllMediaSlotsMap } from "@/lib/cms-media";
 
-export default function Home() {
+export const dynamic = "force-dynamic";
+
+export default async function Home() {
+  const mediaSlots = await getAllMediaSlotsMap();
+
   return (
     <>
       {/* Scroll Reveal Observer Engine */}
@@ -23,9 +28,9 @@ export default function Home() {
       {/* Main Content Container with Warm Porcelain Base */}
       <main className="flex-1 w-full pt-16 sm:pt-20 md:pt-24 lg:pt-28 pb-28 lg:pb-20 bg-surface-cream">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-12 sm:gap-16 md:gap-20">
-          <Hero />
+          <Hero mediaSlots={mediaSlots} />
           <TrustRibbon />
-          <HomeGateway />
+          <HomeGateway mediaSlots={mediaSlots} />
         </div>
       </main>
 

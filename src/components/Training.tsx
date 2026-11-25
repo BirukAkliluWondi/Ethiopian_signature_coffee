@@ -122,7 +122,7 @@ export default function Training() {
               </button>
               <Link
                 className="group btn-shimmer w-full sm:w-auto h-12 px-6 sm:px-8 rounded-xl bg-brand-yellow hover:bg-brand-yellow-light text-black font-bold text-xs uppercase tracking-wider text-center whitespace-nowrap active:scale-95 transition-all shadow-cozy hover:shadow-cozy-float flex items-center justify-center hover:-translate-y-0.5 duration-200"
-                href="/contact"
+                href="/contact?service=Barista%20%26%20Staff%20Training"
               >
                 <span>Enroll in Academy</span>
               </Link>

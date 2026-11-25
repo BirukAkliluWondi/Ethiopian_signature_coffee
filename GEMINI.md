@@ -90,9 +90,11 @@
    - **Pre-Revert to Original Checkpoint Tag**: `pre-revert-to-original-feature`
    - **Pre-Executive Admin Overhaul Checkpoint Tag**: `pre-executive-admin-overhaul`
    - **Pre-Multi-Page Main Site Checkpoint Tag**: `pre-multipage-main-site-refactor`
-   - **Backup Branches**: `backup-stable-baseline`, `backup-pre-hero-media-carousel`, `backup-pre-opening-motion-choreography`, `backup-pre-chronological-resequence`, `backup-pre-debox-transformation`, `backup-pre-ui-ux-refinements`, `backup-pre-catering-service`, `backup-pre-catering-dedicated-showcase`, `backup-pre-admin-dashboard`, `backup-stitch-admin-ui`, `backup-admin-step-guides`, `backup-contact-messages-visibility`, `backup-admin-polish-and-auth`, `backup-dynamic-applications-excel`, `backup-admin-ai-copilot`, `backup-services-and-pricing-cms`, `backup-multipage-and-ui-cleanup`, `backup-admin-login-polish`, `backup-delete-feature-and-login-privacy`, `backup-nav-bars-streamline`, `backup-media-revert-and-copilot-fix`, `backup-filter-and-notification-activation`, `backup-revert-to-original-feature`, `backup-executive-admin-overhaul`, `backup-multipage-main-site-refactor` (Pushed to GitHub `origin`)
+   - **Pre-Final Website Polish Checkpoint Tag**: `pre-final-website-polish`
+   - **Backup Branches**: `backup-stable-baseline`, `backup-pre-hero-media-carousel`, `backup-pre-opening-motion-choreography`, `backup-pre-chronological-resequence`, `backup-pre-debox-transformation`, `backup-pre-ui-ux-refinements`, `backup-pre-catering-service`, `backup-pre-catering-dedicated-showcase`, `backup-pre-admin-dashboard`, `backup-stitch-admin-ui`, `backup-admin-step-guides`, `backup-contact-messages-visibility`, `backup-admin-polish-and-auth`, `backup-dynamic-applications-excel`, `backup-admin-ai-copilot`, `backup-services-and-pricing-cms`, `backup-multipage-and-ui-cleanup`, `backup-admin-login-polish`, `backup-delete-feature-and-login-privacy`, `backup-nav-bars-streamline`, `backup-media-revert-and-copilot-fix`, `backup-filter-and-notification-activation`, `backup-revert-to-original-feature`, `backup-executive-admin-overhaul`, `backup-multipage-main-site-refactor`, `backup-final-website-polish` (Pushed to GitHub `origin`)
    - **Remote Synchronization**: Fully backed up on remote GitHub repository.
    - **One-Prompt Revert Protocol**:
+     - To revert to the state before the final website polish pass: `git reset --hard pre-final-website-polish && git clean -fd`
      - To revert to the state before the 5-page public site refactor: `git reset --hard pre-multipage-main-site-refactor && git clean -fd`
      - To revert to the state before the Executive Admin Dashboard overhaul: `git reset --hard pre-executive-admin-overhaul && git clean -fd`
      - To revert to the state before the revert to original feature: `git reset --hard pre-revert-to-original-feature && git clean -fd`
@@ -487,4 +489,20 @@
       - Hosts `<Contact />` consultation form, interactive service tiles, WhatsApp, Telegram, and phone `+251925451711` on its own clean route.
     - **Dynamic Tab Reveal Observer (`ScrollRevealInit.tsx`)**:
       - Uses a `MutationObserver` on `document.body` so `.reveal-on-scroll` and `.spotlight-card` elements inside newly switched tabs reveal immediately without stalling at `opacity: 0`.
+    - **Strict Rule Preservation**: Strictly ZERO `rounded-full` text pill badges, unclipped original ceremony photo on Hero Slide 0, official phone strictly `+251925451711`.
+
+## Final Website Polish, Live CMS Wiring & Technical SEO Architecture
+31. **Live Media Slot Synchronization, Smart Service Routing, SEO & Mobile CTA Spacing**:
+    - **Live CMS Media Wiring (`src/lib/cms-media.ts` & `src/app/actions/admin-cms.ts`)**:
+      - Added `getAllMediaSlotsMap()` merging active Supabase `media_assets` records over `ORIGINAL_MEDIA_BASELINE` so `Hero`, `HomeGateway`, `CoreServicesSection`, and `CateringShowcaseSection` render CMS photography live on `/` (`force-dynamic`) and `/services`.
+      - Added `revalidatePath("/", "layout")` across CMS media and catalog mutations so admin Media Studio edits and reverts sync immediately across public routes.
+    - **Local Logo Asset Reliability (`Header.tsx` & `Footer.tsx`)**:
+      - Replaced external `lh3.googleusercontent.com` brand logo URLs in Header and Footer with local `/logo.png` while preserving the original Slide 0 ceremony portrait intact.
+    - **Smart `/contact?service=` Inquiry Routing (`Contact.tsx` & `src/app/contact/page.tsx`)**:
+      - `Contact.tsx` reads `?service=` via `useSearchParams()` inside a `<Suspense>` boundary on `/contact` to pre-select the matching inquiry tile automatically when visitors click `"Request a Quote"`, `"Book Setup Advisory"`, `"Inquire Menus"`, `"Book Advisory"`, `"Enroll in Academy"`, or `"Cooperative Allocations"`.
+    - **Technical SEO, Font Deduplication & Branded 404**:
+      - Upgraded `src/app/layout.tsx` with `icons` (`/logo.png`), `openGraph`, `twitter` card metadata, `metadataBase`, `LocalBusiness` JSON-LD (`+251925451711`, Atlas District, Bole Sub-City, Addis Ababa), and removed the duplicate Material Symbols `<link>` tag (already imported in `globals.css`).
+      - Added `src/app/sitemap.ts`, `src/app/robots.ts` (disallowing `/admin` and `/api/`), and branded `src/app/not-found.tsx`.
+    - **Mobile Hero CTA & Floating Advisory Button Separation (`Hero.tsx`)**:
+      - Placed `"Explore Services"` and `"Start Advisory"` side-by-side (`grid grid-cols-2`) on mobile viewports (`< sm`) so both primary CTAs remain comfortably above the floating `support_agent` FAB (`StickyChatButton`) at scroll `0` with zero overlap.
     - **Strict Rule Preservation**: Strictly ZERO `rounded-full` text pill badges, unclipped original ceremony photo on Hero Slide 0, official phone strictly `+251925451711`.
