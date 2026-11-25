@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useRef, useCallback } from "react";
+import Link from "next/link";
 
 function useCounter(target: number, duration: number = 1200, delay: number = 0) {
   const [count, setCount] = useState(0);
@@ -194,19 +195,19 @@ export default function Hero() {
         {/* CTAs: Secondary Outline on Left, Primary Main Action on Right (Fully responsive) */}
         <div className="mount-cta flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1 sm:pt-2 w-full sm:w-auto">
           {/* Secondary Outline Action (Left) */}
-          <a
+          <Link
             className="group h-12 w-full sm:w-auto px-6 sm:px-8 rounded-xl border-2 border-brand-green text-brand-green bg-white hover:bg-brand-green/5 text-center font-semibold text-sm whitespace-nowrap active:scale-95 transition-all shadow-cozy-sm hover:shadow-cozy flex items-center justify-center hover:-translate-y-0.5 duration-200"
-            href="#services"
+            href="/services"
           >
             <span>Explore Services</span>
-          </a>
+          </Link>
           {/* Primary Solid Confirmation Action (Right) */}
-          <a
+          <Link
             className="group btn-shimmer h-12 w-full sm:w-auto px-6 sm:px-8 rounded-xl bg-brand-green hover:bg-brand-green-dark text-white text-center font-semibold text-sm shadow-cozy hover:shadow-cozy-float whitespace-nowrap active:scale-95 transition-all flex items-center justify-center hover:-translate-y-0.5 duration-200"
-            href="#contact"
+            href="/contact"
           >
             <span>Start Advisory</span>
-          </a>
+          </Link>
         </div>
       </div>
 

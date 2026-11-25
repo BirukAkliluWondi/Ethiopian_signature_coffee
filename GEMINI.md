@@ -89,9 +89,11 @@
    - **Pre-Filter & Notification Activation Tag**: `pre-filter-and-notification-activation`
    - **Pre-Revert to Original Checkpoint Tag**: `pre-revert-to-original-feature`
    - **Pre-Executive Admin Overhaul Checkpoint Tag**: `pre-executive-admin-overhaul`
-   - **Backup Branches**: `backup-stable-baseline`, `backup-pre-hero-media-carousel`, `backup-pre-opening-motion-choreography`, `backup-pre-chronological-resequence`, `backup-pre-debox-transformation`, `backup-pre-ui-ux-refinements`, `backup-pre-catering-service`, `backup-pre-catering-dedicated-showcase`, `backup-pre-admin-dashboard`, `backup-stitch-admin-ui`, `backup-admin-step-guides`, `backup-contact-messages-visibility`, `backup-admin-polish-and-auth`, `backup-dynamic-applications-excel`, `backup-admin-ai-copilot`, `backup-services-and-pricing-cms`, `backup-multipage-and-ui-cleanup`, `backup-admin-login-polish`, `backup-delete-feature-and-login-privacy`, `backup-nav-bars-streamline`, `backup-media-revert-and-copilot-fix`, `backup-filter-and-notification-activation`, `backup-revert-to-original-feature`, `backup-executive-admin-overhaul` (Pushed to GitHub `origin`)
+   - **Pre-Multi-Page Main Site Checkpoint Tag**: `pre-multipage-main-site-refactor`
+   - **Backup Branches**: `backup-stable-baseline`, `backup-pre-hero-media-carousel`, `backup-pre-opening-motion-choreography`, `backup-pre-chronological-resequence`, `backup-pre-debox-transformation`, `backup-pre-ui-ux-refinements`, `backup-pre-catering-service`, `backup-pre-catering-dedicated-showcase`, `backup-pre-admin-dashboard`, `backup-stitch-admin-ui`, `backup-admin-step-guides`, `backup-contact-messages-visibility`, `backup-admin-polish-and-auth`, `backup-dynamic-applications-excel`, `backup-admin-ai-copilot`, `backup-services-and-pricing-cms`, `backup-multipage-and-ui-cleanup`, `backup-admin-login-polish`, `backup-delete-feature-and-login-privacy`, `backup-nav-bars-streamline`, `backup-media-revert-and-copilot-fix`, `backup-filter-and-notification-activation`, `backup-revert-to-original-feature`, `backup-executive-admin-overhaul`, `backup-multipage-main-site-refactor` (Pushed to GitHub `origin`)
    - **Remote Synchronization**: Fully backed up on remote GitHub repository.
    - **One-Prompt Revert Protocol**:
+     - To revert to the state before the 5-page public site refactor: `git reset --hard pre-multipage-main-site-refactor && git clean -fd`
      - To revert to the state before the Executive Admin Dashboard overhaul: `git reset --hard pre-executive-admin-overhaul && git clean -fd`
      - To revert to the state before the revert to original feature: `git reset --hard pre-revert-to-original-feature && git clean -fd`
      - To revert to the state before filter and notification activation: `git reset --hard pre-filter-and-notification-activation && git clean -fd`
@@ -467,3 +469,22 @@
       - Real-time telemetry powered by `getExecutiveDashboardAnalyticsAction()` in `src/app/actions/admin-cms.ts`.
       - Features Quick Action Header Bar, 4 Modern KPI Stat Cards (`Contact Inquiries`, `Service Bookings`, `Academy Enrollments`, `Open Visitor Chats`), a responsive `grid-cols-7` **7-Day Client Activity** interactive bar chart with zero-shift floating hover tooltips, **Demand by Service Category** progress bars, **Upcoming Academy Cohorts** seat occupancy bars, and an upgraded **Recent Client Inquiries** CRM table.
     - **Strict Rule Preservation**: Strictly ZERO `rounded-full` text pill badges, ZERO exposed AI model names, ZERO bulky tutorial boxes (AI Copilot provides on-demand help), phone strictly `+251925451711`, admin credentials strictly `henoktessma111@gmail.com` / `254517`.
+
+## 5-Page Multi-Page Public Website Architecture
+30. **Focused Multi-Page Routing, Compact Homepage & Tabbed Domain Hubs**:
+    - **Elimination of Single-Long-Scroll Homepage (`/`)**:
+      - Homepage (`src/app/page.tsx`) renders ONLY `<Hero />`, `<TrustRibbon />`, and `<HomeGateway />` (a compact 3-card overview gateway linking to `/services`, `/training`, and `/about`, paired with `<PageConsultationCTA />`), eliminating the vertical stack of Process, SingleOrigins, Projects, About, and Contact sections on `/`.
+    - **Dedicated 5-Page Navigation (`Header.tsx` & `MobileBottomNav.tsx`)**:
+      - `Home` (`/`), `Services` (`/services`), `Training` (`/training`), `About` (`/about`), `Contact` (`/contact`), highlighting cleanly via `usePathname()`.
+      - All cross-site CTAs (`Hero.tsx`, `Services.tsx`, `Training.tsx`, `Footer.tsx`) route to dedicated URL paths rather than homepage hash anchors.
+    - **Tabbed Services Hub (`/services` & `ServicesTabbedHub.tsx`)**:
+      - Organizes Services into 4 interactive tabs with `?tab=` query support: `Core Practices (1–6)`, `Packages & Pricing` (live from `getServicePackagesAction()`), `Luxury Catering`, and `4-Stage Process`. Replaced embedded `<Contact />` with compact `<PageConsultationCTA />`.
+    - **Dedicated Barista Academy (`/training`)**:
+      - Preserves `Curriculum Pillars` & `Upcoming Cohorts & Dates` tabs; replaced embedded `<Contact />` with `<PageConsultationCTA />`.
+    - **Tabbed About & Origins Hub (`/about` & `AboutTabbedHub.tsx`)**:
+      - Organizes `Our Organization` (`About`), `Direct-Trade Origins` (`SingleOrigins`), and `Executed Projects` (`Projects`) cleanly into 3 interactive tabs with `?tab=` query support.
+    - **Dedicated Contact & Booking Desk (`/contact`)**:
+      - Hosts `<Contact />` consultation form, interactive service tiles, WhatsApp, Telegram, and phone `+251925451711` on its own clean route.
+    - **Dynamic Tab Reveal Observer (`ScrollRevealInit.tsx`)**:
+      - Uses a `MutationObserver` on `document.body` so `.reveal-on-scroll` and `.spotlight-card` elements inside newly switched tabs reveal immediately without stalling at `opacity: 0`.
+    - **Strict Rule Preservation**: Strictly ZERO `rounded-full` text pill badges, unclipped original ceremony photo on Hero Slide 0, official phone strictly `+251925451711`.

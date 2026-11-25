@@ -1,12 +1,12 @@
+import Link from "next/link";
 import TopAccentLine from "@/components/TopAccentLine";
 import Header from "@/components/Header";
 import Training from "@/components/Training";
-import Contact from "@/components/Contact";
+import PageConsultationCTA from "@/components/PageConsultationCTA";
 import Footer from "@/components/Footer";
 import MobileBottomNav from "@/components/MobileBottomNav";
 import StickyChatButton from "@/components/StickyChatButton";
 import ScrollRevealInit from "@/components/ScrollRevealInit";
-import Link from "next/link";
 
 export const metadata = {
   title: "Specialty Barista Academy | Ethiopian Signature Coffee",
@@ -22,7 +22,7 @@ export default function TrainingPage() {
       <Header />
 
       <main className="flex-1 w-full pt-20 sm:pt-24 md:pt-28 pb-28 lg:pb-20 bg-surface-cream">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-12 sm:gap-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-10 sm:gap-12">
           {/* Breadcrumb Navigation & Page Banner */}
           <div className="flex flex-col gap-3 border-b border-border-subtle pb-6 sm:pb-8">
             <div className="flex items-center gap-2 text-xs text-text-muted">
@@ -50,8 +50,12 @@ export default function TrainingPage() {
           {/* Full Barista Academy Suite with Cohorts & Dynamic Courses */}
           <Training />
 
-          {/* Direct Enrollment Inquiries Desk */}
-          <Contact />
+          {/* Compact Consultation CTA */}
+          <PageConsultationCTA
+            kicker="TEAM & CORPORATE TRAINING"
+            subtitle="Have questions about group team training or private café staff certification in Addis Ababa? Reach our academy advisors directly."
+            title="Schedule Private Barista Certification for Your Café Team"
+          />
         </div>
       </main>
 

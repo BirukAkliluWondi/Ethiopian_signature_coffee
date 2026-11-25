@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import TrainingSchedules from "./TrainingSchedules";
 
 export default function Training() {
@@ -119,12 +120,12 @@ export default function Training() {
               >
                 <span>View Live Cohorts</span>
               </button>
-              <a
+              <Link
                 className="group btn-shimmer w-full sm:w-auto h-12 px-6 sm:px-8 rounded-xl bg-brand-yellow hover:bg-brand-yellow-light text-black font-bold text-xs uppercase tracking-wider text-center whitespace-nowrap active:scale-95 transition-all shadow-cozy hover:shadow-cozy-float flex items-center justify-center hover:-translate-y-0.5 duration-200"
-                href="#contact"
+                href="/contact"
               >
                 <span>Enroll in Academy</span>
-              </a>
+              </Link>
             </div>
           </div>
         </div>

@@ -14,7 +14,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 items-start">
           {/* Column 1: Identity & Headquarters (4 cols) */}
           <div className="lg:col-span-4 flex flex-col gap-4">
-            <a href="#home" className="flex items-center gap-3 group shrink-0">
+            <Link href="/" className="flex items-center gap-3 group shrink-0">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 alt="Ethiopian Signature Coffee Logo"
@@ -29,7 +29,7 @@ export default function Footer() {
                   Building Coffee Businesses
                 </span>
               </div>
-            </a>
+            </Link>
 
             <p className="text-xs sm:text-sm text-white/70 leading-relaxed max-w-sm">
               Turnkey café execution, specialty barista certification, and direct-trade highland coffee allocations for modern hospitality enterprises.
@@ -108,7 +108,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link className="hover:text-white transition-colors flex items-center gap-2 group" href="/services#catering">
+                <Link className="hover:text-white transition-colors flex items-center gap-2 group" href="/services?tab=catering">
                   <span className="w-1.5 h-1.5 rounded-full bg-brand-yellow/60 group-hover:bg-brand-yellow transition-colors" />
                   <span>7. Catering Services &amp; Events</span>
                 </Link>
@@ -123,37 +123,37 @@ export default function Footer() {
             </h3>
             <ul className="flex flex-col gap-2.5 text-xs sm:text-sm text-white/75">
               <li>
-                <a className="hover:text-white transition-colors flex flex-col" href="#origins">
+                <Link className="hover:text-white transition-colors flex flex-col" href="/about?tab=origins">
                   <span className="font-semibold text-white">Yirgacheffe</span>
                   <span className="text-[11px] text-white/50">Floral &amp; Delicate</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a className="hover:text-white transition-colors flex flex-col" href="#origins">
+                <Link className="hover:text-white transition-colors flex flex-col" href="/about?tab=origins">
                   <span className="font-semibold text-white">Sidama</span>
                   <span className="text-[11px] text-white/50">Complex &amp; Balanced</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a className="hover:text-white transition-colors flex flex-col" href="#origins">
+                <Link className="hover:text-white transition-colors flex flex-col" href="/about?tab=origins">
                   <span className="font-semibold text-white">Guji</span>
                   <span className="text-[11px] text-white/50">Lush &amp; Exotic</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a className="hover:text-white transition-colors flex flex-col" href="#origins">
+                <Link className="hover:text-white transition-colors flex flex-col" href="/about?tab=origins">
                   <span className="font-semibold text-white">Harrar</span>
                   <span className="text-[11px] text-white/50">Wild &amp; Sun-Dried</span>
-                </a>
+                </Link>
               </li>
               <li className="pt-1">
-                <a
+                <Link
                   className="hover:text-brand-yellow transition-colors text-xs text-brand-yellow/90 font-medium flex items-center gap-1"
-                  href="#contact"
+                  href="/contact"
                 >
                   <span>Cooperative Allocations</span>
                   <span className="text-[10px]">→</span>
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -198,13 +198,13 @@ export default function Footer() {
                 <span className="text-[11px] text-white/50 group-hover:text-white/95">@ethiopiansignature</span>
               </a>
 
-              <a
+              <Link
                 className="btn-shimmer mt-1 h-11 px-5 rounded-xl bg-brand-yellow hover:bg-brand-yellow-light text-stone-950 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-cozy hover:shadow-cozy-float active:scale-95 transition-all text-center hover:-translate-y-0.5 duration-200"
-                href="#contact"
+                href="/contact"
               >
                 <span>Book Setup Advisory</span>
                 <span className="material-symbols-outlined text-sm">arrow_forward</span>
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -216,7 +216,7 @@ export default function Footer() {
             Direct-Trade Highland Sourcing &middot; Addis Ababa, Ethiopia
           </span>
           <div className="flex items-center gap-4 text-white/60 text-[11px]">
-            <a className="hover:text-white transition-colors" href="#home">
+            <a className="hover:text-white transition-colors" href="#">
               Back to Top ↑
             </a>
           </div>

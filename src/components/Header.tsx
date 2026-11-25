@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 
 export default function Header() {
   const pathname = usePathname();
-  const [activeSection, setActiveSection] = useState("home");
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -14,30 +13,12 @@ export default function Header() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
 
-      if (pathname === "/") {
-        const sectionIds = ["home", "services", "process", "origins", "projects", "about", "contact"];
-        const scrollPos = window.scrollY + 220;
-
-        for (let i = sectionIds.length - 1; i >= 0; i--) {
-          const el = document.getElementById(sectionIds[i]);
-          if (el && el.offsetTop <= scrollPos) {
-            const current = sectionIds[i];
-            if (current === "process") {
-              setActiveSection("services");
-            } else if (current === "origins" || current === "projects") {
-              setActiveSection("about");
-            } else {
-              setActiveSection(current);
-            }
-            break;
-          }
-        }
-      }
-
       const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
       if (totalHeight > 0) {
         const progress = (window.scrollY / totalHeight) * 100;
         setScrollProgress(Math.min(Math.max(progress, 0), 100));
+      } else {
+        setScrollProgress(0);
       }
     };
 
@@ -46,16 +27,18 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [pathname]);
 
-  const isServicesPage = pathname.startsWith("/services");
-  const isTrainingPage = pathname.startsWith("/training");
-
   const navLinks = [
-    { id: "home", label: "Home", href: pathname === "/" ? "#home" : "/" },
+    { id: "home", label: "Home", href: "/" },
     { id: "services", label: "Services", href: "/services" },
     { id: "training", label: "Training", href: "/training" },
-    { id: "about", label: "About", href: pathname === "/" ? "#about" : "/#about" },
-    { id: "contact", label: "Contact", href: pathname === "/" ? "#contact" : "/#contact" },
+    { id: "about", label: "About", href: "/about" },
+    { id: "contact", label: "Contact", href: "/contact" },
   ];
+
+  const isLinkActive = (id: string) => {
+    if (id === "home") return pathname === "/";
+    return pathname.startsWith(`/${id}`);
+  };
 
   return (
     <header
@@ -69,7 +52,7 @@ export default function Header() {
         {/* Main Header Row */}
         <div className="flex items-center justify-between h-16 sm:h-20">
           {/* Logo & Branding */}
-          <Link href={pathname === "/" ? "#home" : "/"} className="flex items-center gap-2.5 sm:gap-3.5 group shrink-0">
+          <Link href="/" className="flex items-center gap-2.5 sm:gap-3.5 group shrink-0">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               alt="Ethiopian Signature Coffee Logo"
@@ -89,34 +72,46 @@ export default function Header() {
           {/* Desktop Navigation Links (Full Desktop Only: lg and up, 1024px+) */}
           <nav className="hidden lg:flex items-center gap-5 xl:gap-7">
             {navLinks.map((link) => {
-              const isActive =
-                (link.id === "services" && isServicesPage) ||
-                (link.id === "training" && isTrainingPage) ||
-                (pathname === "/" && activeSection === link.id);
+              const isActive = isLinkActive(link.id);
 
               return (
                 <Link
                   key={link.id}
                   className={`text-[13px] tracking-wide py-1 transition-all relative ${
                     isActive
-                      ? "text-brand-green font-semibold after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-4 after:h-[2px] after:bg-brand-yellow after:rounded-full"
-                      : "text-text-muted font-medium hover:text-brand-green"
+                      ? "text-brand-green font-bold"
+                      : "text-text-muted hover:text-brand-green font-medium"
                   }`}
                   href={link.href}
                 >
-                  <span>{link.label}</span>
+                  {link.label}
+                  {isActive && (
+                    <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-brand-yellow rounded-full" />
+                  )}
                 </Link>
               );
             })}
           </nav>
+
+          {/* Direct Consultation Action CTA */}
+          <div className="hidden lg:flex items-center gap-3 shrink-0">
+            <Link
+              className="btn-shimmer h-10 px-5 rounded-xl bg-brand-green hover:bg-brand-green-dark text-white text-xs font-bold uppercase tracking-wider flex items-center justify-center shadow-cozy-sm hover:shadow-cozy transition-all active:scale-95 whitespace-nowrap"
+              href="/contact"
+            >
+              Book Advisory
+            </Link>
+          </div>
         </div>
       </div>
 
-      {/* Reading Progress Indicator Bar */}
-      <div
-        className="absolute bottom-0 left-0 h-[2.5px] bg-gradient-to-r from-brand-yellow via-amber-400 to-brand-green transition-all duration-150 ease-out pointer-events-none"
-        style={{ width: `${scrollProgress}%` }}
-      />
+      {/* Header Reading Progress Line */}
+      <div className="w-full h-[2.5px] bg-transparent relative overflow-hidden">
+        <div
+          className="h-full bg-gradient-to-r from-brand-green via-brand-yellow to-brand-green-light transition-[width] duration-150 ease-out"
+          style={{ width: `${scrollProgress}%` }}
+        />
+      </div>
     </header>
   );
 }

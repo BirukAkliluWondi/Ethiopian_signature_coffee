@@ -1,12 +1,13 @@
+import Link from "next/link";
 import DynamicServicePackages from "./DynamicServicePackages";
 
-export default function Services() {
+export function CoreServicesSection() {
   return (
     <section className="reveal-on-scroll flex flex-col gap-8 sm:gap-10 scroll-mt-28 relative section-transition-glow" id="services">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 sm:gap-4">
         <div className="mask-reveal-wrap">
           <h2 className="mask-reveal-content font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-brand-green font-bold">
-            Our Services
+            Core Advisory Practices
           </h2>
         </div>
         <p className="text-xs sm:text-sm md:text-base text-text-muted max-w-md">
@@ -57,12 +58,12 @@ export default function Services() {
           </div>
 
           <div className="pt-1 sm:pt-2">
-            <a
+            <Link
               className="group btn-shimmer inline-flex items-center justify-center h-12 w-full sm:w-auto px-6 sm:px-8 rounded-xl bg-brand-green hover:bg-brand-green-dark text-white font-semibold text-sm whitespace-nowrap shadow-cozy hover:shadow-cozy-float active:scale-95 transition-all text-center hover:-translate-y-0.5 duration-200"
-              href="#contact"
+              href="/contact"
             >
               <span>Book Setup Consultation</span>
-            </a>
+            </Link>
           </div>
         </div>
       </article>
@@ -88,12 +89,12 @@ export default function Services() {
                 Professional training covering espresso extraction science, milk texturing, latte art, station ergonomics, and guest hospitality ethics.
               </p>
             </div>
-            <a
+            <Link
               className="group w-full h-11 px-5 rounded-xl border border-brand-green text-brand-green font-bold text-xs uppercase tracking-wider hover:bg-brand-green hover:text-white transition-all shadow-cozy-sm flex items-center justify-center whitespace-nowrap active:scale-95"
-              href="#training"
+              href="/training"
             >
               <span>View Curriculum</span>
-            </a>
+            </Link>
           </div>
         </article>
 
@@ -116,12 +117,12 @@ export default function Services() {
                 Crafting signature coffee beverages, indigenous botanical infusions, recipe standardization, and seasonal drink promotions.
               </p>
             </div>
-            <a
+            <Link
               className="group w-full h-11 px-5 rounded-xl border border-brand-green text-brand-green font-bold text-xs uppercase tracking-wider hover:bg-brand-green hover:text-white transition-all shadow-cozy-sm flex items-center justify-center whitespace-nowrap active:scale-95"
-              href="#contact"
+              href="/contact"
             >
               <span>Inquire Menus</span>
-            </a>
+            </Link>
           </div>
         </article>
 
@@ -144,12 +145,12 @@ export default function Services() {
                 Financial feasibility modeling, brand positioning, commercial site assessment, and scalable operational roadmaps.
               </p>
             </div>
-            <a
+            <Link
               className="group w-full h-11 px-5 rounded-xl border border-brand-green text-brand-green font-bold text-xs uppercase tracking-wider hover:bg-brand-green hover:text-white transition-all shadow-cozy-sm flex items-center justify-center whitespace-nowrap active:scale-95"
-              href="#contact"
+              href="/contact"
             >
               <span>Book Advisory</span>
-            </a>
+            </Link>
           </div>
         </article>
 
@@ -172,12 +173,12 @@ export default function Services() {
                 Real-time inventory management protocols, waste minimization, daily shift checklists, and quality maintenance standards.
               </p>
             </div>
-            <a
+            <Link
               className="group w-full h-11 px-5 rounded-xl border border-brand-green text-brand-green font-bold text-xs uppercase tracking-wider hover:bg-brand-green hover:text-white transition-all shadow-cozy-sm flex items-center justify-center whitespace-nowrap active:scale-95"
-              href="#contact"
+              href="/contact"
             >
               <span>View Operations</span>
-            </a>
+            </Link>
           </div>
         </article>
 
@@ -200,96 +201,106 @@ export default function Services() {
                 Margin analysis per beverage, high-profit signature drink architecture, pricing strategies, and waste reduction optimization.
               </p>
             </div>
-            <a
+            <Link
               className="group w-full h-11 px-5 rounded-xl border border-brand-green text-brand-green font-bold text-xs uppercase tracking-wider hover:bg-brand-green hover:text-white transition-all shadow-cozy-sm flex items-center justify-center whitespace-nowrap active:scale-95"
-              href="#contact"
+              href="/contact"
             >
               <span>Improve Margins</span>
-            </a>
+            </Link>
           </div>
         </article>
       </div>
-
-      {/* Featured Service Packages & Transparent Pricing (Dynamic CMS) */}
-      <DynamicServicePackages />
-
-      {/* Dedicated Luxury Catering Showcase (Flagship 2) */}
-      <article
-        id="catering"
-        className="spotlight-card p-5 sm:p-8 lg:p-10 rounded-2xl sm:rounded-3xl bg-surface-white border border-border-warm shadow-roast-bloom flex flex-col lg:grid lg:grid-cols-12 gap-6 sm:gap-8 items-center ring-1 ring-border-subtle hover:-translate-y-1 hover:shadow-cozy-lg transition-all duration-300 scroll-mt-28"
-      >
-        {/* Dedicated Photo Section (5 cols) */}
-        <div className="w-full lg:col-span-5 relative rounded-xl sm:rounded-2xl overflow-hidden bg-stone-900 aspect-video lg:aspect-[4/3] shadow-cozy group">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            alt="Ethiopian Signature Catering Services & Event Hospitality"
-            className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
-            src="/catering-services.jpg"
-          />
-        </div>
-
-        {/* Narrative, 4 Pillars & Booking Actions (7 cols) */}
-        <div className="w-full lg:col-span-7 flex flex-col gap-4 sm:gap-5">
-          <div className="flex flex-col gap-1.5 sm:gap-2">
-            <span className="text-xs uppercase tracking-wider text-brand-green font-bold">
-              Luxury Event Hospitality
-            </span>
-            <h3 className="font-serif text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-text-main">
-              7. Catering Services &amp; Event Hospitality
-            </h3>
-            <p className="text-xs sm:text-sm md:text-base text-text-muted leading-relaxed">
-              Complete specialty coffee bars, traditional ceremonial service, and culinary catering designed for high-profile gatherings, corporate summits, and intimate celebrations. We bring authentic hospitality, craft beverages, and seamless event coordination to your venue.
-            </p>
-          </div>
-
-          {/* 4 Core Offerings Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 pt-1">
-            <div className="p-3 sm:p-3.5 rounded-xl bg-surface-subtle border border-border-subtle shadow-cozy-sm flex flex-col gap-1 hover:-translate-y-0.5 transition-all">
-              <span className="text-xs text-text-main font-bold">Coffee Catering</span>
-              <span className="text-[11px] text-text-muted leading-snug">
-                Specialty coffee service for meetings, conferences, and special events.
-              </span>
-            </div>
-            <div className="p-3 sm:p-3.5 rounded-xl bg-surface-subtle border border-border-subtle shadow-cozy-sm flex flex-col gap-1 hover:-translate-y-0.5 transition-all">
-              <span className="text-xs text-text-main font-bold">Event Catering</span>
-              <span className="text-[11px] text-text-muted leading-snug">
-                Food and beverage catering for private and corporate functions.
-              </span>
-            </div>
-            <div className="p-3 sm:p-3.5 rounded-xl bg-surface-subtle border border-border-subtle shadow-cozy-sm flex flex-col gap-1 hover:-translate-y-0.5 transition-all">
-              <span className="text-xs text-text-main font-bold">Mocktail &amp; Beverage</span>
-              <span className="text-[11px] text-text-muted leading-snug">
-                Custom mocktails, cold refreshments, and hot beverage service for events.
-              </span>
-            </div>
-            <div className="p-3 sm:p-3.5 rounded-xl bg-surface-subtle border border-border-subtle shadow-cozy-sm flex flex-col gap-1 hover:-translate-y-0.5 transition-all">
-              <span className="text-xs text-text-main font-bold">Corporate &amp; Private Events</span>
-              <span className="text-[11px] text-text-muted leading-snug">
-                Full hospitality service for company functions, birthdays, weddings, and private celebrations.
-              </span>
-            </div>
-          </div>
-
-          {/* Dual Action Buttons: Request a Quote & Make a Reservation */}
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1 sm:pt-2">
-            <a
-              className="group btn-shimmer inline-flex items-center justify-center h-12 w-full sm:w-auto px-6 sm:px-8 rounded-xl bg-brand-green hover:bg-brand-green-dark text-white font-semibold text-sm whitespace-nowrap shadow-cozy hover:shadow-cozy-float active:scale-95 transition-all text-center hover:-translate-y-0.5 duration-200"
-              href="#contact"
-            >
-              <span>Request a Quote</span>
-            </a>
-            <a
-              className="inline-flex items-center justify-center h-12 w-full sm:w-auto px-5 sm:px-6 rounded-xl border border-brand-green text-brand-green hover:bg-brand-green/10 font-semibold text-sm active:scale-95 transition-all text-center duration-200 gap-2 whitespace-nowrap"
-              href="https://wa.me/251925451711?text=Hello%20Ethiopian%20Signature%20Coffee%2C%20I%20would%20like%20to%20request%20a%20quote%20and%20reserve%20catering%20services%20for%20an%20upcoming%20event."
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              <span className="material-symbols-outlined text-base">calendar_month</span>
-              <span>Make a Reservation</span>
-            </a>
-          </div>
-        </div>
-      </article>
     </section>
+  );
+}
+
+export function CateringShowcaseSection() {
+  return (
+    <article
+      id="catering"
+      className="spotlight-card p-5 sm:p-8 lg:p-10 rounded-2xl sm:rounded-3xl bg-surface-white border border-border-warm shadow-roast-bloom flex flex-col lg:grid lg:grid-cols-12 gap-6 sm:gap-8 items-center ring-1 ring-border-subtle hover:-translate-y-1 hover:shadow-cozy-lg transition-all duration-300 scroll-mt-28"
+    >
+      {/* Dedicated Photo Section (5 cols) */}
+      <div className="w-full lg:col-span-5 relative rounded-xl sm:rounded-2xl overflow-hidden bg-stone-900 aspect-video lg:aspect-[4/3] shadow-cozy group">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          alt="Ethiopian Signature Catering Services & Event Hospitality"
+          className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+          src="/catering-services.jpg"
+        />
+      </div>
+
+      {/* Narrative, 4 Pillars & Booking Actions (7 cols) */}
+      <div className="w-full lg:col-span-7 flex flex-col gap-4 sm:gap-5">
+        <div className="flex flex-col gap-1.5 sm:gap-2">
+          <span className="text-xs uppercase tracking-wider text-brand-green font-bold">
+            Luxury Event Hospitality
+          </span>
+          <h3 className="font-serif text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-text-main">
+            7. Catering Services &amp; Event Hospitality
+          </h3>
+          <p className="text-xs sm:text-sm md:text-base text-text-muted leading-relaxed">
+            Complete specialty coffee bars, traditional ceremonial service, and culinary catering designed for high-profile gatherings, corporate summits, and intimate celebrations. We bring authentic hospitality, craft beverages, and seamless event coordination to your venue.
+          </p>
+        </div>
+
+        {/* 4 Core Offerings Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 pt-1">
+          <div className="p-3 sm:p-3.5 rounded-xl bg-surface-subtle border border-border-subtle shadow-cozy-sm flex flex-col gap-1 hover:-translate-y-0.5 transition-all">
+            <span className="text-xs text-text-main font-bold">Coffee Catering</span>
+            <span className="text-[11px] text-text-muted leading-snug">
+              Specialty coffee service for meetings, conferences, and special events.
+            </span>
+          </div>
+          <div className="p-3 sm:p-3.5 rounded-xl bg-surface-subtle border border-border-subtle shadow-cozy-sm flex flex-col gap-1 hover:-translate-y-0.5 transition-all">
+            <span className="text-xs text-text-main font-bold">Event Catering</span>
+            <span className="text-[11px] text-text-muted leading-snug">
+              Food and beverage catering for private and corporate functions.
+            </span>
+          </div>
+          <div className="p-3 sm:p-3.5 rounded-xl bg-surface-subtle border border-border-subtle shadow-cozy-sm flex flex-col gap-1 hover:-translate-y-0.5 transition-all">
+            <span className="text-xs text-text-main font-bold">Mocktail &amp; Beverage</span>
+            <span className="text-[11px] text-text-muted leading-snug">
+              Custom mocktails, cold refreshments, and hot beverage service for events.
+            </span>
+          </div>
+          <div className="p-3 sm:p-3.5 rounded-xl bg-surface-subtle border border-border-subtle shadow-cozy-sm flex flex-col gap-1 hover:-translate-y-0.5 transition-all">
+            <span className="text-xs text-text-main font-bold">Corporate &amp; Private Events</span>
+            <span className="text-[11px] text-text-muted leading-snug">
+              Full hospitality service for company functions, birthdays, weddings, and private celebrations.
+            </span>
+          </div>
+        </div>
+
+        {/* Dual Action Buttons: Request a Quote & Make a Reservation */}
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1 sm:pt-2">
+          <Link
+            className="group btn-shimmer inline-flex items-center justify-center h-12 w-full sm:w-auto px-6 sm:px-8 rounded-xl bg-brand-green hover:bg-brand-green-dark text-white font-semibold text-sm whitespace-nowrap shadow-cozy hover:shadow-cozy-float active:scale-95 transition-all text-center hover:-translate-y-0.5 duration-200"
+            href="/contact"
+          >
+            <span>Request a Quote</span>
+          </Link>
+          <a
+            className="inline-flex items-center justify-center h-12 w-full sm:w-auto px-5 sm:px-6 rounded-xl border border-brand-green text-brand-green hover:bg-brand-green/10 font-semibold text-sm active:scale-95 transition-all text-center duration-200 gap-2 whitespace-nowrap"
+            href="https://wa.me/251925451711?text=Hello%20Ethiopian%20Signature%20Coffee%2C%20I%20would%20like%20to%20request%20a%20quote%20and%20reserve%20catering%20services%20for%20an%20upcoming%20event."
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <span className="material-symbols-outlined text-base">calendar_month</span>
+            <span>Make a Reservation</span>
+          </a>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+export default function Services() {
+  return (
+    <div className="flex flex-col gap-10">
+      <CoreServicesSection />
+      <DynamicServicePackages />
+      <CateringShowcaseSection />
+    </div>
   );
 }

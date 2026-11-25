@@ -4,50 +4,8 @@ import { useEffect } from "react";
 
 export default function ScrollRevealInit() {
   useEffect(() => {
-    // If user prefers reduced motion, make all elements visible immediately
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      document.querySelectorAll(".reveal-on-scroll").forEach((el) => {
-        el.classList.add("reveal-visible");
-      });
-      document.querySelectorAll(".mask-reveal-content").forEach((el) => {
-        el.classList.add("mask-revealed");
-      });
-      return;
-    }
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    // Bidirectional Intersection Observer: Elements appear when entering viewport
-    // and gently fade away when exiting viewport (up or down).
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("reveal-visible");
-            // If the element has a masked text child, trigger reveal
-            const maskedChild = entry.target.querySelector(".mask-reveal-content");
-            if (maskedChild) {
-              maskedChild.classList.add("mask-revealed");
-            }
-          } else {
-            // Bidirectional fade away when scrolled out of view
-            entry.target.classList.remove("reveal-visible");
-            const maskedChild = entry.target.querySelector(".mask-reveal-content");
-            if (maskedChild) {
-              maskedChild.classList.remove("mask-revealed");
-            }
-          }
-        });
-      },
-      {
-        threshold: 0.08,
-        rootMargin: "-20px 0px -20px 0px",
-      }
-    );
-
-    const elements = document.querySelectorAll(".reveal-on-scroll");
-    elements.forEach((el) => observer.observe(el));
-
-    // Interactive Cursor Spotlight Glare for .spotlight-card elements
-    const spotlightCards = document.querySelectorAll<HTMLElement>(".spotlight-card");
     const handlePointerMove = (e: MouseEvent) => {
       const card = e.currentTarget as HTMLElement;
       const rect = card.getBoundingClientRect();
@@ -57,13 +15,81 @@ export default function ScrollRevealInit() {
       card.style.setProperty("--mouse-y", `${y}px`);
     };
 
-    spotlightCards.forEach((card) => {
-      card.addEventListener("mousemove", handlePointerMove as EventListener, { passive: true });
+    const observer = !prefersReducedMotion
+      ? new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("reveal-visible");
+                const maskedChild = entry.target.querySelector(".mask-reveal-content");
+                if (maskedChild) {
+                  maskedChild.classList.add("mask-revealed");
+                }
+              } else {
+                entry.target.classList.remove("reveal-visible");
+                const maskedChild = entry.target.querySelector(".mask-reveal-content");
+                if (maskedChild) {
+                  maskedChild.classList.remove("mask-revealed");
+                }
+              }
+            });
+          },
+          {
+            threshold: 0.05,
+            rootMargin: "20px 0px 20px 0px",
+          }
+        )
+      : null;
+
+    const observedElements = new WeakSet<Element>();
+    const boundSpotlights = new WeakSet<HTMLElement>();
+
+    const scanAndBind = () => {
+      document.querySelectorAll(".reveal-on-scroll").forEach((el) => {
+        if (prefersReducedMotion) {
+          el.classList.add("reveal-visible");
+          const maskedChild = el.querySelector(".mask-reveal-content");
+          if (maskedChild) maskedChild.classList.add("mask-revealed");
+          return;
+        }
+        if (observer && !observedElements.has(el)) {
+          observedElements.add(el);
+          observer.observe(el);
+          // Immediately reveal if already near/inside viewport on mount or tab change
+          const rect = el.getBoundingClientRect();
+          if (rect.top < window.innerHeight && rect.bottom > 0) {
+            el.classList.add("reveal-visible");
+            const maskedChild = el.querySelector(".mask-reveal-content");
+            if (maskedChild) maskedChild.classList.add("mask-revealed");
+          }
+        }
+      });
+
+      if (prefersReducedMotion) {
+        document.querySelectorAll(".mask-reveal-content").forEach((el) => {
+          el.classList.add("mask-revealed");
+        });
+      }
+
+      document.querySelectorAll<HTMLElement>(".spotlight-card").forEach((card) => {
+        if (!boundSpotlights.has(card)) {
+          boundSpotlights.add(card);
+          card.addEventListener("mousemove", handlePointerMove as EventListener, { passive: true });
+        }
+      });
+    };
+
+    scanAndBind();
+
+    const mutationObserver = new MutationObserver(() => {
+      scanAndBind();
     });
+    mutationObserver.observe(document.body, { childList: true, subtree: true });
 
     return () => {
-      observer.disconnect();
-      spotlightCards.forEach((card) => {
+      mutationObserver.disconnect();
+      if (observer) observer.disconnect();
+      document.querySelectorAll<HTMLElement>(".spotlight-card").forEach((card) => {
         card.removeEventListener("mousemove", handlePointerMove as EventListener);
       });
     };

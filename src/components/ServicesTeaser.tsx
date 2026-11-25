@@ -61,12 +61,12 @@ export default function ServicesTeaser() {
 
           {/* Dual Action Buttons */}
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1 sm:pt-2">
-            <a
+            <Link
               className="group btn-shimmer inline-flex items-center justify-center h-12 px-6 sm:px-8 rounded-xl bg-brand-green hover:bg-brand-green-dark text-white font-semibold text-sm whitespace-nowrap shadow-cozy hover:shadow-cozy-float active:scale-95 transition-all text-center hover:-translate-y-0.5 duration-200"
-              href="#contact"
+              href="/contact"
             >
               <span>Book Setup Consultation</span>
-            </a>
+            </Link>
             <Link
               className="inline-flex items-center justify-center h-12 px-6 rounded-xl border border-brand-green/40 hover:border-brand-green text-brand-green bg-white hover:bg-brand-green/5 font-semibold text-sm transition-all text-center"
               href="/services"
