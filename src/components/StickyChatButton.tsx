@@ -50,7 +50,9 @@ export default function StickyChatButton() {
               }}
             >
               <div className="w-8 h-8 rounded-lg bg-brand-green/10 text-brand-green flex items-center justify-center shrink-0 group-hover:bg-brand-green group-hover:text-white transition-colors">
-                <span className="material-symbols-outlined text-lg">chat</span>
+                <svg aria-hidden="true" className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                </svg>
               </div>
               <div className="flex flex-col">
                 <span className="text-xs font-bold leading-tight">Chat on Website</span>
@@ -91,9 +93,16 @@ export default function StickyChatButton() {
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
           {isMenuOpen ? (
-            <span className="material-symbols-outlined text-xl sm:text-2xl">close</span>
+            <svg aria-hidden="true" className="w-5 h-5 sm:w-6 sm:h-6 shrink-0" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.2" viewBox="0 0 24 24">
+              <line x1="18" x2="6" y1="6" y2="18" />
+              <line x1="6" x2="18" y1="6" y2="18" />
+            </svg>
           ) : (
-            <span className="material-symbols-outlined text-xl sm:text-2xl">support_agent</span>
+            <svg aria-hidden="true" className="w-5 h-5 sm:w-6 sm:h-6 shrink-0" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.9" viewBox="0 0 24 24">
+              <path d="M3 18v-6a9 9 0 0 1 18 0v6" />
+              <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z" />
+              <path d="M12 22h3a3 3 0 0 0 3-3" />
+            </svg>
           )}
 
           {/* Minimalist Tooltip (Only on hover when closed) */}
