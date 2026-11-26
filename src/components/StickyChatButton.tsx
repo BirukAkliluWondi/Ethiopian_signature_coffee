@@ -116,9 +116,10 @@ export default function StickyChatButton() {
             </svg>
           ) : (
             <svg aria-hidden="true" className="w-5 h-5 sm:w-6 sm:h-6 shrink-0" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.9" viewBox="0 0 24 24">
-              <path d="M3 18v-6a9 9 0 0 1 18 0v6" />
-              <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z" />
-              <path d="M12 22h3a3 3 0 0 0 3-3" />
+              <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+              <circle cx="8.5" cy="12" fill="currentColor" r="1" stroke="none" />
+              <circle cx="12" cy="12" fill="currentColor" r="1" stroke="none" />
+              <circle cx="15.5" cy="12" fill="currentColor" r="1" stroke="none" />
             </svg>
           )}
 
