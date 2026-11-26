@@ -172,9 +172,9 @@ export default function Hero({
       id="home"
     >
       {/* Story, Headline & CTAs (On mobile: order-2, displays below visual showcase; Desktop: lg:order-1) */}
-      <div className="lg:col-span-6 flex flex-col gap-2.5 sm:gap-4 order-2 lg:order-1 lg:pt-3">
+      <div className="lg:col-span-6 flex flex-col gap-2.5 sm:gap-4 lg:gap-5 order-2 lg:order-1 lg:pt-8">
         <div className="mask-reveal-wrap">
-          <h1 className="mask-reveal-content mount-headline font-serif text-[22px] sm:text-4xl lg:text-[2.9rem] xl:text-[3.1rem] font-bold text-brand-green leading-[1.14] tracking-tight">
+          <h1 className="mask-reveal-content mount-headline font-serif text-[22px] sm:text-4xl lg:text-[2.95rem] xl:text-[3.15rem] font-bold text-brand-green leading-[1.14] tracking-tight">
             Discover the Excellence of Ethiopian Coffee
           </h1>
         </div>
@@ -184,7 +184,7 @@ export default function Hero({
         </p>
 
         {/* Quantitative Proof Metrics: Open-Air Editorial Typography (Borderless, High-Luxury) */}
-        <div className="grid grid-cols-3 divide-x divide-border-subtle/80 py-1.5 sm:py-2 border-y border-border-subtle/70 my-0">
+        <div className="grid grid-cols-3 divide-x divide-border-subtle/80 py-1.5 sm:py-2 lg:py-2.5 border-y border-border-subtle/70 my-0">
           <div className="mount-metric-1 flex flex-col pr-2 sm:pr-4 group">
             <span className="font-serif text-xl sm:text-3xl lg:text-[2rem] font-bold text-brand-green leading-none tracking-tight group-hover:text-brand-green-light transition-colors">
               {venuesCount}+
@@ -215,14 +215,14 @@ export default function Hero({
         <div className="mount-cta grid grid-cols-2 sm:flex sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 pt-0.5 sm:pt-1 w-full sm:w-auto">
           {/* Secondary Outline Action (Left) */}
           <Link
-            className="group h-10 sm:h-11 w-full sm:w-auto px-3 sm:px-7 rounded-xl border-2 border-brand-green text-brand-green bg-white hover:bg-brand-green/5 text-center font-semibold text-[13px] sm:text-sm whitespace-nowrap active:scale-95 transition-all shadow-cozy-sm hover:shadow-cozy flex items-center justify-center hover:-translate-y-0.5 duration-200"
+            className="group h-10 sm:h-11 lg:h-12 w-full sm:w-auto px-3 sm:px-7 lg:px-8 rounded-xl border-2 border-brand-green text-brand-green bg-white hover:bg-brand-green/5 text-center font-semibold text-[13px] sm:text-sm whitespace-nowrap active:scale-95 transition-all shadow-cozy-sm hover:shadow-cozy flex items-center justify-center hover:-translate-y-0.5 duration-200"
             href="/services"
           >
             <span>Explore Services</span>
           </Link>
           {/* Primary Solid Confirmation Action (Right) */}
           <Link
-            className="group btn-shimmer h-10 sm:h-11 w-full sm:w-auto px-3 sm:px-7 rounded-xl bg-brand-green hover:bg-brand-green-dark text-white text-center font-semibold text-[13px] sm:text-sm shadow-cozy hover:shadow-cozy-float whitespace-nowrap active:scale-95 transition-all flex items-center justify-center hover:-translate-y-0.5 duration-200"
+            className="group btn-shimmer h-10 sm:h-11 lg:h-12 w-full sm:w-auto px-3 sm:px-7 lg:px-8 rounded-xl bg-brand-green hover:bg-brand-green-dark text-white text-center font-semibold text-[13px] sm:text-sm shadow-cozy hover:shadow-cozy-float whitespace-nowrap active:scale-95 transition-all flex items-center justify-center hover:-translate-y-0.5 duration-200"
             href="/contact"
           >
             <span>Start Advisory</span>
@@ -233,7 +233,7 @@ export default function Hero({
       {/* Right Column: Visual Showcase (On mobile/tablet: order-1; Full Desktop: lg:order-2) */}
       <div className="lg:col-span-6 order-1 lg:order-2 flex justify-center lg:justify-end pt-3.5 sm:pt-3 lg:pt-0">
         <div className="mount-hero-card relative w-full max-w-[268px] sm:max-w-lg lg:max-w-none rounded-2xl sm:rounded-3xl overflow-hidden shadow-roast-bloom border border-border-subtle bg-stone-900 group ring-1 ring-border-subtle">
-          <div className="relative w-full aspect-[4/3] lg:aspect-[4/3.4] xl:aspect-[4/3.2] lg:max-h-[395px] xl:max-h-[420px]">
+          <div className="relative w-full aspect-[4/3] lg:aspect-[4/3.4] xl:aspect-[4/3.2] lg:max-h-[420px] xl:max-h-[445px]">
             {/* Sequential Crossfading Media Showcase */}
             {slides.map((slide, index) => {
               const isActive = index === currentSlideIndex;

@@ -26,8 +26,8 @@ export default async function Home() {
       <Header />
 
       {/* Main Content Container with Warm Porcelain Base */}
-      <main className="flex-1 w-full pt-16 sm:pt-20 md:pt-24 lg:pt-24 pb-28 lg:pb-20 bg-surface-cream">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-10 sm:gap-14 md:gap-16">
+      <main className="flex-1 w-full pt-16 sm:pt-20 md:pt-24 lg:pt-[104px] pb-28 lg:pb-20 bg-surface-cream">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-10 sm:gap-14 md:gap-12 lg:gap-11">
           <Hero mediaSlots={mediaSlots} />
           <TrustRibbon />
           <HomeGateway mediaSlots={mediaSlots} />
