@@ -115,7 +115,6 @@ export default function Hero({
   }, [mediaSlots]);
 
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
-  const [isMuted, setIsMuted] = useState(true);
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -143,7 +142,7 @@ export default function Hero({
   useEffect(() => {
     if (currentSlide.type === "video" && videoRef.current) {
       videoRef.current.currentTime = 0;
-      videoRef.current.muted = isMuted;
+      videoRef.current.muted = true;
       const playPromise = videoRef.current.play();
       if (playPromise !== undefined) {
         playPromise.catch(() => {
@@ -151,19 +150,11 @@ export default function Hero({
         });
       }
     }
-  }, [currentSlideIndex, currentSlide.type, isMuted]);
+  }, [currentSlideIndex, currentSlide.type]);
 
   // When video completely finishes playing, advance and fade away
   const handleVideoEnded = () => {
     nextSlide();
-  };
-
-  const toggleSound = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (videoRef.current) {
-      videoRef.current.muted = !isMuted;
-    }
-    setIsMuted(!isMuted);
   };
 
   return (
@@ -261,7 +252,7 @@ export default function Hero({
                       ref={slide.id === "ceremony-video" ? videoRef : undefined}
                       aria-label={slide.alt}
                       className="w-full h-full object-cover object-center"
-                      muted={isMuted}
+                      muted
                       onEnded={handleVideoEnded}
                       playsInline
                       preload="auto"
@@ -274,20 +265,6 @@ export default function Hero({
 
             {/* Subtle Gradient Vignette at Bottom Edge for Story Depth */}
             <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-stone-950/70 via-stone-950/25 to-transparent pointer-events-none z-20" />
-
-            {/* Sound Toggle (Only visible when video slide is active) */}
-            {currentSlide.type === "video" && (
-              <button
-                type="button"
-                onClick={toggleSound}
-                aria-label={isMuted ? "Unmute ceremony audio" : "Mute ceremony audio"}
-                className="absolute top-3.5 right-3.5 z-30 w-8 h-8 rounded-full bg-stone-950/60 hover:bg-stone-950/80 text-white/90 hover:text-white backdrop-blur-md transition-all flex items-center justify-center border border-white/20 shadow-md active:scale-95"
-              >
-                <span className="material-symbols-outlined text-[18px]">
-                  {isMuted ? "volume_off" : "volume_up"}
-                </span>
-              </button>
-            )}
 
             {/* Minimalist Segment Story Progress Lines (No text pill badges) */}
             <div
