@@ -212,7 +212,7 @@ export default function Hero({
         </div>
 
         {/* CTAs: Secondary Outline on Left, Primary Main Action on Right (Side-by-side on mobile & desktop for clean above-the-fold framing) */}
-        <div className="mount-cta grid grid-cols-2 sm:flex sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 pt-0.5 sm:pt-1 w-full sm:w-auto">
+        <div className="mount-cta grid grid-cols-2 sm:flex sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 pt-0.5 sm:pt-1 lg:pt-6 w-full sm:w-auto">
           {/* Secondary Outline Action (Left) */}
           <Link
             className="group h-10 sm:h-11 lg:h-12 w-full sm:w-auto px-3 sm:px-7 lg:px-8 rounded-xl border-2 border-brand-green text-brand-green bg-white hover:bg-brand-green/5 text-center font-semibold text-[13px] sm:text-sm whitespace-nowrap active:scale-95 transition-all shadow-cozy-sm hover:shadow-cozy flex items-center justify-center hover:-translate-y-0.5 duration-200"
