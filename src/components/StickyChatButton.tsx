@@ -4,34 +4,51 @@ import { useState, useEffect } from "react";
 import ConciergeChatModal from "./ConciergeChatModal";
 
 export default function StickyChatButton() {
-  const [shouldHide, setShouldHide] = useState(false);
+  const [isOccluded, setIsOccluded] = useState(false);
+  const [isMobileHeroTop, setIsMobileHeroTop] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isChatModalOpen, setIsChatModalOpen] = useState(false);
 
   useEffect(() => {
+    const checkMobileHeroTop = () => {
+      const hasHomeHero = Boolean(document.querySelector("#home"));
+      const isCompactViewport = window.innerWidth < 1024;
+      setIsMobileHeroTop(hasHomeHero && isCompactViewport && window.scrollY < 70);
+    };
+
+    checkMobileHeroTop();
+    window.addEventListener("scroll", checkMobileHeroTop, { passive: true });
+    window.addEventListener("resize", checkMobileHeroTop, { passive: true });
+
     const footer = document.querySelector("footer");
     const contact = document.querySelector("#contact");
 
     const targets = [footer, contact].filter(Boolean) as Element[];
-    if (targets.length === 0) return;
+    let observer: IntersectionObserver | null = null;
+    if (targets.length > 0) {
+      observer = new IntersectionObserver(
+        (entries) => {
+          setIsOccluded(entries.some((entry) => entry.isIntersecting));
+        },
+        { threshold: 0.08 }
+      );
+      targets.forEach((target) => observer?.observe(target));
+    }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const isOccluded = entries.some((entry) => entry.isIntersecting);
-        setShouldHide(isOccluded);
-      },
-      { threshold: 0.08 }
-    );
-
-    targets.forEach((target) => observer.observe(target));
-    return () => observer.disconnect();
+    return () => {
+      window.removeEventListener("scroll", checkMobileHeroTop);
+      window.removeEventListener("resize", checkMobileHeroTop);
+      observer?.disconnect();
+    };
   }, []);
+
+  const shouldHide = isOccluded || isMobileHeroTop;
 
   return (
     <>
       <aside
         aria-label="Direct advisory chat"
-        className={`fixed bottom-24 lg:bottom-6 right-4 sm:right-6 lg:right-6 z-40 flex flex-col items-end transition-all duration-300 ${
+        className={`fixed bottom-[70px] lg:bottom-6 right-3 sm:right-6 lg:right-6 z-40 flex flex-col items-end transition-all duration-300 ${
           shouldHide
             ? "opacity-0 pointer-events-none translate-y-3"
             : "opacity-100 pointer-events-auto translate-y-0"

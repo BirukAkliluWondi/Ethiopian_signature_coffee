@@ -168,61 +168,61 @@ export default function Hero({
 
   return (
     <section
-      className="reveal-on-scroll reveal-visible grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-12 items-center scroll-mt-28 relative section-transition-glow"
+      className="reveal-on-scroll reveal-visible grid grid-cols-1 lg:grid-cols-12 gap-3.5 sm:gap-6 lg:gap-10 xl:gap-12 items-center scroll-mt-28 relative section-transition-glow"
       id="home"
     >
       {/* Story, Headline & CTAs (On mobile: order-2, displays below visual showcase; Desktop: lg:order-1) */}
-      <div className="lg:col-span-6 flex flex-col gap-5 sm:gap-6 order-2 lg:order-1 lg:pt-12">
+      <div className="lg:col-span-6 flex flex-col gap-2.5 sm:gap-4 order-2 lg:order-1 lg:pt-3">
         <div className="mask-reveal-wrap">
-          <h1 className="mask-reveal-content mount-headline font-serif text-2xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-bold text-brand-green leading-[1.18] sm:leading-[1.15] tracking-tight">
+          <h1 className="mask-reveal-content mount-headline font-serif text-[22px] sm:text-4xl lg:text-[2.9rem] xl:text-[3.1rem] font-bold text-brand-green leading-[1.14] tracking-tight">
             Discover the Excellence of Ethiopian Coffee
           </h1>
         </div>
 
-        <p className="mount-paragraph text-sm sm:text-base md:text-lg text-text-muted leading-relaxed max-w-xl lg:max-w-none font-normal">
+        <p className="mount-paragraph text-[12.5px] sm:text-[15px] xl:text-base text-text-muted leading-[1.38] sm:leading-relaxed max-w-xl lg:max-w-none font-normal">
           We bring together premium Ethiopian coffee, professional coffee training, business consultancy, and innovative café solutions. From centuries-old ceremonial roots to modern commercial venues, we help coffee businesses achieve excellence.
         </p>
 
         {/* Quantitative Proof Metrics: Open-Air Editorial Typography (Borderless, High-Luxury) */}
-        <div className="grid grid-cols-3 divide-x divide-border-subtle/80 py-2 sm:py-2.5 border-y border-border-subtle/70 my-0.5">
-          <div className="mount-metric-1 flex flex-col pr-3 sm:pr-4 group">
-            <span className="font-serif text-2xl sm:text-3xl lg:text-[2.1rem] font-bold text-brand-green leading-none tracking-tight group-hover:text-brand-green-light transition-colors">
+        <div className="grid grid-cols-3 divide-x divide-border-subtle/80 py-1.5 sm:py-2 border-y border-border-subtle/70 my-0">
+          <div className="mount-metric-1 flex flex-col pr-2 sm:pr-4 group">
+            <span className="font-serif text-xl sm:text-3xl lg:text-[2rem] font-bold text-brand-green leading-none tracking-tight group-hover:text-brand-green-light transition-colors">
               {venuesCount}+
             </span>
-            <span className="text-[10px] sm:text-xs text-text-muted font-medium mt-1 sm:mt-1.5 leading-tight">
+            <span className="text-[9.5px] sm:text-xs text-text-muted font-medium mt-1 leading-tight whitespace-nowrap sm:whitespace-normal">
               Turnkey Venues
             </span>
           </div>
-          <div className="mount-metric-2 flex flex-col px-3 sm:px-4 group">
-            <span className="font-serif text-2xl sm:text-3xl lg:text-[2.1rem] font-bold text-brand-green leading-none tracking-tight group-hover:text-brand-green-light transition-colors">
+          <div className="mount-metric-2 flex flex-col px-2 sm:px-4 group">
+            <span className="font-serif text-xl sm:text-3xl lg:text-[2rem] font-bold text-brand-green leading-none tracking-tight group-hover:text-brand-green-light transition-colors">
               {baristasCount}+
             </span>
-            <span className="text-[10px] sm:text-xs text-text-muted font-medium mt-1 sm:mt-1.5 leading-tight">
+            <span className="text-[9.5px] sm:text-xs text-text-muted font-medium mt-1 leading-tight whitespace-nowrap sm:whitespace-normal">
               Certified Baristas
             </span>
           </div>
-          <div className="mount-metric-3 flex flex-col pl-3 sm:pl-4 group">
-            <span className="font-serif text-2xl sm:text-3xl lg:text-[2.1rem] font-bold text-brand-green leading-none tracking-tight group-hover:text-brand-green-light transition-colors">
+          <div className="mount-metric-3 flex flex-col pl-2 sm:pl-4 group">
+            <span className="font-serif text-xl sm:text-3xl lg:text-[2rem] font-bold text-brand-green leading-none tracking-tight group-hover:text-brand-green-light transition-colors">
               {originsCount}%
             </span>
-            <span className="text-[10px] sm:text-xs text-text-muted font-medium mt-1 sm:mt-1.5 leading-tight">
+            <span className="text-[9.5px] sm:text-xs text-text-muted font-medium mt-1 leading-tight whitespace-nowrap sm:whitespace-normal">
               Direct-Trade Origins
             </span>
           </div>
         </div>
 
         {/* CTAs: Secondary Outline on Left, Primary Main Action on Right (Side-by-side on mobile & desktop for clean above-the-fold framing) */}
-        <div className="mount-cta grid grid-cols-2 sm:flex sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 pt-1 sm:pt-2 w-full sm:w-auto">
+        <div className="mount-cta grid grid-cols-2 sm:flex sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 pt-0.5 sm:pt-1 w-full sm:w-auto">
           {/* Secondary Outline Action (Left) */}
           <Link
-            className="group h-12 w-full sm:w-auto px-3 sm:px-8 rounded-xl border-2 border-brand-green text-brand-green bg-white hover:bg-brand-green/5 text-center font-semibold text-[13px] sm:text-sm whitespace-nowrap active:scale-95 transition-all shadow-cozy-sm hover:shadow-cozy flex items-center justify-center hover:-translate-y-0.5 duration-200"
+            className="group h-10 sm:h-11 w-full sm:w-auto px-3 sm:px-7 rounded-xl border-2 border-brand-green text-brand-green bg-white hover:bg-brand-green/5 text-center font-semibold text-[13px] sm:text-sm whitespace-nowrap active:scale-95 transition-all shadow-cozy-sm hover:shadow-cozy flex items-center justify-center hover:-translate-y-0.5 duration-200"
             href="/services"
           >
             <span>Explore Services</span>
           </Link>
           {/* Primary Solid Confirmation Action (Right) */}
           <Link
-            className="group btn-shimmer h-12 w-full sm:w-auto px-3 sm:px-8 rounded-xl bg-brand-green hover:bg-brand-green-dark text-white text-center font-semibold text-[13px] sm:text-sm shadow-cozy hover:shadow-cozy-float whitespace-nowrap active:scale-95 transition-all flex items-center justify-center hover:-translate-y-0.5 duration-200"
+            className="group btn-shimmer h-10 sm:h-11 w-full sm:w-auto px-3 sm:px-7 rounded-xl bg-brand-green hover:bg-brand-green-dark text-white text-center font-semibold text-[13px] sm:text-sm shadow-cozy hover:shadow-cozy-float whitespace-nowrap active:scale-95 transition-all flex items-center justify-center hover:-translate-y-0.5 duration-200"
             href="/contact"
           >
             <span>Start Advisory</span>
@@ -231,9 +231,9 @@ export default function Hero({
       </div>
 
       {/* Right Column: Visual Showcase (On mobile/tablet: order-1; Full Desktop: lg:order-2) */}
-      <div className="lg:col-span-6 order-1 lg:order-2 flex justify-center lg:justify-end pt-4 -mb-4 sm:pt-5 sm:-mb-5 md:pt-6 md:-mb-6 lg:pt-0 lg:mb-0">
-        <div className="mount-hero-card relative w-full max-w-lg lg:max-w-none rounded-2xl sm:rounded-3xl overflow-hidden shadow-roast-bloom border border-border-subtle bg-stone-900 group ring-1 ring-border-subtle">
-          <div className="relative w-full aspect-[4/3] sm:aspect-[4/3] lg:aspect-[4/3.5] xl:aspect-[4/3.3] max-h-[480px]">
+      <div className="lg:col-span-6 order-1 lg:order-2 flex justify-center lg:justify-end pt-3.5 sm:pt-3 lg:pt-0">
+        <div className="mount-hero-card relative w-full max-w-[268px] sm:max-w-lg lg:max-w-none rounded-2xl sm:rounded-3xl overflow-hidden shadow-roast-bloom border border-border-subtle bg-stone-900 group ring-1 ring-border-subtle">
+          <div className="relative w-full aspect-[4/3] lg:aspect-[4/3.4] xl:aspect-[4/3.2] lg:max-h-[395px] xl:max-h-[420px]">
             {/* Sequential Crossfading Media Showcase */}
             {slides.map((slide, index) => {
               const isActive = index === currentSlideIndex;
